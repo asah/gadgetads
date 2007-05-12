@@ -344,11 +344,51 @@ _IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;contain
   simply reference the maps JavaScript library to start using it.
 </p>
 
-<h3>Import the Google Maps JavaScript Library</h3>
+<h3>Start Small</h3>
 <p>
-  The first step is to add the appropriate <code>&lt;script&gt;</code> tags pointing to the maps
-  API from within your gadget:
-<pre>&lt;script src=&quot;http://maps.google.com/maps?file=api&amp;amp;v=2&amp;amp;&quot;&gt;&lt;/script&gt;</pre>
+  The Google Maps API is fairly large with a constantly growing set of functionality.
+  If you've never used the API before, the easiest way to start learning is to 
+  work off a simple example and then build your way up.  For example, 
+  here's a gadget that displays a small map centered on Palo Alto, CA:
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Sample Map&quot;&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;Content type=&quot;html&quot;&gt;
+  &lt;![CDATA[
+    &lt;style&gt;
+      #map {
+        width: 100%;
+        height: 300px;
+      }
+    &lt;/style&gt;
+    &lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
+    
+    &lt;script src=&quot;http://maps.google.com/maps?file=api&amp;amp;v=2&amp;amp;&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+      _IG_RegisterOnloadHandler(function() {
+        if (GBrowserIsCompatible()) {
+          var map = new GMap2(_gel(&#39;map&#39;));
+          map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+        }
+      });
+    &lt;/script&gt;
+  ]]&gt; 
+  &lt;/Content&gt;
+&lt;/Module&gt;</pre>
+</p>
+<p>
+  Once you have a map within your gadget, reference the 
+  <a href="http://www.google.com/apis/maps/documentation/">Google Maps API documentation</a>
+  and work your way up to more advanced techniques on how to build more functional
+  maps.  Another great learning tool is to view the source code of existing
+  gadgets that uses Google Maps API.  Here's a few that we recommend checking out:
+  <ul
+    <li><a href="http://www.google.com/ig/directory?url=mapsearch.xml">Google Map Search</a></li>
+    <li><a href="http://www.google.com/ig/directory?url=driving_directions.xml">Driving Directions</a></li>
+    <li><a href="http://www.google.com/ig/directory?url=http://ralph.feedback.googlepages.com/googlemap.xml">Google Map</a></li>
+    <li><a href="http://www.google.com/ig/directory?q=maps"><i>More...</i></a></li>
+  </ul>
 </p>
 
 
