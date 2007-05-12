@@ -120,9 +120,9 @@
     "http://www.labpixies.com/gadgads/hp_simple/hp_simple.xml": "Hewlett Packard",
     "http://www.labpixies.com/gadgads/eclips/eclips.xml": "Eclipse",
     "http://flash.atlrec.com/google/diddy/diddy.xml": "Diddy TV",
-    "http://www.google.com/ig/directory?url=mapsearch.xml": "Google Map Search",
-    "http://www.google.com/ig/directory?url=driving_directions.xml": "Driving Directions",
-    "http://www.google.com/ig/directory?url=http://ralph.feedback.googlepages.com/googlemap.xml": "Google Map"
+    "http://www.google.com/ig/modules/mapsearch.xml": "Google Map Search",
+    "http://www.google.com/ig/modules/driving_directions.xml": "Driving Directions",
+    "http://ralph.feedback.googlepages.com/googlemap.xml": "Google Map"
   };
 
   // Global variables
