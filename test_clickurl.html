@@ -1,0 +1,41 @@
+<script>
+function _unesc(s) {
+  return window.decodeURIComponent ? decodeURIComponent(s) : unescape(s);
+}
+function _args() {
+  var args = new Object();
+  var query = document.location.search.substring(1);
+  var pairs = query.split("&");
+  for ( var i = 0; i < pairs.length; i++) {
+    var pos = pairs[i].indexOf('=');
+    if ( pos == -1 ) continue;
+    var argname = pairs[i].substring(0,pos);
+    var value = pairs[i].substring(pos+1);
+    value = value.replace(/\+/g, " ");
+    args[argname] = _unesc(value);
+  }
+  return args;
+}
+
+var url = _args()["url"];
+if (url) {
+  url = _unesc(url);
+  var regexp = new RegExp("^http://.*");
+  if (url.match(regexp)) {
+    var msg = [
+      "*** Click Received ***",
+      "",
+      "Destination URL:",
+      url,
+      "",
+      "Continue?"
+    ].join("\n");
+
+    if (confirm(msg)) {
+      window.location.replace(url);
+    } else {
+      window.history.back();
+    }
+  }
+}
+</script>

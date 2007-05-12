@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Simple Gmail Gadget Ad" width="300" height="250"/>
+  <UserPref name="clickurl" datatype="hidden" default_value="http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url="/>
+  <Content type="html"><![CDATA[
+    <table width="300" id="main" border=0 cellspacing=0 cellpadding=0>
+      <tr height="30">
+        <td style="padding-left: 190px; font-size: 12px;">
+          <a id="signup" target="_top" href="http://mail.google.com/mail/help/open.html#utm_campaign=en&utm_source=en-ha-na-us-gadget&utm_medium=ha">Sign up for Gmail</a>
+        </td>
+      </tr>
+      <tr height="220">
+        <td valign=top>
+          <object width="300" height="210">
+            <param name="movie" value="http://www.youtube.com/v/_YUugB4IUl4"></param>
+            <param name="wmode" value="transparent"></param>
+            <embed src="http://www.youtube.com/v/_YUugB4IUl4" type="application/x-shockwave-flash" wmode="transparent" width="300" height="210"></embed>
+          </object>  
+        </td>
+      </tr>
+    </table>
+    
+    <script>
+      _IG_RegisterOnloadHandler(function() {
+        var prefs = new _IG_Prefs();
+        _gel("signup").href = prefs.getString("clickurl") + _esc(_gel("signup").href);
+        _gel("main").style.background = "transparent url(" + _IG_GetImageUrl("http://www.labpixies.com/gadgads/gmail/images/background.png") + ")";
+      });
+    </script>
+  ]]></Content>
+</Module>
