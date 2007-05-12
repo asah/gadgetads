@@ -19,6 +19,23 @@
 
 <h1>How to Build a Google Gadget Ad</h1>
 
+<ul>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#adsgadgets">Gadget Ads vs. Google Gadgets</a></li>
+  <li><a href="#gettingstarted">Getting Started</a></li>
+  <li><a href="#defineclickurl">Defining the Click URL</a></li>
+  <li><a href="#useclickurl">How To Use the Click URL</a></li>
+  <li><a href="#remotecontent">Getting Remote Content</a></li>
+  <li><a href="#images">Embedding Images: A Better Way</a></li>
+  <li><a href="#flash">Embedding Flash Content</a></li>
+  <li><a href="#map">Embedding a Google Map</a></li>
+  <li><a href="#casestudy">Case Study: Simplified Gmail Gadget Ad</a></li>
+  <li><a href="#finaloutcome">The Final Outcome</a></li>
+  <li><a href="#resources">Resources</a></li>
+  <li><a href="#scratchpad">Scratch Pad</a></li>
+</ul>
+
+<a name="introduction"></a>
 <h2>Introduction</h2>
 <p>
   This tutorial takes you through the various steps to create a gadget ad. We'll describe how to get 
@@ -30,6 +47,7 @@
   along with the examples below.
 </p>
 
+<a name="adsgadgets"></a>
 <h2>Gadget Ads vs. Google Gadgets</h2>
 <p>
   Gadget Ads are simply Google Gadgets with rich-interactive content designed to attract users to a product.  Architecturally,
@@ -41,6 +59,7 @@
   are available can significantly increase your ability to create high-quality gadget ads that are capable of reaching millions of users.
 </p>
 
+<a name="gettingstarted"></a>
 <h2>Getting Started</h2>
 <p>
   The <a href="http://www.google.com/ig">personalized homepage</a> is a great place to develop and 
@@ -96,6 +115,7 @@
 <pre>&lt;ModulePrefs title="My First Gadget Ad" <b>width="250" height="200"</b>/&gt;</pre>
 </p>
 
+<a name="defineclickurl"></a>
 <h2>Defining the Click URL</h2>
 <p>
   The click URL is a mechanism used to track user-interaction inside a gadget ad. It should be included in the
@@ -128,6 +148,7 @@
   </ul>
 </p>
 
+<a name="useclickurl"></a>
 <h2>How To Use the Click URL</h2>
 <p>
   Once again, gadget content is simply made up of HTML.  So traditionally, the way you'd create a link in HTML
@@ -187,6 +208,7 @@
   </ol>
 </p>
 
+<a name="remotecontent"></a>
 <h2>Getting Remote Content</h2>
 <p>
   One great feature of gadgets is the ability to fetch remote content from third-party
@@ -240,6 +262,7 @@
 &lt;/script&gt;</pre>
 </p>
 
+<a name="images"></a>
 <h2>Embedding Images: A Better Way</h2>
 <p>
   Gadget ads often embed high-quality images to create a visually appealing gadget.
@@ -289,6 +312,7 @@
 &lt;/script&gt;</pre>
 </p>
 
+<a name="flash"></a>
 <h2>Embedding Flash Content</h2>
 <p>
   Many times, you're going to want to embed Flash within your gadget.  There are 
@@ -355,6 +379,7 @@
 });</pre>
 </p>
 
+<a name="map"></a>
 <h2>Embedding a Google Map</h2>
 <p>
   It's easy to integrate a Google Map inside your gadgets using the
@@ -413,6 +438,7 @@
 </p>
 
 
+<a name="casestudy"></a>
 <h2>Case Study: Simplified Gmail Gadget Ad</h2>
 <p>
   The Gmail gadget ad is an extremely successful gadget, receiving an average of 1.4 million
@@ -644,17 +670,23 @@
 &lt;/Module&gt;</pre>
 </p>
 
+<a name="finaloutcome"></a>
 <h2>The Final Outcome</h2>
 <p>
   Congratulations!  You've just made your first gadget ad.  Here's a live running instance
-  showing how the final gadget should look like:
+  showing how the final gadget should look like
+  (<a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml">add it now</a>):
 </p>
 <p><iframe frameborder=0 width=300 height=250 src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml"></iframe></p>
 
-<h3>Resources:</h3>
+<a name="resources"></a>
+<h2>Resources:</h2>
 <p>
   <ul>
     <li><a href="http://www.google.com/apis/gadgets/">Google Gadgets API</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">Test Click URL</a></li>
+    <li><a href="http://www.google.com/apis/maps/">Google Maps API</a></li>
+    <li><a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml">Simple Gmail Gadget Ad</a></li>
     <li><a href="http://gmodules.com/ig/creator?synd=open&url=http%3A//www.labpixies.com/gadgads/gmail/gmail.xml&pt=%26context%3Ds%26synd%3Dopen%26lang%3Den%26.lang%3Den%26country%3Dus%26.country%3Dus%26cat%3Dall%26q%3Dlabpixies.com%2Bgmail%26num%3D1%26start%3D0%26cols%3D1%26objs%3Dj2j&sn=j2j&lang=en">Original Gmail Gadget Ad</a></li>
     <li><a href="http://groups.google.com/group/Google-Gadgets-API/topics?start=">Discussion Group</a></li>
     <li><a href="http://code.google.com/support/bin/topic.py?topic=10027">Knowledge Base / FAQ</a></li>
