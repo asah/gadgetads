@@ -113,7 +113,7 @@
   // Global constants
   var gadgetLinks = {
     "http://www.google.com/ig/modules/hello.xml": "Hello World",
-    "http://doc-examples.googlecode.com/svn/trunk/gadget-ads/simple_gmail_ad.xml": "Simple Gmail Gadget",
+    "http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml": "Simple Gmail Gadget",
     "http://www.labpixies.com/gadgads/gmail/gmail.xml": "Gmail Gadget",
     "http://www.labpixies.com/gadgads/aa/aa_ie_link.xml": "American Airlines",
     "http://www.labpixies.com/campaigns/fox/fox.xml": "Fox Home Entertainment",
