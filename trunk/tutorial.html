@@ -103,10 +103,29 @@
   which will be used to append the target destination for tracked links in your gadget.
 </p>
 <p>
-  We provide a test click URL that you can use when developing your gadget ad.  Instead of sending real clicks to your ads database, 
+  We provide a test click URL that you can use when developing your gadget ad.  Instead of sending real clicks 
+  to the ads database, 
   it'll create a simple pop-up that displays the target destination.  This is useful when you want to verify that your links are
   tracking correctly and that requests are correctly being sent to the click URL.
   <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</b>&quot;/&gt;</pre>
+</p>
+<p>
+  Make note of this test click URL as you will be using while developing your gadget ads:<br>
+  <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</a>
+</p>
+
+<h3>Experiment: Test the Click URL</h3>
+<p>
+  The links below are all set to route through the 
+  <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">test click URL</a>
+  described above.  Try clicking on a few to see the confirmation pop-up which confirms
+  click-thrus are being tracked properly.  If you setup click URLs correctly in your gadget,
+  then you should see similar results:
+  <ul>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/">http://www.google.com</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.amazon.com">Amazon.com</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/ig/directory">Content directory</a></li>
+  </ul>
 </p>
 
 <h2>How To Use the Click URL</h2>
@@ -505,28 +524,41 @@
 <h3>Add the Gmail Ad Video</h3>
 <p>
   In the main content row of the table, let's embed the <a href="http://www.youtube.com/v/_YUugB4IUl4">Gmail video ad</a>.
-  This row has dimensions of 300 x 220 pixels.  Make sure you edit the width and height of the embedded video to fit inside
+  This row has dimensions of 300 x 220 pixels.  Make sure you set the width and height of the embedded video to fit inside
   these dimensions.  Feel free to play around with video dimensions here to create more or less whitespace padding.
 </p>
 <p>
-  Set the vertical alignment of this table cell to <code>top</code>.  This forces the video to align its
-  top border with the very top of the cell, eliminating any whitespace in between.
+  <ol>
+    <li>
+      Since we'll be using the Flash library to embed the YouTube video, add the 
+  <code>&lt;Require feature=&quot;flash&quot;/&gt;</code> tag within <code>&lt;ModulePrefs&gt;</code>.
+    </li>
+    <li>
+      Add a container element within the main table cell where the video will be injected.
+    </li>
+    <li>
+      Set the vertical alignment of this table cell to <code>top</code>.  This forces the video to align its
+      top border with the very top of the cell, eliminating any whitespace in between.
+    </li>
+    <li>
+      Lastly, add the <code>_IG_EmbedFlash(...)</code> code in JavaScript and remember to
+      set the width and height of the embedded video to fit inside the gadget dimensions.
+    </li>
+  </ol>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;&gt;
+    <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
+  &lt;/ModulePrefs&gt;
   &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
-    &lt;table width=&quot;300&quot; id=&quot;main&quot; border=1 cellspacing=0 cellpadding=0&gt;
+    &lt;table width=&quot;300&quot; id=&quot;main&quot; border=0 cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
         &lt;td&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr height=&quot;220&quot;&gt;
-        &lt;td <b>valign=top</b>&gt;<b>
-          &lt;object width=&quot;300&quot; height=&quot;210&quot;&gt;
-            &lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;&gt;&lt;/param&gt;
-            &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;
-            &lt;embed src=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; width=&quot;300&quot; height=&quot;210&quot;&gt;&lt;/embed&gt;
-          &lt;/object&gt;</b>
+        &lt;td <b>valign=top</b>&gt;
+          <b>&lt;div id=&quot;video&quot;&gt;&lt;/div&gt;</b>
         &lt;/td&gt;
       &lt;/tr&gt;
     &lt;/table&gt;
@@ -535,6 +567,12 @@
       _IG_RegisterOnloadHandler(function() {
         // Set the background image of the table
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
+        
+        <b>// Embed the Gmail video from YouTube
+        _IG_EmbedFlash(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;, _gel(&quot;video&quot;), {
+            width: 300,
+            height: 210
+          });</b>
       });
     &lt;/script&gt;
   ]]&gt;&lt;/Content&gt;
@@ -579,13 +617,9 @@
           &lt;a id=&quot;signup&quot; target=&quot;_top&quot; href=&quot;http://mail.google.com/mail/help/open.html#utm_campaign=en&utm_source=en-ha-na-us-gadget&utm_medium=ha&quot;&gt;Sign up for Gmail&lt;/a&gt;
         &lt;/td&gt;</b>
       &lt;/tr&gt;
-      &lt;tr height=&quot;220&quot;&gt;
+      &lt;tr height=&quot;220&quot;&gt;        
         &lt;td valign=top&gt;
-          &lt;object width=&quot;300&quot; height=&quot;210&quot;&gt;
-            &lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;&gt;&lt;/param&gt;
-            &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;
-            &lt;embed src=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; width=&quot;300&quot; height=&quot;210&quot;&gt;&lt;/embed&gt;
-          &lt;/object&gt;  
+          &lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
         &lt;/td&gt;
       &lt;/tr&gt;
     &lt;/table&gt;
@@ -598,6 +632,12 @@
 
         // Set the background image of the table
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
+        
+        // Embed the Gmail video from YouTube
+        _IG_EmbedFlash(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;, _gel(&quot;video&quot;), {
+            width: 300,
+            height: 210
+          });
       });
     &lt;/script&gt;
   ]]&gt;&lt;/Content&gt;
