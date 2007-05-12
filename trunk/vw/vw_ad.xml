@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="VW - Gadget Ad" 
+  width="336" 
+  height="280"/>
+<UserPref name="clickurl" datatype="hidden" default_value="http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url="/>
+<Content type="html"><![CDATA[
+  <style>
+    /* Don't show default blue borders around images */
+    img {
+      border-width: 0px;
+    }
+    
+    #mainTable {
+      width: 100%;
+      height: 280px;
+    }
+    
+    #linksContainer {
+      text-align: center;
+      font-size: 13px;
+    }
+    #linksContainer a {
+      text-decoration: none;
+      padding: 0px 3px;
+      color: #0000cc;
+    }
+    
+    #contentContainer {
+      height: 240px;
+      border-top: 1px solid #676767;
+      padding: 5px 5px 2px;
+    }
+    
+    /* Style when displaying feeds */
+    .feeds ul {
+      margin: 0px;
+      padding: 0px 5px;
+      list-style-type: none;
+      font-size: 11px;
+    }
+    .feeds ul li {
+      margin-bottom: 10px;
+    }
+    
+    /* Style when showing videos */
+    .videos {
+      text-align: center;
+    }
+    .videos a {
+      font-size: 13px;
+      text-decoration: none;
+    }
+  </style>
+  
+  <table id="mainTable" border=0 cellspacing=0 cellpadding=1>
+    <tr height="30">
+      <td id="logoContainer" width=40 align=center></td>
+      <td id="linksContainer"></td>
+    </tr>
+    <tr>
+      <td id="contentContainer" colspan=2></td>
+    </tr>
+  </table>
+  
+  <script>
+    // Global variables
+    var prefs = new _IG_Prefs();
+    var contentContainer = _gel("contentContainer");
+    var videoSources = [
+      "http://www.youtube.com/v/cv157ZIInUk",
+      "http://www.youtube.com/v/xCIF6JF1O5U",
+      "http://www.youtube.com/v/0I0WfnhVs2s",
+      "http://www.youtube.com/v/SPQp7HJWVdg",
+      "http://www.youtube.com/v/Xnd1BxAo81g",
+      "http://www.youtube.com/v/119eSti2n1o",
+      "http://www.youtube.com/v/_9Eg-S6aaSw",
+      "http://www.youtube.com/v/FvyxCC5XWCg"
+    ];
+  
+  
+    // This function is executed after the page loads
+    function init() {
+      // Create clickable logo
+      var html = [
+        '<a target="_top" href="' + generateClickUrl('http://www.vw.com/') + '">',
+        '<img src="' + _IG_GetImageUrl('http://daniel-feedback-gadgets.googlecode.com/svn/trunk/vw_ad/vw_logo_small.jpg') + '" width=30 height=30/>',
+        '</a>'
+      ].join("");
+      _gel("logoContainer").innerHTML = html;
+    
+      // Generate tab links
+      var html = [
+        '<a href="javascript:void(0);" onclick="showVideos();">Videos</a>',
+        '<a href="javascript:void(0);" onclick="showFeeds();">Buzz</a>',
+        '<a target="_top" href="' + generateClickUrl('http://www.vw.com/dealerlocator/en/us/') + '">Find Dealers</a>',
+        '<a target="_top" href="' + generateClickUrl('http://www.vw.com/specialoffers/en/us/') + '">Special Offers</a>'
+      ].join(" | ");
+      _gel("linksContainer").innerHTML = html;
+    
+      // Start in feeds mode
+      showVideos();
+    }
+    
+    // Creates a target URL using the clickurl userpref.
+    function generateClickUrl(url) {
+      return prefs.getString("clickurl") + _esc(url);
+    }
+  
+    // Called whenever user clicks on 'VW Buzz'
+    // Fetches RSS feed from vw.com and displays them.
+    function showFeeds() {
+      var url = 'http://www.vw.com/news/browse/en/us/?format=rss';
+      _IG_FetchFeedAsJSON(url, showFeedsCallback, 10, true);
+    }
+  
+    function showFeedsCallback(response) {
+      var entries = response.Entry;
+    
+      var html = new Array();
+      html.push('<ul>');
+      for (var n = 0; n < entries.length; n++) {
+        var entry = entries[n];
+        html.push('<li>');
+        html.push('<a target="_top" href="' + entry.Link + '">' + entry.Title + '</a>');
+        html.push('<div>' + entry.Summary + '</div>');
+        html.push('</li>');
+      }
+      html.push('</ul>');
+    
+      // Show feeds DIV and hide videos
+      contentContainer.innerHTML = html.join("");
+      contentContainer.className = "feeds";
+    }
+  
+    // Called whenever user clicks 'Video'
+    // Play a random GTI video via YouTube
+    function showVideos() {
+      // Pull random video from our pre-selected list
+      var randIndex = Math.floor(Math.random() * 10000 % videoSources.length);
+      var html = [
+        '<div>' + generateYouTubeHtml(videoSources[randIndex], 330, 220) + '</div>',
+        '<a href="javascript:void(0);" onclick="showVideos();">&laquo; see more &raquo;</a>'
+      ];
+    
+      // Show videos DIV and hide feeds
+      contentContainer.innerHTML = html.join("");
+      contentContainer.className = "videos";
+    }
+  
+    // Returns the HTML to embed a YouTube video.
+    // Allows you to pass in the video source, width, and height of the video.
+    function generateYouTubeHtml(source, w, h) {
+      return [
+        '<object width="' + w + '" height="' + h + '">',
+        '<param name="movie" value="' + source + '"></param>',
+        '<param name="wmode" value="transparent"></param>',
+        '<embed src="' + source + '" type="application/x-shockwave-flash" wmode="transparent" width="' + w + '" height="' + h+ '"></embed>',
+        '</object>'
+      ].join("");
+    }
+  
+    _IG_RegisterOnloadHandler(init);
+  </script>
+]]>
+</Content>
+</Module>
