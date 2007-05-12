@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Simple Gmail Gadget Ad" width="300" height="250"/>
+  <ModulePrefs title="Simple Gmail Gadget Ad" width="300" height="250">
+    <Require feature="flash"/>
+  </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url="/>
   <Content type="html"><![CDATA[
     <table width="300" id="main" border=0 cellspacing=0 cellpadding=0>
@@ -11,20 +13,25 @@
       </tr>
       <tr height="220">
         <td valign=top>
-          <object width="300" height="210">
-            <param name="movie" value="http://www.youtube.com/v/_YUugB4IUl4"></param>
-            <param name="wmode" value="transparent"></param>
-            <embed src="http://www.youtube.com/v/_YUugB4IUl4" type="application/x-shockwave-flash" wmode="transparent" width="300" height="210"></embed>
-          </object>  
+          <div id="video"></div>
         </td>
       </tr>
     </table>
     
     <script>
       _IG_RegisterOnloadHandler(function() {
+        // Prepend the click URL to the sign-up link so it can be tracked by the ads system
         var prefs = new _IG_Prefs();
         _gel("signup").href = prefs.getString("clickurl") + _esc(_gel("signup").href);
+        
+        // Set the background image of the table
         _gel("main").style.background = "transparent url(" + _IG_GetImageUrl("http://www.labpixies.com/gadgads/gmail/images/background.png") + ")";
+        
+        // Embed the Gmail video from YouTube
+        _IG_EmbedFlash("http://www.youtube.com/v/_YUugB4IUl4", _gel("video"), {
+            width: 300,
+            height: 210
+          });
       });
     </script>
   ]]></Content>

@@ -308,12 +308,12 @@
   Flash library and setting a custom width and height:
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
-_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;container&#39;), {
+<b>_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;container&#39;), {
     swf_version: 6,
     id: &quot;flashid&quot;,
     width: 250,
     height: 200
-  });
+  });</b>
 &lt;/script&gt;</pre>
 </p>
 
@@ -328,7 +328,7 @@ _IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;contain
 </p>
 <p>
   Here's the same example from above.  Instead we cache the embedded YouTube video:
-<pre>_IG_EmbedFlash(_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;), _gel(&#39;container&#39;), {
+<pre>_IG_EmbedFlash(<b>_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;)</b>, _gel(&#39;container&#39;), {
   swf_version: 6,
   id: &quot;flashid&quot;,
   width: 250,
@@ -341,7 +341,7 @@ _IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;contain
   It's easy to integrate a Google Map inside your gadgets using the
   <a href="http://www.google.com/apis/maps/">Google Maps API</a>.  When using maps
   within gadgets, you don't need to sign up for a Google Maps API key, and you can
-  simply reference the maps JavaScript library to start using it.
+  simply add a reference to the maps JavaScript library to start using it.
 </p>
 
 <h3>Start Small</h3>
@@ -349,7 +349,8 @@ _IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;contain
   The Google Maps API is fairly large with a constantly growing set of functionality.
   If you've never used the API before, the easiest way to start learning is to 
   work off a simple example and then build your way up.  For example, 
-  here's a gadget that displays a small map centered on Palo Alto, CA:
+  here's a gadget that displays a small map centered on Palo Alto, CA
+  (<a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/sample_map.xml">add it now</a>):
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
   &lt;ModulePrefs title=&quot;Sample Map&quot;&gt;
@@ -357,20 +358,21 @@ _IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;contain
   &lt;Content type=&quot;html&quot;&gt;
   &lt;![CDATA[
     &lt;style&gt;
-      #map {
+      <b>#map {
         width: 100%;
         height: 300px;
-      }
+      }</b>
     &lt;/style&gt;
-    &lt;div id=&quot;map&quot;&gt;&lt;/div&gt;
-    
-    &lt;script src=&quot;http://maps.google.com/maps?file=api&amp;amp;v=2&amp;amp;&quot;&gt;&lt;/script&gt;
+    <b>&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;</b>
+    <b>&lt;script src=&quot;http://maps.google.com/maps?file=api&amp;amp;v=2&amp;amp;&quot;&gt;&lt;/script&gt;</b>
     &lt;script&gt;
-      _IG_RegisterOnloadHandler(function() {
+      _IG_RegisterOnloadHandler(function() {<b>
         if (GBrowserIsCompatible()) {
           var map = new GMap2(_gel(&#39;map&#39;));
+          map.addControl(new GSmallMapControl());
+          map.addControl(new GMapTypeControl());
           map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-        }
+        }</b>
       });
     &lt;/script&gt;
   ]]&gt; 
@@ -381,7 +383,7 @@ _IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;contain
   Once you have a map within your gadget, reference the 
   <a href="http://www.google.com/apis/maps/documentation/">Google Maps API documentation</a>
   and work your way up to more advanced techniques on how to build more functional
-  maps.  Another great learning tool is to view the source code of existing
+  maps.  A great recommended learning tool is to view the source code of existing
   gadgets that uses Google Maps API.  Here's a few that we recommend checking out:
   <ul
     <li><a href="http://www.google.com/ig/directory?url=mapsearch.xml">Google Map Search</a></li>
