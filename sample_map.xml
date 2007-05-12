@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Test">
-    <Require feature="flash"/>
+  <ModulePrefs title="Sample Map">
   </ModulePrefs>
   <Content type="html">
   <![CDATA[
@@ -18,7 +17,6 @@
       _IG_RegisterOnloadHandler(function() {
         if (GBrowserIsCompatible()) {
           var map = new GMap2(_gel('map'));
-          map.setCenter(new GLatLng(37.4419, -122.1419), 13);
         }
       });
     </script>
