@@ -1,0 +1,542 @@
+<html>
+<head>
+<title>How to Build a Google Gadget Ad</title>
+<link rel="stylesheet" type="text/css" href="http://code.google.com/css/dev_docs.css">
+<style><!--
+.google_conf {
+  font-weight: bold;
+  font-size: 12px;
+  color: #cc0000;
+}
+--></style>
+</head>
+<body>
+<div class="google_conf">
+  GOOGLE CONFIDENTIAL AND PROPRIETARY<br>
+  Do not distribute without written consent and authorization from Google Inc.<br>
+  Google Gadget Ads have not been officially launched to the public.
+</div>
+
+<h1>How to Build a Google Gadget Ad</h1>
+
+<h2>Introduction</h2>
+<p>
+  This tutorial takes you through the various steps to create a gadget ad. We'll describe how to get 
+  started and cover various ways to include interesting content in your gadget. Lastly, we'll work 
+  through a case study using one of our existing gadget ads, taking you step-by-step through building
+  it as if it's being built for the first time. 
+  At the end, you'll have a higher level of understanding of gadgets, how they work, and how to begin writing 
+  your own effective gadget ads.  We also recommend using the <a href="#scratchpad">gadget scratch pad</a> as you follow
+  along with the examples below.
+</p>
+
+<h2>Gadget Ads vs. Google Gadgets</h2>
+<p>
+  Gadget Ads are simply Google Gadgets with rich-interactive content designed to attract users to a product.  Architecturally,
+  they're exactly the same.  The only new concept introduced is the <code>clickurl</code>, discussed further below, used 
+  to track user-interactions inside the ad.  Like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
+  Personalized Homepage, Google Desktop, blogs, websites, etc.  Since gadget ads and Google Gadgets are created in more or less the same way, 
+  we highly recommend familiarizing yourself with the <a href="http://www.google.com/apis/gadgets/index.html">Google Gadgets API documentation</a>.  
+  Understanding what gadgets are, how they work, and what features 
+  are available can significantly increase your ability to create high-quality gadget ads that are capable of reaching millions of users.
+</p>
+
+<h2>Getting Started</h2>
+<p>
+  The <a href="http://www.google.com/ig">personalized homepage</a> is a great place to develop and 
+  test your gadget. There are a few things to do before you can begin designing your gadget. 
+  These simple instructions take you through the initial steps.
+</p>
+
+<h3>Add the Developer Gadget</h3>
+<p>
+  The developer gadget acts a "command center" for all gadgets on your personalized homepage. In addition to listing all the gadgets that you're running, 
+  it lets you add, view, and manage gadgets. The developer gadget provides features that you'll need when developing your gadget such as 
+  disabling gadget caching.  This prevents your gadget from being cached and lets you see your changes immediately.
+</p>
+<p>
+  Go ahead and <a href="http://fusion.google.com/add?moduleurl=developer.xml">add the developer gadget</a>.  For more information, visit the
+  <a href="http://www.google.com/apis/gadgets/basic.html#DevModStart">documentation</a>.
+</p>
+
+<h3>Create an Empty Gadget</h3>
+<p>
+  First, you'll want to add a new blank gadget to your homepage. We're not worried about content, so the gadget can initially be empty.
+</p>
+<p>
+  Using a text editor of your choice, copy and paste the gadget template below into a file,
+  save it, and upload it to your public web server:
+  <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;My First Gadget Ad&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;&quot;/&gt;
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    <b>ALL HTML CONTENT GOES HERE</b>
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
+</p>
+<p>
+  Gadget content is simply HTML and should be added between the opening and closing <code>CDATA</code> tags.  Everything
+  inside here represents gadget ad content and can contain any valid HTML syntax.
+</p>
+
+<h3>Disable Caching</h3>
+<p>
+  After the gadget is uploaded, add it to your homepage using the developer gadget. Using the 
+  developer gadget, disable caching for your newly-added gadget. This ensures that your 
+  changes will immediately be visible while developing your gadget. Once this is done, 
+  you can make changes to the gadget and re-upload it to the hosting server. You can 
+  simply reload the homepage to see the changes you made.
+</p>
+
+<h3>Set the Width and Height</h3>
+<p>
+  Set gadget dimensions early on so you can figure out the best way to layout your content 
+  inside the gadget.  Under <code>ModulePrefs</code>, the width and height should be specified in number of pixels:
+<pre>&lt;ModulePrefs title="My First Gadget Ad" <b>width="250" height="200"</b>/&gt;</pre>
+</p>
+
+<h2>Defining the Click URL</h2>
+<p>
+  The click URL is a mechanism used to track user-interaction inside a gadget ad. It should be included in the
+  gadget XML as a hidden UserPref named <code>clickurl</code>.  All click URLs should end with an open URL parameter, <code>&amp;url=</code>
+  which will be used to append the target destination for tracked links in your gadget.
+</p>
+<p>
+  We provide a test click URL that you can use when developing your gadget ad.  Instead of sending real clicks to your ads database, 
+  it'll create a simple pop-up that displays the target destination.  This is useful when you want to verify that your links are
+  tracking correctly and that requests are correctly being sent to the click URL.
+  <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url=</b>&quot;/&gt;</pre>
+</p>
+
+<h2>How To Use the Click URL</h2>
+<p>
+  Once again, gadget content is simply made up of HTML.  So traditionally, the way you'd create a link in HTML
+  is by creating an anchor tag that looks something like this:
+  <pre>&lt;a target="_top" href="http://mytargetdomain.com"&gt;Target Link&lt;/a&gt;</pre>
+</p
+<p>
+  However, this link won't be tracked by the ads system because it didn't go through the <code>clickurl</code>.
+  Instead, you'll need to use JavaScript to generate and assign the URL to these links.  There are various ways
+  to do this, but here's one simple step-by-step overview to get you started:
+  <ol>
+    <li>
+      Create an <code>id</code> attribute in your anchor tag and assign it a unique value.
+      The <code>href</code> attribute should also contain the target destination.
+      <pre>&lt;a id="<b>link1</b>" target="_top" href="<b>http://mytargetdomain.com</b>"&gt;Target Link&lt;/a&gt;</pre>
+    </li>
+    <li>
+      Setup an event handler function using <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_RegisterOnloadHandler(func)</a>.
+      This method accepts a single argument, which is a function that gets called after the entire gadget loads.  This is recommended
+      to ensure that all anchor tags defined in step 1 are rendered before generating and assigning new URLs to them.
+<pre>&lt;script&gt;
+  <b>_IG_RegisterOnloadHandler</b>(function() {
+    // This will be executed after gadget loads
+  });
+&lt;/script&gt;</pre>
+    </li>
+    <li>
+      Inside the event handler function, you can retrieve the <code>clickurl</code> using the 
+      <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_Prefs</a> object.
+      Once you have the <code>clickurl</code>, generate the new trackable URL which is created by taking the
+      existing value in <code>href</code>, escaping it, and appending it to the <code>clickurl</code>.
+      You can then access the HTML DOM using <code>_gel()</code> and replace the current
+      anchor tag's <code>href</code> attribute with the new URL.
+<pre>&lt;script&gt;
+  _IG_RegisterOnloadHandler(function() {<b>
+    // Get anchor tag element 
+    var link1 = _gel("link1");
+    var prefs = new _IG_Prefs();
+    var clickUrl = prefs.getString("clickurl");
+    var trackableUrl = clickUrl + _esc(link1.href);
+    
+    // Replace the existing href attribute for link1 with the new URL
+    link1.href = trackableUrl;</b>
+  });
+&lt;/script&gt;</pre>
+      <br>
+      Here's a more condensed version:
+<pre>&lt;script&gt;
+  _IG_RegisterOnloadHandler(function() {<b>
+    var prefs = new _IG_Prefs();
+    
+    // Replace the existing href attribute for link1 with the new URL
+    _gel("link1").href = prefs.getString("clickurl") + _esc(_gel("link1").href);</b>
+  });
+&lt;/script&gt;</pre>
+    </li>
+  </ol>
+</p>
+
+<h2>Getting Remote Content</h2>
+<p>
+  One great feature of gadgets is the ability to fetch remote content from third-party
+  websites and display it within your gadget.  The API currently offers three different methods to do
+  this, depending on the type of content being retrieved:
+  <ul>
+    <li>
+      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_text">_IG_FetchContent(url, func)</a>:
+      Fetches content from <code>url</code> and returns the response as text.
+      When it's ready, it calls <code>func()</code>. Note that <code>_IG_FetchContent()</code> is asynchronous, 
+      meaning that it returns immediately and then calls the inner function later, when the fetch finishes. 
+      This means that you must put any dependent code inside the callback function, or inside functions called by the callback function. 
+    </li>
+    <li>
+      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_XML">_IG_FetchXmlContent(url, func)</a>:
+      Fetches content from <code>url</code> and returns the response as an XML object.
+      When it's ready, calls <code>func()</code>. Like <code>_IG_FetchContent()</code>, is asynchronous.
+    </li>
+    <li>
+      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_JSON">_IG_FetchFeedAsJSON(url, func, num_entries, get_summaries)</a>:
+      Fetches the RSS / Atom feed content from <code>url</code> and returns it as a JSON object. When it's ready, calls <code>func()</code>. 
+      Fetches the number of feed entries specified by <code>num_entries</code> (default is 3, possible range is 1-100), 
+      and optionally fetches additional descriptions depending on the value of <code>summaries</code> (default is false).
+    </li>
+  </ul>
+</p>
+<h3>Example: Fetching from an Atom/RSS Feed</h3>
+<p>
+  Here's an example where the first feed entry is fetched from the Google News
+  <a href="http://news.google.com/?output=atom">Atom feed</a> and returned as 
+  a <a href="http://www.json.org">JSON object</a>.
+  The callback function takes the response and outputs HTML generated from
+  the entry title, link, and summary.
+<pre>&lt;div id=&quot;out&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  _IG_RegisterOnloadHandler(function() {
+    <b>function callback(response) {
+      // Retrieve first entry from the response
+      var firstEntry = response.Entry[0];
+      
+      // Generate HTML using the entry's title, link, and summary
+      _gel(&quot;out&quot;).innerHTML = [
+        &#39;&lt;a href=&quot;&#39; + firstEntry.Link + &#39;&quot;&gt;&#39; + firstEntry.Title + &#39;&lt;/a&gt;&#39;,
+        firstEntry.Summary,
+      ].join(&quot;&lt;br&gt;&quot;);
+    }
+    
+    // Fetch 1 entry from Google News Atom feed and include summaries
+    _IG_FetchFeedAsJSON(&quot;http://news.google.com/?output=atom&quot;, callback, 1, true);</b>
+  });
+&lt;/script&gt;</pre>
+</p>
+
+<h2>Embedding Images: A Better Way</h2>
+<p>
+  Gadget ads often embed high-quality images to create a visually appealing gadget.
+  Each time the gadget is rendered, requests are sent out to retrieve each image from original hosting servers.  This can
+  significantly increase latency and gadget loading times, which can result in slower loading pages and a negative user experience.
+  Fortunately, there is a feature that allows you to cache images on Google servers, which significantly
+  improves gadget performance and loading times.  This also dramatically
+  reduces the load on the image hosting servers because of the significant decrease in number of requests.
+</p>
+<p>
+  There are two JavaScript functions available for this purpose:
+  <ul>
+    <li>
+      <code>_IG_GetImage(url)</code>: Fetches the image specified in by the <code>url</code> and returns it as an HTML image object.  This is useful
+      when you want to preload images.
+    </li>
+    <li>
+      <code>_IG_GetImageUrl(url)</code>: Returns the image URL pointing to our cache server.
+    </li>
+  </ul>
+</p>
+<p>
+  In HTML, you'd typically embed an image like this:
+  <pre>&lt;img src="http://www.google.com/intl/en_ALL/images/logo.gif"/&gt;</pre>
+</p>
+<p>
+  However, to maximize performance benefits, here's the recommended way to embed images in your gadgets:
+<pre>&lt;img id="<b>logoImg</b>" src=""/&gt;
+&lt;script&gt;
+  _IG_RegisterOnloadHandler(function() {
+    <b>_gel("logoImg").src = _IG_GetImageUrl("http://www.google.com/intl/en_ALL/images/logo.gif");</b>
+  });
+&lt;/script&gt;</pre>
+</p>
+
+<h3>Background Images</h3>
+<p>
+  There are other ways you might include images in your gadgets besides using <code>&lt;img&gt;</code> tags.  
+  For example, you can use similar tactics for CSS background images:
+<pre>&lt;div id="panel">This content has a background image&lt;/div&gt;
+&lt;script&gt;
+  _IG_RegisterOnloadHandler(function() {
+    <b>_gel("panel").style.background = "transparent url(" + _IG_GetImageUrl("http://www.google.com/intl/en_ALL/images/logo.gif") + ") 0px 0px no-repeat";</b>
+  });
+&lt;/script&gt;</pre>
+
+<h2>Embedding Flash Content</h2>
+<p>
+  Since gadgets are rendered in HTML, it's trival to add other types of content such as videos and Flash objects.
+  You can simply add them like you would to any other HTML webpage, using proper
+  <code>object</code> and <code>embed</code> tags.  Many online video galleries like <a href="http://www.youtube.com">YouTube</a>
+  provide the HTML snippet you need to embed a video within the gadget.  Simply copy and paste the HTML snippet into your gadget.
+</p>
+<p>
+  Since gadget real-esate is limited, you could consider adjusting the width and height based on the dimensions of your gadget.
+</p>
+<h3>Adding a YouTube Video</h3>
+<p>
+  Here's how you can embed a YouTube video in your gadget with custom width and height:
+<pre>&lt;object <b>width=&quot;250&quot;</b> <b>height=&quot;200&quot;</b>&gt;
+  &lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;&gt;&lt;/param&gt;
+  &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;
+  &lt;embed src=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; <b>width=&quot;250&quot;</b> <b>height=&quot;200&quot;</b>&gt;&lt;/embed&gt;
+&lt;/object&gt;</pre>
+</p>
+
+<h2>Case Study: Simplified Gmail Gadget Ad</h2>
+<p>
+  The Gmail gadget ad is an extremely successful gadget, receiving an average of 1.4 million
+  pageviews per week.  It can easily
+  be added to your <a href="http://fusion.google.com/add?moduleurl=http://www.labpixies.com/gadgads/gmail/gmail.xml">homepage</a>
+  or embedded on other <a href="http://gmodules.com/ig/creator?synd=open&url=http%3A//www.labpixies.com/gadgads/gmail/gmail.xml&pt=%26context%3Ds%26synd%3Dopen%26lang%3Den%26.lang%3Den%26country%3Dus%26.country%3Dus%26cat%3Dall%26q%3Dlabpixies.com%2Bgmail%26num%3D1%26start%3D0%26cols%3D1%26objs%3Dj2j&sn=j2j&lang=en">webpages</a>.
+  The best way to learn to write successful gadget ads is by building one yourself.
+  So let's build a simplified version of the Gmail gadget ad.  We won't replicate all the functionality
+  in the original gadget.  However, by the end, you'll have created a gadget that includes a Gmail video, 
+  the branded logo, and a clickable link that allows users to sign up for a Gmail account.
+</p>
+
+<h3>Collecting Resources</h3>
+<p>
+  When initially building a gadget, it's extremely helpful to know what resources are required to build your gadget.
+  Resources can be any content in your gadget, like images, URLs, Flash objects, etc.
+  Normally, you'd be responsible for finding and/or creating the resources required by your gadget.
+  For this example, let's assume you created the resources listed here:
+  <ul>
+    <li>
+      <a href="http://www.youtube.com/v/_YUugB4IUl4">Gmail Video Ad</a> hosted on YouTube
+    </li>
+    <li>
+      <a href="http://www.labpixies.com/gadgads/gmail/images/background.png">Gadget Background Image</a> (300 x 250):<br>
+      <img src="http://www.labpixies.com/gadgads/gmail/images/background.png"/>
+    </li>
+    <li>
+      URL pointing to the <a href="http://mail.google.com/mail/help/open.html#utm_campaign=en&utm_source=en-ha-na-us-gadget&utm_medium=ha">Gmail Sign-up Page</a>
+    </li>
+  </ul>
+</p>
+
+<h3>Starting from Scratch</h3>
+<p>
+  We start with an empty gadget template.  The background image is 300 x 250 pixels.
+  Let's set the width and height of the gadget to 300 x 250 by setting the <code>width</code> and <code>height</code> 
+  attributes under <code>ModulePrefs</code>.
+</p>
+<p>
+  Since we're still in testing phase, let's also set the <code>clickurl</code> to <code>http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url=</code>.
+  Your gadget should look something like this:
+  
+  <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; <b>width="300" height="250"</b>/&gt;
+  <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url=&quot;/&gt;</b>
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>  
+</p>
+
+<h3>Create the Content Layout</h3>
+<p>
+  The background image determines how and where gadget content will be laid out..
+  We want the Gmail video ad to be the highlight of this gadget.  So let's make it occupy the main center
+  area.  The background image makes room for this.  
+  At the top of the image, there are two icons for 'Videos' and 'Secret Tips'.
+  We won't be using them in this example, but we have some free space to the right of it.
+  Let's place a link there that redirects users to the Gmail sign-up page.
+</p>
+<p>
+  In HTML, we can use tables to help us organize and overlay content
+  above specific areas in the background image.
+  <ol>
+    <li>
+      Create an HTML table and set the background image 
+      to <code>http://www.labpixies.com/gadgads/gmail/images/background.png</code>.
+      Set the table width to 300 pixels to match the width of the background image.
+    </li>
+    <li>
+      Create two table rows, one for the top header, and one for the main content area.  Set the height for 
+      the header row to 30, and set main content row height to the fill up the remainder, which comes
+      out to around 220.  The two rows should combine to completely
+      fill up the gadget's entire vertical space.
+    </li>
+    <li>
+      Temporarily enable table borders to help guide and verify that the
+      header and main content rows are split correctly.  Remember to remove them later on 
+      when they are no longer needed.
+    </li>
+  </ol>
+</p>
+<p>
+  Your gadget should now look something like this:
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url=&quot;/&gt;
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    <b>&lt;table width=&quot;300&quot; id=&quot;main&quot; border=1 cellspacing=0 cellpadding=0&gt;
+      &lt;tr height=&quot;30&quot;&gt;
+        &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr height=&quot;220&quot;&gt;
+        &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    
+    &lt;script&gt;
+      _IG_RegisterOnloadHandler(function() {
+        // Set the background image of the table
+        _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
+      });
+    &lt;/script&gt;</b>
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
+</p>
+
+<h3>Add the Gmail Ad Video</h3>
+<p>
+  In the main content row of the table, let's embed the <a href="http://www.youtube.com/v/_YUugB4IUl4">Gmail video ad</a>.
+  This row has dimensions of 300 x 220 pixels.  Make sure you edit the width and height of the embedded video to fit inside
+  these dimensions.  Feel free to play around with video dimensions here to create more or less whitespace padding.
+</p>
+<p>
+  Set the vertical alignment of this table cell to <code>top</code>.  This forces the video to align its
+  top border with the very top of the cell, eliminating any whitespace in between.
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url=&quot;/&gt;
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    &lt;table width=&quot;300&quot; id=&quot;main&quot; border=1 cellspacing=0 cellpadding=0&gt;
+      &lt;tr height=&quot;30&quot;&gt;
+        &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr height=&quot;220&quot;&gt;
+        &lt;td <b>valign=top</b>&gt;<b>
+          &lt;object width=&quot;300&quot; height=&quot;210&quot;&gt;
+            &lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;&gt;&lt;/param&gt;
+            &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;
+            &lt;embed src=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; width=&quot;300&quot; height=&quot;210&quot;&gt;&lt;/embed&gt;
+          &lt;/object&gt;</b>
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    
+    &lt;script&gt;
+      _IG_RegisterOnloadHandler(function() {
+        // Set the background image of the table
+        _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
+      });
+    &lt;/script&gt;
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
+</p>
+
+<h3>Insert the Gmail Sign-up Link</h3>
+<p>
+  In the unused top-right corner, let's create a Gmail sign-up link that redirects
+  users to a webpage where they can sign up for a Gmail account.  We want the 
+  gadget ad to track clicks on this link.  So we'll
+  need to use the <code>clickurl</code> to help create the link.
+</p>
+<p>
+  In this example, the 'Videos' and 'Secret Tips' icons aren't used.  To position the link
+  to the right of these icons, we could simply add some left padding to the table cell which
+  pushes the link towards the right past the icons.
+  Experiment a bit to determine the right amount of padding needed.
+  Since the table is 300 pixels wide, a good starting pointing would be around 200 pixels.
+  <ol>
+    <li>
+      Create a new anchor tag inside the table cell of the first row.  Remember to assign
+      it an <code>id</code> so we can later add the <code>clickurl</code> to it.
+    </li>
+    <li>
+      Use the <code>style</code> attribute to add left padding to the table cell.
+      Fine-tune the padding until the link is correctly positioned to the right of the two icons.
+    </li>
+    <li>
+      If table borders are still enabled, disable them because we no longer need them.
+    </li>
+  </ol>
+  
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url=&quot;/&gt;
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    &lt;table width=&quot;300&quot; id=&quot;main&quot; <b>border=0</b> cellspacing=0 cellpadding=0&gt;
+      &lt;tr height=&quot;30&quot;&gt;
+        <b>&lt;td style=&quot;padding-left: 190px; font-size: 12px;&quot;&gt;
+          &lt;a id=&quot;signup&quot; target=&quot;_top&quot; href=&quot;http://mail.google.com/mail/help/open.html#utm_campaign=en&utm_source=en-ha-na-us-gadget&utm_medium=ha&quot;&gt;Sign up for Gmail&lt;/a&gt;
+        &lt;/td&gt;</b>
+      &lt;/tr&gt;
+      &lt;tr height=&quot;220&quot;&gt;
+        &lt;td valign=top&gt;
+          &lt;object width=&quot;300&quot; height=&quot;210&quot;&gt;
+            &lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;&gt;&lt;/param&gt;
+            &lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;
+            &lt;embed src=&quot;http://www.youtube.com/v/_YUugB4IUl4&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; width=&quot;300&quot; height=&quot;210&quot;&gt;&lt;/embed&gt;
+          &lt;/object&gt;  
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    
+    &lt;script&gt;
+      _IG_RegisterOnloadHandler(function() {
+        <b>// Prepend the click URL to the sign-up link so it can be tracked by the ads system
+        var prefs = new _IG_Prefs();
+        _gel(&quot;signup&quot;).href = prefs.getString(&quot;clickurl&quot;) + _esc(_gel(&quot;signup&quot;).href);</b>
+
+        // Set the background image of the table
+        _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
+      });
+    &lt;/script&gt;
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
+</p>
+
+<h2>The Final Outcome</h2>
+<p>
+  Congratulations!  You've just made your first gadget ad.  Here's a live running instance
+  showing how the final gadget should look like:
+</p>
+<p><iframe frameborder=0 width=300 height=250 src="http://gmodules.com/ig/ifr?url=http://doc-examples.googlecode.com/svn/trunk/gadget-ads/simple_gmail_ad.xml"></iframe></p>
+
+<h3>Resources:</h3>
+<p>
+  <ul>
+    <li><a href="http://www.google.com/apis/gadgets/">Google Gadgets API</a></li>
+    <li><a href="http://gmodules.com/ig/creator?synd=open&url=http%3A//www.labpixies.com/gadgads/gmail/gmail.xml&pt=%26context%3Ds%26synd%3Dopen%26lang%3Den%26.lang%3Den%26country%3Dus%26.country%3Dus%26cat%3Dall%26q%3Dlabpixies.com%2Bgmail%26num%3D1%26start%3D0%26cols%3D1%26objs%3Dj2j&sn=j2j&lang=en">Original Gmail Gadget Ad</a></li>
+    <li><a href="http://groups.google.com/group/Google-Gadgets-API/topics?start=">Discussion Group</a></li>
+    <li><a href="http://code.google.com/support/bin/topic.py?topic=10027">Knowledge Base / FAQ</a></li>
+  </ul>
+</p>
+
+<a name="scratchpad"></a>
+<h2>Build Gadgets Using the Scratch Pad</h2>
+<p>
+  One of the quickest and easiest way to start writing gadgets is to use the scratch pad. The scratch pad
+  contains two tabs: "Edit" and "Preview".  The "Edit" tab includes a simple text editor that lets
+  you edit the gadget XML.  Clicking on "Preview" lets you instantly view live results of 
+  your changes, without ever leaving the webpage.
+</p>
+<p>
+  Underneath the scratch pad, there are links to other gadget ads.  Clicking on any of them loads the gadget
+  spec into the editor where you can view the XML, modify it, and preview the effects of your changes.
+  The <a href="http://www.google.com/ig/modules/hello.xml">Hello World</a> gadget is loaded by default.
+</p>
+<p>
+  There are different ways to use the scratch pad:
+  <ul>
+    <li>Edit the "Hello World" gadget spec that is displayed in the scratchpad by default.</li>
+    <li>Click on any gadget ad link underneath the scratchpad to display, edit, and preview the gadget spec.</li>
+    <li>Paste any gadget spec into the scratch pad to edit it and preview the results, or write a gadget from scratch.</li>
+  </ul>
+</p>
+<p>
+  <iframe style="width:100%; height:530px;" frameborder=0 scrolling=no src="http://gmodules.com/ig/ifr?url=http://doc-examples.googlecode.com/svn/trunk/gadget-ads/scratchpad_ads.xml&amp;synd=open&amp;up_height=450"></iframe>
+</p>
+</body>
+</html>
