@@ -49,9 +49,10 @@
 <a name="adsgadgets"></a>
 <h2>Gadget Ads vs. Google Gadgets</h2>
 <p>
-  Gadget Ads are simply Google Gadgets with rich-interactive content designed to attract users to a product.  Architecturally,
-  they're exactly the same.  The only new concept introduced is the <code>clickurl</code>, discussed further below, used 
-  to track user clicks inside the ad.  Like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
+  Gadget Ads are simply Google Gadgets with rich, interactive content designed to attract users to a product.  Architecturally,
+  they're exactly the same.  The only new concept introduced is the <code>clickurl</code>, discussed in more detail below.
+  It's used to track user clicks inside the ad and record the hits
+  in the ads database.  Like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
   Personalized Homepage, Google Desktop, blogs, websites, etc.  Since gadget ads and Google Gadgets are created in more or less the same way, 
   we highly recommend familiarizing yourself with the <a href="http://www.google.com/apis/gadgets/index.html">Google Gadgets API documentation</a>.  
   Understanding what gadgets are, how they work, and what features 
@@ -129,7 +130,7 @@
   <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</b>&quot;/&gt;</pre>
 </p>
 <p>
-  Make note of this test click URL as you will be using while developing your gadget ads:<br>
+  Make note of this test click URL as you will be using it while developing your gadget ads:<br>
   <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</a>
 </p>
 
@@ -138,7 +139,7 @@
   The links below are all set to route through the 
   <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">test click URL</a>
   described above.  Try clicking on a few to see the confirmation pop-up which confirms
-  click-thrus are being tracked properly.  If you setup click URLs correctly in your gadget,
+  click-throughs are being tracked properly.  If you set up click URLs correctly in your gadget,
   then you should see similar results:
   <ul>
     <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/">http://www.google.com</a></li>
@@ -164,7 +165,7 @@
       <pre>&lt;a id="<b>link1</b>" target="_top" href="<b>http://mytargetdomain.com</b>"&gt;Target Link&lt;/a&gt;</pre>
     </li>
     <li>
-      Setup an event handler function using <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_RegisterOnloadHandler(func)</a>.
+      Set up an event handler function using <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_RegisterOnloadHandler(func)</a>.
       This method accepts a single argument, which is a function that gets called after the entire gadget loads.  This is recommended
       to ensure that all anchor tags defined in step 1 are rendered before generating and assigning new URLs to them.
 <pre>&lt;script&gt;
