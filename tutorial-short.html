@@ -274,24 +274,6 @@
   color.
 </p>
 
-<p>
-<script>
-function toggle(name) {
-var obj=document.getElementById(name);
-if(obj.style.display=='none'){obj.style.display='inline';}else{obj.style.display='none';}
-}
-</script>
-  CHRISTIAN-- I'd like to add a rule that requires click targets to be
-  visually identified as causing click-through vs. popups vs. in-gadget
-  interactions.  This is a problem with the consumer web and consumer
-  gadgets: does a blue underline <a target=_top
-  href=http://www.google.com/apis/gadgets>click through</a>,
-  <a href=# onclick="window.open('http://www.google.com/apis/gadgets');return
-  false;">open a new window</a>, or interact with the gadget e.g. <a href=#
-  onclick="toggle('hiddentext');return false;">toggling some <span id=hiddentext
-  style='display:none'>hidden</span> elements</a>
-</p>
-
 <h3>Animated Ads</h3>
 <p>
   Animation is restricted to a maximum of 30 seconds (at a
