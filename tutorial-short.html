@@ -23,10 +23,10 @@
   <li><a href="#intro">Introduction</a></li>
   <li><a href="#adsgadgets">Gadget Ads vs. Google Gadgets</a></li>
   <li><a href="#gettingstarted">Getting Started</a></li>
-  <li><a href="#clickurl">Defining the Click URL</a></li>
-  <li><a href="#remotecontent">Getting Remote Content</a></li>
+  <li><a href="#clickurl">Defining and Using the Click URL</a></li>
+  <li><a href="#policy">Conforming to IAB and Google Advertising Policies</a></li>
   <li><a href="#images">Embedding Images: A Better Way</a></li>
-  <li><a href="#flash">Embedding Flash Content</a></li>
+  <li><a href="#flash">Embedding Flash and Video Content</a></li>
   <li><a href="#map">Embedding Google Maps</a></li>
   <li><a href="#casestudy">Case Study: Simplified Gmail Gadget Ad</a></li>
   <li><a href="#finaloutcome">The Final Outcome</a></li>
@@ -49,9 +49,13 @@
 <a name="adsgadgets"></a>
 <h2>Gadget Ads vs. Google Gadgets</h2>
 <p>
-  Gadget Ads are simply Google Gadgets with rich-interactive content designed to attract users to a product.  Architecturally,
-  they're exactly the same.  The only new concept introduced is the <code>clickurl</code>, discussed further below, used 
-  to track user clicks inside the ad.  Like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
+  Gadget Ads are simply Google Gadgets with rich, interactive content designed to attract users to a product.  Architecturally,
+  they're exactly the same.  The only new concept introduced is the <code>clickurl</code>, which is 
+  discussed in more detail below.  It's used to track user clicks inside the ad and record the hits
+  in the ads database.
+</p>
+<p>
+  Just like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
   Personalized Homepage, Google Desktop, blogs, websites, etc.  Since gadget ads and Google Gadgets are created in more or less the same way, 
   we highly recommend familiarizing yourself with the <a href="http://www.google.com/apis/gadgets/index.html">Google Gadgets API documentation</a>.  
   Understanding what gadgets are, how they work, and what features 
@@ -129,16 +133,15 @@
   <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</b>&quot;/&gt;</pre>
 </p>
 <p>
-  Make note of this test click URL as you will be using while developing your gadget ads:<br>
+  Make note of this test click URL as you will be using it while developing your gadget ads:<br>
   <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</a>
 </p>
 
 <h3>Experiment: Test the Click URL</h3>
 <p>
-  The links below are all set to route through the 
-  <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">test click URL</a>
+  The links below are all set to route through the test click URL
   described above.  Try clicking on a few to see the confirmation pop-up which confirms
-  click-thrus are being tracked properly.  If you setup click URLs correctly in your gadget,
+  that click-throughs are being tracked properly.  If you set up click URLs correctly in your gadget,
   then you should see similar results:
   <ul>
     <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/">http://www.google.com</a></li>
@@ -147,7 +150,7 @@
   </ul>
 </p>
 
-<h3>How To Use the Click URL</h3>
+<h3>How To Use the Click URL</h2>
 <p>
   Once again, gadget content is simply made up of HTML.  So traditionally, the way you'd create a link in HTML
   is by creating an anchor tag that looks something like this:
@@ -206,71 +209,110 @@
   </ol>
 </p>
 
-<a name="remotecontent"></a>
-<h2>Getting Remote Content</h2>
+<a name="policy"></a>
+<h2>Conforming to IAB and Google Rich Media Advertising Policies</h2>
 <p>
-  One great feature of gadgets is the ability to fetch remote content from third-party
-  websites and display it within your gadget.  The API currently offers three different methods to do
-  this, depending on the type of content being retrieved:
-  <ul>
-    <li>
-      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_text">_IG_FetchContent(url, func)</a>:
-      Fetches content from <code>url</code> and returns the response as text.
-      When it's ready, it calls <code>func()</code>. Note that <code>_IG_FetchContent()</code> is asynchronous, 
-      meaning that it returns immediately and then calls the inner function later, when the fetch finishes. 
-      This means that you must put any dependent code inside the callback function, or inside functions called by the callback function. 
-    </li>
-    <li>
-      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_XML">_IG_FetchXmlContent(url, func)</a>:
-      Fetches content from <code>url</code> and returns the response as an XML object.
-      When it's ready, calls <code>func()</code>. Like <code>_IG_FetchContent()</code>, is asynchronous.
-    </li>
-    <li>
-      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_JSON">_IG_FetchFeedAsJSON(url, func, num_entries, get_summaries)</a>:
-      Fetches the RSS / Atom feed content from <code>url</code> and returns it as a JSON object. When it's ready, calls <code>func()</code>. 
-      Fetches the number of feed entries specified by <code>num_entries</code> (default is 3, possible range is 1-100), 
-      and optionally fetches additional descriptions depending on the value of <code>summaries</code> (default is false).
-    </li>
-  </ul>
+  NOTE: this section under construction!  (Christian-- please help me flesh
+  it out)
 </p>
-<h3>Example: Fetching from an Atom/RSS Feed</h3>
 <p>
-  Here's an example where the first feed entry is fetched from the Google News
-  <a href="http://news.google.com/?output=atom">Atom feed</a> and returned as 
-  a <a href="http://www.json.org">JSON object</a>.
-  The callback function takes the response and outputs HTML generated from
-  the entry title, link, and summary.
-<pre>&lt;div id=&quot;out&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-  _IG_RegisterOnloadHandler(function() {
-    <b>function callback(response) {
-      // Retrieve first entry from the response
-      var firstEntry = response.Entry[0];
-      
-      // Generate HTML using the entry's title, link, and summary
-      _gel(&quot;out&quot;).innerHTML = [
-        &#39;&lt;a href=&quot;&#39; + firstEntry.Link + &#39;&quot;&gt;&#39; + firstEntry.Title + &#39;&lt;/a&gt;&#39;,
-        firstEntry.Summary,
-      ].join(&quot;&lt;br&gt;&quot;);
-    }
-    
-    // Fetch 1 entry from Google News Atom feed and include summaries
-    _IG_FetchFeedAsJSON(&quot;http://news.google.com/?output=atom&quot;, callback, 1, true);</b>
-  });
-&lt;/script&gt;</pre>
+  It is very important that you conform to both IAB (Internet Advertising
+  Board) and Google corporate policies around acceptable forms of
+  advertising.  Intentional or repeated policy violations will have serious
+  consequences for your relationship Google-- this is very important.  Beyond
+  "obvious" guidelines about not misleading users, there are some special
+  considerations that may not be obvious at first.  For example, pages
+  can have multiple ads on them-- so you cannot play audio on-load, or
+  the ads will conflict.
 </p>
 
+<h3>Performance and Bandwidth Use</h3>
+<p>
+  In many parts of the world, users and companies pay a lot of money for
+  bandwidth and so it is important to respect their needs to keep ads small.
+  Moreover, if ads slowed down webpages too much, then the web would seem
+  slow and we would all suffer.  Therefore, the IAB and Google have set a
+  maximum of 50 KB (kilobytes) allowed "on load" for an ad.  The definition
+  of "on load" is tricky, but roughly, if the user has "interacted" with the
+  gadget ad, then it is OK to use more than 50KB.  Both for the 50KB limit
+  and the no-audio rule mentioned above, on-load video is generally not
+  possible, but small animation sequences work.
+  Neither the IAB nor Google specifies a particular number 
+  (e.g. milliseconds) that your gadget must render in, 
+</p>
+
+<h3>Bad Clicks and Misleading Click-Targets</h3>
+<p>
+  It is trivial to simulate a click with a gadget ad-- obviously, don't do
+  this.  Beyond threats, click fraud makes no sense for gadget ads--
+  click-through-based advertisers ultimate make money when users willingly
+  choose to click to learn more about products or services.  Fraudulent
+  gadget ad clicks increase click through rate, at the expense of conversion.
+  Similarly, "tricking" the user into clicking with bad click targets is
+  self-defeating.
+</p>
+<p>
+  The more subtle issue are low click-through rates.  For example, if the
+  click through URLs are not properly placed, then the gadget will 'work'
+  but fail to run if it uses CPC (cost-per-click) advertising.  More subtly,
+  your help in usser interface design can help
+  advertisers understand the implications of CPM (paying for impressions,
+  not clicks) vs. CPC vs. CPA (paying for conversion) advertising.
+</p>
+<p>
+<script>
+function toggle(name) {
+var obj=document.getElementById(name);
+if(obj.style.display=='none'){obj.style.display='inline';}else{obj.style.display='none';}
+}
+</script>
+  CHRISTIAN-- I'd like to add a rule that requires click targets to be
+  visually identified as causing click-through vs. popups vs. in-gadget
+  interactions.  This is a problem with the consumer web and consumer
+  gadgets: does a blue underline <a target=_top
+  href=http://www.google.com/apis/gadgets>click through</a>,
+  <a href=# onclick="window.open('http://www.google.com/apis/gadgets');return
+  false;">open a new window</a>, or interact with the gadget e.g. <a href=#
+  onclick="toggle('hiddentext');return false;">toggling some <span id=hiddentext
+  style='display:none'>hidden</span> elements</a>
+</p>
+
+<h3>Annoying Ads</h3>
+<p>
+  On-load, looped animation is not allowed-- but a short onload animation is
+  fine.  [insert actual IAB/Google rule]
+</p>
+
+<h3>Privacy and Cookies</h3>
+<p>
+  Google requires that ads are completely anonymous, and Gadget Ads may not
+  create or read cookies, or use other cookie-like mechanisms, e.g. flash
+  local storage.  This is an <u>extremely important</u> rule-- do
+  not make mistakes.
+</p>
+
+<h3>Downloads and Malware Ads</h3>
+<p>
+  Gadget Ads cannot download (or attempt to download) any software
+  to the user's computer.
+  Currently, IAB/Google do not permit download-links from inside gadgets--
+  we are investigating way(s) of changing these guidelines to allow download
+  links from inside gadget ads-- but today, advertisers must place all
+  download links on the 'landing page' (destination page from click throughs).
+</p>
+
+<h3>Popup Windows</h3>
+<p>
+  Don't use alert(), confirm() or other "modal" dialog boxes for any reason.
+  <b>CHRISTIAN</b>-- are gadgets allowed to use popup windows?  onclick?
+</p>
+
+
+</p>
 <a name="images"></a>
 <h2>Embedding Images: A Better Way</h2>
 <p>
-  Gadget ads often embed high-quality images to create a visually appealing gadget.
-  Each time the gadget is rendered, requests are sent out to retrieve each image from original hosting servers.  This can
-  significantly increase latency and gadget loading times, which can result in slower loading pages and a negative user experience.
-  Fortunately, there is a feature that allows you to cache images on Google servers, which significantly
-  improves gadget performance and loading times.  This also dramatically
-  reduces the load on the image hosting servers because of the significant decrease in number of requests.
-</p>
-<p>
+  Gadget ads often receive huge amounts of traffic, so it is important to use the Google caching services for rendering images.
   There are two JavaScript functions available for this purpose:
   <ul>
     <li>
@@ -311,58 +353,25 @@
 </p>
 
 <a name="flash"></a>
-<h2>Embedding Flash Content</h2>
+<h2>Embedding Flash and Video Content</h2>
 <p>
-  Many times, you're going to want to embed Flash within your gadget.  There are 
-  different ways to do this in HTML, and it can be a challenge to make it work across all browsers.
-  As a result, we've created a cross-browser compatible Flash injection library that allows you to easily embed Flash
-  content anywhere within your gadget.
-</p>
-<p>
-  To use the Flash library, simply add the following line under <code>&lt;ModulePrefs&gt;</code>:
-<pre>&lt;Require feature=&quot;flash&quot; /&gt;</pre>
-</p>
-<p>
-  The Flash library currently includes the following methods:
-  <ul>
-    <li>
-      <code>_IG_EmbedFlash(swf_url, swf_container, opt_params)</code>: Embeds the 
-      .swf file specified by <code>swf_url</code>, and displays it in the gadget 
-      at the location specified by <code>swf_container</code>.
-    </li>
-    <li>
-      <code>_IG_GetFlashMajorVersion()</code>: Returns the Flash Player's major 
-      version or zero if Flash Player is not detected.
-    </li>
-  </ul>
-</p>
-<p>
+  Many times, you're going to want to embed Flash within your gadget.
   Using our Flash library is the recommended way to embed Flash content in your gadget
   and ensures it works correctly across multiple browsers.  Please visit the
   <a href="http://www.google.com/apis/gadgets/ui.html#Flash">documentation</a>
   for more information.
 </p>
-
-<h3>Example: Add a YouTube Video</h3>
 <p>
-  Here's a classic example on how to embed a YouTube video in your gadget using the
-  Flash library:
-<pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
-&lt;script&gt;
-<b>_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;container&#39;), {
-    swf_version: 6,
-    id: &quot;flashid&quot;,
-    width: 250,
-    height: 200
-  });</b>
-&lt;/script&gt;</pre>
+  For video content, we recommend using a Flash player.  For gadget ads, we recommend
+  hosting on YouTube, and using the advanced YouTube player.  For advertisers who
+  insist on unbranded players [DAN-- include instructions...]
 </p>
 
 <h3>Caching Flash Content on Google</h3>
 <p>
-  Similar to the way you cache gadget images,
-  you can also cache embedded Flash content to improve gadget performance
-  and decrease the load on hosting servers.  To do this, you'll need to use
+  Similar caching gadget images, you should also use the cache for Flash content
+  to improve gadget performance and decrease the load on hosting servers.  To do
+  this, you'll need to use
   <code>_IG_EmbedFlash(url, container, opt_params)</code> in conjunction with 
   another method called <code>_IG_GetCachedUrl(url)</code>, which simply returns
   the proxy URL for the cached version of the file specified by <code>url</code>.
