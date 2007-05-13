@@ -53,9 +53,7 @@
   they're exactly the same.  The only new concept introduced is the <code>clickurl</code>, which is 
   discussed in more detail below.  It's used to track user clicks inside the ad and record the hits
   in the ads database.
-</p>
-<p>
-  Just like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
+  Like Google Gadgets, once a gadget ad is created, it can be distributed and added to Google 
   Personalized Homepage, Google Desktop, blogs, websites, etc.  Since gadget ads and Google Gadgets are created in more or less the same way, 
   we highly recommend familiarizing yourself with the <a href="http://www.google.com/apis/gadgets/index.html">Google Gadgets API documentation</a>.  
   Understanding what gadgets are, how they work, and what features 
@@ -167,7 +165,7 @@
       <pre>&lt;a id="<b>link1</b>" target="_top" href="<b>http://mytargetdomain.com</b>"&gt;Target Link&lt;/a&gt;</pre>
     </li>
     <li>
-      Setup an event handler function using <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_RegisterOnloadHandler(func)</a>.
+      Set up an event handler function using <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_RegisterOnloadHandler(func)</a>.
       This method accepts a single argument, which is a function that gets called after the entire gadget loads.  This is recommended
       to ensure that all anchor tags defined in step 1 are rendered before generating and assigning new URLs to them.
 <pre>&lt;script&gt;
@@ -212,53 +210,70 @@
 <a name="policy"></a>
 <h2>Conforming to IAB and Google Rich Media Advertising Policies</h2>
 <p>
-  NOTE: this section under construction!  (Christian-- please help me flesh
-  it out)
+  While gadget ads is a format unique to Google, we consider it imperative that
+  these ads conform to industry standards and Google's accepted policies around
+  rich media and dynamic advertising. It is very important that you conform to
+  both IAB (Internet Advertising Board) and Google corporate policies around
+  acceptable forms of advertising. Beyond "obvious" guidelines about not
+  misleading users, there are some special considerations that may not be obvious
+  at first. For example, pages can have multiple ads on them-- so you cannot play
+  audio on-load, or the ads will conflict. Google has developed an initial set of
+  editorial guidelines that must be adhered to. You can see these guidelines at
+  the link below:
 </p>
 <p>
-  It is very important that you conform to both IAB (Internet Advertising
-  Board) and Google corporate policies around acceptable forms of
-  advertising.  Intentional or repeated policy violations will have serious
-  consequences for your relationship Google-- this is very important.  Beyond
-  "obvious" guidelines about not misleading users, there are some special
-  considerations that may not be obvious at first.  For example, pages
-  can have multiple ads on them-- so you cannot play audio on-load, or
-  the ads will conflict.
+  <a href="http://adwords.google.com/support/bin/answer.py?answer=66136">http://adwords.google.com/support/bin/answer.py?answer=66136</a>
 </p>
 
 <h3>Performance and Bandwidth Use</h3>
 <p>
   In many parts of the world, users and companies pay a lot of money for
   bandwidth and so it is important to respect their needs to keep ads small.
-  Moreover, if ads slowed down webpages too much, then the web would seem
-  slow and we would all suffer.  Therefore, the IAB and Google have set a
-  maximum of 50 KB (kilobytes) allowed "on load" for an ad.  The definition
-  of "on load" is tricky, but roughly, if the user has "interacted" with the
-  gadget ad, then it is OK to use more than 50KB.  Both for the 50KB limit
-  and the no-audio rule mentioned above, on-load video is generally not
-  possible, but small animation sequences work.
-  Neither the IAB nor Google specifies a particular number 
-  (e.g. milliseconds) that your gadget must render in, 
+  Moreover, if ads slowed down webpages too much, then the web would seem slow
+  and we would all suffer. Google has consistently seen that latency and direct
+  and obvious impact on the performance of ads. The IAB limits rich media ad
+  sizes based on the dimensions of the creative, but no ads are allowed to be
+  over 40k on load. Google's preference is always that advertisers should comply
+  with the IAB's standards. To view the IAB's standards on rich media, visit the
+  document below:
+</p>
+<p>
+  <a href="http://www.iab.net/standards/richmedia/pdf/RichMediaGuidelines3.pdf">http://www.iab.net/standards/richmedia/pdf/RichMediaGuidelines3.pdf</a>
+</p>
+<p>
+  As gadget ads are a new and unique format Google has set a maximum of 50 KB
+  (kilobytes) allowed "on load" for an ad during our beta period. The definition
+  of "on load" is tricky, but should be taken to mean the size of the ad when it
+  is loaded with the page and prior to a consumer interacting with it. If the user
+  has "interacted" with the gadget ad, then it is OK to use more than 50KB. Both
+  for the 50KB limit and the no-audio rule mentioned above, on-load video is
+  generally not possible, but small animation sequences work.
 </p>
 
 <h3>Bad Clicks and Misleading Click-Targets</h3>
 <p>
-  It is trivial to simulate a click with a gadget ad-- obviously, don't do
-  this.  Beyond threats, click fraud makes no sense for gadget ads--
+  It is trivial to simulate a click with a gadget ad-- obviously, don't do this.
+  Beyond threats, click fraud makes no sense for gadget ads--
   click-through-based advertisers ultimate make money when users willingly
-  choose to click to learn more about products or services.  Fraudulent
-  gadget ad clicks increase click through rate, at the expense of conversion.
-  Similarly, "tricking" the user into clicking with bad click targets is
-  self-defeating.
+  choose to click to learn more about products or services. Fraudulent gadget ad
+  clicks increase click through rate, at the expense of conversion. Similarly,
+  "tricking" the user into clicking with bad click targets is self-defeating.
 </p>
 <p>
-  The more subtle issue are low click-through rates.  For example, if the
-  click through URLs are not properly placed, then the gadget will 'work'
-  but fail to run if it uses CPC (cost-per-click) advertising.  More subtly,
-  your help in usser interface design can help
-  advertisers understand the implications of CPM (paying for impressions,
-  not clicks) vs. CPC vs. CPA (paying for conversion) advertising.
+  The more subtle issue are low click-through rates. For example, if the click
+  through URLs are not properly placed, then the gadget will 'work' but fail to
+  run if it uses CPC (cost-per-click) advertising. More subtly, your help in
+  user interface design can help advertisers understand the implications of CPM
+  (paying for impressions, not clicks) vs. CPC vs. CPA (paying for conversion)
+  advertising.
 </p>
+<p>
+  Click targets (clicks that lead users to another website) must be visually
+  identified as causing click-through vs. in-gadget interactions. Google
+  suggests doing this by having all click targets underlined and in a blue font
+  color.
+</p>
+
 <p>
 <script>
 function toggle(name) {
@@ -277,38 +292,40 @@ if(obj.style.display=='none'){obj.style.display='inline';}else{obj.style.display
   style='display:none'>hidden</span> elements</a>
 </p>
 
-<h3>Annoying Ads</h3>
+<h3>Animated Ads</h3>
 <p>
-  On-load, looped animation is not allowed-- but a short onload animation is
-  fine.  [insert actual IAB/Google rule]
+  Animation is restricted to a maximum of 30 seconds (at a
+  15-20 fps frame rate). Endless loops are not allowed. Ads can loop a maximum
+  of three times.
 </p>
 
 <h3>Privacy and Cookies</h3>
 <p>
   Google requires that ads are completely anonymous, and Gadget Ads may not
-  create or read cookies, or use other cookie-like mechanisms, e.g. flash
-  local storage.  This is an <u>extremely important</u> rule-- do
-  not make mistakes.
+  create or read cookies, or use other cookie-like mechanisms, e.g. flash local
+  storage. We view this as a crucial aspect of respecting our users' privacy.
+  This is an very important rule -- do not make mistakes.
 </p>
 
 <h3>Downloads and Malware Ads</h3>
 <p>
-  Gadget Ads cannot download (or attempt to download) any software
-  to the user's computer.
-  Currently, IAB/Google do not permit download-links from inside gadgets--
-  we are investigating way(s) of changing these guidelines to allow download
-  links from inside gadget ads-- but today, advertisers must place all
+  Gadget Ads cannot download (or attempt to download) any software to the user's
+  computer. Currently, IAB/Google do not permit download-links from inside
+  gadgets-- we are investigating way(s) of changing these guidelines to allow
+  download links from inside gadget ads-- but today, advertisers must place all
   download links on the 'landing page' (destination page from click throughs).
 </p>
 
 <h3>Popup Windows</h3>
 <p>
   Don't use alert(), confirm() or other "modal" dialog boxes for any reason.
-  <b>CHRISTIAN</b>-- are gadgets allowed to use popup windows?  onclick?
+  We also do not allow links to landing pages that generate
+  pop-ups when users enter or leave your landing page. We consider a pop-up to
+  be any window, regardless of content, that opens in addition to the original
+  window.
 </p>
 
 
-</p>
 <a name="images"></a>
 <h2>Embedding Images: A Better Way</h2>
 <p>
