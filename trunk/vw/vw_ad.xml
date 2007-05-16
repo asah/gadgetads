@@ -141,29 +141,17 @@
       // Pull random video from our pre-selected list
       var randIndex = Math.floor(Math.random() * 10000 % videoSources.length);
       var html = [
-        '<div>' + generateYouTubeHtml(videoSources[randIndex], 330, 220) + '</div>',
+        '<div id="videoContainer">' + generateYouTubeHtml(videoSources[randIndex], 330, 220) + '</div>',
         '<a href="javascript:void(0);" onclick="showVideos();">&laquo; see more &raquo;</a>'
       ];
+      contentContainer.innerHTML = html.join('');
     
       // Show videos DIV and hide feeds
-      //contentContainer.innerHTML = html.join("");
-      _IG_EmbedFlash(videoSources[randIndex], contentContainer, {
+      _IG_EmbedFlash(videoSources[randIndex], _gel('videoContainer'), {
           width: 330,
           height: 220
         });
       contentContainer.className = "videos";
-    }
-  
-    // Returns the HTML to embed a YouTube video.
-    // Allows you to pass in the video source, width, and height of the video.
-    function generateYouTubeHtml(source, w, h) {
-      return [
-        '<object width="' + w + '" height="' + h + '">',
-        '<param name="movie" value="' + source + '"></param>',
-        '<param name="wmode" value="transparent"></param>',
-        '<embed src="' + source + '" type="application/x-shockwave-flash" wmode="transparent" width="' + w + '" height="' + h+ '"></embed>',
-        '</object>'
-      ].join("");
     }
   
     _IG_RegisterOnloadHandler(init);
