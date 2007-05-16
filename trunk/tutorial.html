@@ -659,7 +659,7 @@
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
         
         <b>// Embed the Gmail video from YouTube
-        _IG_EmbedFlash(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;, _gel(&quot;video&quot;), {
+        _IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
             width: 300,
             height: 210
           });</b>
@@ -724,7 +724,7 @@
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
         
         // Embed the Gmail video from YouTube
-        _IG_EmbedFlash(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;, _gel(&quot;video&quot;), {
+        _IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
             width: 300,
             height: 210
           });
@@ -748,7 +748,7 @@
 <p>
   <ul>
     <li><a href="http://www.google.com/apis/gadgets/">Google Gadgets API</a></li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">Test Click URL</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</a></li>
     <li><a href="http://www.google.com/apis/maps/">Google Maps API</a></li>
     <li><a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml">Simple Gmail Gadget Ad</a></li>
     <li><a href="http://gmodules.com/ig/creator?synd=open&url=http%3A//www.labpixies.com/gadgads/gmail/gmail.xml&pt=%26context%3Ds%26synd%3Dopen%26lang%3Den%26.lang%3Den%26country%3Dus%26.country%3Dus%26cat%3Dall%26q%3Dlabpixies.com%2Bgmail%26num%3D1%26start%3D0%26cols%3D1%26objs%3Dj2j&sn=j2j&lang=en">Original Gmail Gadget Ad</a></li>
