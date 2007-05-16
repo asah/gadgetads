@@ -141,7 +141,7 @@
       // Pull random video from our pre-selected list
       var randIndex = Math.floor(Math.random() * 10000 % videoSources.length);
       var html = [
-        '<div id="videoContainer">' + generateYouTubeHtml(videoSources[randIndex], 330, 220) + '</div>',
+        '<div id="videoContainer"></div>',
         '<a href="javascript:void(0);" onclick="showVideos();">&laquo; see more &raquo;</a>'
       ];
       contentContainer.innerHTML = html.join('');
