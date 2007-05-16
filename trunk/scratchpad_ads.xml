@@ -122,7 +122,8 @@
     "http://flash.atlrec.com/google/diddy/diddy.xml": "Diddy TV",
     "http://www.google.com/ig/modules/mapsearch.xml": "Google Map Search",
     "http://www.google.com/ig/modules/driving_directions.xml": "Driving Directions",
-    "http://ralph.feedback.googlepages.com/googlemap.xml": "Google Map"
+    "http://ralph.feedback.googlepages.com/googlemap.xml": "Google Map",
+    "http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml": "VW (example)"
   };
 
   // Global variables
