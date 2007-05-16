@@ -4,7 +4,7 @@
   width="336" 
   height="280">
   <Require feature="flash"/>
-</Module>
+</ModulePrefs>
 <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
 <Content type="html"><![CDATA[
   <style>
