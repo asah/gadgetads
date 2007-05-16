@@ -3,7 +3,7 @@
 <ModulePrefs title="VW - Gadget Ad" 
   width="336" 
   height="280"/>
-<UserPref name="clickurl" datatype="hidden" default_value="http://doc-examples.googlecode.com/svn/trunk/gadget-ads/test_clickurl.html?url="/>
+<UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
 <Content type="html"><![CDATA[
   <style>
     /* Don't show default blue borders around images */
