@@ -29,7 +29,7 @@
         
         // Embed the Gmail video from YouTube
         _IG_EmbedFlash(_IG_GetCachedUrl("http://www.youtube.com/v/_YUugB4IUl4"), _gel("video"), {
-            width: 300,
+            width: 250,
             height: 210
           });
       });
