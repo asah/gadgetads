@@ -160,7 +160,7 @@
       _gel("rawxml").value = response;
     }
 
-    if (tabs.currentTab == 1) {
+    if (tabs.getSelectedTab().getIndex() == 1) {
       previewGadget();
     }
   }
@@ -208,7 +208,7 @@
 
     return [
       "http://gmodules.com/ig/ifr?",
-      "title=" + encodeURIComponent(modulePrefs.title).replace(/%20/g, "+"),
+      "title=" + _esc(modulePrefs.title).replace(/%20/g, "+"),
       "w=" + modulePrefs.width,
       "h=" + modulePrefs.height,
       "synd=open",
