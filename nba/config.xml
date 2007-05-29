@@ -33,5 +33,6 @@
         height: 409,
         flashVars: 'clickUrl=' + _esc(clickUrl)
       });
+  </script>
   ]]></Content>
 </Module>
