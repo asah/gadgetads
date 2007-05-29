@@ -21,7 +21,7 @@
     }
   </style>
   
-  <div id="flashContainer"></div>
+  <div id="flashContainer" style="text-align: center;"></div>
   
   <script>
     var prefs = new _IG_Prefs();
