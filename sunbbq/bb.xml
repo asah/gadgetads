@@ -1,0 +1,188 @@
+<bigBrother>
+    <contestants>
+    
+    
+        <contestant id="0">
+        
+            <name><![CDATA[HOUSE MATE]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+    
+        <contestant id="1">
+        
+            <name><![CDATA[HOUSE MATE 2]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+    
+        <contestant id="2">
+        
+            <name><![CDATA[HOUSE MATE 3]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        <contestant id="3">
+        
+            <name><![CDATA[HOUSE MATE 4]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        <contestant id="4">
+        
+            <name><![CDATA[HOUSE MATE 5]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+
+        <contestant id="5">
+        
+            <name><![CDATA[HOUSE MATE 6]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        <contestant id="6">
+        
+            <name><![CDATA[HOUSE MATE 7]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        <contestant id="7">
+        
+            <name><![CDATA[HOUSE MATE 8]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        <contestant id="8">
+        
+            <name><![CDATA[HOUSE MATE 9]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        <contestant id="9">
+        
+            <name><![CDATA[HOUSE MATE 10]]></name>
+            <age><![CDATA[26]]></age>
+            <occupation><![CDATA[occupation]]></occupation>
+            <description><![CDATA[HOUSE MATE is a great guy and this is his bio]]></description>
+           
+            <!-- RESIDENT | EVICTED | NOMINATED | UNKNOWN -->
+            <status>UNKNOWN</status>   
+           
+            <image>images/unknown.jpg</image>
+            
+            <tracking1><![CDATA[track from home to bio]]></tracking1>
+            <tracking2><![CDATA[track from bio to home]]></tracking2>
+            <tracking3><![CDATA[bio to external]]></tracking3>
+            
+        </contestant>
+        
+        
+    
+    </contestants>
+</bigBrother>

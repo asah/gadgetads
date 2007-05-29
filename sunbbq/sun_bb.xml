@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="My First Gadget Ad" width="300" height="250">
+  <Require feature="flash" />
+  </ModulePrefs>
+    <UserPref name="clickurl" datatype="hidden" default_value=""/>
+    <Content type="html"><![CDATA[    
+    <object width="300" height="250">
+    <param name="movie" value="bb_widget.swf"></param>
+    <param name="wmode" value="transparent"></param>
+    <embed src="bb_widget.swf" type="application/x-shockwave-flash" wmode="transparent" width="300" height="250"></embed>
+    </object>
+      ]]></Content>
+  
+  </Module>
