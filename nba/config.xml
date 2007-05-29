@@ -26,8 +26,9 @@
   <script>
     var prefs = new _IG_Prefs();
     var clickUrl = prefs.getString('clickurl');
+    var cachedUrl = _IG_GetCachedUrl('http://nba.goodbysilverstein.com/google_gadget/container_280x409.swf');
     
-    _IG_EmbedFlash('http://nba.goodbysilverstein.com/google_gadget/container_280x409.swf', 'flashContainer', {
+    _IG_EmbedFlash(cachedUrl, 'flashContainer', {
         width: 280,
         height: 409,
         allowScriptAccess: 'sameDomain',
