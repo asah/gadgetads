@@ -32,7 +32,7 @@
         height: 409,
         allowScriptAccess: 'sameDomain',
         allowFullScreen: 'false',
-        flashVars: 'clickUrl=' = _esc(clickUrl);
+        flashVars: 'clickUrl=' = _esc(clickUrl)
       });
   ]]></Content>
 </Module>
