@@ -31,8 +31,6 @@
     _IG_EmbedFlash(cachedUrl, 'flashContainer', {
         width: 280,
         height: 409,
-        allowScriptAccess: 'sameDomain',
-        allowFullScreen: 'false',
         flashVars: 'clickUrl=' + _esc(clickUrl)
       });
   ]]></Content>
