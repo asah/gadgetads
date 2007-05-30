@@ -419,14 +419,32 @@
   for more information.
 </p>
 <p>
-  For video content, we recommend using a Flash player.  For gadget ads, we recommend
-  hosting on YouTube, and using the advanced YouTube player.  For advertisers who
-  insist on unbranded players [DAN-- include instructions...]
+  For gadget ads, we highly recommend hosting your video on <a href="http://www.youtube.com">YouTube</a>.
+  View the <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">instructions</a>
+  on how to upload videos if you're unfamiliar with the process.  Hosting videos on
+  YouTube ensures that your video hosting server will be able to handle the traffic
+  and load coming from your gadget ad.  In addition, once your video is hosted,
+  you can utilize the advanced YouTube player for video playback in your gadget.
+</p>
+
+<h3>Example: Add a YouTube Video</h3>
+<p>
+  Here's a classic example on how to embed a YouTube video in your gadget using the
+  Flash library and setting a custom width and height:
+<pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+<b>_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;container&#39;), {
+    swf_version: 6,
+    id: &quot;flashid&quot;,
+    width: 250,
+    height: 200
+  });</b>
+&lt;/script&gt;</pre>
 </p>
 
 <h3>Caching Flash Content on Google</h3>
 <p>
-  Similar caching gadget images, you should also use the cache for Flash content
+  Similar to caching gadget images, you should also use the cache for Flash content
   to improve gadget performance and decrease the load on hosting servers.  To do
   this, you'll need to use
   <code>_IG_EmbedFlash(url, container, opt_params)</code> in conjunction with 
