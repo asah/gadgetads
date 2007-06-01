@@ -1,3 +1,4 @@
+<div id="out"></div>
 <script>
 function _unesc(s) {
   return window.decodeURIComponent ? decodeURIComponent(s) : unescape(s);
@@ -18,24 +19,19 @@ function _args() {
 }
 
 var url = _args()["url"];
+var msg = _args()["msg"];
+
 if (url) {
   url = _unesc(url);
+  msg = (msg == 0) ? false : true;
+  
   var regexp = new RegExp("^http://.*");
   if (url.match(regexp)) {
-    var msg = [
-      "*** Click Received ***",
-      "",
-      "Destination URL:",
-      url,
-      "",
-      "Continue?"
+    var html = [
+      "<h3>*** Click Received ***</h3>",
+      "<div>Desitination URL<div>",
+      '<div><a href="javascript:window.location.replace(' + url + ');">' + url + '</a></div>'
     ].join("\n");
-
-    if (confirm(msg)) {
-      window.location.replace(url);
-    } else {
-      window.history.back();
-    }
   }
 }
 </script>
