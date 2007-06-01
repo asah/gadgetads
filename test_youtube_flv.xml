@@ -22,7 +22,7 @@
       font-weight: bold;
       font-size: 1.2em;
       padding: 15px 10px;
-      margin-top: 130px;
+      top: 120px;
     }
   </style>
   
