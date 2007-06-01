@@ -429,6 +429,24 @@
 
 <h3>Example: Add a YouTube Video</h3>
 <p>
+  Many times you'll want to show videos in your gadget ad.  We highly recommend
+  using YouTube to host and playback your videos.  If you want to use the YouTube
+  branded player, that's very easy to do.  The YouTube player is simply a Flash
+  application that you can easily embed anywhere in your gadget.  Here's what you 
+  need to do.
+  <ol>
+    <li>
+      Find the video on <a href="http://www.youtube.com">YouTube</a> that you want to use.
+      If your video doesn't exist on YouTube, <a href="http://www.youtube.com/my_videos_upload">upload</a>
+      them now.  Visit their <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">help center</a>
+      if you need help.
+    </li>
+    <li>
+      Go to your video on YouTube.  YouTube provides the HTML you can use to embed
+      this video on other webpages.  All you need is the <code>src</code> value
+      from the <code>&lt;embed&gt;</code> tag:
+      <pre>&lt;object width=&quot;425&quot; height=&quot;350&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/aB_c2RwpbXU&quot;&gt;&lt;/param&gt;&lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;&lt;embed src=&quot;http://www.youtube.com/v/aB_c2RwpbXU&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; width=&quot;425&quot; height=&quot;350&quot;&gt;&lt;/embed&gt;&lt;/object&gt;</pre>
+      
   Here's a classic example on how to embed a YouTube video in your gadget using the
   Flash library and setting a custom width and height:
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
