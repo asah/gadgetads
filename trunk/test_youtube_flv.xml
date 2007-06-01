@@ -1,23 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-<ModulePrefs title="Google News Reader" />
+<ModulePrefs title="Streaming FLV From YouTube" />
 <Content type="html"><![CDATA[
+  <style>
+    #flvOut a {
+      font-size: 12px;
+      color: #00c;
+    }
+  </style>
+  
+  <div>
+    Link to the FLV file on YouTube for this
+    <a href="http://www.youtube.com/watch?v=WWyJJQbFago">video</a>.  The video
+    ID is <b>WWyJJQbFago</b>
+  </div>
+  <div id="flvOut"</div>
 
-<div id="out"></div>
-<script>
-  function getFlvUrl(videoId) {
-    var url = 'http://www.youtube.com/get_video?';
-    return url + [
+  <script>
+    var flvOut = _gel('flvOut');
+    var flvUrl = 'http://www.youtube.com/get_video?';
+    var flvUrl += [
         'video_id=' + _esc(videoId),
         'ts=' + _esc(__ENV_time_secs_since_epoch__),
         't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
         'gad=1'
       ].join('&');
-  }
-  
-  var out = _gel('out');
-  var flvUrl = getFlvUrl('WWyJJQbFago');
-  out.innerHTML = '<a target="_top" href="' + flvUrl + '">' + flvUrl + '</a>';
-</script>
+    flvOut.innerHTML = '<a target="_top" href="' + flvUrl + '">' + flvUrl + '</a>';
+  </script>
 ]]></Content>
 </Module>
