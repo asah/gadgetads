@@ -3,8 +3,11 @@
 <ModulePrefs title="Streaming FLV From YouTube" />
 <Content type="html"><![CDATA[
   <style>
+    body {
+      font-size: 0.9em;
+    }
+    
     #flvOut a {
-      font-size: 12px;
       color: #00c;
     }
   </style>
