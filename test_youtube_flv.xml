@@ -16,18 +16,27 @@
     Here's the <a id="flvLink" target="_top">FLV link</a>
     for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
   </div>
-  <div id="flvOut"</div>
+  <div id="player"></div>
 
   <script>
     var flvLink = _gel('flvLink');
-    var flvUrl = 'http://www.youtube.com/get_video?';
-    var flvUrl += [
+    var flvURL = 'http://www.youtube.com/get_video?';
+    var flvURL += [
         'video_id=' + _esc(videoId),
         'ts=' + _esc(__ENV_time_secs_since_epoch__),
         't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
         'gad=1'
       ].join('&');
-    flvLink.href = flvUrl;
+    flvLink.href = flvURL;
+    
+    // Embed my own Flash player using the FLV from YouTube
+    var fv = 'flvURL=' + _esc(flvURL);
+    _IG_EmbedFlash(_IG_GetCachedUrl("http://somegadgets.googlepages.com/gadyt1.swf"), "player", {
+        swf_version: 8, 
+        width: 320, 
+        height: 240, 
+        flashvars: fv
+      });
   </script>
 ]]></Content>
 </Module>
