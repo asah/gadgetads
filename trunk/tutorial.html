@@ -474,12 +474,14 @@
 </p>
   <pre>&lt;div id=&#39;container&#39;&gt;&lt;/div&gt;
 &lt;script&gt;
+  var prefs = new _IG_Prefs();
+  var clickUrl = prefs.getString('clickurl') + _esc('http://exampletarget.com');
   _IG_EmbedFlash(_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;), &#39;container&#39;, {
     swf_version: 6,
     id: &quot;flashid&quot;,
     width: 250,
     height: 200,
-    <b>flashVars: var1=value1&amp;var2=value2&amp;var3=value3&amp;var4=value4</b>
+    <b>flashVars: 'clickUrl=' + clickUrl</b>
   });
 &lt;/script&gt;</pre>
 </p>
