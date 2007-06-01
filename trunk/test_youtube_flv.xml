@@ -12,8 +12,6 @@
       color: #00c;
     }
     div#player {
-      width: 300px;
-      height: 250px;
       background-color: #000;
       text-align: center;
     }
