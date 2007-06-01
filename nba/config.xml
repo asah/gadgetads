@@ -32,7 +32,7 @@
 					height: '250',
 					allowScriptAccess: 'sameDomain',
 					allowFullScreen: false,
-					flashVars: 'clickTAG=' + tClickUrl + '&baseUrl=' + tCacheUrl + _esc(tBaseUrl)
+					flashVars: 'clickTAG=' + _esc(tClickUrl) + '&baseUrl=' + _esc(tCacheUrl + _esc(tBaseUrl))
 				});
 			</script>
 	]]>
