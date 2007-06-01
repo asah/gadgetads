@@ -12,6 +12,8 @@
       color: #00c;
     }
     div#player {
+      width: 300px;
+      height: 250px;
       background-color: #000;
     }
   </style>
@@ -39,8 +41,8 @@
     var fv = 'clickURL=http://www.google.com&flvURL=' + _esc(flvURL);
     _IG_EmbedFlash(_IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/small_player.swf"), "player", {
         swf_version: 8, 
-        width: 320, 
-        height: 240, 
+        width: 300, 
+        height: 250, 
         flashvars: fv
       });
   </script>
