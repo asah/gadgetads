@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+<ModulePrefs title="Google News Reader" />
+<Content type="html"><![CDATA[
+
+<div id="out"></div>
+<script>
+  function getFlvUrl(videoId) {
+    var url = 'http://www.youtube.com/get_video?';
+    return url + [
+        'video_id=' + _esc(videoId),
+        'ts=' + _esc(__ENV_time_secs_since_epoch__),
+        't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
+        'gad=1'
+      ].join('&');
+  }
+  
+  var out = _gel('out');
+  var flvUrl = getFlvUrl('WWyJJQbFago');
+  out.innerHTML = '<a target="_top" href="' + flvUrl + '">' + flvUrl + '</a>';
+</script>
+]]></Content>
+</Module>
