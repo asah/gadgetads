@@ -39,7 +39,7 @@
     
     // Embed my own Flash player using the FLV from YouTube
     var fv = 'clickURL=http://www.google.com&flvURL=' + _esc(flvURL);
-    _IG_EmbedFlash(_IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/small_player.swf"), "player", {
+    _IG_EmbedFlash("http://gadgetads.googlecode.com/svn/trunk/small_player.swf", "player", {
         swf_version: 8, 
         width: 300, 
         height: 250, 
