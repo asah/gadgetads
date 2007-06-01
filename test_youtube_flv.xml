@@ -19,7 +19,9 @@
   <div id="player"></div>
 
   <script>
-    var flvLink = _gel('flvLink');
+    
+    
+    // Manually create the link to the FLV file on YouTube
     var flvURL = 'http://www.youtube.com/get_video?';
     var flvURL += [
         'video_id=' + _esc(videoId),
@@ -27,7 +29,9 @@
         't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
         'gad=1'
       ].join('&');
-    flvLink.href = flvURL;
+      
+    // Set the href attribute so the user can see what it looks like
+    _gel('flvLink').href = flvURL;
     
     // Embed my own Flash player using the FLV from YouTube
     var fv = 'flvURL=' + _esc(flvURL);
