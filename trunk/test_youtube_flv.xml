@@ -20,10 +20,10 @@
     div#click {
       width: 150px;
       padding: 10px 0px;
+      margin: 0px auto;
       background-color: #eef;
       font-weight: bold;
       font-size: 1.2em;
-      margin: 0px auto;
       position: relative;
       top: 100px;
       cursor: pointer;
@@ -35,7 +35,7 @@
     for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
   </div>
   <div id="player">
-    <div id="click" href="javascript:play();">Click to Play</div>
+    <div id="click" onclick="javascript:play();">Click to Play</div>
   </div>
 
   <script>
