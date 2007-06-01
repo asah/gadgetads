@@ -13,14 +13,13 @@
   </style>
   
   <div>
-    Link to the FLV file on YouTube for this
-    <a href="http://www.youtube.com/watch?v=WWyJJQbFago">video</a>.  The video
-    ID is <b>WWyJJQbFago</b>
+    Here's the <a id="flvLink" target="_top">FLV link</a>
+    for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
   </div>
   <div id="flvOut"</div>
 
   <script>
-    var flvOut = _gel('flvOut');
+    var flvLink = _gel('flvLink');
     var flvUrl = 'http://www.youtube.com/get_video?';
     var flvUrl += [
         'video_id=' + _esc(videoId),
@@ -28,7 +27,7 @@
         't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
         'gad=1'
       ].join('&');
-    flvOut.innerHTML = '<a target="_top" href="' + flvUrl + '">' + flvUrl + '</a>';
+    flvLink.href = flvUrl;
   </script>
 ]]></Content>
 </Module>
