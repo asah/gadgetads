@@ -17,10 +17,12 @@
       background-color: #000;
       text-align: center;
     }
-    div#player a {
+    div#player #click {
+      background-color: #eef;
       font-weight: bold;
       font-size: 1.2em;
-      padding-top: 120px;
+      padding: 15px 10px;
+      margin-top: 130px;
     }
   </style>
   
@@ -29,7 +31,7 @@
     for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
   </div>
   <div id="player">
-    <a id="playLink" href="javascript:play();">Click to Play</a>
+    <div id="click" href="javascript:play();">Click to Play</div>
   </div>
 
   <script>
