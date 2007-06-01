@@ -18,12 +18,14 @@
       text-align: center;
     }
     div#click {
+      width: 150px;
+      height: 30px;
       background-color: #eef;
       font-weight: bold;
       font-size: 1.2em;
-      padding: 15px 10px;
       position: relative;
-      top: 120px;
+      top: 100px;
+      cursor: pointer;
     }
   </style>
   
