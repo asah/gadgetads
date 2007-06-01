@@ -461,6 +461,25 @@
 });</pre>
 </p>
 
+<h3>Using the Click URL in Flash</h3>
+<p>
+  You're going to need access to the click URL from your Flash files.  To enable
+  this, get the click URL value and pass it in as a flash variable.  Define
+  flash variables by first creating a Flash parameter called 'flashVars'.
+  Assign it name-value pairs separated by <code>&amp;</code>:
+<pre>"var1=value1&var2=value2&var3=value3&var4=value4"</pre>
+</p>
+<p>
+  Here's an example of how you would pass in the click URL to Flash:
+</p>
+  <pre>&lt;div id=&#39;container&#39;&gt;&lt;/div&gt;
+&lt;script&gt;
+_IG_EmbedFlash(_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;),   &#39;container&#39;, {
+    width: 250,
+    height: 200
+  });
+&lt;/script&gt;</pre>
+
 <a name="map"></a>
 <h2>Embedding Google Maps</h2>
 <p>
