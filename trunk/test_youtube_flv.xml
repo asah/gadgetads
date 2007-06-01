@@ -18,12 +18,10 @@
   </div>
   <div id="player"></div>
 
-  <script>
-    
-    
+  <script>    
     // Manually create the link to the FLV file on YouTube
     var flvURL = 'http://www.youtube.com/get_video?';
-    var flvURL += [
+    flvURL += [
         'video_id=' + _esc(videoId),
         'ts=' + _esc(__ENV_time_secs_since_epoch__),
         't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
@@ -35,7 +33,7 @@
     
     // Embed my own Flash player using the FLV from YouTube
     var fv = 'flvURL=' + _esc(flvURL);
-    _IG_EmbedFlash(_IG_GetCachedUrl("http://somegadgets.googlepages.com/gadyt1.swf"), "player", {
+    _IG_EmbedFlash(_IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/simple_player.swf"), "player", {
         swf_version: 8, 
         width: 320, 
         height: 240, 
