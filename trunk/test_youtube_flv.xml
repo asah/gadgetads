@@ -16,14 +16,20 @@
       height: 250px;
       background-color: #000;
     }
+    div#player a {
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 120px 100px;
+    }
   </style>
   
   <div>
     Here's the <a id="flvLink" target="_top">FLV link</a>
     for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
-    (<a href='javascript:play();'>play video</a>)
   </div>
-  <div id="player"></div>
+  <div id="player">
+    <a id="playLink" href="javascript:play();">Click to Play</a>
+  </div>
 
   <script>
     function play() {
