@@ -1,38 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="NBA Playoffs Gadget" 
-      directory_title="NBA Playoffs Gadget" 
-      title_url="http://nba.com/unbelievable" 
-      description="Latest unbelievable scores, stats, highlights, and schedules for the 2007 NBA Playoffs" 
-      screenshot="http://nba.goodbysilverstein.com/google_gadget/google_config/screenshot.jpg" 
-      thumbnail="http://nba.goodbysilverstein.com/google_gadget/google_config/thumbnail.jpg" 
-      author="NBA" 
-      author_link="http://nba.com/unbelievable"
-      height="409">
-	<Require feature="flash" />
-</ModulePrefs>
-<UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
-<Content type="html"><![CDATA[
-  <style>
-    body {
-      background-color: #000000;
-      margin: 0px;
-      padding: 0px;
-    }
-  </style>
-  
-  <div id="flashContainer" style="text-align: center;"></div>
-  
-  <script>
-    var prefs = new _IG_Prefs();
-    var clickUrl = prefs.getString('clickurl');
-    var cachedUrl = _IG_GetCachedUrl('http://nba.goodbysilverstein.com/google_gadget/container_280x409.swf');
-    
-    _IG_EmbedFlash(cachedUrl, 'flashContainer', {
-        width: 280,
-        height: 409,
-        flashVars: 'clickUrl=' + _esc(clickUrl)
-      });
-  </script>
-  ]]></Content>
+    <ModulePrefs title="NBA Playoffs Gadget"
+		directory_title="NBA Playoffs Gadget"
+		title_url="http://nba.com/unbelievable/"
+		description="Latest unbelievable scores, stats, highlights, and schedules for the 2007 NBA Playoffs"
+		screenshot="http://nba.goodbysilverstein.com/google_gadget/google_config/screenshot.jpg"
+		thumbnail="http://nba.goodbysilverstein.com/google_gadget/google_config/thumbnail.jpg"
+		author="NBA"
+		author_link="http://nba.com/unbelievable/"
+		width="300"
+		height="250"
+		>
+		<Require feature="flash"/>	
+	</ModulePrefs>
+	<UserPref name="clickurl" datatype="hidden" default_value="http://www.midgard.net/~asah/igp/test_clickurl.html?showmsg=0&amp;url="/>
+
+	<Content type="html">
+		<![CDATA[
+			<div id="flashContainer"></div>
+			<script>
+        var tDestUrl = 'http://www.nba.com/unbelievable/';
+				var tBaseUrl = 'http://nba.goodbysilverstein.com/google_ad2/';
+				var tSwfName = 'container_300x250.swf';
+				var tCacheUrl = 'http://gmodules.com/ig/proxy?url=';
+
+				var tPrefs = new _IG_Prefs();
+				var tClickUrl = _esc(tPrefs.getString('clickurl') + _esc(tDestUrl));
+
+				_IG_EmbedFlash(_IG_GetCachedUrl(tBaseUrl+tSwfName), 'flashContainer', {
+					width: '300',
+					height: '250',
+					allowScriptAccess: 'sameDomain',
+					allowFullScreen: false,
+					flashVars: 'clickTAG=' + tClickUrl + '&baseUrl=' + tCacheUrl + _esc(tBaseUrl)
+				});
+			</script>
+	]]>
+    </Content>
 </Module>
