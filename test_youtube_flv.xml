@@ -8,9 +8,11 @@
     body {
       font-size: 0.9em;
     }
-    
-    #flvOut a {
+    a {
       color: #00c;
+    }
+    div#player {
+      background-color: #000;
     }
   </style>
   
@@ -34,7 +36,7 @@
     _gel('flvLink').href = flvURL;
     
     // Embed my own Flash player using the FLV from YouTube
-    var fv = 'flvURL=' + _esc(flvURL);
+    var fv = 'clickURL=http://www.google.com&flvURL=' + _esc(flvURL);
     _IG_EmbedFlash(_IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/small_player.swf"), "player", {
         swf_version: 8, 
         width: 320, 
