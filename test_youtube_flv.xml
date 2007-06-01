@@ -21,11 +21,12 @@
   <div>
     Here's the <a id="flvLink" target="_top">FLV link</a>
     for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
+    (<a href='javascript:play();'>play video</a>)
   </div>
   <div id="player"></div>
 
   <script>
-    _IG_RegisterOnloadHandler(function() {
+    function play() {
       // Manually create the link to the FLV file on YouTube
       var flvURL = 'http://www.youtube.com/get_video?';
       flvURL += [
@@ -46,7 +47,7 @@
           height: 250, 
           flashvars: fv
         });
-    });
+    }
   </script>
 ]]></Content>
 </Module>
