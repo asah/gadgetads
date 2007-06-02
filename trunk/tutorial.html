@@ -442,16 +442,29 @@
       if you need help.
     </li>
     <li>
-      Go to your video on YouTube.  YouTube provides the HTML you can use to embed
-      this video on other webpages.  All you need is the <code>src</code> value
-      from the <code>&lt;embed&gt;</code> tag:
-      <pre>&lt;object width=&quot;425&quot; height=&quot;350&quot;&gt;&lt;param name=&quot;movie&quot; value=&quot;http://www.youtube.com/v/aB_c2RwpbXU&quot;&gt;&lt;/param&gt;&lt;param name=&quot;wmode&quot; value=&quot;transparent&quot;&gt;&lt;/param&gt;&lt;embed src=&quot;http://www.youtube.com/v/aB_c2RwpbXU&quot; type=&quot;application/x-shockwave-flash&quot; wmode=&quot;transparent&quot; width=&quot;425&quot; height=&quot;350&quot;&gt;&lt;/embed&gt;&lt;/object&gt;</pre>
-      
-  Here's a classic example on how to embed a YouTube video in your gadget using the
+      Once your video is on YouTube, find the video ID.  You can get this from
+      the location of your video.  For example, here's a random video on YouTube
+      where the video ID is bolded:
+      <pre>http://www.youtube.com/watch?v=<b>aB_c2RwpbXU</b></pre>
+    </li>
+    <li>
+      The location of the YouTube branded player is at:
+      <pre>http://www.youtube.com/v/YOUTUBE_VIDEO_ID</pre>
+      <br>
+      Substitute your YouTube video ID with <code>YOUTUBE_VIDEO_ID</code>.
+      This is the URL pointing to the YouTube Flash player that will playback
+      the video corresponding to the video ID.
+      You can embed this anywhere in your gadget
+      just like you would with any other Flash application.
+    </li>
+  </ol>
+</p>
+<p>
+  Here's an example on embedding the YouTube Flash player in your gadget using the
   Flash library and setting a custom width and height:
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
-<b>_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, _gel(&#39;container&#39;), {
+<b>_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, &#39;container&#39;, {
     swf_version: 6,
     id: &quot;flashid&quot;,
     width: 250,
@@ -472,7 +485,7 @@
 </p>
 <p>
   Here's an example where we cache the embedded YouTube video:
-<pre>_IG_EmbedFlash(<b>_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;)</b>, _gel(&#39;container&#39;), {
+<pre>_IG_EmbedFlash(<b>_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;)</b>, &#39;container&#39;, {
   swf_version: 6,
   id: &quot;flashid&quot;,
   width: 250,
@@ -481,7 +494,7 @@
 </p>
 
 <a name="flash_clickurl"></a>
-<h3>Using the Click URL in Flash</h3>
+<h3>Passing the Click URL into Flash</h3>
 <p>
   You're going to need access to the click URL from your Flash files.  To enable
   this, get the click URL value and pass it in as a flash variable.  Define
@@ -503,11 +516,74 @@
     id: &quot;flashid&quot;,
     width: 250,
     height: 200,
-    <b>flashVars: 'clickUrl=' + _esc(clickUrl)</b>
+    <b>flashvars: 'clickTAG=' + _esc(clickUrl)</b>
   });
 &lt;/script&gt;</pre>
 </p>
 
+<a name="flash_nonbranded"></a>
+<h3>Using YouTube Videos with Your Own Flash Player</h3>
+<p>
+  If you want to use your own non-branded Flash player to playback videos
+  hosted on YouTube, you can!  All you need is the URL pointing to the 
+  FLV video hosted on YouTube servers.  With the FLV URL, you can use it
+  to stream the video from within your own Flash player.  This is great because
+  it removes the burden of having to host the source video yourself.  Streaming
+  also helps to keep your file size down because it's not stored locally.
+</p>
+
+<style>
+  .red, .green, .blue {
+    font-weight: bold;
+  }
+  .red {
+    color: #a00;
+  }
+  .green {
+    color: #0a0;
+  }
+  .blue {
+    color: #00a;
+  }
+</style>
+<h4>Building the FLV URL</h4>
+<p>
+  The first thing you need is the FLV URL.  This step needs to be done
+  from inside the gadget and then later passed onto the Flash object
+  via flashvars.  Here's how the URL is constructed:
+  <pre>http://www.youtube.com/get_video?video_id=<b class="red">YOUTUBE_VIDEO_ID</b>&amp;ts=<b class="green">TIMESTAMP</b>&amp;t=<b class="blue">YOUTUBE_SIGNATURE</b>&amp;gad=1</pre>
+  <ul>
+    <li>
+      <b class="red">YOUTUBE_VIDEO_ID</b>: Replace this field with the YouTube
+      video ID.  When you're watching the video on YouTube, the video ID 
+      is located in the URL. Example: <code>http://www.youtube.com/watch?v=<b>aB_c2RwpbXU</b></code>
+    </li>
+    <li>
+      <b class="green">TIMESTAMP</b>: Replace this with <code>__ENV_time_secs_since_epoch__</code>.
+      This will insert the current time as number of seconds since epoch.
+    </li>
+    <li>
+      <b class="blue">YOUTUBE_SIGNATURE</b>: Replace this with 
+      <code>__YOUTUBE_VIDEO_TEST(<b class="red">YOUTUBE_VIDEO_ID</b>)__</code>.
+      Fill in the same YouTube video ID as above.  This will create a special
+      YouTube signature that's generated based on your video ID.
+    </li>
+  </ul>
+</p>
+<h4>Using the FLV URL</h4>
+<p>
+  Now that you have the FLV URL, you have to pass it to your Flash player.
+  Embed your Flash player using <code>_IG_EmbedFlash(...)</code> and create
+  a flashvars property with the FLV URL.  
+  <b>Make sure to escape all flashvar values when doing this.</b>
+  Here's an example of what this looks like:
+<pre>var flvUrl = &quot;http://www.youtube.com/get_video?video_id=<b class="red">C5rTJkfBhbQ</b>&amp;ts=<b class="green">__ENV_time_secs_since_epoch__</b>&amp;t=<b class="blue"__YOUTUBE_VIDEO_TEST(C5rTJkfBhbQ)</b>__&amp;gad=1&quot;;
+_IG_EmbedFlash(/*_IG_GetCachedUrl*/&quot;http://somegadgets.googlepages.com/gadyt1.swf&quot;, &quot;vid&quot;, {swf_version: 8, width: 320, height: 240, flashvars: fv});</pre>
+
+  
+
+    
+  
 
 <a name="map"></a>
 <h2>Embedding Google Maps</h2>
