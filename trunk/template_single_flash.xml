@@ -13,7 +13,23 @@
     <Require feature="flash"/>
   </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+  <UserPref name="flashurl" datatype="hidden" default_value=""/>
+  <UserPref name="desturl" datatype="hidden" default_value=""/>
   <Content type="html"><![CDATA[
+    <div id="fc"></div>
+    <script>
+      var prefs = new _IG_Prefs();
+      var clickUrl = prefs.getString('clickurl');
+      var destUrl = clickUrl + _esc(prefs.getString('desturl'));
+      
+      var fv = 'clickTAG=' + _esc(destUrl);
+      _IG_EmbedFlash(_IG_GetCachedUrl(prefs.getString('flashurl')), 'fc', {
+          width: 300,
+          height: 250,
+          flashvars: fv
+        });
+    </script>
+    
     
     <textarea>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Module&gt;
@@ -32,6 +48,6 @@
   &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
   ]]&gt;&lt;/Content&gt;
-&lt;/Module&gt;</textare>
+&lt;/Module&gt;</textarea>
   ]]></Content>
 </Module>
