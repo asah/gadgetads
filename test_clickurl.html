@@ -44,6 +44,11 @@ if (url) {
     } else {
       window.location.replace(url);
     }
+  } else {
+    document.write([
+      '<h2>Bad destination URL</h2>',
+      url
+    ].join('');
   }
 }
 </script>
