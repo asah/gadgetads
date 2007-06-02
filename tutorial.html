@@ -465,12 +465,15 @@
 <h3>Passing the Click URL into Flash</h3>
 <p>
   You're going to need access to the click URL from your Flash files.  To enable
-  this, get the click URL value and pass it in as a flash variable.  Define
-  flash variables by first creating a Flash parameter called 'flashVars'.
-  Then you can assign it name-value pairs separated by <code>&amp;</code>.
-  In your Flash file, you'll be able to access each variable.  Here's how 
-  you would need to format your variables:
-<pre>var1=value1&amp;var2=value2&amp;var3=value3&amp;var4=value4</pre>
+  this, get the click URL from the userpref and pass it into Flash as a flash variable
+  called <b>clickTAG</b>.  You can define
+  flash variables by creating a Flash parameter called 'flashvars'.
+  Then you can create new variables by specifying name-value pairs
+  separated by <code>&amp;</code>. In your Flash file, you'll be able to
+  access each variable using ActionScript.
+  Here's an example showing you how to format the flashvars string with
+  multiple variables:
+<pre>var1=value1<b>&amp;</b>var2=value2<b>&amp;</b>var3=value3<b>&amp;</b>var4=value</pre>
 </p>
 <p>
   Here's an example of how you would pass in the click URL to Flash:
