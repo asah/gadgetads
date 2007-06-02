@@ -57,7 +57,7 @@
       _IG_EmbedFlash("http://gadgetads.googlecode.com/svn/trunk/small_player.swf", "player", {
           swf_version: 8, 
           width: 300, 
-          height: 230, 
+          height: 250, 
           flashvars: fv
         });
     }
