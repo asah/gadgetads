@@ -32,6 +32,7 @@ if (url) {
       "<div>Desitination URL<div>",
       '<div><a href="javascript:window.location.replace(' + url + ');">' + url + '</a></div>'
     ];
+    alert(document.getElementById('out'));
     document.getElementById('out').innerHTML = html.join('');
   }
 }
