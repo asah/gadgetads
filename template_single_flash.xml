@@ -20,10 +20,11 @@
     <script>
       var prefs = new _IG_Prefs();
       var clickUrl = prefs.getString('clickurl');
+      var flashUrl = prefs.getString('flashurl');
       var destUrl = clickUrl + _esc(prefs.getString('desturl'));
       
       var fv = 'clickTAG=' + _esc(destUrl);
-      _IG_EmbedFlash(_IG_GetCachedUrl(prefs.getString('flashurl')), 'fc', {
+      _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
           width: 300,
           height: 250,
           flashvars: fv
