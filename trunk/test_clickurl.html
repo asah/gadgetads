@@ -18,23 +18,32 @@ function _args() {
   return args;
 }
 
-window.onload = function() {
 var url = _args()["url"];
 var msg = _args()["msg"];
 
 if (url) {
   url = _unesc(url);
-  msg = (msg == 0) ? false : true;
+  msg = (parseInt(msg) == 1) ? true : false;
   
   var regexp = new RegExp("^http://.*");
   if (url.match(regexp)) {
-    var html = [
-      "<h3>*** Click Received ***</h3>",
-      "<div>Desitination URL<div>",
-      '<div><a href="javascript:window.location.replace(' + url + ');">' + url + '</a></div>'
+    var str = [
+      '*** Click Received ***',
+      '',
+      "Desitination URL",
+      url
     ];
-    document.getElementById('out').innerHTML = html.join('');
+    
+    // Only show message if msg == true
+    if (msg) {
+      if (window.confirm(str.join('\n'))) {
+        window.location.replace(url);
+      } else {
+        window.history.back();
+      }
+    } else {
+      window.location.replace(url);
+    }
   }
 }
-};
 </script>
