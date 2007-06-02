@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-<ModulePrefs title="Streaming FLV From YouTube">
+<ModulePrefs title="Streaming FLV From YouTube" width="300" height="250">
   <Require feature="flash"/>
 </ModulePrefs>
 <Content type="html"><![CDATA[

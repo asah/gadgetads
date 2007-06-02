@@ -419,48 +419,7 @@
   for more information.
 </p>
 <p>
-  For gadget ads, we highly recommend hosting your video on <a href="http://www.youtube.com">YouTube</a>.
-  View the <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">instructions</a>
-  on how to upload videos if you're unfamiliar with the process.  Hosting videos on
-  YouTube ensures that your video hosting server will be able to handle the traffic
-  and load coming from your gadget ad.  In addition, once your video is hosted,
-  you can utilize the advanced YouTube player for video playback in your gadget.
-</p>
-
-<h3>Example: Add a YouTube Video</h3>
-<p>
-  Many times you'll want to show videos in your gadget ad.  We highly recommend
-  using YouTube to host and playback your videos.  If you want to use the YouTube
-  branded player, that's very easy to do.  The YouTube player is simply a Flash
-  application that you can easily embed anywhere in your gadget.  Here's what you 
-  need to do.
-  <ol>
-    <li>
-      Find the video on <a href="http://www.youtube.com">YouTube</a> that you want to use.
-      If your video doesn't exist on YouTube, <a href="http://www.youtube.com/my_videos_upload">upload</a>
-      them now.  Visit their <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">help center</a>
-      if you need help.
-    </li>
-    <li>
-      Once your video is on YouTube, find the video ID.  You can get this from
-      the location of your video.  For example, here's a random video on YouTube
-      where the video ID is bolded:
-      <pre>http://www.youtube.com/watch?v=<b>aB_c2RwpbXU</b></pre>
-    </li>
-    <li>
-      The location of the YouTube branded player is at:
-      <pre>http://www.youtube.com/v/YOUTUBE_VIDEO_ID</pre>
-      <br>
-      Substitute your YouTube video ID with <code>YOUTUBE_VIDEO_ID</code>.
-      This is the URL pointing to the YouTube Flash player that will playback
-      the video corresponding to the video ID.
-      You can embed this anywhere in your gadget
-      just like you would with any other Flash application.
-    </li>
-  </ol>
-</p>
-<p>
-  Here's an example on embedding the YouTube Flash player in your gadget using the
+  Here's an example on embedding a Flash ain your gadget using the
   Flash library and setting a custom width and height:
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
@@ -521,8 +480,48 @@
 &lt;/script&gt;</pre>
 </p>
 
+<a name="flash_youtube"></a>
+<h3>Using the YouTube Branded Player For Video Playback</h3>
+<p>
+  For gadget ads, we highly recommend hosting your video on <a href="http://www.youtube.com">YouTube</a>.
+  View the <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">instructions</a>
+  on how to upload videos if you're unfamiliar with the process.  Hosting videos on
+  YouTube ensures that your video hosting server will be able to handle the traffic
+  and load coming from your gadget ad.  In addition, once your video is hosted,
+  you can utilize the advanced YouTube player for video playback in your gadget.
+</p>
+<p>
+  If you want to use the YouTube branded player, that's very easy to do.  
+  The YouTube player is simply a Flash application that you can easily 
+  embed anywhere in your gadget.  Here's what you need to do.
+  <ol>
+    <li>
+      Find the video on <a href="http://www.youtube.com">YouTube</a> that you want to use.
+      If your video doesn't exist on YouTube, <a href="http://www.youtube.com/my_videos_upload">upload</a>
+      them now.  Visit their <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">help center</a>
+      if you need help.
+    </li>
+    <li>
+      Once your video is on YouTube, find the video ID.  You can get this from
+      the location of your video.  For example, here's a random video on YouTube
+      where the video ID is bolded:
+      <pre>http://www.youtube.com/watch?v=<b>aB_c2RwpbXU</b></pre>
+    </li>
+    <li>
+      The location of the YouTube branded player is at:
+      <pre>http://www.youtube.com/v/YOUTUBE_VIDEO_ID</pre>
+      <br>
+      Substitute <code>YOUTUBE_VIDEO_ID</code> with your YouTube video ID.
+      This is the URL pointing to the YouTube Flash player that will playback
+      the video corresponding to the video ID.
+      You can embed this anywhere in your gadget
+      just like you would with any other Flash application.
+    </li>
+  </ol>
+</p>
+
 <a name="flash_nonbranded"></a>
-<h3>Using YouTube Videos with Your Own Flash Player</h3>
+<h3>Using your own Flash player with YouTube Videos</h3>
 <p>
   If you want to use your own non-branded Flash player to playback videos
   hosted on YouTube, you can!  All you need is the URL pointing to the 
@@ -548,8 +547,8 @@
 </style>
 <h4>Building the FLV URL</h4>
 <p>
-  The first thing you need is the FLV URL.  This step needs to be done
-  from inside the gadget and then later passed onto the Flash object
+  The first thing you need is the FLV URL.  This can only be created
+  from inside the gadget which is later passed into the Flash application
   via flashvars.  Here's how the URL is constructed:
   <pre>http://www.youtube.com/get_video?video_id=<b class="red">YOUTUBE_VIDEO_ID</b>&amp;ts=<b class="green">TIMESTAMP</b>&amp;t=<b class="blue">YOUTUBE_SIGNATURE</b>&amp;gad=1</pre>
   <ul>
@@ -575,15 +574,79 @@
   Now that you have the FLV URL, you have to pass it to your Flash player.
   Embed your Flash player using <code>_IG_EmbedFlash(...)</code> and create
   a flashvars property with the FLV URL.  
-  <b>Make sure to escape all flashvar values when doing this.</b>
-  Here's an example of what this looks like:
-<pre>var flvUrl = &quot;http://www.youtube.com/get_video?video_id=<b class="red">C5rTJkfBhbQ</b>&amp;ts=<b class="green">__ENV_time_secs_since_epoch__</b>&amp;t=<b class="blue"__YOUTUBE_VIDEO_TEST(C5rTJkfBhbQ)</b>__&amp;gad=1&quot;;
-_IG_EmbedFlash(/*_IG_GetCachedUrl*/&quot;http://somegadgets.googlepages.com/gadyt1.swf&quot;, &quot;vid&quot;, {swf_version: 8, width: 320, height: 240, flashvars: fv});</pre>
+  <br>
+  <b>*** Make sure to escape all flashvar values. ***</b>
+<pre>var flvUrl = &quot;http://www.youtube.com/get_video?video_id=<b class="red">C5rTJkfBhbQ</b>&amp;ts=<b class="green">__ENV_time_secs_since_epoch__</b>&amp;t=<b class="blue">__YOUTUBE_VIDEO_TEST(C5rTJkfBhbQ)</b>__&amp;gad=1&quot;;
+_IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://examplesite.com/myplayer.swf&quot;), &quot;vid&quot;, {
+    swf_version: 8, 
+    width: 300, 
+    height: 250, 
+    <b>flashvars: 'flvURL=' + _esc(flvUrl)</b>
+  });</pre>
+</p>
+<h4>Playing the FLV using ActionScript</h4>
+<p>
+  <ol>
+    <li>
+      Create a new Flash document that fits the size of your video ad.
+    </li>
+    <li>
+      Open the Library panel (Window > Library). Click "New Video" from the pop-up menu. 
+      In the Video Properties dialog box, name the video symbol and select 
+      "Video (ActionScript controlled)". Click OK to create a video object.
+    </li>
+    <li>
+      Drag the video object from the Library panel to the Stage to create a 
+      video object instance. With the video object selected on the Stage, 
+      type "vid" in the Instance Name text box in the Property 
+      inspector (Window > Properties > Properties).
+    </li>
+    <li>
+      Select Frame 1 in the Timeline, and open the Actions panel 
+      (Window > Actions).  
+      Type the following code in the Actions panel:
+<pre>
+// retrieve FlashVars variables
+var url = clickURL;
+var flv = flvURL;
 
-  
+// create a NetConnection object
+var nc = new NetConnection();
 
-    
-  
+// NetConnection provides playback of streaming FLVs from a local drive or a remote HTTP address.
+// By supplying its connect method with a null parameter, we avoid dependence
+// on Flash Communication Server (aka Flash Media Server) in order to play
+// video hosted on YouTube.
+nc.connect(null);
+
+// create a NetStream object
+var ns = new NetStream(nc);
+
+// NetStream handles the video stream for NetConnection. The video player 
+// instance &quot;vid&quot; cooperates with NetStream and NetConnection by 
+// calling the attachVideo() method.
+vid.attachVideo(ns);
+
+// call NetStream.play() to load the external FLV. The video will start 
+// playing before the file is fully downloaded.
+ns.play(flv);
+
+// finally add an event handler to open the clickURL when a visitor clicks 
+// on the video ad.
+_root.onMouseDown = function(){
+    getURL(url, &quot;_blank&quot;);
+};
+stop();
+</pre>
+    </li>
+  </ol>
+</p>
+<h4>Example: Simple Example Playing YouTube Videos</h4>
+<p>
+  <a href="http://gadgetads.googlecode.com/svn/trunk/test_youtube_flv.xml">Source XML</a> :: 
+  <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/test_youtube_flv.xml">Live Preview</a>
+</p>
+
 
 <a name="map"></a>
 <h2>Embedding Google Maps</h2>
