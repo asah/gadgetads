@@ -19,6 +19,7 @@
 
 <h1>How to Build a Google Gadget Ad</h1>
 
+<!-- TOC -->
 <ul>
   <li><a href="#intro">Introduction</a></li>
   <li><a href="#adsgadgets">Gadget Ads vs. Google Gadgets</a></li>
@@ -27,7 +28,15 @@
   <li><a href="#policy">Conforming to IAB and Google Advertising Policies</a></li>
   <li><a href="#remotecontent">Getting Remote Content</a></li>
   <li><a href="#images">Embedding Images: Recommended</a></li>
-  <li><a href="#flash">Embedding Flash and Video Content</a></li>
+  <li>
+    <a href="#flash">Embedding Flash and Video Content</a>
+    <ul>
+      <li><a href="#flash_cache">Caching Flash Content on Google</a></li>
+      <li><a href="#flash_clickurl">Passing the Click URL into Flash</a></li>
+      <li><a href="#flash_youtube">Using the YouTube Branded Player For Video Playback</a></li>
+      <li><a href="#flash_nonbranded">Using your own Flash player with YouTube Videos</a></li>
+    </ul>
+  </li>
   <li><a href="#map">Embedding Google Maps</a></li>
   <li><a href="#casestudy">Case Study: Simplified Gmail Gadget Ad</a></li>
   <li><a href="#finaloutcome">The Final Outcome</a></li>
@@ -419,11 +428,11 @@
   for more information.
 </p>
 <p>
-  Here's an example on embedding a Flash ain your gadget using the
+  Here's an example on embedding a Flash application in your gadget using the
   Flash library and setting a custom width and height:
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
-<b>_IG_EmbedFlash(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;, &#39;container&#39;, {
+<b>_IG_EmbedFlash(&#39;http://www.mysite.com/flash.swf&#39;, &#39;container&#39;, {
     swf_version: 6,
     id: &quot;flashid&quot;,
     width: 250,
@@ -443,8 +452,8 @@
   the proxy URL for the cached version of the file specified by <code>url</code>.
 </p>
 <p>
-  Here's an example where we cache the embedded YouTube video:
-<pre>_IG_EmbedFlash(<b>_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;)</b>, &#39;container&#39;, {
+  Here's an example where we cache the embedded Flash application:
+<pre>_IG_EmbedFlash(<b>_IG_GetCachedUrl(&#39;http://www.mysite.com/flash.swf&#39;)</b>, &#39;container&#39;, {
   swf_version: 6,
   id: &quot;flashid&quot;,
   width: 250,
@@ -643,10 +652,10 @@ stop();
 </p>
 <h4>Example: Simple Example Playing YouTube Videos</h4>
 <p>
-  <a href="http://gadgetads.googlecode.com/svn/trunk/test_youtube_flv.xml">Source XML</a> :: 
   <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/test_youtube_flv.xml">Live Preview</a>
+  :: 
+  <a href="http://gadgetads.googlecode.com/svn/trunk/test_youtube_flv.xml">Source XML</a>
 </p>
-
 
 <a name="map"></a>
 <h2>Embedding Google Maps</h2>
