@@ -132,31 +132,38 @@
 <h2>Defining the Click URL</h2>
 <p>
   The click URL is a mechanism used to track user-interaction inside a gadget ad. It should be included in the
-  gadget XML as a hidden UserPref named <code>clickurl</code>.  All click URLs should end with an open URL parameter, <code>&amp;url=</code>
-  which will be used to append the target destination for tracked links in your gadget.
+  gadget XML as a hidden UserPref named <code>clickurl</code>.  The click URL ends with an open URL parameter, <code>&amp;url=</code>
+  which will be used to append the target destination for tracked links in your gadget.  Click URLs
+  are simply redirects from a location that records hits to our ads database.  However, 
+  when you're developing your gadget ad, you'll a fake click URL while you're testing.
 </p>
 <p>
-  We provide a test click URL that you can use when developing your gadget ad.  Instead of sending real clicks 
-  to the ads database, 
-  it'll create a simple pop-up that displays the target destination.  This is useful when you want to verify that your links are
-  tracking correctly and that requests are correctly being sent to the click URL.
+  We provide a test click URL that you can use when developing your gadget ad. This test
+  click URL redirects you the target destinaion without sending real clicks 
+  to the ads database.  Your gadget <b>must</b> include the clickurl usepref 
+  in the gadget XML before it can be approved:
   <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</b>&quot;/&gt;</pre>
 </p>
 <p>
-  Make note of this test click URL as you will be using it while developing your gadget ads:<br>
-  <a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=">http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</a>
+  <b>Tip:</b> If you want a confirmation pop-up to appear when going through the click URL,
+  simply add a <code>msg=1</code> parameter to the URL.  This can help you confirm
+  that your links are properly setup.  Here's how to use the click URL with
+  confirmation message enabled:
+  <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1url=</b>&quot;/&gt;</pre>
 </p>
 
 <h3>Experiment: Test the Click URL</h3>
 <p>
-  The links below are all set to route through the test click URL
-  described above.  Try clicking on a few to see the confirmation pop-up which confirms
-  that click-throughs are being tracked properly.  If you set up click URLs correctly in your gadget,
-  then you should see similar results:
+  The links below are all setup to route through the test click URL
+  described above.  Some of them have confirmation enabled.
+  Try clicking on a few to see the confirmation pop-up which confirms
+  that click-throughs are being tracked properly.  In your gadget, you will
+  be creating similar links using the click URL and see similar results:
   <ul>
     <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/">http://www.google.com</a></li>
     <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.amazon.com">Amazon.com</a></li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/ig/directory">Content directory</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;url=http://www.nbc.com">NBC.com</a> (confirmation enabled)</li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;url=http://www.google.com/ig/directory">Content directory</a> (confirmation enabled)</li>
   </ul>
 </p>
 
