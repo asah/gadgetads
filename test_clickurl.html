@@ -32,7 +32,7 @@ if (url) {
       "<div>Desitination URL<div>",
       '<div><a href="javascript:window.location.replace(' + url + ');">' + url + '</a></div>'
     ];
-    _gel('out').innerHTML = html.join('');
+    document.getElementById('out').innerHTML = html.join('');
   }
 }
 </script>
