@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Module>
+
+  <ModulePrefs 
+  title="The Sun Big Brother Gadget" 
+  width="300" 
+  height="250" 
+  description = "A gadget from the sun newspaper that feeds up to date information about the goings on in the big brother house" 
+  author = "tbm" 
+  author_email = "mike@thatblokemike.com" 
+  author_affiliation = "Google" 
+  author_location = "UK" 
+  author_aboutme = "im a bloke called mike" 
+  author_link = "http://www.thatblokemike.com" 
+  author_quote = "find a job you love and you'll never work a day of your life" >
+  
+    <Require feature="flash" />
+  </ModulePrefs>
+
+  <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+
+  <Content type="html"><![CDATA[
+
+    <div id="container"></div>
+    <script>
+      var prefs = new _IG_Prefs();
+      var clickUrl = prefs.getString('clickurl') + _esc('http://www.thesun.co.uk/section/0,,2003230001,00.html');
+      
+      _IG_EmbedFlash(_IG_GetCachedUrl('http://queenscard.thesun.co.uk/BB_googleGadget/bb_widget.swf'), 'container', {
+          width: 300,
+          height: 250,
+          wmode: 'transparent',
+          movie: 'http://queenscard.thesun.co.uk/BB_googleGadget/bb_widget.swf',
+          flashVars: 'clickTAG=' + _esc(clickUrl)
+        });
+    </script>
+    
+  ]]></Content>
+  
+</Module>
