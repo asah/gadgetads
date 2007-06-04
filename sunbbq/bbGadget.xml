@@ -27,11 +27,11 @@
       var prefs = new _IG_Prefs();
       var clickUrl = prefs.getString('clickurl') + _esc('http://www.thesun.co.uk/section/0,,2003230001,00.html');
       
-      _IG_EmbedFlash('http://gmodules.com/ig/proxy?url=http://queenscard.thesun.co.uk/BB_googleGadget/bb_widget.swf', 'container', {
+      _IG_EmbedFlash(_IG_GetCachedUrl('http://queenscard.thesun.co.uk/BB_googleGadget/bb_widget.swf'), 'container', {
           width: 300,
           height: 250,
           wmode: 'transparent',
-          movie: 'bb_widget.swf',
+          movie: 'http://queenscard.thesun.co.uk/BB_googleGadget/bb_widget.swf',
           flashVars: 'clickTAG=' + _esc(clickUrl)
         });
     </script>
