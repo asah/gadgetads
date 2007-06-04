@@ -31,7 +31,6 @@
           width: 300,
           height: 250,
           wmode: 'transparent',
-          movie: 'http://queenscard.thesun.co.uk/BB_googleGadget/bb_widget.swf',
           flashVars: 'clickTAG=' + _esc(clickUrl)
         });
     </script>
