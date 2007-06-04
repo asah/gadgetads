@@ -13,18 +13,21 @@
     <Require feature="flash"/>
   </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+  <UserPref name="desturl" datatype="hidden" default_value=" http://DESTINATION_URL"/>
+  <UserPref name="flashurl" datatype="hidden" default_value="http://FLASH_URL_HERE"/>
   <Content type="html"><![CDATA[
     <div id="fc"></div>
     <script>
       var prefs = new _IG_Prefs();
-      var flashUrl = 'http://FLASH_SWF_URL';
+      var flashUrl = prefs.getString('flashurl');
       var clickUrl = prefs.getString('clickurl');
-      var destUrl = clickUrl + _esc('http://DESTINATION_URL);
+      var destUrl = prefs.getString('desturl');
+      var redirectUrl = clickUrl + _esc(destUrl);
       
       _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
           width: 300,
           height: 250,
-          flashvars: 'clickTAG=' + _esc(destUrl)
+          flashvars: 'clickTAG=' + _esc(redirectUrl)
         });
     </script>
   ]]></Content>
