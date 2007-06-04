@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Gadget Ad Template"
+      title_url=""
+      directory_title=""
+      description=""
+      screenshot=""
+      thumbnail=""
+      author=""
+      author_link=""
+      width="300"
+      height="250">
+    <Require feature="flash"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+  <Content type="html"><![CDATA[
+    <div id="fc"></div>
+    <script>
+      var prefs = new _IG_Prefs();
+      var flashUrl = 'http://FLASH_SWF_URL';
+      var clickUrl = prefs.getString('clickurl');
+      var destUrl = clickUrl + _esc('http://DESTINATION_URL);
+      
+      _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
+          width: 300,
+          height: 250,
+          flashvars: 'clickTAG=' + _esc(destUrl)
+        });
+    </script>
+  ]]></Content>
+</Module>
