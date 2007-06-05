@@ -18,8 +18,11 @@ function _args() {
   return args;
 }
 
-var url = _args()["url"];
 var msg = _args()["msg"];
+var url = _args()["url"];
+if (!url) {
+  url = _args()["adurl"];
+}
 
 if (url) {
   url = _unesc(url);
