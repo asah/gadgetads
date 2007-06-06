@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+
+  <ModulePrefs title="Peugeot 207 GTi THP 175 Gadget" width="300" height="250" description="A gadget from Peugeot to explore the new 207 GTi THP 175" author="tbm" author_email="mike@thatblokemike.com" author_affiliation="Google" author_location="UK" author_aboutme="im a bloke called mike" author_link="http://www.thatblokemike.com" author_quote="find a job you love and you'll never work a day of your life">
+  
+    <Require feature="flash"/>
+  </ModulePrefs>
+
+  <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+
+  <Content type="html"><![CDATA[
+
+    <div id="container"></div>
+    <script>
+      var prefs = new _IG_Prefs();
+      var clickUrl = prefs.getString('clickurl') + _esc('http://communications.peugeot.co.uk/added_pages/form_templates/single_CTA.asp?xml=Gti_Google_Gadget');
+      
+      var flvUrl = "http://www.youtube.com/get_video?video_id= UhovUfwnaQA&ts=__ENV_time_secs_since_epoch__&t=__YOUTUBE_VIDEO_TEST(UhovUfwnaQA)__&gad=1";
+      
+      _IG_EmbedFlash(_IG_GetCachedUrl('http://communications.peugeot.co.uk/added_pages/google_gadgets/peugeot_GG.swf'), 'container', {
+          width: 300,
+          height: 250,
+          wmode: 'transparent',
+          movie: 'peugeot_GG.swf',
+          flashvars: 'flvURL=' + _esc(flvUrl),
+          flashVars: 'clickTAG=' + _esc(clickUrl)
+        });
+    </script>
+    
+  ]]></Content>
+  
+</Module>
