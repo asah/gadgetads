@@ -10,13 +10,15 @@
 
   <Content type="html"><![CDATA[
 
+    <a id="flv">FLV URL</a>
     <div id="container"></div>
     <script>
       var prefs = new _IG_Prefs();
       var clickUrl = prefs.getString('clickurl') + _esc('http://communications.peugeot.co.uk/added_pages/form_templates/single_CTA.asp?xml=Gti_Google_Gadget');
       
-      var flvUrl = "http://www.youtube.com/get_video?video_id= UhovUfwnaQA&ts=__ENV_time_secs_since_epoch__&t=__YOUTUBE_VIDEO_TEST(UhovUfwnaQA)__&gad=1";
-      
+      var flvUrl = "http://www.youtube.com/get_video?video_id=UhovUfwnaQA&ts=__ENV_time_secs_since_epoch__&t=__YOUTUBE_VIDEO_TEST(UhovUfwnaQA)__&gad=1";
+
+      _gel('flv').href = flvUrl;      
       _IG_EmbedFlash(_IG_GetCachedUrl('http://communications.peugeot.co.uk/added_pages/google_gadgets/peugeot_GG.swf'), 'container', {
           width: 300,
           height: 250,
