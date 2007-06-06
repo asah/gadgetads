@@ -24,8 +24,7 @@
           height: 250,
           wmode: 'transparent',
           movie: 'peugeot_GG.swf',
-          flashvars: 'flvURL=' + _esc(flvUrl),
-          flashVars: 'clickTAG=' + _esc(clickUrl)
+          flashvars: 'flvURL=' + _esc(flvUrl) + '&clickTAG=' + _esc(clickUrl)
         });
     </script>
     
