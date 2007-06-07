@@ -32,7 +32,7 @@
     <a href="#flash">Embedding Flash and Video Content</a>
     <ul>
       <li><a href="#flash_cache">Caching Flash Content on Google</a></li>
-      <li><a href="#flash_clickurl">Passing the Click URL into Flash</a></li>
+      <li><a href="#flash_clicktag">Using clickTAG in Flash</a></li>
       <li><a href="#flash_youtube">Using the YouTube Branded Player For Video Playback</a></li>
       <li><a href="#flash_nonbranded">Using your own Flash player with YouTube Videos</a></li>
     </ul>
@@ -426,7 +426,7 @@
 </p>
 
 <a name="flash"></a>
-<h2>Embedding Flash and Video Content</h2>
+<h2>Embedding Flash</h2>
 <p>
   Many times, you're going to want to embed Flash within your gadget.
   Using our Flash library is the recommended way to embed Flash content in your gadget
@@ -449,9 +449,9 @@
 </p>
 
 <a name="flash_cache"></a>
-<h3>Caching Flash Content on Google</h3>
+<h3>Caching Flash Content</h3>
 <p>
-  Similar to caching gadget images, you should also use the cache for Flash content
+  Similar to caching gadget images, you should also cache Flash content
   to improve gadget performance and decrease the load on hosting servers.  To do
   this, you'll need to use
   <code>_IG_EmbedFlash(url, container, opt_params)</code> in conjunction with 
@@ -468,39 +468,91 @@
 });</pre>
 </p>
 
-<a name="flash_clickurl"></a>
-<h3>Passing the Click URL into Flash</h3>
+<a name="flash_cache_other"></a>
+<h3>Caching Other Resources Within Flash</h3>
 <p>
-  You're going to need access to the click URL from your Flash files.  To enable
-  this, get the click URL from the userpref and pass it into Flash as a flash variable
-  called <b>clickTAG</b>.  You can define
-  flash variables by creating a Flash parameter called 'flashvars'.
-  Then you can create new variables by specifying name-value pairs
-  separated by <code>&amp;</code>. In your Flash file, you'll be able to
-  access each variable using ActionScript.
-  Here's an example showing you how to format the flashvars string with
-  multiple variables:
-<pre>var1=value1<b>&amp;</b>var2=value2<b>&amp;</b>var3=value3<b>&amp;</b>var4=value</pre>
+  Many times, Flash objects often embed other external resources such as images,
+  feeds, and other child Flash objects.   We recommend caching these as well for
+  all the same reasons, i.e to prevent melting down the hosting server.
 </p>
 <p>
-  Here's an example of how you would pass in the click URL to Flash:
+  There's no way to access any <code>_IG_...()</code> methods within Flash.
+  Therefore, you can't use <code>_IG_EmbedFlash()</code> or 
+  <code>_IG_GetCachedUrl()</code> to fetch child Flash objects and other resources.
+  Instead, you need to manually prefix all resource URLs with this:
+  <pre>http://gmodules.com/ig/proxy?url=RESOURCE_URL</pre>
+</p>
+<p>
+  For example, to cache child Flash objects from within your Flash, replace
+  <code>RESOURCE_URL</code> with the child Flash URL:
+  <pre>http://gmodules.com/ig/proxy?url=<b>http://mysite.com/child-flash.swf</b></pre>
+</p>
+<p>
+  To cache images from within your Flash, replace <code>RESOURCE_URL</code> with
+  the image URL:
+  <pre>http://gmodules.com/ig/proxy?url=<b>http://mysite.com/image1.gif</b></pre>
+</p>
+
+<a name="flash_flashvars"></a>
+<h3>Using FlashVars To Pass Variables Into Flash</h3>
+<p>
+  <a href="http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=tn_16417">FlashVars</a>
+  allow you to pass in variables to your Flash file.  With ActionScript,
+  you'll be able to access each variable and use it within our Flash application.
+</p>
+<p>
+  To use FlashVars to pass variables in <code>_IG_EmbedFlash()</code>, start by adding
+  an additional property to the third parameter object and call it
+  <code>flashvars</code>.  Assign it a JavaScript String that consists of
+  name=value pairs separated by <code><b>&amp;</b></code>.  Each name=value
+  represents a new variable that will get passed into the Flash.
+  When creating this string of name=value pairs, <b>make sure to escape all values</b>
+  by using <code>_esc()</code>.
+</p>
+<p>
+  Here's an example showing on how to format the <code>flashvars</code> string with
+  multiple variables:
+  <pre>var1=value1<b>&amp;</b>var2=value2<b>&amp;</b>var3=value3<b>&amp;</b>var4=value</pre>
+</p>
+<p>
+  Here's how you would pass it into Flash using <code>_IG_EmbedFlash()</code>:
+<pre>_IG_EmbedFlash('http://www.mysite.com/flash.swf', 'container', {
+    width: 300,
+    height: 250,
+    <b>flashvars: 'var1=' + _esc('value1') + '&amp;var2=' + _esc('value2') + '&amp;var3=' + _esc('value3') + '&amp;var4=' + _esc('value')</b>
+  });</pre>
+</p>
+
+<a name="flash_clicktag"></a>
+<h3>Using clickTAG in Flash</h3>
+<p>
+  In Flash ads, there's always some control(s) which redirects users to some 
+  destination URL.  In order to track users that click through this, you need to 
+  append the destination URL to the click URL in order to create the full redirect
+  URL which goes through our ads database.  Once the full redirect URL is created,
+  pass it into Flash as a flash variable called <code>clickTAG</code>.
+  <b>Make sure to escape the destination URL appended to click URL</b>.
+</p>
+<p>
+  Here's an example of how you to create the properly escaped redirect URL and
+  pass it into Flash as <code>clickTAG</code>:
 </p>
   <pre>&lt;div id=&#39;container&#39;&gt;&lt;/div&gt;
 &lt;script&gt;
   var prefs = new _IG_Prefs();
-  var clickUrl = prefs.getString('clickurl') + _esc('http://exampletarget.com');
-  _IG_EmbedFlash(_IG_GetCachedUrl(&#39;http://www.youtube.com/v/_YUugB4IUl4&#39;), &#39;container&#39;, {
+  <b>var redirectUrl = prefs.getString('clickurl') + _esc('http://exampledestination.com');</b>
+  _IG_EmbedFlash(_IG_GetCachedUrl(&#39;http://www.mysite.com/flash.swf&#39;), &#39;container&#39;, {
     swf_version: 6,
     id: &quot;flashid&quot;,
     width: 250,
     height: 200,
-    <b>flashvars: 'clickTAG=' + _esc(clickUrl)</b>
+    <b>flashvars: 'clickTAG=' + _esc(redirectUrl)</b>
   });
 &lt;/script&gt;</pre>
 </p>
 
-<a name="flash_youtube"></a>
-<h3>Using the YouTube Branded Player For Video Playback</h3>
+<a name="video"></a>
+<h2>Embedding and Playing Videos</h2>
 <p>
   For gadget ads, we highly recommend hosting your video on <a href="http://www.youtube.com">YouTube</a>.
   View the <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">instructions</a>
@@ -509,6 +561,9 @@
   and load coming from your gadget ad.  In addition, once your video is hosted,
   you can utilize the advanced YouTube player for video playback in your gadget.
 </p>
+
+<a name="flash_youtube"></a>
+<h3>Using the YouTube Branded Player For Video Playback</h3>
 <p>
   If you want to use the YouTube branded player, that's very easy to do.  
   The YouTube player is simply a Flash application that you can easily 
@@ -624,8 +679,7 @@ _IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://examplesite.com/myplayer.swf&quot;)
       Select Frame 1 in the Timeline, and open the Actions panel 
       (Window > Actions).  
       Type the following code in the Actions panel:
-<pre>
-// retrieve FlashVars variables
+<pre>// retrieve FlashVars variables
 var url = clickURL;
 var flv = flvURL;
 
@@ -655,8 +709,7 @@ ns.play(flv);
 _root.onMouseDown = function(){
     getURL(url, &quot;_blank&quot;);
 };
-stop();
-</pre>
+stop();</pre>
     </li>
   </ol>
 </p>
@@ -723,6 +776,46 @@ stop();
     <li><a href="http://www.google.com/ig/directory?url=http://ralph.feedback.googlepages.com/googlemap.xml">Google Map</a></li>
     <li><a href="http://www.google.com/ig/directory?q=maps"><i>More...</i></a></li>
   </ul>
+</p>
+
+
+<a name="tracking"></a>
+<h2>Reporting Single Interaction Tracking</h2>
+<p>
+  Gadget ads are unique because it provides users with highly interactive content
+  that displays useful information.
+  A good gadget-ad entices the user to interact with it and delivers most or all
+  of the information that a user wants without ever having to be redirected
+  to a different page.  Therefore, it's very important 
+  to enable at least some form of interaction tracking in order to measure the
+  success of each campaign.
+</p>
+<p>
+  Gadget ads are not allowed to set cookies due to privacy concerns.  This
+  prevents the use of Google Analytics as a tracking solution.
+  For now, we've enabled a simple form of interaction
+  tracking that allows you to send arbitrary hits to our tracking server whenever
+  you want.  To use it, follow these 3 simple steps:
+  <ol>
+    <li>
+      Add <code>&lt;Require feature=&quot;interaction-tracking&quot;/&gt;</code>
+      under <code>&lt;ModulePrefs&gt;</code>
+    </li>
+    <li>
+      Add <code>&lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot;/&gt;</code>
+    </li>
+    <li>
+      Call JavaScript function, <code>_IG_ReportInteraction()</code>, whenever
+      you want to send a hit to our tracking server.
+    </li>      
+  </ol>
+</p>
+<p>
+  In Flash ActionScript, you can call the JavaScript function like this:
+  <pre>getURL(&quot;javascript:_IG_ReportInteraction();&quot;);</pre>
+</p>
+<p>
+  <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml">Sample</a>
 </p>
 
 

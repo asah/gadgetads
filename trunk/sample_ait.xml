@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs
+    title="Interaction Test"
+    description="Sample gadget for ads interaction tracking reporting."
+    height="250"
+    width="300">		
+    <Require feature="interaction-tracking"/>
+  </ModulePrefs>
+  <UserPref datatype="hidden" name="clickurl"/>
+  <UserPref datatype="hidden" name="aiturl"/>
+  <Content type="html"><![CDATA[
+    <a href="javascript:_IG_ReportInteraction();" >
+      <img src="http://gadgets.testing.googlepages.com/clickme.jpg" border="0"/>
+    </a>
+  ]]></Content>
+</Module>
