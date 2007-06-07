@@ -29,15 +29,23 @@
   <li><a href="#remotecontent">Getting Remote Content</a></li>
   <li><a href="#images">Embedding Images: Recommended</a></li>
   <li>
-    <a href="#flash">Embedding Flash and Video Content</a>
+    <a href="#flash">Embedding Flash Content</a>
     <ul>
-      <li><a href="#flash_cache">Caching Flash Content on Google</a></li>
+      <li><a href="#flash_cache">Caching Flash Content</a></li>
+      <li><a href="#flash_cache_other">Caching Other Resources Within Flash</a></li>
+      <li><a href="#flash_flashvars">Using FlashVars To Pass Variables Into Flash</a></li>
       <li><a href="#flash_clicktag">Using clickTAG in Flash</a></li>
-      <li><a href="#flash_youtube">Using the YouTube Branded Player For Video Playback</a></li>
-      <li><a href="#flash_nonbranded">Using your own Flash player with YouTube Videos</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#video">Embedding and Playing Video Content</a>
+    <ul>
+      <li><a href="#video_youtube">Using the YouTube Branded Player For Video Playback</a></li>
+      <li><a href="#video_nonbranded">Using Your Own Flash Player With Youtube Videos</a></li>
     </ul>
   </li>
   <li><a href="#map">Embedding Google Maps</a></li>
+  <li><a href="#tracking">Enabling Single Interaction Tracking</a></li>
   <li><a href="#casestudy">Case Study: Simplified Gmail Gadget Ad</a></li>
   <li><a href="#finaloutcome">The Final Outcome</a></li>
   <li><a href="#resources">Resources</a></li>
@@ -426,7 +434,7 @@
 </p>
 
 <a name="flash"></a>
-<h2>Embedding Flash</h2>
+<h2>Embedding Flash Content</h2>
 <p>
   Many times, you're going to want to embed Flash within your gadget.
   Using our Flash library is the recommended way to embed Flash content in your gadget
@@ -552,17 +560,18 @@
 </p>
 
 <a name="video"></a>
-<h2>Embedding and Playing Videos</h2>
+<h2>Embedding and Playing Video Content</h2>
 <p>
   For gadget ads, we highly recommend hosting your video on <a href="http://www.youtube.com">YouTube</a>.
   View the <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">instructions</a>
   on how to upload videos if you're unfamiliar with the process.  Hosting videos on
   YouTube ensures that your video hosting server will be able to handle the traffic
-  and load coming from your gadget ad.  In addition, once your video is hosted,
-  you can utilize the advanced YouTube player for video playback in your gadget.
+  and load coming from your gadget ad.  Once your video is hosted,
+  you can utilize the advanced YouTube player for video playback in your gadget,
+  or you can stream the video into your own custom Flash player.
 </p>
 
-<a name="flash_youtube"></a>
+<a name="video_youtube"></a>
 <h3>Using the YouTube Branded Player For Video Playback</h3>
 <p>
   If you want to use the YouTube branded player, that's very easy to do.  
@@ -594,8 +603,8 @@
   </ol>
 </p>
 
-<a name="flash_nonbranded"></a>
-<h3>Using your own Flash player with YouTube Videos</h3>
+<a name="video_nonbranded"></a>
+<h3>Using Your Own Flash Player With Youtube Videos</h3>
 <p>
   If you want to use your own non-branded Flash player to playback videos
   hosted on YouTube, you can!  All you need is the URL pointing to the 
@@ -780,7 +789,7 @@ stop();</pre>
 
 
 <a name="tracking"></a>
-<h2>Reporting Single Interaction Tracking</h2>
+<h2>Enabling Single Interaction Tracking</h2>
 <p>
   Gadget ads are unique because it provides users with highly interactive content
   that displays useful information.
@@ -815,7 +824,7 @@ stop();</pre>
   <pre>getURL(&quot;javascript:_IG_ReportInteraction();&quot;);</pre>
 </p>
 <p>
-  <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml">Sample</a>
+  See the <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml">sample gadget</a>.
 </p>
 
 
