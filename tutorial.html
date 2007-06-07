@@ -824,7 +824,20 @@ stop();</pre>
   <pre>getURL(&quot;javascript:_IG_ReportInteraction();&quot;);</pre>
 </p>
 <p>
-  See the <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml">sample gadget</a>.
+  Here's a <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml">simple example gadget</a>
+  that tracks user clicks on a single image:
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Interaction Test&quot;
+    <b>&lt;Require feature=&quot;interaction-tracking&quot;/&gt;</b>
+  &lt;/ModulePrefs&gt;
+  <b>&lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot;/&gt;</b>
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    &lt;a href=&quot;javascript:<b>_IG_ReportInteraction();</b>&quot; &gt;
+      &lt;img src=&quot;http://gadgets.testing.googlepages.com/clickme.jpg&quot; border=&quot;0&quot;/&gt;
+    &lt;/a&gt;
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
 </p>
 
 
