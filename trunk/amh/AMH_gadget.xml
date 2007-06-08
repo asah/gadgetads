@@ -30,7 +30,7 @@
 
       // Embed Flash into HTML container div
       _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
-          swf_version: 8
+          swf_version: 8,
           width: 336,
           height: 280,
           flashvars: 'clickTAG=' + _esc(redirectUrl) + '&flvurl=' + _esc(flvUrl) + '&myurl=' + _esc('http://www.googlebanner.com/336x280/')
