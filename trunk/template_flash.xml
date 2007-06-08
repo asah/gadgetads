@@ -20,12 +20,16 @@
   <Content type="html"><![CDATA[
     <div id="fc"></div>
     <script>
+      // Update these URLs with your own
+      var swfUrl = 'http://FLASH_SWF_URL';
+      var destUrl = 'http://DESTINATION_TARGET_URL';
+    
+      // Create the redirect URL to track click throughs
       var prefs = new _IG_Prefs();
-      var flashUrl = prefs.getString('flashurl');
       var clickUrl = prefs.getString('clickurl');
-      var destUrl = prefs.getString('desturl');
       var redirectUrl = clickUrl + _esc(destUrl);
       
+      // Embed Flash into HTML container div
       _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
           width: 300,
           height: 250,
