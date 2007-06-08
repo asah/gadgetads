@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<Module>
+	<ModulePrefs title="A Mighty Heart" 
+	    title_url="http://www.amightyheartmovie.com/" 
+	    description="The official gadget of A Mighty Heart movie." 
+	    author="The Visionaire Group" 
+	    author_link="http://www.thevisionairegroup.com" 
+	    height="280" 
+	    width="336" 
+	    scaling="false" 
+	    scrolling="false" 
+	    screenshot="http://www.amightyheartmovie.com/gadget/images/preview_w280.jpg" 
+	    thumbnail="http://www.amightyheartmovie.com/gadget/images/preview_w280.jpg" >
+	<Require feature="flash"/>
+	</ModulePrefs>
+	<Content type="html"><![CDATA[
+    <div id="container"></div>
+    <script>
+      // Define your Flash SWF and target destination URL
+      var swfUrl = 'http://www.amightyheart.com/gadget/336x280/main.swf';
+      var destUrl = 'http://www.amightyheart.com/';
+
+      // Create the redirect URL to track click throughs
+      var prefs = new _IG_Prefs();
+      var clickUrl = prefs.getString('clickurl');
+      var redirectUrl = clickUrl + _esc(destUrl);
+      
+      // Create FLV URL from YouTube
+    	var flvUrl = "http://www.youtube.com/get_video?video_id=-v2eKFKFMlY&ts=__ENV_time_secs_since_epoch__&t=__YOUTUBE_VIDEO_TEST(-v2eKFKFMlY)__&gad=1";
+
+      // Embed Flash into HTML container div
+      _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
+          swf_version: 8
+          width: 336,
+          height: 280,
+          flashvars: 'clickTAG=' + _esc(redirectUrl) + '&flvurl=' + _esc(flvUrl) + '&myurl=' + _esc('http://www.googlebanner.com/336x280/')
+        });
+    </script>
+		]]>
+	</Content>
+</Module>
