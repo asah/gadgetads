@@ -31,6 +31,10 @@
       // Create FLV URL from YouTube
     	var flvUrl = "http://www.youtube.com/get_video?video_id=-v2eKFKFMlY&ts=__ENV_time_secs_since_epoch__&t=__YOUTUBE_VIDEO_TEST(-v2eKFKFMlY)__&gad=1";
 
+var a = document.createElement('a');
+a.href = flvUrl;
+document.body.appendChild(a);
+
       // Embed Flash into HTML container div
       _IG_EmbedFlash(_IG_GetCachedUrl(swfUrl), 'container', {
           swf_version: 8,
