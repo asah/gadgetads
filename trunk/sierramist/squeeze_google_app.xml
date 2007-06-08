@@ -20,7 +20,7 @@
     <script>
       // Set the SWF and destination URLs with your own
       var swfUrl = 'http://a405.g.akamai.net/f/405/11649/1h/pepsicoinc.download.akamai.com/11649/sites/sierramist.com/videos/GoogleGadget/gadget_ad_1.swf';
-      var destUrl = 'http://DESTINATION_TARGET_URL';
+      var destUrl = 'http://www.xsqueezeme.com/?or=goog.1030';
     
       // Create the redirect URL to track click throughs
       var prefs = new _IG_Prefs();
@@ -29,7 +29,7 @@
       
       // Embed Flash into HTML container div
       _IG_EmbedFlash(_IG_GetCachedUrl(swfUrl), 'fc', {
-          quality: 'high';
+          quality: 'high',
           allowScriptAccess: 'always',
           width: 300,
           height: 250,
