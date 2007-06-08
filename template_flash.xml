@@ -13,10 +13,8 @@
     <Require feature="flash"/>
     <Require feature="interaction-tracking"/>
   </ModulePrefs>
-  <UserPref name="aiturl" datatype="hidden"/>
   <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
-  <UserPref name="desturl" datatype="hidden" default_value="http://DESTINATION_URL"/>
-  <UserPref name="flashurl" datatype="hidden" default_value="http://FLASH_URL_HERE"/>
+  <UserPref name="aiturl" datatype="hidden"/>
   <Content type="html"><![CDATA[
     <div id="fc"></div>
     <script>
@@ -30,7 +28,7 @@
       var redirectUrl = clickUrl + _esc(destUrl);
       
       // Embed Flash into HTML container div
-      _IG_EmbedFlash(_IG_GetCachedUrl(flashUrl), 'fc', {
+      _IG_EmbedFlash(_IG_GetCachedUrl(swfUrl), 'fc', {
           width: 300,
           height: 250,
           flashvars: 'clickTAG=' + _esc(redirectUrl)
