@@ -22,8 +22,8 @@
     <div id="fc"></div>
     <script>
       // Set the SWF and destination URLs with your own
-      var swfUrl = 'http://FLASH_SWF_URL';
-      var destUrl = 'http://DESTINATION_TARGET_URL';
+      var swfUrl = 'http://dev.juicemedia.com.au/uip/transformers/banners/300x250_transformerGoogleGadgets.swf';
+      var destUrl = 'http://www.transformersthemovie.com.au/';
     
       // Create the redirect URL to track click throughs
       var prefs = new _IG_Prefs();
