@@ -21,10 +21,6 @@
       background-color: #000;
     }
     
-    #videoContainer {
-      background-color: #000;
-    }
-    
     #linksContainer {
       text-align: center;
       font-size: 13px;
