@@ -123,7 +123,7 @@
       scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;interaction-tracking&quot;/&gt;
   &lt;/ModulePrefs&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
   &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     <b>ALL HTML CONTENT GOES HERE</b>
@@ -165,7 +165,7 @@
   click URL redirects you the target destinaion without sending real clicks 
   to the ads database.  Your gadget <b>must</b> include the clickurl usepref 
   in the gadget XML before it can be approved:
-  <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</b>&quot;/&gt;</pre>
+  <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=</b>&quot;/&gt;</pre>
 </p>
 <p>
   <b>Tip:</b> If you want a confirmation pop-up to appear when going through the click URL,
@@ -183,10 +183,10 @@
   that click-throughs are being tracked properly.  In your gadget, you will
   be creating similar links using the click URL and see similar results:
   <ul>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.google.com/">http://www.google.com</a></li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=http://www.amazon.com">Amazon.com</a></li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;url=http://www.nbc.com">NBC.com</a> (confirmation enabled)</li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;url=http://www.google.com/ig/directory">Content directory</a> (confirmation enabled)</li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=http://www.google.com/">http://www.google.com</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=http://www.amazon.com">Amazon.com</a></li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;adurl=http://www.nbc.com">NBC.com</a> (confirmation enabled)</li>
+    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;adurl=http://www.google.com/ig/directory">Content directory</a> (confirmation enabled)</li>
   </ul>
 </p>
 
@@ -903,13 +903,13 @@ stop();</pre>
   attributes under <code>ModulePrefs</code>.
 </p>
 <p>
-  Since we're still in testing phase, let's also set the <code>clickurl</code> to <code>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=</code>.
+  Since we're still in testing phase, let's also set the <code>clickurl</code> to <code>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=</code>.
   Your gadget should look something like this:
   
   <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
   &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; <b>width="300" height="250"</b>/&gt;
-  <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;</b>
+  <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;</b>
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
   ]]&gt;&lt;/Content&gt;
 &lt;/Module&gt;</pre>  
@@ -951,7 +951,7 @@ stop();</pre>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
   &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     <b>&lt;table width=&quot;300&quot; id=&quot;main&quot; border=1 cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
@@ -1001,7 +1001,7 @@ stop();</pre>
   &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;&gt;
     <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
   &lt;/ModulePrefs&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     &lt;table width=&quot;300&quot; id=&quot;main&quot; border=0 cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
@@ -1060,7 +1060,7 @@ stop();</pre>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
   &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     &lt;table width=&quot;300&quot; id=&quot;main&quot; <b>border=0</b> cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
