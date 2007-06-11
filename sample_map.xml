@@ -12,7 +12,7 @@
     </style>
     <div id="map"></div>
     
-    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;"></script>
+    <script src="http://maps.google.com/maps?file=api&amp;v=2.x"></script>
     <script>
       _IG_RegisterOnloadHandler(function() {
         if (GBrowserIsCompatible()) {
