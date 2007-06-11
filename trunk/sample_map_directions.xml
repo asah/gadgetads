@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Sample Map Driving Directions" />
+  <Content type="html"><![CDATA[
+    <style>
+    #map {
+      width: 100%;
+      height: 200px;
+    }
+    #my_textual_div table {
+      font-size: 12px;
+    }
+    </style>
+
+    <div id="map"></div>
+    <div id="my_textual_div"></div>
+
+    <script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAAoB0i6SDqobDYkh2Eosh8_hTZqGWfQErE9pT-IucjscazSdFnjBSYTmG9lkUGpfCnsUSpnbFtRXVsgA"></script>
+    <script>
+      // Create a directions object and register a map and DIV to hold the
+      // resulting computed directions
+
+      var map;
+      var directionsPanel;
+      var directions;
+
+      function main() {
+      map = new GMap2(_gel("map"));
+      directionsPanel = _gel("my_textual_div");
+      map.setCenter(new GLatLng(49.496675,-102.65625), 3);
+      directions = new GDirections(map, directionsPanel);
+      directions.load("New York, NY to Chicago, IL");
+      }
+
+      _IG_RegisterOnloadHandler(main);
+    </script>
+  ]]></Content>
+</Module>
