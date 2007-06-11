@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Interaction Test"
+  <ModulePrefs title="Interaction Test">
     <Require feature="interaction-tracking"/>
   </ModulePrefs>
   <UserPref datatype="hidden" name="aiturl"/>
