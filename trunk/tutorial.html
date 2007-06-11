@@ -106,10 +106,25 @@
 <p>
   Using a text editor of your choice, copy and paste the gadget template below into a file,
   save it, and upload it to your public web server:
-  <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+  <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;My First Gadget Ad&quot;/&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;&quot;/&gt;
+  &lt;ModulePrefs title=&quot;Gadget Ad Template&quot;
+      title_url=&quot;&quot;
+      description=&quot;&quot;
+      author=&quot;&quot;
+      author_email=&quot;&quot;
+      author_affiliation=&quot;&quot;
+      author_location=&quot;&quot;
+      width=&quot;300&quot;
+      height=&quot;250&quot;
+      screenshot=&quot;&quot;
+      thumbnail=&quot;&quot;
+      scaling=&quot;false&quot;
+      scrolling=&quot;false&quot;&gt;
+    &lt;Require feature=&quot;interaction-tracking&quot;/&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=&quot;/&gt;
+  &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     <b>ALL HTML CONTENT GOES HERE</b>
   ]]&gt;&lt;/Content&gt;
@@ -443,6 +458,14 @@
   for more information.
 </p>
 <p>
+  Start by adding a <code>&lt;Require feature="flash"/&gt;</code> in your
+  gadget XML under ModulePrefs:
+  <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;ModulePrefs title=&quot;Gadget Ad&quot; ... &gt;
+  <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
+  &lt;Require feature=&quot;interaction-tracking&quot;/&gt;
+&lt;/ModulePrefs&gt;</pre>
+<p>
   Here's an example on embedding a Flash application in your gadget using the
   Flash library and setting a custom width and height:
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
@@ -524,7 +547,7 @@
 </p>
 <p>
   Here's how you would pass it into Flash using <code>_IG_EmbedFlash()</code>:
-<pre>_IG_EmbedFlash('http://www.mysite.com/flash.swf', 'container', {
+<pre>_IG_EmbedFlash(_IG_GetCachedUrl('http://www.mysite.com/flash.swf'), 'container', {
     width: 300,
     height: 250,
     <b>flashvars: 'var1=' + _esc('value1') + '&amp;var2=' + _esc('value2') + '&amp;var3=' + _esc('value3') + '&amp;var4=' + _esc('value')</b>
