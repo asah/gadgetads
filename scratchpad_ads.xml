@@ -152,7 +152,7 @@
   }
 
   function loadEditor(url) {
-    _IG_FetchContent(url, _IG_Callback(loadEditorCallback, url, { refreshInterval: 0 }));
+    _IG_FetchContent(url, _IG_Callback(loadEditorCallback, url), { refreshInterval: 0 });
   }
 
   function loadEditorCallback(response, url) {
