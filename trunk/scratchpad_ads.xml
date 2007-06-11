@@ -113,6 +113,7 @@
   // Global constants
   var gadgetLinks = {
     "http://www.google.com/ig/modules/hello.xml": "Hello World",
+    "http://gadgetads.googlecode.com/svn/trunk/template_flash.xml": "Sample Template",
     "http://gadgetads.googlecode.com/svn/trunk/sample_map.xml": "Sample Map",
     "http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml": "Sample Interaction Tracking",
     "http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml": "Sample YouTube Streaming",
@@ -151,7 +152,7 @@
   }
 
   function loadEditor(url) {
-    _IG_FetchContent(url, _IG_Callback(loadEditorCallback, url));
+    _IG_FetchContent(url, _IG_Callback(loadEditorCallback, url, { refreshInterval: 0 }));
   }
 
   function loadEditorCallback(response, url) {
