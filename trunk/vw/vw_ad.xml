@@ -89,7 +89,7 @@
       // Create clickable logo
       var html = [
         '<a target="_top" href="' + generateClickUrl('http://www.vw.com/') + '">',
-        '<img src="' + _IG_GetImageUrl('http://gadgetads.googlecode.com/svn/trunk/vw/vw_logo_black.jpg') + '" width=30 height=30/>',
+        '<img src="' + _IG_GetImageUrl('http://gadgetads.googlecode.com/svn/trunk/vw/vw_logo_black.gif') + '" width=30 height=30/>',
         '</a>'
       ].join("");
       _gel("logoContainer").innerHTML = html;
