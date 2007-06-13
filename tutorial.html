@@ -502,25 +502,37 @@
 <h3>Caching Other Resources Within Flash</h3>
 <p>
   Many times, Flash objects often embed other external resources such as images,
-  feeds, and other child Flash objects.   We recommend caching these as well for
+  feeds, and other child Flash objects.  It's required to cache these as well for
   all the same reasons, i.e to prevent melting down the hosting server.
 </p>
 <p>
-  There's no way to access any <code>_IG_...()</code> methods within Flash.
+  There's no way to retrieve any information directly from <code>_IG_...()</code> methods within Flash.
   Therefore, you can't use <code>_IG_EmbedFlash()</code> or 
-  <code>_IG_GetCachedUrl()</code> to fetch child Flash objects and other resources.
-  Instead, you need to manually prefix all resource URLs with this:
-  <pre>http://gmodules.com/ig/proxy?url=RESOURCE_URL</pre>
+  <code>_IG_GetCachedUrl()</code> to embed or fetch child Flash objects and other resources.
+  Instead, you need to manually prefix all resource URLs with this relative path:
+  <pre>/ig/proxy?url=ESCAPED_RESOURCE_URL</pre>
 </p>
 <p>
-  For example, to cache child Flash objects from within your Flash, replace
-  <code>RESOURCE_URL</code> with the child Flash URL:
-  <pre>http://gmodules.com/ig/proxy?url=<b>http://mysite.com/child-flash.swf</b></pre>
+  Using a relative path ensures that your resources are fetched from the same domain that the parent Flash is
+  rendered on.  For example, imagine your gadget ad is rendered on <code>http://gmodules.com</code>.
+  If your Flash is embedded using <code>_IG_EmbedFlash(_IG_GetCachedUrl(...))</code>, it's
+  fetched via <code>/ig/proxy?url=</code> and is therefore rendered on the same
+  domain.  Using relative paths from within your Flash ensures that all child
+  resources are also fetched from the same domain.  This prevents any 
+  cross-domain violations from occurring inside your Flash file.
 </p>
 <p>
-  To cache images from within your Flash, replace <code>RESOURCE_URL</code> with
+  Example: To cache child Flash objects from within Flash, replace
+  <code>ESCAPED_RESOURCE_URL</code> with the 
+  <a href="http://www.adobe.com/support/flash/action_scripts/actionscript_dictionary/actionscript_dictionary199.html">escaped</a> 
+  child Flash URL:
+  <pre>/ig/proxy?url=<b>http%3A%2F%2Fmysite.com%2Fchild-flash.swf</b></pre>
+</p>
+<p>
+  Example: To cache images from within Flash, replace <code>ESCAPED_RESOURCE_URL</code> with
+  <a href="http://www.adobe.com/support/flash/action_scripts/actionscript_dictionary/actionscript_dictionary199.html">escaped</a> 
   the image URL:
-  <pre>http://gmodules.com/ig/proxy?url=<b>http://mysite.com/image1.gif</b></pre>
+  <pre>/ig/proxy?url=<b>http%3A%2F%2Fmysite.com%2Fimage1.gif</b></pre>
 </p>
 
 <a name="flash_flashvars"></a>
