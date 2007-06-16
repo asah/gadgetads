@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Nike Plus Map It" title_url="http://www.nike.com/nikeplus/#mapit" directory_title="Nike Plus Map It" category="news" category2="tools" render_inline="optional" height="350" description="View Nike Plus user's runs in you area" />
+  <ModulePrefs title="Sample Gadget Map" directory_title="Nike Plus Map It" category="news" category2="tools" render_inline="optional" height="350" description="View Nike Plus user's runs in you area" />
   <UserPref name="loc" display_name="Zip Code" datatype="location" required="true" default_value="ec1m"/>
   <Content type="html"><![CDATA[
     <style>
-      #mapContainer {
-        width: 336px; 
-        height: 280px;
+      #mapContainer, #mapContainer img#staticImg {
+        width: 368px; 
+        height: 301px;
       }
-      #mapContainer {
-        width: 336px;
-        height: 225px;
+      img#img1 {
+        width: 368px;
+        height: 25px;
       }
       #infoContainer {
         width: 336px; 
@@ -24,15 +24,25 @@
     </style>
 
     <script>
-      function load_real_gadget() {
-         var loc = '' + document.location;
-         document.location = loc.replace(/url=[^?]+/, "url=http://uat.runlondon.akqa.com/nikegadget/nike_gadget.xml");
-      }
+      // Real gadget URL
+      var REAL_GADGET_URL = 'http://uat.runlondon.akqa.com/nikegadget/nike_gadget.xml';
+      
+      _IG_RegisterOnloadHandler(function() {
+          // Cache images
+          _gel('img1').src = _IG_GetImageUrl('http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg');
+          
+          // Setup static image to load real gadget user clicks on it.
+          var staticImg = _gel('staticImg');
+          staticImg.src = _IG_GetImageUrl('http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg');
+          staticImg.onclick = function() {
+              window.location.replace(/url=[^?]+/, 'url=' + _esc(REAL_GADGET_URL));
+            };
+        });
     </script>
 
-    <img src="/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg" width="336" height="25" alt="Nike +" />
+    <img id='img1' alt="Nike +"/>
     <div id="mapContainer">
-      <img onclick="load_real_gadget(); return false;" border=0 src='/ig/proxy?url=http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg'>
+      <img id="staticImg"/>
     </div>
     <div id="infoContainer">
       Just do it: Click on map to find jogging routes.
