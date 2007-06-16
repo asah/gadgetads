@@ -14,7 +14,7 @@
         font: 0.6em Verdana, sans-serif; 
         color: #FFF; 
         padding: 3px 0px 0px 5px; 
-        background: url("http://gmodules.com/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat
+        background: url("/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat
       }
       #infoContainer a {
         color: #FFF;
