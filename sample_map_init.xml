@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Nike Plus Map It" title_url="http://www.nike.com/nikeplus/#mapit" directory_title="Nike Plus Map It" category="news" category2="tools" render_inline="optional" height="350" description="View Nike Plus user's runs in you area" />
+  <UserPref name="loc" display_name="Zip Code" datatype="location" required="true" default_value="ec1m"/>
+  <Content type="html"><![CDATA[
+    <style>
+      #mapContainer {
+        width: 367px; 
+        height: 300px
+      }
+      #infoContainer {
+        width: 367px; 
+        height: 30px; 
+        font: 0.6em Verdana, sans-serif; 
+        color: #FFF; 
+        padding: 3px 0px 0px 5px; 
+        background: url("http://gmodules.com/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat
+      }
+      #infoContainer a {
+        color: #FFF;
+      }
+    </style>
+
+    <script>
+      function load_real_gadget() {
+         var loc = '' + document.location;
+         document.location = loc.replace(/url=[^&]+/, "url=http://uat.runlondon.akqa.com/nikegadget/nike_gadget.xml");
+      }
+    </script>
+
+    <img src="/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg" width="367" height="25" alt="Nike +" />
+    <div id="mapContainer">
+      <img onclick="load_real_gadget(); return false;" border=0 src='http://gmodules.com/ig/proxy?url=http://www.midgard.net/~asah/igp/nike_static.jpg'>
+    </div>
+    <div id="infoContainer">
+      Just do it: click on map to find jogging routes.
+    </div>
+  ]]></Content>
+</Module>
