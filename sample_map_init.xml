@@ -24,7 +24,7 @@
     <script>
       function load_real_gadget() {
          var loc = '' + document.location;
-         document.location = loc.replace(/url=[^&]+/, "url=http://uat.runlondon.akqa.com/nikegadget/nike_gadget.xml");
+         document.location = loc.replace(/url=[^?]+/, "url=http://uat.runlondon.akqa.com/nikegadget/nike_gadget.xml");
       }
     </script>
 
