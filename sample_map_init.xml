@@ -5,14 +5,15 @@
   <Content type="html"><![CDATA[
     <style>
       #mapContainer {
-        width: 367px; 
-        height: 300px
+        width: 336px; 
+        height: 280px;
       }
       #infoContainer {
-        width: 367px; 
-        height: 30px; 
-        font: 0.6em Verdana, sans-serif; 
-        color: #FFF; 
+        width: 336px; 
+        height: 30px;
+        font: 0.7em Verdana, sans-serif; 
+        font-weight: bold;
+        color: #fff;
         padding: 3px 0px 0px 5px; 
         background: url("/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat
       }
@@ -28,12 +29,12 @@
       }
     </script>
 
-    <img src="/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg" width="367" height="25" alt="Nike +" />
+    <img src="/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg" width="336" height="25" alt="Nike +" />
     <div id="mapContainer">
       <img onclick="load_real_gadget(); return false;" border=0 src='http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg'>
     </div>
     <div id="infoContainer">
-      Just do it: click on map to find jogging routes.
+      Just do it: Click on map to find jogging routes.
     </div>
   ]]></Content>
 </Module>
