@@ -13,7 +13,7 @@
         height: 25px;
       }
       #infoContainer {
-        width: 336px; 
+        width: 368px; 
         height: 30px;
         font: 0.7em Verdana, sans-serif; 
         font-weight: bold;
