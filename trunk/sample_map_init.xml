@@ -8,6 +8,10 @@
         width: 336px; 
         height: 280px;
       }
+      #mapContainer {
+        width: 336px;
+        height: 225px;
+      }
       #infoContainer {
         width: 336px; 
         height: 30px;
@@ -15,10 +19,7 @@
         font-weight: bold;
         color: #fff;
         padding: 3px 0px 0px 5px; 
-        background: url("/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat
-      }
-      #infoContainer a {
-        color: #FFF;
+        background: url("/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat;
       }
     </style>
 
@@ -31,7 +32,7 @@
 
     <img src="/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg" width="336" height="25" alt="Nike +" />
     <div id="mapContainer">
-      <img onclick="load_real_gadget(); return false;" border=0 src='http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg'>
+      <img onclick="load_real_gadget(); return false;" border=0 src='/ig/proxy?url=http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg'>
     </div>
     <div id="infoContainer">
       Just do it: Click on map to find jogging routes.
