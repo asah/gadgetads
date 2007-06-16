@@ -37,8 +37,7 @@
           staticImg.src = _IG_GetImageUrl('http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg');
           staticImg.onclick = function() {
               var newUrl = window.location.href.replace(/url=[^?]+/, 'url=' + _esc(REAL_GADGET_URL));
-              alert(newUrl);
-              window.location.replace(/url=[^?]+/, 'url=' + _esc(REAL_GADGET_URL));
+              window.location.replace(newUrl);
             };
         });
     </script>
