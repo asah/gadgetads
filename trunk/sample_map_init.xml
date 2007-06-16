@@ -30,7 +30,7 @@
 
     <img src="/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_top.jpg" width="367" height="25" alt="Nike +" />
     <div id="mapContainer">
-      <img onclick="load_real_gadget(); return false;" border=0 src='http://gmodules.com/ig/proxy?url=http://www.midgard.net/~asah/igp/nike_static.jpg'>
+      <img onclick="load_real_gadget(); return false;" border=0 src='http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg'>
     </div>
     <div id="infoContainer">
       Just do it: click on map to find jogging routes.
