@@ -15,10 +15,11 @@
       #infoContainer {
         width: 368px; 
         height: 30px;
+        text-align: center;
         font: 0.7em Verdana, sans-serif; 
         font-weight: bold;
         color: #fff;
-        padding: 3px 0px 0px 5px; 
+        padding: 3px; 
         background: url("/ig/proxy?url=http://uat.runlondon.akqa.com/nikegadget/images/img_bottom.jpg") no-repeat;
       }
     </style>
