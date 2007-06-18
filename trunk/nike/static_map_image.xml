@@ -71,7 +71,7 @@
       <img class="right" src="http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_right.jpg" width="172" height="24" alt="" />
     </div>
     
-
+<!--
     <img id='img1' alt="Nike +"/>
     <div id="topContainer>
     <div id="mapContainer">
@@ -80,5 +80,6 @@
     <div id="infoContainer">
       Just do it: Click on map to find jogging routes.
     </div>
+  -->
   ]]></Content>
 </Module>
