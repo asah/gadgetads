@@ -24,8 +24,8 @@
         background:url("/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_centre.jpg") center repeat-x; 
         position:relative;
       }
-      #infoMessage {
-        position: relative;
+      .infoMessage {
+        position: absolute;
         top: 5px;
         left: 100px;
         z-index: 100;
