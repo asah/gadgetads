@@ -66,7 +66,8 @@
     </div>
     <div id="mapContainer"></div>
     <div id="infoContainer">
-      <img class="left" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_left.jpg" width="184" height="24" alt="" />
+      <img class="left" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_left.jpg" width="184" height="24" alt="" />      
+      Just do it: Click on map to find jogging routes.
       <img class="right" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_right.jpg" width="172" height="24" alt="" />
     </div>
   ]]></Content>
