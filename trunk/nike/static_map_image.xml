@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="Sample Gadget Map" directory_title="Nike Plus Map It" category="news" category2="tools" render_inline="optional" height="350" description="View Nike Plus user's runs in you area" />
+  <ModulePrefs 
+  	title="Nike Plus Map It" 
+  	title_url="http://www.nike.com/nikeplus/#mapit" 
+  	directory_title="Nike Plus Map It" 
+  	category="news" 
+  	category2="tools" 
+  	render_inline="optional" 
+  	height="350" 
+  	description="View Nike Plus user's runs in you area" 
+  	thumbnail="http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_icon.png"
+  >
+    <Require feature="interaction-tracking"/>
+  </ModulePrefs>
   <UserPref name="loc" display_name="Zip Code" datatype="location" required="true" default_value="ec1m"/>
   <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="  />
   <UserPref datatype="hidden" name="aiturl"/>
