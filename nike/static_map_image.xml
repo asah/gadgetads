@@ -2,6 +2,8 @@
 <Module>
   <ModulePrefs title="Sample Gadget Map" directory_title="Nike Plus Map It" category="news" category2="tools" render_inline="optional" height="350" description="View Nike Plus user's runs in you area" />
   <UserPref name="loc" display_name="Zip Code" datatype="location" required="true" default_value="ec1m"/>
+  <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="  />
+  <UserPref datatype="hidden" name="aiturl"/>
   <Content type="html"><![CDATA[
     <style>
       #topContainer	{
@@ -39,7 +41,7 @@
 
     <script>
       // Real gadget URL
-      var REAL_GADGET_URL = 'http://uat.runlondon.akqa.com/nikegadget/nike_gadget.xml';
+      var REAL_GADGET_URL = 'http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/nike_gadget.xml';
       
       _IG_RegisterOnloadHandler(function() {
           var prefs = new _IG_Prefs();
@@ -67,16 +69,5 @@
       <img class="left" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_left.jpg" width="184" height="24" alt="" />
       <img class="right" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_right.jpg" width="172" height="24" alt="" />
     </div>
-    
-<!--
-    <img id='img1' alt="Nike +"/>
-    <div id="topContainer>
-    <div id="mapContainer">
-      <img id="staticImg"/>
-    </div>
-    <div id="infoContainer">
-      Just do it: Click on map to find jogging routes.
-    </div>
-  -->
   ]]></Content>
 </Module>
