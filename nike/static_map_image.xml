@@ -27,7 +27,7 @@
       .infoMessage {
         position: absolute;
         top: 5px;
-        left: 100px;
+        left: 5px;
         z-index: 100;
       }
       .left		{position:absolute; left:0; z-index:1;}
