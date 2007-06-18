@@ -41,6 +41,11 @@
         background:url("http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_centre.jpg") center repeat-x; 
         position:relative;
       }
+      .left		{position:absolute; left:0; z-index:1;}
+      .right		{position:absolute; right:-1; z-index:1;}
+      a img {
+        border-width: 0px;
+      }
     </style>
 
     <script>
