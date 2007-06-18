@@ -24,19 +24,12 @@
         background:url("/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_centre.jpg") center repeat-x; 
         position:relative;
       }
-      .left	{
-        position:absolute; 
-        left:0; 
-        z-index:1;
+      #infoMessage {
+        z-index: 100;
       }
-      .right {
-        position:absolute; 
-        right:-1; 
-        z-index:1;
-      }
-      a img {
-        border-width: 0px;
-      }
+      .left		{position:absolute; left:0; z-index:1;}
+      .right		{position:absolute; right:-1; z-index:1;}
+      a img		{border:none;}
     </style>
 
     <script>
@@ -67,7 +60,7 @@
     <div id="mapContainer"></div>
     <div id="infoContainer">
       <img class="left" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_left.jpg" width="184" height="24" alt="" />      
-      Just do it: Click on map to find jogging routes.
+      <span class="infoMessage">Just do it: Click on map to find jogging routes.</span>
       <img class="right" src="/ig/proxy?url=http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/images/img_bottom_right.jpg" width="172" height="24" alt="" />
     </div>
   ]]></Content>
