@@ -59,7 +59,7 @@
 
     <script>
       // Real gadget URL
-      var REAL_GADGET_URL = 'http://nikeplus.nike.com/nikeplus/emea/v1/nikegadget/nike_gadget.xml';
+      var REAL_GADGET_URL = 'http://nikeplus.nike.com/nikeplus/emea/nikegadget/nike_gadget_full.xml';
       
       _IG_RegisterOnloadHandler(function() {
           var prefs = new _IG_Prefs();
