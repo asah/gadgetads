@@ -71,7 +71,8 @@
           // Setup static image to load real gadget user clicks on it.
           var staticImg = _IG_GetImage('http://gadgetads.googlecode.com/svn/trunk/nike_static.jpg');
           staticImg.onclick = function() {
-              var newUrl = window.location.href.replace(/url=[^?]+/, 'url=' + _esc(REAL_GADGET_URL));
+              var newUrl = window.location.href.replace(/url=[^&]+/, 'url=' + _esc(REAL_GADGET_URL));
+              alert(newUrl);
               window.location.replace(newUrl);
             };
           _gel('mapContainer').appendChild(staticImg);
