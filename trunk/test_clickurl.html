@@ -28,7 +28,7 @@ if (url) {
   url = _unesc(url);
   msg = (parseInt(msg) == 1) ? true : false;
   
-  var regexp = new RegExp("^http://.*");
+  var regexp = new RegExp("^http[s]?://.*");
   if (url.match(regexp)) {
     var str = [
       '*** Click Received ***',
