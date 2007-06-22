@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>Gadget Tag Generator For DART</title>
+  <style>
+    #preview {
+      border-width: 0px;
+      padding: 0px;
+      margin: 0px;
+      width: 100%;
+    }
+    #preview iframe {
+      border: 2px solid #676767;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gadget Tag Generator For DART</h1>
+  <p>
+    The following form helps you enter gadget ads into the doubleclick's DART system.  
+    For help, email <a href="mailto:gadget-ads-support@google.com">gadget-ads-support@google.com</a>
+  </p>
+
+  <table border="1" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>Gadget URL:</td>
+      <td><input id="gurl" type="text" value="http://"/></td>
+    </tr>
+    <tr>
+      <td>Dimensions:</td>
+      <td>
+        <select id="gsize">
+          <option value="300x250" selected="selected">Medium Rectangle (300 x 250)</option>
+          <option value="336x280">Large Rectangle (336 x 280)</option>
+          <option value="250x250">Square (250 x 250)</option>
+          <option value="200x200">Small Square (200 x 200)</option>
+          <option value="728x90">Leaderboard (728 x 90)</option>
+          <option value="468x60">Banner (468 x 60)</option>
+          <option value="120x600">Skyscraper (120x600)</option>
+          <option value="160x600">Wide Skyscraper (160x600)</option>
+        </select>
+        <input onclick="getthecode();" type="button" value="Switch to this Gadget"/>
+      </td>
+    </tr>
+  </table>
+  
+  <p>
+    To upload into the DART:
+    <ol>
+      <li>
+        Create a new file.
+      </li>
+      <li>
+        Copy &amp; paste the tag from the box below the preview into the file and save.
+      </li>
+      <li>
+        In DART upload the file as the tag.
+      </li>
+    </ol>
+  </p>
+  
+  <p>
+    Preview:
+    <div id="preview"></div>
+  </p>
+  
+  <p>
+    For debugging, here's the text of the ad (already selected for cut/paste):
+    <div><textarea id="code" rows=5 cols=180></textarea></div>
+  </p>
+
+  <script>
+  var gurl = document.getElementById('gurl');
+  var gsize = document.getElementById('gsize');
+  
+  function set_url(url, w, h) {
+    gurl.value = url;
+    if (w == null) { w = 300; }
+    if (h == null) { h = 250; }
+    gsize.value = w + 'x' + h;
+    getthecode();
+  }
+  
+  function getthecode() {
+    var url = gurl.value;
+    var size = gsize.value.split('x');
+    var w = size[0];
+    var h = size[1];
+    var preview = document.getElementById("preview");
+    var code = document.getElementById("code");
+    code.value = '<!-- ' + w + 'x' + h +' -->\n' + '<iframe frameborder=0 width=' + w + ' height=' + h + ' marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="http://gmodules.com/ig/ifr?url='+encodeURIComponent(url)+'&synd=ads&up_clickurl=%c"></iframe>';
+    code.select();
+    var preview_code;
+    preview_code = code.value.replace("%c", encodeURIComponent("http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl="));
+    preview.innerHTML = preview_code;
+  }
+  
+  set_url('http://www.labpixies.com/campaigns/fox/fox.xml');
+  </script>
+</body>
+</html>
