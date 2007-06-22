@@ -1,0 +1,120 @@
+<style>
+  #config {
+    width: 90%;
+  }
+  #config td {
+    border-bottom: 1px solid #676767;
+  }
+  #config td.label {
+    width: 120px;
+    text-align: right;
+    padding-right: 5px;
+  }
+  #config input {
+    width: 100%;
+    background-color: #ffd;
+  }
+  #preview {
+    margin-top: 10px;
+  }
+</style>
+
+<table id="config" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td class="label">Gadget URL</td>
+    <td>
+      <input tabindex="1" id="gadgetUrl" type="text" value=""/>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">Click URL</td>
+    <td>
+      <input id="clickUrl" type="text" value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;adurl="/>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">AIT URL</td>
+    <td>
+      <input id="aitUrl" type="text" value="http://chaobot.corp.google.com:1248/hit?name=TESTING"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="label">Ad Size</td>
+    <td>
+      <select id="adSize" onchange="preview();">
+        <option value="300x250" selected="selected">Medium Rectangle (300 x 250)</option>
+        <option value="336x280">Large Rectangle (336 x 280)</option>
+        <option value="250x250">Square (250 x 250)</option>
+        <option value="200x200">Small Square (200 x 200)</option>
+        <option value="728x90">Leaderboard (728 x 90)</option>
+        <option value="468x60">Banner (468 x 60)</option>
+        <option value="120x600">Skyscraper (120x600)</option>
+        <option value="160x600">Wide Skyscraper (160x600)</option>
+      </select>
+    </td>
+  </tr>
+</table>
+<div>
+  <input tabindex="2" onclick="preview();" type="button" value="Preview"/>
+  <input onclick="viewSource();" type="button" value="View Source"/>
+</div>
+<div id="preview">
+  <iframe id="previewFrame" scrolling="no" frameborder="no"></iframe>
+</div>
+
+<script>
+  function _gel(n) {
+    return document.getElementById ? document.getElementById(n) : null;
+  }
+  function _esc(s) {
+    return window.encodeURIComponent ? encodeURIComponent(s) : escape(s);
+  }
+  
+  // Global variables
+  var gadgetUrlNode = _gel('gadgetUrl');
+  var clickUrlNode = _gel('clickUrl');
+  var aitUrlNode = _gel('aitUrl');
+  var adSizeNode = _gel('adSize');
+  
+  function isValidUrl(url) {
+    return url.match(/http:\/\/.+/) ? true : false;
+  }
+  
+  function viewSource() {
+    var gadgetUrl = gadgetUrlNode.value;
+    if (isValidUrl(gadgetUrl)) {
+      window.open(gadgetUrl);
+    }
+  }
+  
+  function preview() {
+    var gadgetUrl = gadgetUrlNode.value;
+    var clickUrl = clickUrlNode.value;
+    var aitUrl = aitUrlNode.value;
+    var adSize = adSizeNode.value.split('x');
+    
+    if (isValidUrl(gadgetUrl)) {
+      var iframeSrc = [
+          'http://gmodules.com/ig/ifr?url=' + _esc(gadgetUrl),
+          'up_clickurl=' + _esc(clickUrl),
+          'up_aiturl=' + _esc(aitUrl),
+          'width=' + _esc(adSize[0]),
+          'height=' + _esc(adSize[1]),
+          'nocache=1'
+        ].join('&');
+      
+      _gel('preview').innerHTML = [
+          '<iframe ',
+          'id="previewFrame" scrolling="no" frameborder="no" ',
+          'width="' + adSize[0] + '" height="' + adSize[1] + '" ',
+          'style="border: 3px dotted #00c;" ',
+          'src="' + iframeSrc + '">',
+          '</iframe>'
+        ].join('');
+    }
+  }
+  
+  window.onload = function() {
+    gadgetUrlNode.focus();
+  };
+</script>
