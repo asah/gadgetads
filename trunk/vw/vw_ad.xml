@@ -117,6 +117,9 @@
     function showFeeds() {
       var url = 'http://www.vw.com/news/browse/en/us/?format=rss';
       _IG_FetchFeedAsJSON(url, showFeedsCallback, 10, true);
+      
+      // Report interaction
+      _IG_ReportInteraction();
     }
   
     function showFeedsCallback(response) {
@@ -155,6 +158,9 @@
           height: 220
         });
       contentContainer.className = "videos";
+      
+      // Report interaction
+      _IG_ReportInteraction();
     }
   
     _IG_RegisterOnloadHandler(init);
