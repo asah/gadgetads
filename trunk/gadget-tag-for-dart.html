@@ -12,6 +12,12 @@
     #preview iframe {
       border: 2px solid #676767;
     }
+    #code, #gurl {
+      width: 100%;
+    }
+    #inputTable {
+      width: 80%;
+    }
   </style>
 </head>
 <body>
@@ -21,9 +27,9 @@
     For help, email <a href="mailto:gadget-ads-support@google.com">gadget-ads-support@google.com</a>
   </p>
 
-  <table border="1" cellspacing="0" cellpadding="0">
+  <table id="inputTable" border="0" cellspacing="0" cellpadding="0">
     <tr>
-      <td>Gadget URL:</td>
+      <td width="100">Gadget URL:</td>
       <td><input id="gurl" type="text" value="http://"/></td>
     </tr>
     <tr>
@@ -66,7 +72,7 @@
   
   <p>
     For debugging, here's the text of the ad (already selected for cut/paste):
-    <div><textarea id="code" rows=5 cols=180></textarea></div>
+    <div><textarea id="code" rows="5"></textarea></div>
   </p>
 
   <script>
