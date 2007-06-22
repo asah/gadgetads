@@ -28,7 +28,7 @@
     #linksContainer a {
       text-decoration: none;
       padding: 0px 3px;
-      color: #eef;
+      color: #ddf;
     }
     
     #contentContainer {
@@ -55,7 +55,7 @@
     .videos a {
       font-size: 13px;
       text-decoration: none;
-      color: #eef;
+      color: #ddf;
     }
   </style>
   
