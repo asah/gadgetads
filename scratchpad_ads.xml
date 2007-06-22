@@ -93,7 +93,7 @@
     </form>
   </div>
   <div id="previewTab">
-    <div id="previewDiv"><iframe id="previewFrame" name="previewFrame" frameborder=0></iframe></div>
+    <div id="previewDiv"><iframe id="previewFrame" name="previewFrame" frameborder=0 scrollbars="no"></iframe></div>
   </div>
 
   <div id="inputContainer">
