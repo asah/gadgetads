@@ -119,7 +119,8 @@
     "http://gadgetads.googlecode.com/svn/trunk/sample_map_directions.xml": "Sample Map Directions",
     "http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml": "Sample Interaction Tracking",
     "http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml": "Sample YouTube Streaming",
-    "http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml": "Simple Gmail Gadget",
+    "http://gadgetads.googlecode.com/svn/trunk/simple_gmail_ad.xml": "Ex: Simple Gmail",
+    "http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml": "Ex: Volkswagen",
     "http://www.labpixies.com/gadgads/gmail/gmail.xml": "Gmail Gadget",
     "http://www.labpixies.com/gadgads/aa/aa_ie_link.xml": "American Airlines",
     "http://www.labpixies.com/campaigns/fox/fox.xml": "Fox Home Entertainment",
@@ -127,8 +128,7 @@
     "http://flash.atlrec.com/google/diddy/diddy.xml": "Diddy TV",
     "http://www.google.com/ig/modules/mapsearch.xml": "Google Map Search",
     "http://www.google.com/ig/modules/driving_directions.xml": "Driving Directions",
-    "http://ralph.feedback.googlepages.com/googlemap.xml": "Google Map",
-    "http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml": "VW (example)"
+    "http://ralph.feedback.googlepages.com/googlemap.xml": "Google Map"
   };
 
   // Global variables
