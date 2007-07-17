@@ -22,7 +22,7 @@
     <div id="fc"></div>
     <script>
       // Set the SWF and destination URLs with your own
-      var swfUrl = 'http://http://www.thesandboxonline.com/saatchila/highlander_300x250.swf';
+      var swfUrl = 'http://www.thesandboxonline.com/saatchila/highlander_300x250.swf';
       var destUrl = 'http://www.toyota.com/highlander/';
     
       // Create the redirect URL to track click throughs
