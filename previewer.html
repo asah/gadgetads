@@ -132,10 +132,16 @@
   }
   
   window.onload = function() {
-    // Load gadget if passed in via URL param
-    var gurl = _args()['url'];
+    // Check for URL params and preload fields if exists
+    var args = _args();
+    var gurl = args['url'];
+    var width = args['w'];
+    var height = args['h'];
     if (gurl) {
       gadgetUrlNode.value = gurl;
+    }
+    if (width && height && !isNaN(width) && !isNaN(height)) {
+      adSizeNode.value = width + 'x' + height;
     }
   
     gadgetUrlNode.focus();
