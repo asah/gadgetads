@@ -83,6 +83,9 @@
   function _esc(s) {
     return window.encodeURIComponent ? encodeURIComponent(s) : escape(s);
   }
+  function _unesc(s) {
+    return window.decodeURIComponent ? decodeURIComponent(s) : unescape(s);
+  }
   
   // Global variables
   var gadgetUrlNode = _gel('gadgetUrl');
