@@ -222,7 +222,7 @@ pre b {
       <th>Description</th>
     </tr>
     <tr>
-      <td>AJAX</td>
+      <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax.xml">AJAX</a></td>
       <td>
         <ul>
           Code snippets:
@@ -232,7 +232,7 @@ pre b {
       </td>
     </tr>
     <tr>
-      <td>AJAX + Flash</td>
+      <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax_flash.xml">AJAX + Flash</a></td>
       <td>
         <ul>
           Code snippets:
@@ -243,7 +243,7 @@ pre b {
       </td>
     </tr>
     <tr>
-      <td>AJAX + Flash + Video</td>
+      <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax_flash_video.xml">AJAX + Flash + Video</a></td>
       <td>
         <ul>
           Code snippets:
@@ -255,14 +255,20 @@ pre b {
       </td>
     </tr>
     <tr>
-      <td>Single Flash</td>
+      <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax_flash_video.xml">Tabs</a></td>
       <td>
-        Gadget ad embeds a single Flash object with dimensions that
+        Example gadget ad contains a set of tabs, each containing different types of content.
+      </td>
+    </tr>
+    <tr>
+      <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/single_flash.xml">Single Flash</a></td>
+      <td>
+        Example gadget ad embeds a single Flash object with dimensions that
         exactly matches the ad size.
       </td>
     </tr>
     <tr>
-      <td>Blank</td>
+      <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/blank.xml">Blank</a></td>
       <td>
         XML requirements are in place, but content is empty with no code snippets.
       </td>
@@ -270,6 +276,44 @@ pre b {
   </table>
 </p>
 
+<a name="debugmode"></a>
+<h2>Using Debug Mode</h2>
+<p>
+  Click-through and interaction tracking are two very important pieces that you
+  want to verify works correctly.  If it's not setup correctly, you run the risk
+  of receiving zero data in your reports.  Without the reports, you have no way 
+  of determining the success of the gadget ad.
+</p>
+<p>
+  While you're developing your gadget ad, you must remember to test that both
+  click-through and interaction hits are being reported correctly.  In order
+  to do this, set the <code>default_value</code> to <code>DEBUG</code> for
+  both UserPrefs, <code>clickurl</code> and <code>aiturl</code>.
+<pre>&lt;UserPref name=&quot;aiturl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;
+&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
+</p>
+<p>
+  This enables debug mode for both click-through and interaction-tracking.
+  Now whenever you call <code>_ADS_ClickDestinationUrl()</code>, you'll receive
+  a confirmation that the click was recorded along with the option to continue
+  or cancel the redirect.
+</p>
+<p>
+  Debug mode for interaction-tracking creates a small debug
+  buffer at the top left corner of your gadget.  The debug buffer is designed
+  to overlay on top of all content such as text, images, Flash, and iframes.
+  Whenever an interaction is reported via <code>_ReportAdInteraction
+
+<a name="clickthrough"></a>
+<h2>Tracking Click-Throughs</h2>
+<p>
+  To enable click-through tracking
+</p>
+
+<a name="interaction"></a>
+<h2>Tracking User Interactions</h2>
+<p>
+</p>
 
 <a name="clickurl"></a>
 <h2>Defining the Click URL</h2>
