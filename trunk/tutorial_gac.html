@@ -293,16 +293,31 @@ pre b {
 &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
 </p>
 <p>
-  This enables debug mode for both click-through and interaction-tracking.
-  Now whenever you call <code>_ADS_ClickDestinationUrl()</code>, you'll receive
-  a confirmation that the click was recorded along with the option to continue
+  Setting UserPref <code>clickurl</code> to <code>DEBUG</code> enables debug
+  mode for click-throughs.  This lets you confirm whether a click-through
+  is being reported correctly.  If setup properly, all click-throughs defined
+  in the gadget will create a confirmation popup with a message indicating
+  that a click-through was received.  You can then proceed to continue
   or cancel the redirect.
 </p>
 <p>
+  Here's a screenshot of what it looks like:
+</p>
+
+<p>
   Debug mode for interaction-tracking creates a small debug
-  buffer at the top left corner of your gadget.  The debug buffer is designed
-  to overlay on top of all content such as text, images, Flash, and iframes.
-  Whenever an interaction is reported via <code>_ReportAdInteraction
+  buffer at the top left corner of your gadget.  Initially, only a title bar
+  with a <code>DEBUG</code> link is shown next to a counter for number of messages currently
+  in the buffer.  Clicking on the link expands the container where you can then see
+  the messages contained.  The buffer container is designed to
+  to overlay on top of all HTML content such as text, images, Flash, and iframes to ensure
+  that it remains visible.
+</p>
+<p>
+  Whenever an interaction is reported via <code>_ReportAdInteraction()</code>,
+  a message is written to buffer, and the counter is incremented.  This lets you
+  test your gadget ad an verify that interactions are being reported correctly.
+</p>
 
 <a name="clickthrough"></a>
 <h2>Tracking Click-Throughs</h2>
