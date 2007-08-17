@@ -40,7 +40,7 @@ pre b {
   <li><a href="#gettingstarted">Getting Started</a></li>
   <li><a href="#clickurl">Defining and Using the Click URL</a></li>
   <li><a href="#policy">Conforming to IAB and Google Advertising Policies</a></li>
-  <li><a href="#remotecontent">Getting Remote Content</a></li>
+  <li><a href="#fetchcontent">Getting Remote Content</a></li>
   <li><a href="#images">Embedding Images: Recommended</a></li>
   <li>
     <a href="#flash">Embedding Flash Content</a>
@@ -446,115 +446,19 @@ pre b {
 </p>
 <p>
   Here's a live preview of an 
-  <a href="http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml">example gadget</a> ad with debug mode enabled:
+  <a href="http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml">example gadget ad</a> 
+  with debug mode enabled.  Click around the gadget and observe the interaction hits
+  being sent to the buffer.
 </p>
 <p>
-  <iframe style="width:336px; height:280px;" frameborder=0 scrolling=no src="http://dannon.mtv.corp.google.com:9010/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml&up_clickurl=DEBUG&up_aiturl=DEBUG&nocache=1&synd=open"></iframe>
+  <iframe style="width:336px; height:280px;" frameborder=0 scrolling=no src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml&up_clickurl=DEBUG&up_aiturl=DEBUG&nocache=1&synd=open"></iframe>
 </p>
 <p>
   Whenever an interaction is reported via <code>_ReportAdInteraction()</code>,
-  a message is written to buffer, and the counter is incremented.  This lets you
-  test your gadget ad an verify that interactions are being reported correctly.
+  a message is written to the buffer, and the counter is incremented.  Use this
+  to test your gadget ad and verify that all interactions are being reported correctly.
 </p>
 
-
-<a name="clickurl"></a>
-<h2>Defining the Click URL</h2>
-<p>
-  The click URL is a mechanism used to track user-interaction inside a gadget ad. It should be included in the
-  gadget XML as a hidden UserPref named <code>clickurl</code>.  The click URL ends with an open URL parameter, <code>&amp;url=</code>
-  which will be used to append the target destination for tracked links in your gadget.  Click URLs
-  are simply redirects from a location that records hits to our ads database.  However, 
-  when you're developing your gadget ad, you'll a fake click URL while you're testing.
-</p>
-<p>
-  We provide a test click URL that you can use when developing your gadget ad. This test
-  click URL redirects you the target destinaion without sending real clicks 
-  to the ads database.  Your gadget <b>must</b> include the clickurl usepref 
-  in the gadget XML before it can be approved:
-  <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=</b>&quot;/&gt;</pre>
-</p>
-<p>
-  <b>Tip:</b> If you want a confirmation pop-up to appear when going through the click URL,
-  simply add a <code>msg=1</code> parameter to the URL.  This can help you confirm
-  that your links are properly setup.  Here's how to use the click URL with
-  confirmation message enabled:
-  <pre>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;amp;url=</b>&quot;/&gt;</pre>
-</p>
-
-<h3>Experiment: Test the Click URL</h3>
-<p>
-  The links below are all setup to route through the test click URL
-  described above.  Some of them have confirmation enabled.
-  Try clicking on a few to see the confirmation pop-up which confirms
-  that click-throughs are being tracked properly.  In your gadget, you will
-  be creating similar links using the click URL and see similar results:
-  <ul>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=http://www.google.com/">http://www.google.com</a></li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=http://www.amazon.com">Amazon.com</a></li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;adurl=http://www.nbc.com">NBC.com</a> (confirmation enabled)</li>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?msg=1&amp;adurl=http://www.google.com/ig/directory">Content directory</a> (confirmation enabled)</li>
-  </ul>
-</p>
-
-<h3>How To Use the Click URL</h2>
-<p>
-  Once again, gadget content is simply made up of HTML.  So traditionally, the way you'd create a link in HTML
-  is by creating an anchor tag that looks something like this:
-  <pre>&lt;a target="_top" href="http://mytargetdomain.com"&gt;Target Link&lt;/a&gt;</pre>
-</p
-<p>
-  However, this link won't be tracked by the ads system because it didn't go through the <code>clickurl</code>.
-  Instead, you'll need to use JavaScript to generate and assign the URL to these links.  There are various ways
-  to do this, but here's one simple step-by-step overview to get you started:
-  <ol>
-    <li>
-      Create an <code>id</code> attribute in your anchor tag and assign it a unique value.
-      The <code>href</code> attribute should also contain the target destination.
-      <pre>&lt;a id="<b>link1</b>" target="_top" href="<b>http://mytargetdomain.com</b>"&gt;Target Link&lt;/a&gt;</pre>
-    </li>
-    <li>
-      Set up an event handler function using <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_RegisterOnloadHandler(func)</a>.
-      This method accepts a single argument, which is a function that gets called after the entire gadget loads.  This is recommended
-      to ensure that all anchor tags defined in step 1 are rendered before generating and assigning new URLs to them.
-<pre>&lt;script&gt;
-  <b>_IG_RegisterOnloadHandler</b>(function() {
-    // This will be executed after gadget loads
-  });
-&lt;/script&gt;</pre>
-    </li>
-    <li>
-      Inside the event handler function, you can retrieve the <code>clickurl</code> using the 
-      <a href="http://www.google.com/apis/gadgets/reference.html#Core">_IG_Prefs</a> object.
-      Once you have the <code>clickurl</code>, generate the new trackable URL which is created by taking the
-      existing value in <code>href</code>, escaping it, and appending it to the <code>clickurl</code>.
-      You can then access the HTML DOM using <code>_gel()</code> and replace the current
-      anchor tag's <code>href</code> attribute with the new URL.
-<pre>&lt;script&gt;
-  _IG_RegisterOnloadHandler(function() {<b>
-    // Get anchor tag element 
-    var link1 = _gel("link1");
-    var prefs = new _IG_Prefs();
-    var clickUrl = prefs.getString("clickurl");
-    var trackableUrl = clickUrl + _esc(link1.href);
-    
-    // Replace the existing href attribute for link1 with the new URL
-    link1.href = trackableUrl;</b>
-  });
-&lt;/script&gt;</pre>
-      <br>
-      Here's a more condensed version:
-<pre>&lt;script&gt;
-  _IG_RegisterOnloadHandler(function() {<b>
-    var prefs = new _IG_Prefs();
-    
-    // Replace the existing href attribute for link1 with the new URL
-    _gel("link1").href = prefs.getString("clickurl") + _esc(_gel("link1").href);</b>
-  });
-&lt;/script&gt;</pre>
-    </li>
-  </ol>
-</p>
 
 <a name="policy"></a>
 <h2>Conforming to IAB and Google Rich Media Advertising Policies</h2>
@@ -632,7 +536,7 @@ pre b {
 
 <h3>Privacy and Cookies</h3>
 <p>
-  Google requires that ads are completely anonymous, and Gadget Ads may not
+  Google requires that ads are completely anonymous.  Google Gadget Ads may not
   create or read cookies, or use other cookie-like mechanisms, e.g. flash local
   storage. We view this as a crucial aspect of respecting our users' privacy.
   This is an very important rule -- do not make mistakes.
@@ -657,8 +561,8 @@ pre b {
 </p>
 
 
-<a name="remotecontent"></a>
-<h2>Getting Remote Content</h2>
+<a name="fetchcontent"></a>
+<h2>Fetching Remote Content</h2>
 <p>
   One great feature of gadgets is the ability to fetch remote content from third-party
   websites and display it within your gadget.  The API currently offers three different methods to do
@@ -713,7 +617,7 @@ pre b {
 
 
 <a name="images"></a>
-<h2>Embedding Images: Recommended</h2>
+<h2>Embedding Images</h2>
 <p>
   Gadget ads often receive huge amounts of traffic, so it is important to use the Google caching services for rendering images.
   There are two JavaScript functions available for this purpose:
@@ -758,9 +662,12 @@ pre b {
 <a name="flash"></a>
 <h2>Embedding Flash Content</h2>
 <p>
-  Many times, you're going to want to embed Flash within your gadget.
-  Using our Flash library is the recommended way to embed Flash content in your gadget
-  and ensures it works correctly across multiple browsers.  Please visit the
+  If your gadget ad embeds Flash within your gadget, it's required that you use 
+  our Flash library to do it.  In addition to verifying that it embeds correctly 
+  across multiple browsers, the Flash library also lets you easily cache your 
+  Flash content.  Caching Flash content is required and helps improve
+  gadget performance and prevent hosting servers from getting overloaded.
+  Please visit the Flash library 
   <a href="http://www.google.com/apis/gadgets/ui.html#Flash">documentation</a>
   for more information.
 </p>
@@ -768,12 +675,14 @@ pre b {
   Start by adding a <code>&lt;Require feature="flash"/&gt;</code> in your
   gadget XML under ModulePrefs:
   <pre>&lt;ModulePrefs title=&quot;Gadget Ad&quot; ... &gt;
+  &lt;Require feature=&quot;ads&quot;/&gt;
   <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
-  &lt;Require feature=&quot;interaction-tracking&quot;/&gt;
 &lt;/ModulePrefs&gt;</pre>
 <p>
-  Here's an example on embedding a Flash application in your gadget using the
-  Flash library and setting a custom width and height:
+  Within your gadget's content section, use the <code>_IG_EmbedCachedFlash()</code>
+  method to embed your Flash.  Here's short code snippet that demonstrates how
+  to use it:
+</p>
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
 <b>_IG_EmbedFlash(&#39;http://www.mysite.com/flash.swf&#39;, &#39;container&#39;, {
@@ -783,7 +692,7 @@ pre b {
     height: 200
   });</b>
 &lt;/script&gt;</pre>
-</p>
+
 
 <a name="flash_cache"></a>
 <h3>Caching Flash Content</h3>
@@ -796,14 +705,16 @@ pre b {
   the proxy URL for the cached version of the file specified by <code>url</code>.
 </p>
 <p>
-  Here's an example where we cache the embedded Flash application:
-<pre>_IG_EmbedFlash(<b>_IG_GetCachedUrl(&#39;http://www.mysite.com/flash.swf&#39;)</b>, &#39;container&#39;, {
+  Within your gadget's content section, use the <code>_IG_EmbedCachedFlash()</code>
+  method to embed your Flash.  Here's short code snippet that uses the Flash
+  library to embed Flash content.
+</p>
+<pre>_IG_EmbedCachedFlash(<b>_IG_GetCachedUrl(&#39;http://www.mysite.com/flash.swf&#39;)</b>, &#39;container&#39;, {
   swf_version: 6,
   id: &quot;flashid&quot;,
   width: 250,
   height: 200
 });</pre>
-</p>
 
 <a name="flash_cache_other"></a>
 <h3>Caching Other Resources Within Flash</h3>
@@ -872,33 +783,6 @@ pre b {
   });</pre>
 </p>
 
-<a name="flash_clicktag"></a>
-<h3>Using clickTAG in Flash</h3>
-<p>
-  In Flash ads, there's always some control(s) which redirects users to some 
-  destination URL.  In order to track users that click through this, you need to 
-  append the destination URL to the click URL in order to create the full redirect
-  URL which goes through our ads database.  Once the full redirect URL is created,
-  pass it into Flash as a flash variable called <code>clickTAG</code>.
-  <b>Make sure to escape the destination URL appended to click URL</b>.
-</p>
-<p>
-  Here's an example of how you to create the properly escaped redirect URL and
-  pass it into Flash as <code>clickTAG</code>:
-</p>
-  <pre>&lt;div id=&#39;container&#39;&gt;&lt;/div&gt;
-&lt;script&gt;
-  var prefs = new _IG_Prefs();
-  <b>var redirectUrl = prefs.getString('clickurl') + _esc('http://exampledestination.com');</b>
-  _IG_EmbedFlash(_IG_GetCachedUrl(&#39;http://www.mysite.com/flash.swf&#39;), &#39;container&#39;, {
-    swf_version: 6,
-    id: &quot;flashid&quot;,
-    width: 250,
-    height: 200,
-    <b>flashvars: 'clickTAG=' + _esc(redirectUrl)</b>
-  });
-&lt;/script&gt;</pre>
-</p>
 
 <a name="video"></a>
 <h2>Embedding and Playing Video Content</h2>
@@ -1129,59 +1013,6 @@ stop();</pre>
 </p>
 
 
-<a name="tracking"></a>
-<h2>Enabling Single Interaction Tracking</h2>
-<p>
-  Gadget ads are unique because it provides users with highly interactive content
-  that displays useful information.
-  A good gadget-ad entices the user to interact with it and delivers most or all
-  of the information that a user wants without ever having to be redirected
-  to a different page.  Therefore, it's very important 
-  to enable at least some form of interaction tracking in order to measure the
-  success of each campaign.
-</p>
-<p>
-  Gadget ads are not allowed to set cookies due to privacy concerns.  This
-  prevents the use of Google Analytics as a tracking solution.
-  For now, we've enabled a simple form of interaction
-  tracking that allows you to send arbitrary hits to our tracking server whenever
-  you want.  To use it, follow these 3 simple steps:
-  <ol>
-    <li>
-      Add <code>&lt;Require feature=&quot;interaction-tracking&quot;/&gt;</code>
-      under <code>&lt;ModulePrefs&gt;</code>
-    </li>
-    <li>
-      Add <code>&lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot;/&gt;</code>
-    </li>
-    <li>
-      Call JavaScript function, <code>_IG_ReportInteraction()</code>, whenever
-      you want to send a hit to our tracking server.
-    </li>      
-  </ol>
-</p>
-<p>
-  In Flash ActionScript, you can call the JavaScript function like this:
-  <pre>getURL(&quot;javascript:_IG_ReportInteraction();&quot;);</pre>
-</p>
-<p>
-  Here's a <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_ait.xml">simple example gadget</a>
-  that tracks user clicks on a single image:
-<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Interaction Test&quot;
-    <b>&lt;Require feature=&quot;interaction-tracking&quot;/&gt;</b>
-  &lt;/ModulePrefs&gt;
-  <b>&lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot;/&gt;</b>
-  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
-    &lt;a href=&quot;javascript:<b>_IG_ReportInteraction();</b>&quot; &gt;
-      &lt;img src=&quot;http://gadgets.testing.googlepages.com/clickme.jpg&quot; border=&quot;0&quot;/&gt;
-    &lt;/a&gt;
-  ]]&gt;&lt;/Content&gt;
-&lt;/Module&gt;</pre>
-</p>
-
-
 <a name="casestudy"></a>
 <h2>Case Study: Simplified Gmail Gadget Ad</h2>
 <p>
@@ -1227,8 +1058,10 @@ stop();</pre>
   
   <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; <b>width="300" height="250"</b>/&gt;
-  <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;</b>
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; <b>width="300" height="250"</b> thumbnail=""&gt;
+    &lt;Require feature=&quot;ads&quot;/&gt;
+  &lt;/ModulePrefs&gt;
+  <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;&quot;/&gt;</b>
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
   ]]&gt;&lt;/Content&gt;
 &lt;/Module&gt;</pre>  
