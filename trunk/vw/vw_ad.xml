@@ -85,9 +85,10 @@
   
     // This function is executed after the page loads
     function init() {
+    alert('here');
       // Create clickable logo
       var html = [
-        '<a href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/')">',
+        '<a href="javascript:_ADS_ClickDestinationUrl()">',
         '<img src="' + _IG_GetImageUrl('http://gadgetads.googlecode.com/svn/trunk/vw/vw_logo_black.gif') + '" width=30 height=30/>',
         '</a>'
       ].join("");
@@ -95,10 +96,10 @@
     
       // Generate tab links
       var html = [
-        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction('tab_1'); showVideos();">Videos</a>',
-        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction('tab_2'); showFeeds();">Buzz</a>',
-        '<a onclick="_ReportAdsInteraction('destination_url_1');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/dealerlocator/en/us/');">Find Dealers</a>',
-        '<a onclick="_ReportAdsInteraction('destination_url_2');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/specialoffers/en/us/');">Special Offers</a>'
+        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction(\'tab_1\'); showVideos();">Videos</a>',
+        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction(\'tab_2\'); showFeeds();">Buzz</a>',
+        '<a onclick="_ReportAdsInteraction(\'destination_url_1\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/dealerlocator/en/us/\');">Find Dealers</a>',
+        '<a onclick="_ReportAdsInteraction(\'destination_url_2\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/specialoffers/en/us/\');">Special Offers</a>'
       ].join(" | ");
       _gel("linksContainer").innerHTML = html;
     
@@ -144,7 +145,7 @@
       var randIndex = Math.floor(Math.random() * 10000 % videoSources.length);
       var html = [
         '<div id="videoContainer"></div>',
-        '<a href="javascript:void(0);" onclick="showVideos();">&laquo; see more &raquo;</a>'
+        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction('browse'); showVideos();">&laquo; see more &raquo;</a>'
       ];
       contentContainer.innerHTML = html.join('');
     
