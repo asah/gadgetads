@@ -87,7 +87,7 @@
     function init() {
       // Create clickable logo
       var html = [
-        '<a target="_top" href="' + generateClickUrl('http://www.vw.com/') + '">',
+        '<a href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/')">',
         '<img src="' + _IG_GetImageUrl('http://gadgetads.googlecode.com/svn/trunk/vw/vw_logo_black.gif') + '" width=30 height=30/>',
         '</a>'
       ].join("");
@@ -95,10 +95,10 @@
     
       // Generate tab links
       var html = [
-        '<a href="javascript:void(0);" onclick="_IG_ReportInteraction(); showVideos();">Videos</a>',
-        '<a href="javascript:void(0);" onclick="_IG_ReportInteraction(); showFeeds();">Buzz</a>',
-        '<a target="_top" onclick="_IG_ReportInteraction();" href="' + generateClickUrl('http://www.vw.com/dealerlocator/en/us/') + '">Find Dealers</a>',
-        '<a target="_top" onclick="_IG_ReportInteraction();" href="' + generateClickUrl('http://www.vw.com/specialoffers/en/us/') + '">Special Offers</a>'
+        '<a href="javascript:void(0);" onclick="_IG_ReportInteraction('tab_1'); showVideos();">Videos</a>',
+        '<a href="javascript:void(0);" onclick="_IG_ReportInteraction('tab_2'); showFeeds();">Buzz</a>',
+        '<a target="_top" onclick="_IG_ReportInteraction('tab_3');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/dealerlocator/en/us/');">Find Dealers</a>',
+        '<a target="_top" onclick="_IG_ReportInteraction('tab_4');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/specialoffers/en/us/');">Special Offers</a>'
       ].join(" | ");
       _gel("linksContainer").innerHTML = html;
     
@@ -152,7 +152,7 @@
       contentContainer.innerHTML = html.join('');
     
       // Show videos DIV and hide feeds
-      _IG_EmbedFlash(videoSources[randIndex], _gel('videoContainer'), {
+      _IG_EmbedCachedFlash(videoSources[randIndex], 'videoContainer', {
           width: 270,
           height: 220
         });

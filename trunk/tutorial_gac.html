@@ -146,7 +146,7 @@ pre b {
 </p>
 <p>
   The <code>width</code> and <code>height</code> attributes define the ad size, which
-  must be one of the following:
+  must match one of the following formats:
   <ul>
     <li>Banner: 468 x 60</li>
     <li>Leaderboard: 728 x 90</li>
@@ -224,8 +224,8 @@ pre b {
     <tr>
       <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax.xml">AJAX</a></td>
       <td>
+        <div>Code snippets:</div>
         <ul>
-          Code snippets:
           <li>tracking click-through in HTML</li>
           <li>tracking user interactions in HTML</li>
         </ul>
@@ -234,8 +234,8 @@ pre b {
     <tr>
       <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax_flash.xml">AJAX + Flash</a></td>
       <td>
+        <div>Code snippets:</div>
         <ul>
-          Code snippets:
           <li>tracking click-through in HTML</li>
           <li>tracking user interactions in HTML</li>
           <li>embedding Flash</li>
@@ -245,8 +245,8 @@ pre b {
     <tr>
       <td><a href="http://gadgetads.googlecode.com/svn/trunk/skeletons/all_ajax_flash_video.xml">AJAX + Flash + Video</a></td>
       <td>
+        <div>Code snippets:</div>
         <ul>
-          Code snippets:
           <li>tracking click-through in HTML</li>
           <li>tracking user interactions in HTML</li>
           <li>embedding Flash</li>
@@ -276,42 +276,179 @@ pre b {
   </table>
 </p>
 
-<a name="debugmode"></a>
-<h2>Using Debug Mode</h2>
+
+<a name="clickthrough"></a>
+<h2>Tracking Click-Throughs</h2>
 <p>
-  Click-through and interaction tracking are two very important pieces that you
-  want to verify works correctly.  If it's not setup correctly, you run the risk
-  of receiving zero data in your reports.  Without the reports, you have no way 
-  of determining the success of the gadget ad.
+  All gadget ads should have at least one exit link defined where users can click on the link
+  and be redirected to some remote destination, usually a landing page of some kind.
+  In order to determine click-through rates for your gadget ad, you need to track
+  all click-throughs on all your designated exit links.  This requires a slight
+  implementation change in the way you define your links.
 </p>
 <p>
-  While you're developing your gadget ad, you must remember to test that both
-  click-through and interaction hits are being reported correctly.  In order
-  to do this, set the <code>default_value</code> to <code>DEBUG</code> for
-  both UserPrefs, <code>clickurl</code> and <code>aiturl</code>.
-<pre>&lt;UserPref name=&quot;aiturl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;
-&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
+  The traditional way you'd create an exit link in HTML is by creating an anchor tag
+  and setting the destination URL to the <code>href</code> attribute.  For example:
+</p>
+<pre>&lt;a target="_top" href="http://mytargetdomain.com"&gt;Target Link&lt;/a&gt;</pre>
+<p>
+  In order to enable click-through tracking on this link, you must use the following
+  JavaScript method to initiate the redirect:
+  <ul>
+    <li>
+      <code><b>_ADS_ClickDestinationUrl(url)</b></code>
+      <p>
+        Pass in the final destination URL into the function as the <code>url</code> parameter.  
+        When function is called, a click-through hit is received and then redirected to the destination.
+    </li>
+  </ul>
 </p>
 <p>
-  Setting UserPref <code>clickurl</code> to <code>DEBUG</code> enables debug
-  mode for click-throughs.  This lets you confirm whether a click-through
-  is being reported correctly.  If setup properly, all click-throughs defined
-  in the gadget will create a confirmation popup with a message indicating
-  that a click-through was received.  You can then proceed to continue
-  or cancel the redirect.
+  Here's the same link from above, except that click-through tracking is now enabled:
 </p>
+<pre>&lt;a href="<b>javascript:_ADS_ClickDestinationUrl('http://mytargetdomain.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
 <p>
+  You can call this method from anywhere to simulate a click-through.
+  Here's an example on creating a click-through using an input button
+</p>
+<pre>&lt;input onclick="<b>javascript:_ADS_ClickDestinationUrl('http://mytargetdomain.com');</b>" type="button" value="Target Link"/&gt;</pre>
+<p>
+  Here's how to create a click-through in Flash using ActionScript:
+</p>
+<pre>getURL(<b>javascript:_ADS_ClickDestinationUrl('http://mytargetdomain.com');</b>)</pre>
+
+<h3>Enabling Debug Mode</h3>
+<p>
+  In order to verify that your click-throughs are setup and working correctly, you can enable
+  debug mode by setting the <code>default_value</code> for UserPref <code>clickurl</code>
+  to &quot;DEBUG&quot;.  This lets you see a confirmation whenever your click-through
+  enabled links are clicked.
+</p>
+<pre>&lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
+<p>
+  In debug mode, <code>_ADS_ClickDestinationUrl()</code> creates a
+  confirmation pop-up with a message indicating that the click-through was received.
+  The destination URL is also displayed in the confirmation as well.
+  You then have the option of proceeding through to the destination URL or
+  cancelling the redirect to staty on the same page.
   Here's a screenshot of what it looks like:
+</p>    
+<p>
+  <img src="http://gadgetads.googlecode.com/svn/trunk/samples/confirmation.png"/>
 </p>
 
+
+<a name="interaction"></a>
+<h2>Tracking User Interactions</h2>
 <p>
-  Debug mode for interaction-tracking creates a small debug
-  buffer at the top left corner of your gadget.  Initially, only a title bar
-  with a <code>DEBUG</code> link is shown next to a counter for number of messages currently
+  Tracking user interactions is very important to gadget ads.  Unlike traditional
+  display ads, gadget ads are encouraged to contain compelling and highly interactive content.
+  A successful gadget ad often engages users to interact with the content.
+  If all user interactions are reported, you can analyze the data and measure the
+  success of your gadget ad.  In order to get this important data, you need to
+  track as many user interactions as possible.
+</p>
+<p>
+  To report interactions, setup JavaScript event handlers in your gadget ad to be
+  triggered by user interactions that you wish to track.  Have each
+  event handler function call one of the JavaScript methods below.  Each call will
+  send a hit to our tracking server and report the interaction:
+  <ul>
+    <li>
+      <code><b>_ReportAdInteraction()</b></code>
+      <p>
+        Use this when your gadget contains only a single user-interaction that needs
+        to be tracked.  For example, this could be a click-to-play button which starts
+        video playback or a start button to load in a Flash game.  Each time this function
+        is called, a generic hit is sent to our tracking server.
+      </p>
+    </li>
+    <li>
+      <code><b>_ReportAdInteraction(name)</b></code>
+      <p>
+        Use this method when your gadget needs to track multiple user interaction types.
+        The <code>name</code> parameter must match one from the supported
+        <a href="#interactionlist">list of interactions</a>.
+      </p>
+    </li>
+    <li>
+      <code><b>_ReportAdInteraction(name, value)</b></code>
+      <p>
+        Use this method when you want pass in a value for a specific interaction type
+        to be summed up in the reports.  The <code>name</code> parameter must match one from the supported
+        <a href="#interactionlist">list of interactions</a>.
+        The <code>value</code> parameter must be a positive number.
+    </li>
+  </ul>
+</p>
+<p>
+  <b>Note: </b>If the <code>name</code> parameter doesn't match one from the list,
+  the hits are grouped into an &quot;Other&quot; section in the reports.
+</p>
+<p>
+  Here's an
+  <a href="http://gadgetads.googlecode.com/svn/trunk/samples/interaction_tracking.xml">example gadget</a>
+  that reports interactions when mouse rolls over the ad and when clicking on any of four item links:
+  (<a href="http://gmodules.com/ig/ifr?synd=open&url=http://gadgetads.googlecode.com/svn/trunk/samples/interaction_tracking.xml">live preview</a>)
+</p>
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;My Items&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+    &lt;Require feature=&quot;ads&quot;/&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot; default_value=&quot;&quot;/&gt;
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_1&#39;);&quot; &gt;Item 1&lt;/a&gt;
+    &lt;br&gt;
+    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_2&#39;);&quot; &gt;Item 2&lt;/a&gt;
+    &lt;br&gt;
+    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_3&#39;);&quot; &gt;Item 3&lt;/a&gt;
+    &lt;br&gt;
+    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_4&#39;);&quot; &gt;Item 4&lt;/a&gt;
+    
+    &lt;script&gt;
+      function callInteraction(name) {
+        return function() {
+          _ReportAdInteraction(name);
+        };
+      }
+      document.body.onmouseover = callInteraction(&#39;mouse_over&#39;);
+    &lt;/script&gt;
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
+<p>
+  For Flash files, you can call JavaScript functions in ActionScript.  Here's an example:
+</p>
+<pre>getURL("javascript:_<code>ReportAdInteraction</code>('mouse_over', 1);");</pre>
+
+<a name="interactiondebug"></a>
+<h3>Enabling Debug Mode</h3>
+<p>
+  Interaction tracking is very important to implement correctly.
+  If it's not setup properly, you run the risk
+  of receiving significantly less data in your reports.  Without the reports, you have no way 
+  of determining the success of your gadget ad.  Based on these facts,
+  remember to test and verify that interaction hits are being reported correctly.
+</p>
+<p>
+  Set the <code>default_value</code> to <code>DEBUG</code> for
+  UserPref <code>aiturl</code>:
+<pre>&lt;UserPref name=&quot;aiturl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
+</p>
+<p>
+  This enables debug mode for interaction-tracking, which creates a small debug
+  buffer at the top left corner of your gadget.  Initially, a title bar
+  with the &quot;DEBUG&quot; link is shown along with a message counter for number of items currently
   in the buffer.  Clicking on the link expands the container where you can then see
   the messages contained.  The buffer container is designed to
   to overlay on top of all HTML content such as text, images, Flash, and iframes to ensure
   that it remains visible.
+</p>
+<p>
+  Here's a live preview of an example gadget ad in debug mode:
+</p>
+<p>
+  <img src="http://gadgetads.googlecode.com/svn/trunk/samples/debugbuffer.png"/>
 </p>
 <p>
   Whenever an interaction is reported via <code>_ReportAdInteraction()</code>,
@@ -319,16 +456,6 @@ pre b {
   test your gadget ad an verify that interactions are being reported correctly.
 </p>
 
-<a name="clickthrough"></a>
-<h2>Tracking Click-Throughs</h2>
-<p>
-  To enable click-through tracking
-</p>
-
-<a name="interaction"></a>
-<h2>Tracking User Interactions</h2>
-<p>
-</p>
 
 <a name="clickurl"></a>
 <h2>Defining the Click URL</h2>
@@ -1311,6 +1438,348 @@ stop();</pre>
     <li><a href="mailto:gadget-ads-support@google.com">gadget-ads-support@google.com</a></li>
   </ul>
 </p>
+
+<a name="reference"></a>
+<h2>Reference</h2>
+<a name="interactionlist"></a>
+<h3>List of Interactions</h3>
+<p>
+  <table width="90%" border="1" cellpadding="0" cellspacing="0" >
+   <tr>
+    <th width=90>Category</th>
+    <th width=120>Name</th>
+    <th>Description</th>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>play</td>
+    <td>User initiated start of media</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>pause</td>
+    <td>User initiated pausing of media</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>stop</td>
+    <td>User initiated ending of media</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>unmute</td>
+    <td>User initiated sound</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>mute</td>
+    <td>User initiated ending of sound</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>completion</td>
+    <td>Video, game or audio stream reaches end</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>restart</td>
+    <td>User initiated restart of a video or audio stream</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>drag</td>
+    <td>User initiated moving of the progress bar in a video or audio stream</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>next</td>
+    <td>User clicks to initiate next video in a series of media files</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>previous</td>
+    <td>User clicks to initiate previous video in a series of media files</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>video_1</td>
+    <td>User clicks on the first video in a series of videos available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>video_2</td>
+    <td>User clicks on the second video in a series of videos available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>video_3</td>
+    <td>User clicks on the third video in a series of videos available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>video_4</td>
+    <td>User clicks on the fourth video in a series of videos available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>video_5</td>
+    <td>User clicks on the fifth video in a series of videos available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>audio_1</td>
+    <td>User clicks on the first audio file in a series of audio files available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>audio_2</td>
+    <td>User clicks on the second audio file in a series of audio files available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>audio_3</td>
+    <td>User clicks on the third audio file in a series of audio files available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>audio_4</td>
+    <td>User clicks on the fourth audio file in a series of audio files available</td>
+   </tr>
+   <tr>
+    <td>Media</td>
+    <td>audio_5</td>
+    <td>User clicks on the fifth audio file in a series of audio files available</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>mouse_over</td>
+    <td>User mouses over any area of the ad unit</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>expansion</td>
+    <td>User initiated expansion of the ad unit</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>contraction</td>
+    <td>User initiated contraction of the ad unit</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>page_backward</td>
+    <td>User clicks to move forward a page within ad</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>page_forward</td>
+    <td>User clicks to move backward a page within ad</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>tab_1</td>
+    <td>User clicks on the first tab in a layered creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>tab_2</td>
+    <td>User clicks on the second tab in a layered creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>tab_3</td>
+    <td>User clicks on the third tab in a layered creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>tab_4</td>
+    <td>User clicks on the fourth tab in a layered creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>tab_5</td>
+    <td>User clicks on the fifth tab in a layered creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>destination_url_1</td>
+    <td>User clicks on the first exit link</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>destination_url_2</td>
+    <td>User clicks on the second exit link</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>destination_url_3</td>
+    <td>User clicks on the third exit link</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>destination_url_4</td>
+    <td>User clicks on the fourth exit link</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>destination_url_5</td>
+    <td>User clicks on the fifth exit link</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>scroll</td>
+    <td>User uses the scroll bar in a ad creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>submit_zip</td>
+    <td>User submits zip code</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>change_zip</td>
+    <td>User changes zip cod info in creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>find_location</td>
+    <td>User clicks to find a store or other specific location</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>igoogle_add</td>
+    <td>User clicks to add gadget ad to iGoogle</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>search_submit</td>
+    <td>User submits a search</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>view_detail</td>
+    <td>User clicks to view more detail on a product, item, etc.</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>browse</td>
+    <td>User clicks to browse a gallery, list, etc.</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>dropdown</td>
+    <td>User utilizes drop down menu in creative</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>item_1</td>
+    <td>User clicks on first item in a list</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>item_2</td>
+    <td>User clicks on second item in a list</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>item_3</td>
+    <td>User clicks on third item in a list</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>item_4</td>
+    <td>User clicks on fourth item in a list</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>item_5</td>
+    <td>User clicks o fifth item in a list</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>zoom_in</td>
+    <td>User utilizes zoom in functionality on an object or image</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>zoom_out</td>
+    <td>User utilizes zoom out functionality on an object or image</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>vote</td>
+    <td>User submits a poll or vote</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>print</td>
+    <td>User clicks to print an item</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>download</td>
+    <td>User clicks to download an item</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>subscribe</td>
+    <td>User opts to subscribe to a list or feed</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>submit</td>
+    <td>User submits data</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>add</td>
+    <td>User clicks to add an item to a shopping cart or list</td>
+   </tr>
+   <tr>
+    <td>General</td>
+    <td>remove</td>
+    <td>User clicks to remove an item to a shopping cart or list</td>
+   </tr>
+   <tr>
+    <td>Maps</td>
+    <td>load_map</td>
+    <td>User initiates load of map</td>
+   </tr>
+   <tr>
+    <td>Maps</td>
+    <td>load_traffic</td>
+    <td>User initiates load of traffic data in map</td>
+   </tr>
+   <tr>
+    <td>Commerce</td>
+    <td>view_cart</td>
+    <td>User clicks to view shopping cart</td>
+   </tr>
+   <tr>
+    <td>Commerce</td>
+    <td>next_item</td>
+    <td>User clicks to view next item in a list or product gallery</td>
+   </tr>
+   <tr>
+    <td>Commerce</td>
+    <td>previous_item</td>
+    <td>User clicks to view previous item in a list or product gallery</td>
+   </tr>
+   <tr>
+    <td>Commerce</td>
+    <td>buy</td>
+    <td>User clicks to buy an item</td>
+   </tr>
+   <tr>
+    <td>Commerce</td>
+    <td>select_category</td>
+    <td>User clicks to select a category</td>
+   </tr>
+  </table>
+</p>
+
+
+
 
 <a name="scratchpad"></a>
 <h2>Build Gadgets Using the Scratch Pad</h2>
