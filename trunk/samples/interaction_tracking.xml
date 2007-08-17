@@ -12,5 +12,13 @@
     <a href="javascript:_ReportAdInteraction('item_3');" >Item 3</a>
     <br>
     <a href="javascript:_ReportAdInteraction('item_4');" >Item 4</a>
+    
+    <script>
+      function callInteraction(name) {
+        return function() {
+          _ReportAdInteraction(name);
+        };
+      }
+      document.body.onmouseover = callInteraction('mouse_over');
   ]]></Content>
 </Module>
