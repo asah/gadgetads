@@ -85,7 +85,6 @@
   
     // This function is executed after the page loads
     function init() {
-    alert('here');
       // Create clickable logo
       var html = [
         '<a href="javascript:_ADS_ClickDestinationUrl()">',
@@ -145,7 +144,7 @@
       var randIndex = Math.floor(Math.random() * 10000 % videoSources.length);
       var html = [
         '<div id="videoContainer"></div>',
-        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction('browse'); showVideos();">&laquo; see more &raquo;</a>'
+        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction(\'browse\'); showVideos();">&laquo; see more &raquo;</a>'
       ];
       contentContainer.innerHTML = html.join('');
     
