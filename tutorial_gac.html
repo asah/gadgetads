@@ -40,7 +40,7 @@ pre b {
   <li><a href="#gettingstarted">Getting Started</a></li>
   <li><a href="#clickurl">Defining and Using the Click URL</a></li>
   <li><a href="#policy">Conforming to IAB and Google Advertising Policies</a></li>
-  <li><a href="#fetchcontent">Getting Remote Content</a></li>
+  <li><a href="#remotecontent">Getting Remote Content</a></li>
   <li><a href="#images">Embedding Images: Recommended</a></li>
   <li>
     <a href="#flash">Embedding Flash Content</a>
@@ -320,6 +320,7 @@ pre b {
 </p>
 <pre>getURL(<b>javascript:_ADS_ClickDestinationUrl(&#39;http://targetdestination.com&#39;);</b>)</pre>
 
+<a name="clickthroughdebug"></a>
 <h3>Enabling Debug Mode</h3>
 <p>
   In order to verify that your click-throughs are setup and working correctly, you can enable
@@ -341,7 +342,7 @@ pre b {
 </p>
 
 
-<a name="interaction"></a>
+<a name="tracking"></a>
 <h2>Tracking User Interactions</h2>
 <p>
   Tracking user interactions is very important to gadget ads.  Unlike traditional
@@ -424,7 +425,7 @@ pre b {
 </p>
 <pre>getURL("javascript:_<code>ReportAdInteraction</code>('mouse_over', 1);");</pre>
 
-<a name="interactiondebug"></a>
+<a name="trackingdebug"></a>
 <h3>Enabling Debug Mode</h3>
 <p>
   Interaction tracking is very important to implement correctly.
@@ -564,7 +565,7 @@ pre b {
 </p>
 
 
-<a name="fetchcontent"></a>
+<a name="remotecontent"></a>
 <h2>Fetching Remote Content</h2>
 <p>
   One great feature of gadgets is the ability to fetch remote content from third-party
@@ -572,25 +573,32 @@ pre b {
   this, depending on the type of content being retrieved:
   <ul>
     <li>
-      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_text">_IG_FetchContent(url, func)</a>:
+      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_text"><code><b>_IG_FetchContent(url, func)</b></code></a>
+      <p>
       Fetches content from <code>url</code> and returns the response as text.
       When it's ready, it calls <code>func()</code>. Note that <code>_IG_FetchContent()</code> is asynchronous, 
       meaning that it returns immediately and then calls the inner function later, when the fetch finishes. 
       This means that you must put any dependent code inside the callback function, or inside functions called by the callback function. 
+      </p>
     </li>
     <li>
-      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_XML">_IG_FetchXmlContent(url, func)</a>:
+      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_XML"><code><b>_IG_FetchXmlContent(url, func)</b></code></a>:
+      <p>
       Fetches content from <code>url</code> and returns the response as an XML object.
       When it's ready, calls <code>func()</code>. Like <code>_IG_FetchContent()</code>, is asynchronous.
+      </p>
     </li>
     <li>
-      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_JSON">_IG_FetchFeedAsJSON(url, func, num_entries, get_summaries)</a>:
+      <a href="http://www.google.com/apis/gadgets/remote-content.html#Fetch_JSON"><code><b>_IG_FetchFeedAsJSON(url, func, num_entries, get_summaries)</b></code></a>:
+      <p>
       Fetches the RSS / Atom feed content from <code>url</code> and returns it as a JSON object. When it's ready, calls <code>func()</code>. 
       Fetches the number of feed entries specified by <code>num_entries</code> (default is 3, possible range is 1-100), 
       and optionally fetches additional descriptions depending on the value of <code>summaries</code> (default is false).
+      </p>
     </li>
   </ul>
 </p>
+
 <h3>Example: Fetching from an Atom/RSS Feed</h3>
 <p>
   Here's an example where the first feed entry is fetched from the Google News
@@ -600,39 +608,58 @@ pre b {
   the entry title, link, and summary.
 <pre>&lt;div id=&quot;out&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
-  _IG_RegisterOnloadHandler(function() {
-    <b>function callback(response) {
-      // Retrieve first entry from the response
-      var firstEntry = response.Entry[0];
-      
-      // Generate HTML using the entry's title, link, and summary
-      _gel(&quot;out&quot;).innerHTML = [
-        &#39;&lt;a href=&quot;&#39; + firstEntry.Link + &#39;&quot;&gt;&#39; + firstEntry.Title + &#39;&lt;/a&gt;&#39;,
-        firstEntry.Summary,
-      ].join(&quot;&lt;br&gt;&quot;);
-    }
+  function callback(response) {
+    // Retrieve first entry from the response
+    var firstEntry = response.Entry[0];
     
-    // Fetch 1 entry from Google News Atom feed and include summaries
-    _IG_FetchFeedAsJSON(&quot;http://news.google.com/?output=atom&quot;, callback, 1, true);</b>
-  });
+    // Generate HTML using the entry's title, link, and summary
+    _gel(&quot;out&quot;).innerHTML = [
+      &#39;&lt;a href=&quot;&#39; + firstEntry.Link + &#39;&quot;&gt;&#39; + firstEntry.Title + &#39;&lt;/a&gt;&#39;,
+      firstEntry.Summary,
+    ].join(&quot;&lt;br&gt;&quot;);
+  }
+  
+  // Fetch 1 entry from Google News Atom feed and include summaries
+  <b>_IG_FetchFeedAsJSON(&quot;http://news.google.com/?output=atom&quot;, callback, 1, true);</b>
 &lt;/script&gt;</pre>
+</p>
+<p>
+  Visit the 
+  <a href="http://www.google.com/apis/gadgets/remote-content.html">developer guide</a>
+  for more detailed documentation.
 </p>
 
 
 <a name="images"></a>
 <h2>Embedding Images</h2>
 <p>
-  Gadget ads often receive huge amounts of traffic, so it is important to use the Google caching services for rendering images.
-  There are two JavaScript functions available for this purpose:
+  One of the requirements in gadget ads is that you cache all embedded images through Google servers.
+  Gadget ads are expected to receive huge amounts of traffic per day.  Without caching enabled,
+  image hosting providers will become overloaded with the high number of requests
+  coming in.  Google provides you with two JavaScript methods that lets you effectively
+  cache all images.  However, there is an extra step that you must implement in order
+  to accomplish this.
+</p>
+<p>
+  The traditional way you'd embed an image in HTML is by using <code>&lt;img&gt;</code> tags.
+  For example:
+</p>
+<pre>
+  
   <ul>
     <li>
-      <code>_IG_GetImage(url)</code>: Returns the cached image specified by <code>url</code>.
-      This can improve performance in gadgets that have static images and is useful
-      when you want to preload images.
+      <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImage(url)</b></code></a>
+      <p>
+      Returns an HTML Image element after fetching it through Google's cache.
+      The <code>url</code> parameter must an absolute URL pointing to your image.
+      </p>
     </li>
     <li>
-      <code>_IG_GetImageUrl(url)</code>: Returns the proxy URL for the cached 
+      <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImageUrl(url)</b></code></a>
+      <p>
+      Returns the proxy URL for the cached 
       version of the image specified by <code>url</code>.
+      </p>
     </li>
   </ul>
 </p>
@@ -670,29 +697,40 @@ pre b {
   across multiple browsers, the Flash library also lets you easily cache your 
   Flash content.  Caching Flash content is required and helps improve
   gadget performance and prevent hosting servers from getting overloaded.
-  Please visit the Flash library 
-  <a href="http://www.google.com/apis/gadgets/ui.html#Flash">documentation</a>
-  for more information.
 </p>
 <p>
   Start by adding a <code>&lt;Require feature="flash"/&gt;</code> in your
   gadget XML under ModulePrefs:
-  <pre>&lt;ModulePrefs title=&quot;Gadget Ad&quot; ... &gt;
+</p>
+<pre>&lt;ModulePrefs title=&quot;Gadget Ad&quot; ... &gt;
   &lt;Require feature=&quot;ads&quot;/&gt;
   <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
 &lt;/ModulePrefs&gt;</pre>
 <p>
-  Within your gadget's content section, use the <code>_IG_EmbedCachedFlash()</code>
-  method to embed your Flash.  Here's short code snippet that demonstrates how
-  to use it:
+  This enables use of the <a href="http://www.google.com/apis/gadgets/ui.html#Flash">Flash library</a>,
+  which exposes the JavaScript method <code>_IG_EmbedFlash()</code>.  However, all Flash content must be cached.
+  Therefore you must, use the alternate JavaScript method below to embed Flash content
+  into your gadget:
+  <ul>
+    <li>
+      <code><b>_IG_EmbedCachedFlash(swf_url, swf_container, opt_params)</b></code>
+      <p>
+        Embeds the .swf file specified by <code>swf_url</code>, and displays it in the gadget
+        at the location specified by <code>swf_container</code>. The parameter <code>opt_params</code> is an object 
+        that optionally includes various Flash parameters.
+      </p>
+    </li>
+  </ul>
+
+<p>
+  Here's short code snippet that demonstrates how to use it:
 </p>
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
-<b>_IG_EmbedFlash(&#39;http://www.mysite.com/flash.swf&#39;, &#39;container&#39;, {
+  <b>_IG_EmbedCachedFlash(&#39;http://www.mysite.com/flash.swf&#39;, &#39;container&#39;, {
     swf_version: 6,
-    id: &quot;flashid&quot;,
-    width: 250,
-    height: 200
+    width: 300,
+    height: 250
   });</b>
 &lt;/script&gt;</pre>
 
