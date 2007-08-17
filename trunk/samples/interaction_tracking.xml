@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="My Items" width="300" height="250" thumbnail="">
+    <Require feature="ads"/>
+  </ModulePrefs>
+  <UserPref datatype="hidden" name="aiturl" default_value=""/>
+  <Content type="html"><![CDATA[
+    <a href="javascript:_ReportAdInteraction('item_1');" >Item 1</a>
+    <br>
+    <a href="javascript:_ReportAdInteraction('item_2');" >Item 2</a>
+    <br>
+    <a href="javascript:_ReportAdInteraction('item_3');" >Item 3</a>
+    <br>
+    <a href="javascript:_ReportAdInteraction('item_4');" >Item 4</a>
+  ]]></Content>
+</Module>
