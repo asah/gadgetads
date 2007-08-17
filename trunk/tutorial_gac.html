@@ -215,7 +215,8 @@ pre b {
 </p>
 <p>
   To quickly get started, choose an appropriate gadget ad example below
-  based on the type of gadget you want to build.
+  based on the type of gadget you want to build.  After downloading and hosting
+  the XML, go through and make necessary changes to the content.
   <table width="90%" border=1 cellspacing=0 cellpadding=0>
     <tr>
       <th width=150>Starter Example</th>
@@ -306,16 +307,18 @@ pre b {
 <p>
   Here's the same link from above, except that click-through tracking is now enabled:
 </p>
-<pre>&lt;a href="<b>javascript:_ADS_ClickDestinationUrl('http://mytargetdomain.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
+<pre>&lt;a href="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
 <p>
   You can call this method from anywhere to simulate a click-through.
   Here's an example on creating a click-through using an input button
 </p>
-<pre>&lt;input onclick="<b>javascript:_ADS_ClickDestinationUrl('http://mytargetdomain.com');</b>" type="button" value="Target Link"/&gt;</pre>
+<pre>&lt;input onclick="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>" type="button" value="Target Link"/&gt;</pre>
+
+<h3>Using Flash ActionScript</h3>
 <p>
-  Here's how to create a click-through in Flash using ActionScript:
+  Here's how you'd create a click-through in Flash using ActionScript:
 </p>
-<pre>getURL(<b>javascript:_ADS_ClickDestinationUrl('http://mytargetdomain.com');</b>)</pre>
+<pre>getURL(<b>javascript:_ADS_ClickDestinationUrl(&#39;http://targetdestination.com&#39;);</b>)</pre>
 
 <h3>Enabling Debug Mode</h3>
 <p>
@@ -398,18 +401,18 @@ pre b {
   &lt;/ModulePrefs&gt;
   &lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot; default_value=&quot;&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
-    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_1&#39;);&quot; &gt;Item 1&lt;/a&gt;
+    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_1&#39;);</b>&quot; &gt;Item 1&lt;/a&gt;
     &lt;br&gt;
-    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_2&#39;);&quot; &gt;Item 2&lt;/a&gt;
+    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_2&#39;);</b>&quot; &gt;Item 2&lt;/a&gt;
     &lt;br&gt;
-    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_3&#39;);&quot; &gt;Item 3&lt;/a&gt;
+    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_3&#39;);</b>&quot; &gt;Item 3&lt;/a&gt;
     &lt;br&gt;
-    &lt;a href=&quot;javascript:_ReportAdInteraction(&#39;item_4&#39;);&quot; &gt;Item 4&lt;/a&gt;
+    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_4&#39;);</b>&quot; &gt;Item 4&lt;/a&gt;
     
     &lt;script&gt;
       function callInteraction(name) {
         return function() {
-          _ReportAdInteraction(name);
+          <b>_ReportAdInteraction(name);</b>
         };
       }
       document.body.onmouseover = callInteraction(&#39;mouse_over&#39;);
