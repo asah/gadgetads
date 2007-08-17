@@ -95,10 +95,10 @@
     
       // Generate tab links
       var html = [
-        '<a href="javascript:void(0);" onclick="_IG_ReportInteraction('tab_1'); showVideos();">Videos</a>',
-        '<a href="javascript:void(0);" onclick="_IG_ReportInteraction('tab_2'); showFeeds();">Buzz</a>',
-        '<a target="_top" onclick="_IG_ReportInteraction('tab_3');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/dealerlocator/en/us/');">Find Dealers</a>',
-        '<a target="_top" onclick="_IG_ReportInteraction('tab_4');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/specialoffers/en/us/');">Special Offers</a>'
+        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction('tab_1'); showVideos();">Videos</a>',
+        '<a href="javascript:void(0);" onclick="_ReportAdsInteraction('tab_2'); showFeeds();">Buzz</a>',
+        '<a onclick="_ReportAdsInteraction('destination_url_1');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/dealerlocator/en/us/');">Find Dealers</a>',
+        '<a onclick="_ReportAdsInteraction('destination_url_2');" href="javascript:_ADS_ClickDestinationUrl('http://www.vw.com/specialoffers/en/us/');">Special Offers</a>'
       ].join(" | ");
       _gel("linksContainer").innerHTML = html;
     
@@ -116,9 +116,6 @@
     function showFeeds() {
       var url = 'http://www.vw.com/news/browse/en/us/?format=rss';
       _IG_FetchFeedAsJSON(url, showFeedsCallback, 10, true);
-      
-      // Report interaction
-      _IG_ReportInteraction();
     }
   
     function showFeedsCallback(response) {
@@ -157,9 +154,6 @@
           height: 220
         });
       contentContainer.className = "videos";
-      
-      // Report interaction
-      _IG_ReportInteraction();
     }
   
     _IG_RegisterOnloadHandler(init);
