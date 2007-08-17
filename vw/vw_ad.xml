@@ -85,6 +85,11 @@
   
     // This function is executed after the page loads
     function init() {
+      // Track mouseovers on the ad
+      _IG_AddDOMEventHandler(document.body, 'mouseover', function() {
+        _ReportAdInteraction('mouse_over');
+      });
+      
       // Create clickable logo
       var html = [
         '<a href="javascript:_ADS_ClickDestinationUrl()">',
