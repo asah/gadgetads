@@ -19,6 +19,7 @@
       height: 250px;
       background-color: #000;
       text-align: center;
+      color: #fff;
     }
     div#click {
       width: 150px;
