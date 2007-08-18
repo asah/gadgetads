@@ -22,6 +22,7 @@
       color: #fff;
     }
     div#click {
+      color: #000;
       width: 150px;
       padding: 10px 0px;
       margin: 0px auto;
@@ -35,10 +36,8 @@
   </style>
   
   <div id="player">
-    <div>
-      Here's the <a id="flvLink" target="_top">FLV link</a>
-      for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
-    </div>
+    Here's the <a id="flvLink" target="_top">FLV link</a>
+    for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
     <div id="click" onclick="javascript:play();">Click to Play</div>
   </div>
 
