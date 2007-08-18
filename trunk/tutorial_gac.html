@@ -29,7 +29,7 @@ pre b {
   This document is intended for people who want to build a Google Gadget Ad.
   We'll cover tips on how to get started and highlight some of the key differences 
   between Google Gadgets and Google Gadget Ads.  There are additional
-  implementation methods that you're required to use when building your ad, which
+  implementation functions that you're required to use when building your ad, which
   are documented here and should frequently be used as your primary reference.
 </p>
 
@@ -212,7 +212,7 @@ pre b {
   the gadget is implemented.  Gadget content is made up of standard HTML, meaning
   you can embed all types of content such as images, Flash, videos, etc.
   as you would on a normal webpage.   You also have complete access to our various
-  <a href="http://www.google.com/apis/gadgets/reference.html">API methods</a> with
+  <a href="http://www.google.com/apis/gadgets/reference.html">API functions</a> with
   no restrictions on how it's used.
 </p>
 <p>
@@ -392,7 +392,7 @@ pre b {
 <a name="ggae"></a>
 <h3>Use the Google Gadget Ads Editor</h3>
 <p>
-  One of the quickest and easiest way to start writing gadgets is to use the 
+  One of the quickest and easiest ways to start writing gadgets is to use the 
   <a href="http://www.google.com/ig/modules/gadgetads.html">Google Gadget Ads Editor</a> also known as GGAE for short.
   GGAE is a gadget development tool that lets you build, test, and validate your gadget ads
   prior to being submitted for review.  It contains a rich text editor where you 
@@ -433,7 +433,7 @@ pre b {
 <pre>&lt;a target="_top" href="http://mytargetdomain.com"&gt;Target Link&lt;/a&gt;</pre>
 <p>
   In order to enable click-through tracking on this link, you must use the following
-  JavaScript method to initiate the redirect:
+  JavaScript function to initiate the redirect:
   <ul>
     <li>
       <code><b>_ADS_ClickDestinationUrl(url)</b></code>
@@ -448,14 +448,16 @@ pre b {
 </p>
 <pre>&lt;a href="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
 <p>
-  You can call this method from anywhere to simulate a click-through.
+  You can call this function from anywhere to simulate a click-through.
   Here's an example on creating a click-through using an input button
 </p>
 <pre>&lt;input onclick="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>" type="button" value="Target Link"/&gt;</pre>
 
-<h3>Using Flash ActionScript</h3>
+<h3>Click-Throughs in Flash</h3>
 <p>
-  Here's how you'd create a click-through in Flash using ActionScript:
+  To create click-throughs in Flash, you need to simply call the JavaScript function
+  using ActionScript.  You can do this by using <code>getURL(javascript:&lt;JS_FUNCTION&gt;)</code>.
+  For example:
 </p>
 <pre>getURL(<b>javascript:_ADS_ClickDestinationUrl(&#39;http://targetdestination.com&#39;);</b>)</pre>
 
@@ -464,20 +466,24 @@ pre b {
 <p>
   In order to verify that your click-throughs are setup and working correctly, you can enable
   debug mode by setting the <code>default_value</code> for UserPref <code>clickurl</code>
-  to &quot;DEBUG&quot;.  This lets you see a confirmation whenever your click-through
-  enabled links are clicked.
+  to &quot;DEBUG&quot;.  This lets you see a confirmation whenever click-throughs
+  are detected.
 </p>
-<pre>&lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
+<pre>&lt;UserPref name=&quot;<b>clickurl</b>&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
 <p>
   In debug mode, <code>_ADS_ClickDestinationUrl()</code> creates a
   confirmation pop-up with a message indicating that the click-through was received.
-  The destination URL is also displayed in the confirmation as well.
-  You then have the option of proceeding through to the destination URL or
-  cancelling the redirect to staty on the same page.
+  The destination URL is displayed in the confirmation box so you can clearly see
+  the final destination.
+  You then have the option of proceeding to the destination URL or
+  cancelling the redirect if you want to stay on the same page.
   Here's a screenshot of what it looks like:
-</p>    
+</p>
+<p><img src="http://gadgetads.googlecode.com/svn/trunk/tutorial_content/confirmation.png"/></p>
 <p>
-  <img src="http://gadgetads.googlecode.com/svn/trunk/tutorial_content/confirmation.png"/>
+  <b>Note:</b> Debug mode is automatically disabled when the gadget ad goes live
+  on the content network.  You do not need to clear the &quot;DEBUG&quot; value before submitting
+  your ad.
 </p>
 
 
@@ -494,11 +500,11 @@ pre b {
 <p>
   To report interactions, setup JavaScript event handlers in your gadget ad to be
   triggered by user interactions that you wish to track.  Have each
-  event handler function call one of the JavaScript methods below.  Each call will
+  event handler callback execute one of the JavaScript functions below.  Each call will
   send a hit to our tracking server and report the interaction:
   <ul>
     <li>
-      <code><b>_ReportAdInteraction()</b></code>
+      <code><b>_ADS_ReportInteraction()</b></code>
       <p>
         Use this when your gadget contains only a single user-interaction that needs
         to be tracked.  For example, this could be a click-to-play button which starts
@@ -507,17 +513,17 @@ pre b {
       </p>
     </li>
     <li>
-      <code><b>_ReportAdInteraction(name)</b></code>
+      <code><b>_ADS_ReportInteraction(name)</b></code>
       <p>
-        Use this method when your gadget needs to track multiple user interaction types.
+        Use this function when your gadget needs to track multiple user interaction types.
         The <code>name</code> parameter must match one from the supported
         <a href="#interactionlist">list of interactions</a>.
       </p>
     </li>
     <li>
-      <code><b>_ReportAdInteraction(name, value)</b></code>
+      <code><b>_ADS_ReportInteraction(name, value)</b></code>
       <p>
-        Use this method when you want pass in a value for a specific interaction type
+        Use this function when you want pass in a value for a specific interaction type
         to be summed up in the reports.  The <code>name</code> parameter must match one from the supported
         <a href="#interactionlist">list of interactions</a>.
         The <code>value</code> parameter must be a positive number.
@@ -539,30 +545,34 @@ pre b {
   &lt;ModulePrefs title=&quot;My Items&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
   &lt;/ModulePrefs&gt;
+  &lt;UserPref datatype=&quot;hidden&quot; name=&quot;clickurl&quot; default_value=&quot;&quot;/&gt;
   &lt;UserPref datatype=&quot;hidden&quot; name=&quot;aiturl&quot; default_value=&quot;&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
-    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_1&#39;);</b>&quot; &gt;Item 1&lt;/a&gt;
+    &lt;a href=&quot;<b>javascript:_ADS_ReportInteraction(&#39;item_1&#39;);</b>&quot; &gt;Item 1&lt;/a&gt;
     &lt;br&gt;
-    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_2&#39;);</b>&quot; &gt;Item 2&lt;/a&gt;
+    &lt;a href=&quot;<b>javascript:_ADS_ReportInteraction(&#39;item_2&#39;);</b>&quot; &gt;Item 2&lt;/a&gt;
     &lt;br&gt;
-    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_3&#39;);</b>&quot; &gt;Item 3&lt;/a&gt;
+    &lt;a href=&quot;<b>javascript:_ADS_ReportInteraction(&#39;item_3&#39;);</b>&quot; &gt;Item 3&lt;/a&gt;
     &lt;br&gt;
-    &lt;a href=&quot;javascript:<b>_ReportAdInteraction(&#39;item_4&#39;);</b>&quot; &gt;Item 4&lt;/a&gt;
+    &lt;a href=&quot;<b>javascript:_ADS_ReportInteraction(&#39;item_4&#39;);</b>&quot; &gt;Item 4&lt;/a&gt;
     
     &lt;script&gt;
       function callInteraction(name) {
         return function() {
-          <b>_ReportAdInteraction(name);</b>
+          <b>_ADS_ReportInteraction(name);</b>
         };
       }
       document.body.onmouseover = callInteraction(&#39;mouse_over&#39;);
     &lt;/script&gt;
   ]]&gt;&lt;/Content&gt;
 &lt;/Module&gt;</pre>
+
+<h3>Interactions in Flash</h3>
 <p>
-  For Flash files, you can call JavaScript functions in ActionScript.  Here's an example:
+  To track interactions in your Flash applications, call <code>_ADS_ReportInteraction()</code>
+  using ActionScript to send hits to our tracking server.  For example:
 </p>
-<pre>getURL("javascript:_<code>ReportAdInteraction</code>('mouse_over', 1);");</pre>
+<pre>getURL("<b>javascript:_ADS_ReportInteraction('mouse_over', 1);</b>");</pre>
 
 <a name="trackingdebug"></a>
 <h3>Enabling Debug Mode</h3>
@@ -570,13 +580,13 @@ pre b {
   Interaction tracking is very important to implement correctly.
   If it's not setup properly, you run the risk
   of receiving significantly less data in your reports.  Without the reports, you have no way 
-  of determining the success of your gadget ad.  Based on these facts,
-  remember to test and verify that interaction hits are being reported correctly.
+  of determining the success of your gadget ad.  You can easily test
+  verify whether interaction hits are being reported correctly by enabling debug mode.
 </p>
 <p>
-  Set the <code>default_value</code> to <code>DEBUG</code> for
+  To enable debug mode, set the <code>default_value</code> to &quot;DEBUG&quot; for
   UserPref <code>aiturl</code>:
-<pre>&lt;UserPref name=&quot;aiturl&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
+<pre>&lt;UserPref name=&quot;<b>aiturl</b>&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
 </p>
 <p>
   This enables debug mode for interaction-tracking, which creates a small debug
@@ -590,24 +600,28 @@ pre b {
 <p>
   Here's a live preview of an 
   <a href="http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml">example gadget ad</a> 
-  with debug mode enabled.  Click around the gadget and observe the interaction hits
+  with debug mode enabled.  Click around the gadget and see interaction hits
   being sent to the buffer.
 </p>
 <p>
   <iframe style="width:336px; height:280px;" frameborder=0 scrolling=no src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/vw/vw_ad.xml&up_clickurl=DEBUG&up_aiturl=DEBUG&nocache=1&synd=open"></iframe>
 </p>
 <p>
-  Whenever an interaction is reported via <code>_ReportAdInteraction()</code>,
+  Whenever an interaction is reported via <code>_ADS_ReportInteraction()</code>,
   a message is written to the buffer, and the counter is incremented.  Use this
   to test your gadget ad and verify that all interactions are being reported correctly.
 </p>
-
+<p>
+  <b>Note:</b> Debug mode is automatically disabled when the gadget ad goes live
+  on the content network.  You do not need to clear the &quot;DEBUG&quot; value before submitting
+  your ad.
+</p>
 
 <a name="remotecontent"></a>
 <h2>Fetching Remote Content</h2>
 <p>
   One great feature of gadgets is the ability to fetch remote content from third-party
-  websites and display it within your gadget.  The API currently offers three different methods to do
+  websites and display it within your gadget.  The API currently offers three different functions to do
   this, depending on the type of content being retrieved:
   <ul>
     <li>
@@ -674,7 +688,7 @@ pre b {
   One of the requirements in gadget ads is that you cache all embedded images through Google servers.
   Gadget ads are expected to receive huge amounts of traffic per day.  Without caching enabled,
   image hosting providers will become overloaded with the high number of requests
-  coming in.  Google provides you with two JavaScript methods that lets you effectively
+  coming in.  Google provides you with two JavaScript functions that lets you effectively
   cache all images.  However, there is an extra step that you must implement in order
   to accomplish this.
 </p>
@@ -684,7 +698,7 @@ pre b {
 </p>
 <pre>&lt;img src=&quot;http://www.google.com/intl/en_ALL/images/logo.gif&quot;/&gt;</pre>
 <p>
-  To cache your images, you must use one of the two methods below to get the cached image
+  To cache your images, you must use one of the two functions below to get the cached image
   element or source URL in JavaScript and add it to your gadget.  This is where the
   extra step comes in.
 </p>
@@ -705,8 +719,8 @@ pre b {
   </li>
 </ul>
 <p>
-  There are different ways you can use the two methods above to embed cached
-  images in your gadget depending on which method you use.
+  There are different ways you can use the two functions above to embed cached
+  images in your gadget depending on which function you use.
   Here's an example that demonstrates one way you can cache your image:
 </p>
 <pre>&lt;img id=&quot;logoImg&quot; src=&quot;&quot;/&gt;
@@ -714,7 +728,7 @@ pre b {
   _gel(&quot;logoImg&quot;).src = <b>_IG_GetImageUrl(&quot;http://www.google.com/intl/en_ALL/images/logo.gif&quot;);</b>
 &lt;/script&gt;</pre>
 <p>
-  Here's an alternative way using the other method:
+  Here's an alternative way using the other function:
 </p>
 <pre>&lt;div id=&quot;logoContainer&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
@@ -754,9 +768,9 @@ pre b {
 &lt;/ModulePrefs&gt;</pre>
 <p>
   This enables use of the <a href="http://www.google.com/apis/gadgets/ui.html#Flash">Flash library</a>,
-  which exposes the JavaScript method <code>_IG_EmbedFlash()</code>.  However, gadget ads are
+  which exposes the JavaScript function <code>_IG_EmbedFlash()</code>.  However, gadget ads are
   required to cache all embedded Flash content.
-  Therefore you must use the alternate JavaScript method below to embed Flash content
+  Therefore you must use the alternate JavaScript function below to embed Flash content
   into your gadget:
   <ul>
     <li>
@@ -764,7 +778,7 @@ pre b {
       <p>
         Embeds the .swf file specified by <code>swf_url</code>, and displays it in the gadget
         at the location specified by <code>swf_container</code>. The parameter <code>opt_params</code> is an object 
-        that optionally includes various Flash parameters including the width and height.  This method accepts
+        that optionally includes various Flash parameters including the width and height.  This function accepts
         the same parameters as <code>_IG_EmbedFlash()</code>.  For a full description of parameters,
         visit the Flash section in the <a href="http://www.google.com/apis/gadgets/ui.html#Flash">developer guide</a>.
       </p>
@@ -772,7 +786,7 @@ pre b {
   </ul>
 
 <p>
-  Here's an example that demonstrates how to embed a cached Flash object:
+  Here's an example that demonstrates how to use the function to embed a cached Flash object:
 </p>
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
@@ -806,7 +820,7 @@ pre b {
   automatically caches any child resources that are embedded using a relative path.
   Assuming the parent Flash file is embedded using <code>_IG_EmbedCachedFlash()</code>,
   all you need to do is reference the child resources using relative paths.  These
-  resources are automatically cached.
+  resources are automatically cached and no additional actions are required.
 </p>
 <h4>Third-Party Domain</h4>
 <p>
@@ -814,13 +828,13 @@ pre b {
   These resources can only be referenced by using an absolute path to the source,
   which means they won't be automatically cached.  To enable caching, you need
   to <a href="http://www.adobe.com/support/flash/action_scripts/actionscript_dictionary/actionscript_dictionary199.html">escape</a> 
-  the resource URL and prefix it with <code>/ig/proxy?url=</code>.
+  the resource URL and append it to <code>/ig/proxy?url=</code>.
   The constructed URL should match this format:
 </p>
 <pre>/ig/proxy?url=<b>&lt;ESCAPED_RESOURCE_URL&gt;</b></pre>
 <p>
-  Here's a snippet on how to construct the child resource URL in
-  Flash ActionScript:
+  Here's a snippet on how resource URLs should be constructed in
+  Flash using ActionScript:
 </p>
 <pre>"/ig/proxy?url=" + escape("http://thirdpartydomain.com/child_flash.swf")</pre>
 
@@ -845,8 +859,9 @@ pre b {
 <pre>var1=value1<b>&amp;</b>var2=value2<b>&amp;</b>var3=value3<b>&amp;</b>var4=value</pre>
 <p>
   <b>Note:</b> When creating the <code>flashvars</code> string, make sure each <code>value</code>
-  is escaped using <code>_esc()</code>.  Visit the <a href="http://www.google.com/apis/gadgets/reference.html#Core">reference</a>
-  for a full list of shortcut methods.
+  is escaped using <code>_esc()</code>.  Visit the Google Gadgets API
+  <a href="http://www.google.com/apis/gadgets/reference.html#Core">reference</a>
+  for a full list of shortcut functions.
 </p>
 <p>
   Here's an example that shows what the implementation might look like:
@@ -994,7 +1009,7 @@ var flv = flvURL;
 var nc = new NetConnection();
 
 // NetConnection provides playback of streaming FLVs from a local drive or a remote HTTP address.
-// By supplying its connect method with a null parameter, we avoid dependence
+// By supplying its connect function with a null parameter, we avoid dependence
 // on Flash Communication Server (aka Flash Media Server) in order to play
 // video hosted on YouTube.
 nc.connect(null);
@@ -1004,7 +1019,7 @@ var ns = new NetStream(nc);
 
 // NetStream handles the video stream for NetConnection. The video player 
 // instance &quot;vid&quot; cooperates with NetStream and NetConnection by 
-// calling the attachVideo() method.
+// calling the attachVideo() function.
 vid.attachVideo(ns);
 
 // call NetStream.play() to load the external FLV. The video will start 
@@ -1249,7 +1264,7 @@ stop();</pre>
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
         
         // Embed the Gmail video from YouTube
-        _IG_EmbedCachedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
+        _IG_EmbedCachedFlash(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;, _gel(&quot;video&quot;), {
             width: 250,
             height: 210
           });
@@ -1262,10 +1277,10 @@ stop();</pre>
 <p>
   Lastly, let's send an interaction hit when the user initially moves their mouse
   over the ad.  To do this, we need to bind a <code>mouseover</code> JavaScript event handler
-  to the body.  In the callback, call <code>_ReportAdInteraction()</code> to report the hit.
+  to the body.  In the callback, call <code>_ADS_ReportInteraction()</code> to report the hit.
   We only want to report the first <code>mouseover</code> that occurs.  Create a global variable
   that gets flagged after the initial <code>mouseover</code> is received, and only call 
-  <code>_ReportAdInteraction()</code> if the variable hasn't been flagged.
+  <code>_ADS_ReportInteraction()</code> if the variable hasn't been flagged.
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
@@ -1294,7 +1309,7 @@ stop();</pre>
       var mouseover_hit = false;
       _IG_AddDOMEventHandler(document.body, &apos;mouseover&apos;, function() {
         if (!mouseover_hit) {
-          _ReportAdInteraction(&apos;mouse_over&apos;);
+          _ADS_ReportInteraction(&apos;mouse_over&apos;);
           mouseover_hit = true;
         }
       });</b>
@@ -1321,12 +1336,12 @@ stop();</pre>
 <p><iframe frameborder=0 width=300 height=250 src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/tutorial_content/simple_gmail_ad.xml&synd=open"></iframe></p>
 
 <a name="resources"></a>
-<h2>Resources:</h2>
+<h2>Resources</h2>
 <p>
   <ul>
     <li><a href="http://www.google.com/ig/modules/gadgetads.html">Google Gadget Ads Editor</a></li>
     <li><a href="http://www.google.com/apis/gadgets/docs-home.html">Google Gadgets API Documentation</a></li>
-    <li><a href="http://groups.google.com/group/google-gadget-ads">PublicDiscussion Group</a></li>
+    <li><a href="http://groups.google.com/group/google-gadget-ads">Discussion Group</a></li>
     <li><a href="http://code.google.com/support/bin/topic.py?topic=10027">Knowledge Base / FAQ</a></li>
   </ul>
 </p>
@@ -1338,14 +1353,76 @@ stop();</pre>
   This section describes the JavaScript functions supported by the Google Gadgets API
   that's specifically relevant to Google Gadget Ads.
 </p>
-<table width="90%" border=0 cellspacing=0 cellpadding=0>
+<table width="95%" border=0 cellspacing=0 cellpadding=0>
   <tr>
-    <th width="200">Function</th>
+    <th>Function</th>
     <th>Description</th>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
+    <td><code>_ADS_ReportInteraction(opt_name, opt_value)</code></td>
+    <td>
+      Sends an interaction hit to our tracking server to report user interactions
+      inside gadget ads.  Valid parameters are:
+      <ul>
+        <li>
+          <b>opt_name:</b> The name of the interaction to report.  Must match
+          a name from the supported <a href="#interactionlist">list of interactions</a>.  
+          If name doesn't exist, interaction hits are grouped together in
+          an &quot;Other&quot; section within the reports.
+        </li>
+        <li>
+          <b>opt_value:</b> A postiive number to be summed up in the reports for
+          a specific interaction defined by the <code>opt_name</code> parameter.
+        </li>
+      </ul>
+      <br/>
+      Can be called three different ways:
+      <ul>
+        <li>
+          <b><code>_ADS_ReportInteraction():</code></b> To be used when tracking only a single interaction.
+        </li>
+        <li>
+          <b><code>_ADS_ReportInteraction(name):</code></b> To be used when tracking
+          multiple interactions.
+        </li>
+        <li>
+          <b><code>_ADS_ReportInteraction(name, value):</code></b> To be used when
+          tracking multiple interactions and pass in a value to be summed up in
+          the reports.
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>_ADS_ClickDestinationUrl(dest_url)</code></td>
+    <td>
+      Reports a click-through hit and redirects to the location specified by <code>dest_url</code>.
+      Valid parameters are:
+      <ul>
+        <li>
+          <b><code>dest_url:</code></b> The destination URL to redirect to.
+        </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><code>_IG_EmbedCachedFlash(swf_url, swf_container, opt_params)</code></td>
+    <td>
+      Embeds a cached version of the Flash object specified by <code>swf_url</code>
+      and automatically caches all child resources that are referenced by a relative path.
+      This is an extension to the existing <code>_IG_EmbedFlash()</code> function.
+      More information is located in the <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Flash">flash library reference</a>.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <code>_IG_GetImage(url)</code><br/>
+      <code>_IG_GetImageUrl(url)</code>
+    </td>
+    <td>
+      Use to cache embedded images.  More information located in the
+      <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache">Google Gadgets API reference</a>.
+    </td>
   </tr>
 </table>
 
