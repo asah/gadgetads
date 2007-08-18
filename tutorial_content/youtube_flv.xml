@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-<ModulePrefs title="Streaming FLV From YouTube" width="300" height="250">
+<ModulePrefs title="Streaming FLV From YouTube" width="300" height="250" thumbnail="">
+  <Require feature="ads"/>
   <Require feature="flash"/>
 </ModulePrefs>
+<UserPref name="clickurl" datatype="hidden" default_value=""/>
+<UserPref name="aiturl" datatype="hidden" default_value=""/>
 <Content type="html"><![CDATA[
   <style>
     body {
@@ -30,11 +33,11 @@
     }
   </style>
   
-  <div>
-    Here's the <a id="flvLink" target="_top">FLV link</a>
-    for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
-  </div>
   <div id="player">
+    <div>
+      Here's the <a id="flvLink" target="_top">FLV link</a>
+      for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
+    </div>
     <div id="click" onclick="javascript:play();">Click to Play</div>
   </div>
 
@@ -53,12 +56,11 @@
     
     function play() {    
       // Embed my own Flash player using the FLV from YouTube
-      var fv = 'flvURL=' + _esc(flvURL);
-      _IG_EmbedFlash("http://gadgetads.googlecode.com/svn/trunk/small_player.swf", "player", {
+      _IG_EmbedCachedFlash("http://gadgetads.googlecode.com/svn/trunk/tutorial_content/small_player.swf", "player", {
           swf_version: 8, 
           width: 300, 
           height: 250, 
-          flashvars: fv
+          flashvars: 'flvUrl=' + _esc(flvURL)
         });
     }
   </script>
