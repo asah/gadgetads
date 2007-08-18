@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Simple Gmail Gadget Ad" width="300" height="250" thumbnail="">
+    <Require feature="ads"/>
+    <Require feature="flash"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <table width="300" id="main" border=0 cellspacing=0 cellpadding=0>
+      <tr height="30">
+        <td style="padding-left: 190px; font-size: 12px;">
+          <a href="javascript:_ADS_ClickDestinationUrl('http://mail.google.com/mail/help/open.html#utm_campaign=en&utm_source=en-ha-na-us-gadget&utm_medium=ha')">Sign up for Gmail</a>
+        </td>
+      </tr>
+      <tr height="220">
+        <td align=center valign=top>
+          <div id="video"></div>
+        </td>
+      </tr>
+    </table>
+    
+    <script>
+      var mouseover_hit = false;
+      _IG_RegisterOnloadHandler(function() {
+        // Track initial mouseover the ad
+        _IG_AddDOMEventHandler(document.body, 'mouseover', function() {
+          if (!mouseover_hit) {
+            _ReportAdInteraction('mouse_over');
+            mouseover_hit = true;
+          }
+        });
+        
+        // Cache the background image of the table
+        _gel("main").style.background = "transparent url(" + _IG_GetImageUrl("http://www.labpixies.com/gadgads/gmail/images/background.png") + ")";
+        
+        // Embed the Gmail video from YouTube
+        _IG_EmbedCachedFlash(_IG_GetCachedUrl("http://www.youtube.com/v/_YUugB4IUl4"), _gel("video"), {
+            width: 250,
+            height: 210
+          });
+      });
+    </script>
+  ]]></Content>
+</Module>
