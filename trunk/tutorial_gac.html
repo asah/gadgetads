@@ -37,33 +37,48 @@ pre b {
 <!-- TOC -->
 <h2>Contents</h2>
 <ul class="toc">
-  <li><a href="#gettingstarted">Getting Started</a></li>
-  <li><a href="#clickurl">Defining and Using the Click URL</a></li>
+  <li><a href="#introduction">Introduction</a></li>
   <li><a href="#policy">Conforming to IAB and Google Advertising Policies</a></li>
-  <li><a href="#remotecontent">Getting Remote Content</a></li>
+  <li>
+    <a href="#googlegadgetads">Google Gadget Ads vs. Google Gadgets on iGoogle</a>
+    <ul>
+      <li><a href="#xmlrequire">XML Requirements</a></li>
+      <li><a href="#imprequire">Implementation Requirements</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#gs">Getting Started</a>
+    <ul>
+      <li><a href="#ggae">Use the Google Gadget Ads Editor</a></li>
+    </ul>
+  </li>
+  <li><a href="#clickthrough">Tracking Click-Throughs</a></li>
+  <li><a href="#interaction">Tracking User Interactions</a></li
+  <li><a href="#remotecontent">Fetching Remote Content</a></li>
   <li><a href="#images">Embedding Images: Recommended</a></li>
   <li>
     <a href="#flash">Embedding Flash Content</a>
     <ul>
-      <li><a href="#flash_cache">Caching Flash Content</a></li>
-      <li><a href="#flash_cache_other">Caching Other Resources Within Flash</a></li>
+      <li><a href="#flash_child">Caching Child Resources Within Flash</a></li>
       <li><a href="#flash_flashvars">Using FlashVars To Pass Variables Into Flash</a></li>
-      <li><a href="#flash_clicktag">Using clickTAG in Flash</a></li>
     </ul>
   </li>
   <li>
-    <a href="#video">Embedding and Playing Video Content</a>
+    <a href="#video">Embedding Video Content</a>
     <ul>
       <li><a href="#video_youtube">Using the YouTube Branded Player For Video Playback</a></li>
-      <li><a href="#video_nonbranded">Using Your Own Flash Player With Youtube Videos</a></li>
+      <li><a href="#video_nonbranded">Using Your Own Flash Player With YouTube Videos</a></li>
     </ul>
   </li>
-  <li><a href="#map">Embedding Google Maps</a></li>
-  <li><a href="#tracking">Enabling Single Interaction Tracking</a></li>
   <li><a href="#casestudy">Case Study: Simplified Gmail Gadget Ad</a></li>
-  <li><a href="#finaloutcome">The Final Outcome</a></li>
   <li><a href="#resources">Resources</a></li>
-  <li><a href="#scratchpad">Scratch Pad</a></li>
+  <li>
+    <a href="#resources">Reference</a>
+    <ul>
+      <li><a href="#functions">JavaScript Library</a></li>
+      <li><a href="#interactionlist">List of Interactions</a></li>
+    </ul>
+  </li>
 </ul>
 
 
@@ -95,6 +110,101 @@ pre b {
 </p>
 
 
+<a name="policy"></a>
+<h2>Conforming to IAB and Google Rich Media Advertising Policies</h2>
+<p>
+  While gadget ads are a format unique to Google, we consider it imperative that
+  these ads conform to industry standards and Google's accepted policies around
+  rich media and dynamic advertising. It is very important that you conform to
+  both IAB (Internet Advertising Board) and Google corporate policies around
+  acceptable forms of advertising. Beyond "obvious" guidelines about not
+  misleading users, there are some special considerations that may not be obvious
+  at first. For example, pages can have multiple ads on them-- so you cannot play
+  audio on-load, or the ads will conflict. Google has developed an initial set of
+  editorial guidelines that must be adhered to. You can see these guidelines at
+  the link below:
+</p>
+<p>
+  <a href="http://adwords.google.com/support/bin/answer.py?answer=66136">http://adwords.google.com/support/bin/answer.py?answer=66136</a>
+</p>
+<h3>Performance and Bandwidth Use</h3>
+<p>
+  In many parts of the world, users and companies pay a lot of money for
+  bandwidth and so it is important to respect their needs to keep ads small.
+  Moreover, if ads slowed down webpages too much, then the web would seem slow
+  and we would all suffer. Google has consistently seen that latency and direct
+  and obvious impact on the performance of ads. The IAB limits rich media ad
+  sizes based on the dimensions of the creative, but no ads are allowed to be
+  over 40k on load. Google's preference is always that advertisers should comply
+  with the IAB's standards. To view the IAB's standards on rich media, visit the
+  document below:
+</p>
+<p>
+  <a href="http://www.iab.net/standards/richmedia/pdf/RichMediaGuidelines3.pdf">http://www.iab.net/standards/richmedia/pdf/RichMediaGuidelines3.pdf</a>
+</p>
+<p>
+  As gadget ads are a new and unique format Google has set a maximum of 50 KB
+  (kilobytes) allowed "on load" for an ad during our beta period. The definition
+  of "on load" is tricky, but should be taken to mean the size of the ad when it
+  is loaded with the page and prior to a consumer interacting with it. If the user
+  has "interacted" with the gadget ad, then it is OK to use more than 50KB. Both
+  for the 50KB limit and the no-audio rule mentioned above, on-load video is
+  generally not possible, but small animation sequences work.
+</p>
+<h3>Bad Clicks and Misleading Click-Targets</h3>
+<p>
+  It is trivial to simulate a click with a gadget ad-- obviously, don't do this.
+  Beyond threats, click fraud makes no sense for gadget ads--
+  click-through-based advertisers ultimate make money when users willingly
+  choose to click to learn more about products or services. Fraudulent gadget ad
+  clicks increase click through rate, at the expense of conversion. Similarly,
+  "tricking" the user into clicking with bad click targets is self-defeating.
+</p>
+<p>
+  The more subtle issue are low click-through rates. For example, if the click
+  through URLs are not properly placed, then the gadget will 'work' but fail to
+  run if it uses CPC (cost-per-click) advertising. More subtly, your help in
+  user interface design can help advertisers understand the implications of CPM
+  (paying for impressions, not clicks) vs. CPC vs. CPA (paying for conversion)
+  advertising.
+</p>
+<p>
+  Click targets (clicks that lead users to another website) must be visually
+  identified as causing click-through vs. in-gadget interactions. Google
+  suggests doing this by having all click targets underlined and in a blue font
+  color.
+</p>
+<h3>Animated Ads</h3>
+<p>
+  Animation is restricted to a maximum of 15 seconds (at a
+  15-20 fps frame rate). Endless loops are not allowed.  Ads can loop an infinite
+  number of times for a maximum of 15 seconds.
+</p>
+<h3>Privacy and Cookies</h3>
+<p>
+  Google requires that ads are completely anonymous.  Google Gadget Ads may not
+  create or read cookies, or use other cookie-like mechanisms, e.g. flash local
+  storage. We view this as a crucial aspect of respecting our users' privacy.
+  This is an very important rule -- do not make mistakes.
+</p>
+<h3>Downloads and Malware Ads</h3>
+<p>
+  Gadget Ads cannot download (or attempt to download) any software to the user's
+  computer. Currently, IAB/Google do not permit download-links from inside
+  gadgets-- we are investigating way(s) of changing these guidelines to allow
+  download links from inside gadget ads-- but today, advertisers must place all
+  download links on the 'landing page' (destination page from click throughs).
+</p>
+<h3>Popup Windows</h3>
+<p>
+  Don't use alert(), confirm() or other "modal" dialog boxes for any reason.
+  We also do not allow links to landing pages that generate
+  pop-ups when users enter or leave your landing page. We consider a pop-up to
+  be any window, regardless of content, that opens in addition to the original
+  window.
+</p>
+
+
 <a name="googlegadgetads"></a>
 <h2>Google Gadget Ads vs. Google Gadgets on iGoogle</h2>
 <p>
@@ -117,6 +227,7 @@ pre b {
   These requirements are what differentiates Google Gadget Ads from Google Gadgets on iGoogle.
 </p>
 
+<a name="xmlrequire"></a>
 <h3>XML Requirements</h3>
 <p>
   Regular gadgets on iGoogle can contain the bare minimum XML.  Here's an example:
@@ -158,6 +269,7 @@ pre b {
     <li>Wide Skyscraper: 160 x 600</li>
   </ul>
 
+<a name="imprequire"></a>
 <h3>Implementation Requirements</h3>
 <p>
   For gadget ad implementation requirements, you must follow the instructions contained
@@ -182,7 +294,7 @@ pre b {
     </tr>
     <tr>
       <td>Must track user interactions.</td>
-      <td>Follow the instructions under <a href="#tracking">Tracking User Interactions</a>.</td>
+      <td>Follow the instructions under <a href="#interaction">Tracking User Interactions</a>.</td>
     </tr>
     <tr>
       <td>Must track click-throughs on target links.</td>
@@ -196,7 +308,7 @@ pre b {
 </p>
 
 
-<a name="gettingstarted"></a>
+<a name="gs"></a>
 <h2>Getting Started</h2>
 <p>
   Now that you have a better understanding of gadget ad requirements, you can start building one.
@@ -277,6 +389,33 @@ pre b {
   </table>
 </p>
 
+<a name="ggae"></a>
+<h3>Use the Google Gadget Ads Editor</h3>
+<p>
+  One of the quickest and easiest way to start writing gadgets is to use the 
+  <a href="http://www.google.com/ig/modules/gadgetads.html">Google Gadget Ads Editor</a> also known as GGAE for short.
+  GGAE is a gadget development tool that lets you build, test, and validate your gadget ads
+  prior to being submitted for review.  It contains a rich text editor where you 
+  can write your gadgets as well as the ability to save your gadget and host it through GGAE.
+  You can also upload files through GGAE which gets served off of Google servers.  The 
+  benefit of using GGAE to host your assets is that you don't to worry about server bandwidth.
+  However, all assets are still required to be cached, even files that are hosted on GGAE.
+</p>
+<p>
+  When submitting your gadget ad for review, it's <b>required</b>
+  that you use GGAE to validate your gadget ad before submission.  The built-in validationa
+  tool automatically checks for various gadget ad requirements such as
+  the XML requirements mentioned <a href="#googlegadgetads">above</a> as well
+  as various implementation requirements.  In order to decrease the time involved
+  to approve your ad, make sure to run the validation
+  tool against your gadget and verify that all checks have passed.
+</p>
+<p>
+  Use
+  <a href="http://www.google.com/ig/modules/gadgetads.html">Google Gadget Ads Editor</a>
+  to build your gadgets.
+</p>
+
 
 <a name="clickthrough"></a>
 <h2>Tracking Click-Throughs</h2>
@@ -342,7 +481,7 @@ pre b {
 </p>
 
 
-<a name="tracking"></a>
+<a name="interaction"></a>
 <h2>Tracking User Interactions</h2>
 <p>
   Tracking user interactions is very important to gadget ads.  Unlike traditional
@@ -461,107 +600,6 @@ pre b {
   Whenever an interaction is reported via <code>_ReportAdInteraction()</code>,
   a message is written to the buffer, and the counter is incremented.  Use this
   to test your gadget ad and verify that all interactions are being reported correctly.
-</p>
-
-
-<a name="policy"></a>
-<h2>Conforming to IAB and Google Rich Media Advertising Policies</h2>
-<p>
-  While gadget ads is a format unique to Google, we consider it imperative that
-  these ads conform to industry standards and Google's accepted policies around
-  rich media and dynamic advertising. It is very important that you conform to
-  both IAB (Internet Advertising Board) and Google corporate policies around
-  acceptable forms of advertising. Beyond "obvious" guidelines about not
-  misleading users, there are some special considerations that may not be obvious
-  at first. For example, pages can have multiple ads on them-- so you cannot play
-  audio on-load, or the ads will conflict. Google has developed an initial set of
-  editorial guidelines that must be adhered to. You can see these guidelines at
-  the link below:
-</p>
-<p>
-  <a href="http://adwords.google.com/support/bin/answer.py?answer=66136">http://adwords.google.com/support/bin/answer.py?answer=66136</a>
-</p>
-
-<h3>Performance and Bandwidth Use</h3>
-<p>
-  In many parts of the world, users and companies pay a lot of money for
-  bandwidth and so it is important to respect their needs to keep ads small.
-  Moreover, if ads slowed down webpages too much, then the web would seem slow
-  and we would all suffer. Google has consistently seen that latency and direct
-  and obvious impact on the performance of ads. The IAB limits rich media ad
-  sizes based on the dimensions of the creative, but no ads are allowed to be
-  over 40k on load. Google's preference is always that advertisers should comply
-  with the IAB's standards. To view the IAB's standards on rich media, visit the
-  document below:
-</p>
-<p>
-  <a href="http://www.iab.net/standards/richmedia/pdf/RichMediaGuidelines3.pdf">http://www.iab.net/standards/richmedia/pdf/RichMediaGuidelines3.pdf</a>
-</p>
-<p>
-  As gadget ads are a new and unique format Google has set a maximum of 50 KB
-  (kilobytes) allowed "on load" for an ad during our beta period. The definition
-  of "on load" is tricky, but should be taken to mean the size of the ad when it
-  is loaded with the page and prior to a consumer interacting with it. If the user
-  has "interacted" with the gadget ad, then it is OK to use more than 50KB. Both
-  for the 50KB limit and the no-audio rule mentioned above, on-load video is
-  generally not possible, but small animation sequences work.
-</p>
-
-<h3>Bad Clicks and Misleading Click-Targets</h3>
-<p>
-  It is trivial to simulate a click with a gadget ad-- obviously, don't do this.
-  Beyond threats, click fraud makes no sense for gadget ads--
-  click-through-based advertisers ultimate make money when users willingly
-  choose to click to learn more about products or services. Fraudulent gadget ad
-  clicks increase click through rate, at the expense of conversion. Similarly,
-  "tricking" the user into clicking with bad click targets is self-defeating.
-</p>
-<p>
-  The more subtle issue are low click-through rates. For example, if the click
-  through URLs are not properly placed, then the gadget will 'work' but fail to
-  run if it uses CPC (cost-per-click) advertising. More subtly, your help in
-  user interface design can help advertisers understand the implications of CPM
-  (paying for impressions, not clicks) vs. CPC vs. CPA (paying for conversion)
-  advertising.
-</p>
-<p>
-  Click targets (clicks that lead users to another website) must be visually
-  identified as causing click-through vs. in-gadget interactions. Google
-  suggests doing this by having all click targets underlined and in a blue font
-  color.
-</p>
-
-<h3>Animated Ads</h3>
-<p>
-  Animation is restricted to a maximum of 15 seconds (at a
-  15-20 fps frame rate). Endless loops are not allowed.  Ads can loop an infinite
-  number of times for a maximum of 15 seconds.
-</p>
-
-<h3>Privacy and Cookies</h3>
-<p>
-  Google requires that ads are completely anonymous.  Google Gadget Ads may not
-  create or read cookies, or use other cookie-like mechanisms, e.g. flash local
-  storage. We view this as a crucial aspect of respecting our users' privacy.
-  This is an very important rule -- do not make mistakes.
-</p>
-
-<h3>Downloads and Malware Ads</h3>
-<p>
-  Gadget Ads cannot download (or attempt to download) any software to the user's
-  computer. Currently, IAB/Google do not permit download-links from inside
-  gadgets-- we are investigating way(s) of changing these guidelines to allow
-  download links from inside gadget ads-- but today, advertisers must place all
-  download links on the 'landing page' (destination page from click throughs).
-</p>
-
-<h3>Popup Windows</h3>
-<p>
-  Don't use alert(), confirm() or other "modal" dialog boxes for any reason.
-  We also do not allow links to landing pages that generate
-  pop-ups when users enter or leave your landing page. We consider a pop-up to
-  be any window, regardless of content, that opens in addition to the original
-  window.
 </p>
 
 
@@ -744,7 +782,7 @@ pre b {
   });</b>
 &lt;/script&gt;</pre>
 
-<a name="flash_cache_other"></a>
+<a name="flash_child"></a>
 <h3>Caching Child Resources Within Flash</h3>
 <p>
   Flash objects can embed other child resources such as images and other Flash objects.
@@ -765,7 +803,7 @@ pre b {
   that's accessing it.  These resources can be referenced by using a relative path.
   All Flash files that are fetched using <code>_IG_EmbedCachedFlash()</code>
   automatically caches any child resources that are embedded using a relative path.
-  Assuming the parent Flash file is embedded using <code>_IG_EmbedFlash()</code>,
+  Assuming the parent Flash file is embedded using <code>_IG_EmbedCachedFlash()</code>,
   all you need to do is reference the child resources using relative paths.  These
   resources are automatically cached.
 </p>
@@ -864,7 +902,7 @@ pre b {
 </p>
 
 <a name="video_nonbranded"></a>
-<h3>Using Your Own Flash Player With Youtube Videos</h3>
+<h3>Using Your Own Flash Player With YouTube Videos</h3>
 <p>
   If you want to use your own non-branded Flash player to playback videos
   hosted on YouTube, you can!  All you need is the URL pointing to the 
@@ -915,12 +953,12 @@ pre b {
 <h4>Using the FLV URL</h4>
 <p>
   Now that you have the FLV URL, you have to pass it to your Flash player.
-  Embed your Flash player using <code>_IG_EmbedFlash(...)</code> and create
+  Embed your Flash player using <code>_IG_EmbedCachedFlash()</code> and create
   a <code>flashvars</code> property with the FLV URL.  
   <br>
   <b>*** Make sure to escape all flashvar values. ***</b>
 <pre>var flvUrl = &quot;http://www.youtube.com/get_video?video_id=<b class="red">C5rTJkfBhbQ</b>&amp;ts=<b class="green">__ENV_time_secs_since_epoch__</b>&amp;t=<b class="blue">__YOUTUBE_VIDEO_TEST(C5rTJkfBhbQ)</b>__&amp;gad=1&quot;;
-_IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://examplesite.com/myplayer.swf&quot;), &quot;vid&quot;, {
+_IG_EmbedCachedFlash(&quot;http://examplesite.com/myplayer.swf&quot;, &quot;vid&quot;, {
     swf_version: 8, 
     width: 300, 
     height: 250, 
@@ -981,64 +1019,6 @@ stop();</pre>
   Preview this 
   <a href="http://gmodules.com/ig/ifr?synd=open&url=http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml">example gadget</a> 
   which plays videos from YouTube using its own player, view the <a href="http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml">source</a>.
-</p>
-
-<a name="map"></a>
-<h2>Embedding Google Maps</h2>
-<p>
-  It's easy to integrate a Google Map inside your gadgets using the
-  <a href="http://www.google.com/apis/maps/">Google Maps API</a>.  When using maps
-  within gadgets, you don't need to sign up for a Google Maps API key, and you can
-  simply add a reference to the maps JavaScript library to start using it.
-</p>
-
-<h3>Start Small</h3>
-<p>
-  The Google Maps API is fairly large with a constantly growing set of functionality.
-  If you've never used the API before, the easiest way to start learning is to 
-  work off a simple example and then build your way up.  For example, 
-  here's a gadget that displays a small map centered on Palo Alto, CA
-  (<a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/sample_map.xml">add it now</a>):
-<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Sample Map&quot;&gt;
-  &lt;/ModulePrefs&gt;
-  &lt;Content type=&quot;html&quot;&gt;
-  &lt;![CDATA[
-    &lt;style&gt;
-      <b>#map {
-        width: 100%;
-        height: 300px;
-      }</b>
-    &lt;/style&gt;
-    <b>&lt;div id=&quot;map&quot;&gt;&lt;/div&gt;</b>
-    <b>&lt;script src=&quot;http://maps.google.com/maps?file=api&amp;amp;v=2&quot;&gt;&lt;/script&gt;</b>
-    &lt;script&gt;
-      _IG_RegisterOnloadHandler(function() {<b>
-        if (GBrowserIsCompatible()) {
-          var map = new GMap2(_gel(&#39;map&#39;));
-          map.addControl(new GSmallMapControl());
-          map.addControl(new GMapTypeControl());
-          map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-        }</b>
-      });
-    &lt;/script&gt;
-  ]]&gt; 
-  &lt;/Content&gt;
-&lt;/Module&gt;</pre>
-</p>
-<p>
-  Once you have a map within your gadget, reference the 
-  <a href="http://www.google.com/apis/maps/documentation/">Google Maps API documentation</a>
-  and work your way up to more advanced techniques on how to build more functional
-  maps.  A great recommended learning tool is to view the source code of existing
-  gadgets that uses Google Maps API.  Here's a few that we recommend checking out:
-  <ul
-    <li><a href="http://www.google.com/ig/directory?url=mapsearch.xml">Google Map Search</a></li>
-    <li><a href="http://www.google.com/ig/directory?url=driving_directions.xml">Driving Directions</a></li>
-    <li><a href="http://www.google.com/ig/directory?url=http://ralph.feedback.googlepages.com/googlemap.xml">Google Map</a></li>
-    <li><a href="http://www.google.com/ig/directory?q=maps"><i>More...</i></a></li>
-  </ul>
 </p>
 
 
@@ -1338,27 +1318,37 @@ stop();</pre>
   showing how the final gadget should look like
   (<a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/samples/simple_gmail_ad.xml">add it now</a>):
 </p>
-<p><iframe frameborder=0 width=300 height=250 src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/samples/simple_gmail_ad.xml"></iframe></p>
+<p><iframe frameborder=0 width=300 height=250 src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/samples/simple_gmail_ad.xml&synd=open&nocache=1"></iframe></p>
 
 <a name="resources"></a>
 <h2>Resources:</h2>
 <p>
   <ul>
-    <li><a href="http://gadgetads.googlecode.com/svn/trunk/previewer.html">Gadget Ad Previewer</a></li>
-    <li><a href="http://www.google.com/apis/gadgets/">Google Gadgets API Documentation</a></li>
-    <li><a href="http://www.google.com/ig">iGoogle Homepage</a></li>    
-    <li><a href="http://www.google.com/ig/directory">Content Directory</a></li>
-    <li><a href="http://www.google.com/ig/directory?synd=open">Google Gadgets For Your Webpage</a></li>
-    <li><a href="http://www.google.com/apis/maps/">Google Maps API</a></li>
-    <li><a href="http://groups.google.com/group/Google-Gadgets-API/topics?start=">Discussion Group</a></li>
+    <li><a href="http://www.google.com/ig/modules/gadgetads.html">Google Gadget Ads Editor</a></li>
+    <li><a href="http://www.google.com/apis/gadgets/docs-home.html">Google Gadgets API Documentation</a></li>
+    <li><a href="http://groups.google.com/group/google-gadget-ads">PublicDiscussion Group</a></li>
     <li><a href="http://code.google.com/support/bin/topic.py?topic=10027">Knowledge Base / FAQ</a></li>
-    <li><a href="http://www.google.com/ig/directory?synd=branded">Example Gadgets</a></li>
-    <li><a href="mailto:gadget-ads-support@google.com">gadget-ads-support@google.com</a></li>
   </ul>
 </p>
 
 <a name="reference"></a>
 <h2>Reference</h2>
+<h3>JavaScript Library</h3>
+<p>
+  This section describes the JavaScript functions supported by the Google Gadgets API
+  that's specifically relevant to Google Gadget Ads.
+</p>
+<table width="90%" border=0 cellspacing=0 cellpadding=0>
+  <tr>
+    <th width="200">Function</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+
 <a name="interactionlist"></a>
 <h3>List of Interactions</h3>
 <p>
@@ -1694,33 +1684,6 @@ stop();</pre>
     <td>User clicks to select a category</td>
    </tr>
   </table>
-</p>
-
-
-
-<a name="scratchpad"></a>
-<h2>Build Gadgets Using the Scratch Pad</h2>
-<p>
-  One of the quickest and easiest way to start writing gadgets is to use the scratch pad. The scratch pad
-  contains two tabs: "Edit" and "Preview".  The "Edit" tab includes a simple text editor that lets
-  you edit the gadget XML.  Clicking on "Preview" lets you instantly view live results of 
-  your changes, without ever leaving the webpage.
-</p>
-<p>
-  Underneath the scratch pad, there are links to other gadget ads.  Clicking on any of them loads the gadget
-  spec into the editor where you can view the XML, modify it, and preview the effects of your changes.
-  The <a href="http://www.google.com/ig/modules/hello.xml">Hello World</a> gadget is loaded by default.
-</p>
-<p>
-  There are different ways to use the scratch pad:
-  <ul>
-    <li>Edit the "Hello World" gadget spec that is displayed in the scratchpad by default.</li>
-    <li>Click on any gadget ad link underneath the scratchpad to display, edit, and preview the gadget spec.</li>
-    <li>Paste any gadget spec into the scratch pad to edit it and preview the results, or write a gadget from scratch.</li>
-  </ul>
-</p>
-<p>
-  <iframe style="width:100%; height:530px;" frameborder=0 scrolling=no src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/scratchpad_ads.xml&amp;nocache=1&amp;synd=open&amp;up_height=450"></iframe>
 </p>
 </body>
 </html>
