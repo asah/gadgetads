@@ -644,50 +644,57 @@ pre b {
   The traditional way you'd embed an image in HTML is by using <code>&lt;img&gt;</code> tags.
   For example:
 </p>
-<pre>
-  
-  <ul>
-    <li>
-      <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImage(url)</b></code></a>
-      <p>
-      Returns an HTML Image element after fetching it through Google's cache.
-      The <code>url</code> parameter must an absolute URL pointing to your image.
-      </p>
-    </li>
-    <li>
-      <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImageUrl(url)</b></code></a>
-      <p>
-      Returns the proxy URL for the cached 
-      version of the image specified by <code>url</code>.
-      </p>
-    </li>
-  </ul>
-</p>
+<pre>&lt;img src=&quot;http://www.google.com/intl/en_ALL/images/logo.gif&quot;/&gt;</pre>
 <p>
-  In HTML, you'd typically embed an image like this:
-  <pre>&lt;img src="http://www.google.com/intl/en_ALL/images/logo.gif"/&gt;</pre>
+  To cache your images, you must use one of the two methods below to get the cached image
+  element or source URL in JavaScript and add it to your gadget.  This is where the
+  extra step comes in.
 </p>
+<ul>
+  <li>
+    <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImage(url)</b></code></a>
+    <p>
+    Returns an HTML Image element after fetching it through Google's cache.
+    The <code>url</code> parameter must an absolute URL pointing to your image.
+    </p>
+  </li>
+  <li>
+    <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImageUrl(url)</b></code></a>
+    <p>
+    Returns the proxy URL for the cached 
+    version of the image specified by <code>url</code>.
+    </p>
+  </li>
+</ul>
 <p>
-  However, to maximize performance benefits, here's the recommended way to embed images in your gadgets:
-<pre>&lt;img id="<b>logoImg</b>" src=""/&gt;
+  There are different ways you can use the two methods above to embed cached
+  images in your gadget depending on which method you use.
+  Here's an example that demonstrates one way you can cache your image:
+</p>
+<pre>&lt;img id=&quot;logoImg&quot; src=&quot;&quot;/&gt;
 &lt;script&gt;
-  _IG_RegisterOnloadHandler(function() {
-    <b>_gel("logoImg").src = _IG_GetImageUrl("http://www.google.com/intl/en_ALL/images/logo.gif");</b>
-  });
+  _gel(&quot;logoImg&quot;).src = <b>_IG_GetImageUrl(&quot;http://www.google.com/intl/en_ALL/images/logo.gif&quot;);</b>
 &lt;/script&gt;</pre>
+<p>
+  Here's an alternative way using the other method:
 </p>
+<pre>&lt;div id=&quot;logoContainer&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  _gel(&quot;logoContainer&quot;).appendChild(<b>_IG_GetImage(&quot;http://www.google.com/intl/en_ALL/images/logo.gif&quot;)</b>);
+&lt;/script&gt;</pre>
+  
 
 <h3>Background Images</h3>
 <p>
-  There are other ways you might include images in your gadgets besides using <code>&lt;img&gt;</code> tags.  
-  For example, you can use similar tactics for CSS background images:
+  There are other ways you can include images in your gadgets besides using <code>&lt;img&gt;</code> tags.  
+  Here's an example that demonstrates how to cache a CSS background image:
+</p>
 <pre>&lt;div id="panel">This content has a background image&lt;/div&gt;
 &lt;script&gt;
   _IG_RegisterOnloadHandler(function() {
     <b>_gel("panel").style.background = "transparent url(" + _IG_GetImageUrl("http://www.google.com/intl/en_ALL/images/logo.gif") + ") 0px 0px no-repeat";</b>
   });
 &lt;/script&gt;</pre>
-</p>
 
 <a name="flash"></a>
 <h2>Embedding Flash Content</h2>
@@ -708,8 +715,9 @@ pre b {
 &lt;/ModulePrefs&gt;</pre>
 <p>
   This enables use of the <a href="http://www.google.com/apis/gadgets/ui.html#Flash">Flash library</a>,
-  which exposes the JavaScript method <code>_IG_EmbedFlash()</code>.  However, all Flash content must be cached.
-  Therefore you must, use the alternate JavaScript method below to embed Flash content
+  which exposes the JavaScript method <code>_IG_EmbedFlash()</code>.  However, gadget ads are
+  required to cache all embedded Flash content.
+  Therefore you must use the alternate JavaScript method below to embed Flash content
   into your gadget:
   <ul>
     <li>
@@ -717,13 +725,15 @@ pre b {
       <p>
         Embeds the .swf file specified by <code>swf_url</code>, and displays it in the gadget
         at the location specified by <code>swf_container</code>. The parameter <code>opt_params</code> is an object 
-        that optionally includes various Flash parameters.
+        that optionally includes various Flash parameters including the width and height.  This method accepts
+        the same parameters as <code>_IG_EmbedFlash()</code>.  For a full description of parameters,
+        visit the Flash section in the <a href="http://www.google.com/apis/gadgets/ui.html#Flash">developer guide</a>.
       </p>
     </li>
   </ul>
 
 <p>
-  Here's short code snippet that demonstrates how to use it:
+  Here's an example that demonstrates how to embed a cached Flash object:
 </p>
 <pre>&lt;div id=&quot;container&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
@@ -734,90 +744,74 @@ pre b {
   });</b>
 &lt;/script&gt;</pre>
 
-
-<a name="flash_cache"></a>
-<h3>Caching Flash Content</h3>
-<p>
-  Similar to caching gadget images, you should also cache Flash content
-  to improve gadget performance and decrease the load on hosting servers.  To do
-  this, you'll need to use
-  <code>_IG_EmbedFlash(url, container, opt_params)</code> in conjunction with 
-  another method called <code>_IG_GetCachedUrl(url)</code>, which simply returns
-  the proxy URL for the cached version of the file specified by <code>url</code>.
-</p>
-<p>
-  Within your gadget's content section, use the <code>_IG_EmbedCachedFlash()</code>
-  method to embed your Flash.  Here's short code snippet that uses the Flash
-  library to embed Flash content.
-</p>
-<pre>_IG_EmbedCachedFlash(<b>_IG_GetCachedUrl(&#39;http://www.mysite.com/flash.swf&#39;)</b>, &#39;container&#39;, {
-  swf_version: 6,
-  id: &quot;flashid&quot;,
-  width: 250,
-  height: 200
-});</pre>
-
 <a name="flash_cache_other"></a>
-<h3>Caching Other Resources Within Flash</h3>
+<h3>Caching Child Resources Within Flash</h3>
 <p>
-  Many times, Flash objects often embed other external resources such as images,
-  feeds, and other child Flash objects.  It's required to cache these as well for
-  all the same reasons, i.e to prevent melting down the hosting server.
+  Flash objects can embed other child resources such as images and other Flash objects.
+  However gadget ads are required to cache all embedded resources in order to prevent
+  hosting servers from being overloaded with requests.  Each embedded
+  resource falls under two categories:
 </p>
+<ol>
+  <li>hosted on the same domain as the Flash file and can be referenced using a relative path</li>
+  <li>hosted on a third-party domain and must be referenced using an absolute path</li>
+</ol>
 <p>
-  There's no way to retrieve any information directly from <code>_IG_...()</code> methods within Flash.
-  Therefore, you can't use <code>_IG_EmbedFlash()</code> or 
-  <code>_IG_GetCachedUrl()</code> to embed or fetch child Flash objects and other resources.
-  Instead, you need to manually prefix all resource URLs with this relative path:
-  <pre>/ig/proxy?url=ESCAPED_RESOURCE_URL</pre>
+  Depending on which category applies, caching the resource is slightly different.
 </p>
+<h4>Same Domain</h4>
 <p>
-  Using a relative path ensures that your resources are fetched from the same domain that the parent Flash is
-  rendered on.  For example, imagine your gadget ad is rendered on <code>http://gmodules.com</code>.
-  If your Flash is embedded using <code>_IG_EmbedFlash(_IG_GetCachedUrl(...))</code>, it's
-  fetched via <code>/ig/proxy?url=</code> and is therefore rendered on the same
-  domain.  Using relative paths from within your Flash ensures that all child
-  resources are also fetched from the same domain.  This prevents any 
-  cross-domain violations from occurring inside your Flash file.
+  Resources that fall under the first category are hosted on the same domain as the Flash object
+  that's accessing it.  These resources can be referenced by using a relative path.
+  All Flash files that are fetched using <code>_IG_EmbedCachedFlash()</code>
+  automatically caches any child resources that are embedded using a relative path.
+  Assuming the parent Flash file is embedded using <code>_IG_EmbedFlash()</code>,
+  all you need to do is reference the child resources using relative paths.  These
+  resources are automatically cached.
 </p>
+<h4>Third-Party Domain</h4>
 <p>
-  Example: To cache child Flash objects from within Flash, replace
-  <code>ESCAPED_RESOURCE_URL</code> with the 
-  <a href="http://www.adobe.com/support/flash/action_scripts/actionscript_dictionary/actionscript_dictionary199.html">escaped</a> 
-  child Flash URL:
-  <pre>/ig/proxy?url=<b>http%3A%2F%2Fmysite.com%2Fchild-flash.swf</b></pre>
+  Resources that fall under the second category are hosted on a third-party domain.
+  These resources can only be referenced by using an absolute path to the source,
+  which means they won't be automatically cached.  To enable caching, you need
+  to <a href="http://www.adobe.com/support/flash/action_scripts/actionscript_dictionary/actionscript_dictionary199.html">escape</a> 
+  the resource URL and prefix it with <code>/ig/proxy?url=</code>.
+  The constructed URL should match this format:
 </p>
+<pre>/ig/proxy?url=<b>&lt;ESCAPED_RESOURCE_URL&gt;</b></pre>
 <p>
-  Example: To cache images from within Flash, replace <code>ESCAPED_RESOURCE_URL</code> with
-  <a href="http://www.adobe.com/support/flash/action_scripts/actionscript_dictionary/actionscript_dictionary199.html">escaped</a> 
-  the image URL:
-  <pre>/ig/proxy?url=<b>http%3A%2F%2Fmysite.com%2Fimage1.gif</b></pre>
+  Here's a snippet on how to construct the child resource URL in
+  Flash ActionScript:
 </p>
+<pre>"/ig/proxy?url=" + escape("http://thirdpartydomain.com/child_flash.swf")</pre>
 
 <a name="flash_flashvars"></a>
 <h3>Using FlashVars To Pass Variables Into Flash</h3>
 <p>
   <a href="http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=tn_16417">FlashVars</a>
-  allow you to pass in variables to your Flash file.  With ActionScript,
-  you'll be able to access each variable and use it within our Flash application.
+  allow you to pass in variables to your Flash file.  Using ActionScript,
+  you'll be able to access each variable and use it within your Flash application.
 </p>
 <p>
-  To use FlashVars to pass variables in <code>_IG_EmbedFlash()</code>, start by adding
-  an additional property to the third parameter object and call it
-  <code>flashvars</code>.  Assign it a JavaScript String that consists of
-  name=value pairs separated by <code><b>&amp;</b></code>.  Each name=value
-  represents a new variable that will get passed into the Flash.
-  When creating this string of name=value pairs, <b>make sure to escape all values
-  by using <code>_esc()</code></b>.
+  Your Flash object should be embedded using <code>_IG_EmbedCachedFlash()</code>.
+  You can define FlashVars by adding an additional property to the third parameter object.
+  The name of the property should be <code>flashvars</code>.  Assign the new
+  property a string that consists of <code>name=escaped(value)</code> pairs separated
+  by <code><b>&amp;</b></code>.  Each <code>name=escaped(value)</code> pair
+  represents a variable that will get passed into the Flash object.
 </p>
 <p>
-  Here's an example showing how a formatted <code>flashvars</code> string with
-  multiple variables would look:
-  <pre>var1=value1<b>&amp;</b>var2=value2<b>&amp;</b>var3=value3<b>&amp;</b>var4=value</pre>
+  The <code>flashvars</code> string should match this format:
+</p>
+<pre>var1=value1<b>&amp;</b>var2=value2<b>&amp;</b>var3=value3<b>&amp;</b>var4=value</pre>
+<p>
+  <b>Note:</b> When creating the <code>flashvars</code> string, make sure each <code>value</code>
+  is escaped using <code>_esc()</code>.  Visit the <a href="http://www.google.com/apis/gadgets/reference.html#Core">reference</a>
+  for a full list of shortcut methods.
 </p>
 <p>
-  Here's how you would pass it into Flash using <code>_IG_EmbedFlash()</code>:
-<pre>_IG_EmbedFlash(_IG_GetCachedUrl('http://www.mysite.com/flash.swf'), 'container', {
+  Here's an example that shows what the implementation might look like:
+<pre>_IG_EmbedCachedFlash('http://www.mysite.com/flash.swf', 'container', {
     width: 300,
     height: 250,
     <b>flashvars: 'var1=' + _esc('value1') + '&amp;var2=' + _esc('value2') + '&amp;var3=' + _esc('value3') + '&amp;var4=' + _esc('value')</b>
@@ -826,7 +820,7 @@ pre b {
 
 
 <a name="video"></a>
-<h2>Embedding and Playing Video Content</h2>
+<h2>Embedding Video Content</h2>
 <p>
   For gadget ads, we highly recommend hosting your video on <a href="http://www.youtube.com">YouTube</a>.
   View the <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">instructions</a>
@@ -898,7 +892,7 @@ pre b {
 <p>
   The first thing you need is the FLV URL.  This can only be created
   from inside the gadget which is later passed into the Flash application
-  via flashvars.  Here's how the URL is constructed:
+  via <code>flashvars</code>.  Here's how the URL is constructed:
   <pre>http://www.youtube.com/get_video?video_id=<b class="red">YOUTUBE_VIDEO_ID</b>&amp;ts=<b class="green">TIMESTAMP</b>&amp;t=<b class="blue">YOUTUBE_SIGNATURE</b>&amp;gad=1</pre>
   <ul>
     <li>
@@ -922,7 +916,7 @@ pre b {
 <p>
   Now that you have the FLV URL, you have to pass it to your Flash player.
   Embed your Flash player using <code>_IG_EmbedFlash(...)</code> and create
-  a flashvars property with the FLV URL.  
+  a <code>flashvars</code> property with the FLV URL.  
   <br>
   <b>*** Make sure to escape all flashvar values. ***</b>
 <pre>var flvUrl = &quot;http://www.youtube.com/get_video?video_id=<b class="red">C5rTJkfBhbQ</b>&amp;ts=<b class="green">__ENV_time_secs_since_epoch__</b>&amp;t=<b class="blue">__YOUTUBE_VIDEO_TEST(C5rTJkfBhbQ)</b>__&amp;gad=1&quot;;
@@ -955,7 +949,6 @@ _IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://examplesite.com/myplayer.swf&quot;)
       (Window > Actions).  
       Type the following code in the Actions panel:
 <pre>// retrieve FlashVars variables
-var url = clickURL;
 var flv = flvURL;
 
 // create a NetConnection object
@@ -978,21 +971,16 @@ vid.attachVideo(ns);
 // call NetStream.play() to load the external FLV. The video will start 
 // playing before the file is fully downloaded.
 ns.play(flv);
-
-// finally add an event handler to open the clickURL when a visitor clicks 
-// on the video ad.
-_root.onMouseDown = function(){
-    getURL(url, &quot;_blank&quot;);
 };
 stop();</pre>
     </li>
   </ol>
 </p>
-<h4>Example: Simple Example Playing YouTube Videos</h4>
+<h4>Example</h4>
 <p>
-  <a href="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml">Live Preview</a>
-  :: 
-  <a href="http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml">Source XML</a>
+  Preview this 
+  <a href="http://gmodules.com/ig/ifr?synd=open&url=http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml">example gadget</a> 
+  which plays videos from YouTube using its own player, view the <a href="http://gadgetads.googlecode.com/svn/trunk/sample_youtube_flv.xml">source</a>.
 </p>
 
 <a name="map"></a>
@@ -1091,22 +1079,19 @@ stop();</pre>
 <p>
   We start with an empty gadget template.  The background image is 300 x 250 pixels.
   Let's set the width and height of the gadget to 300 x 250 by setting the <code>width</code> and <code>height</code> 
-  attributes under <code>ModulePrefs</code>.
+  attributes under <code>ModulePrefs</code>.  Since we're in the process of developing
+  the gadget, make sure to enable debug mode for both click-through and interaction-tracking.
 </p>
-<p>
-  Since we're still in testing phase, let's also set the <code>clickurl</code> to <code>http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=</code>.
-  Your gadget should look something like this:
-  
-  <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; <b>width="300" height="250"</b> thumbnail=""&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;<b>300</b>&quot; height=&quot;<b>250</b>&quot; thumbnail=&quot;&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
   &lt;/ModulePrefs&gt;
-  <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;&quot;/&gt;</b>
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;
+  &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
   ]]&gt;&lt;/Content&gt;
-&lt;/Module&gt;</pre>  
-</p>
+&lt;/Module&gt;</pre>
 
 <h3>Create the Content Layout</h3>
 <p>
@@ -1143,8 +1128,11 @@ stop();</pre>
   Your gadget should now look something like this:
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+    &lt;Require feature=&quot;ads&quot;/&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
+  &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     <b>&lt;table width=&quot;300&quot; id=&quot;main&quot; border=1 cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
@@ -1157,7 +1145,7 @@ stop();</pre>
     
     &lt;script&gt;
       _IG_RegisterOnloadHandler(function() {
-        // Set the background image of the table
+        // Cache the background image of the table
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
       });
     &lt;/script&gt;</b>
@@ -1175,7 +1163,7 @@ stop();</pre>
   <ol>
     <li>
       Since we'll be using the Flash library to embed the YouTube video, add the 
-  <code>&lt;Require feature=&quot;flash&quot;/&gt;</code> tag within <code>&lt;ModulePrefs&gt;</code>.
+  <code>&lt;Require feature=&quot;flash&quot;/&gt;</code> tag under <code>&lt;ModulePrefs&gt;</code>.
     </li>
     <li>
       Add a container element within the main table cell where the video will be injected.
@@ -1185,16 +1173,18 @@ stop();</pre>
       top border with the very top of the cell, eliminating any whitespace in between.
     </li>
     <li>
-      Lastly, add the <code>_IG_EmbedFlash(...)</code> code in JavaScript and remember to
-      set the width and height of the embedded video to fit inside the gadget dimensions.
+      Lastly, use <code>_IG_EmbedCachedFlash()</code> to embed the Flash in JavaScript.
+      Remember to set the width and height of the embedded video to fit inside the gadget dimensions.
     </li>
   </ol>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+    &lt;Require feature=&quot;ads&quot;/&gt;
     <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
   &lt;/ModulePrefs&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
+  &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     &lt;table width=&quot;300&quot; id=&quot;main&quot; border=0 cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
@@ -1209,11 +1199,11 @@ stop();</pre>
     
     &lt;script&gt;
       _IG_RegisterOnloadHandler(function() {
-        // Set the background image of the table
+        // Cache the background image of the table
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
         
         <b>// Embed the Gmail video from YouTube
-        _IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
+        _IG_EmbedCachedFlash(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;, _gel(&quot;video&quot;), {
             width: 300,
             height: 210
           });</b>
@@ -1227,8 +1217,8 @@ stop();</pre>
 <p>
   In the unused top-right corner, let's create a Gmail sign-up link that redirects
   users to a webpage where they can sign up for a Gmail account.  We want the 
-  gadget ad to track clicks on this link.  So we'll
-  need to use the <code>clickurl</code> to help create the link.
+  gadget ad to track click-throughs on this link.  So we'll
+  need to use <code>_ADS_ClickDestinationUrl()</code> to create the redirect.
 </p>
 <p>
   In this example, the 'Videos' and 'Secret Tips' icons aren't used.  To position the link
@@ -1238,8 +1228,8 @@ stop();</pre>
   Since the table is 300 pixels wide, a good starting pointing would be around 200 pixels.
   <ol>
     <li>
-      Create a new anchor tag inside the table cell of the first row.  Remember to assign
-      it an <code>id</code> so we can later add the <code>clickurl</code> to it.
+      Create a new anchor tag inside the table cell of the first row and
+      use <code>_ADS_ClickDestinationUrl()</code>.
     </li>
     <li>
       Use the <code>style</code> attribute to add left padding to the table cell.
@@ -1249,44 +1239,97 @@ stop();</pre>
       If table borders are still enabled, disable them because we no longer need them.
     </li>
   </ol>
-  
+</p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot;/&gt;
-  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl=&quot;/&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+    &lt;Require feature=&quot;ads&quot;/&gt;
+    &lt;Require feature=&quot;flash&quot;/&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
+  &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
   &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
     &lt;table width=&quot;300&quot; id=&quot;main&quot; <b>border=0</b> cellspacing=0 cellpadding=0&gt;
       &lt;tr height=&quot;30&quot;&gt;
         <b>&lt;td style=&quot;padding-left: 190px; font-size: 12px;&quot;&gt;
-          &lt;a id=&quot;signup&quot; target=&quot;_top&quot; href=&quot;http://mail.google.com/mail/help/open.html#utm_campaign=en&utm_source=en-ha-na-us-gadget&utm_medium=ha&quot;&gt;Sign up for Gmail&lt;/a&gt;
+          &lt;a href=&quot;javascript:_ADS_ClickDestinationUrl(&apos;http://mail.google.com/mail/help/open.html#utm_campaign=en&amp;utm_source=en-ha-na-us-gadget&amp;utm_medium=ha&apos;)&quot;&gt;Sign up for Gmail&lt;/a&gt;
         &lt;/td&gt;</b>
       &lt;/tr&gt;
-      &lt;tr height=&quot;220&quot;&gt;        
-        &lt;td valign=top&gt;
+      &lt;tr height=&quot;220&quot;&gt;
+        &lt;td align=center valign=top&gt;
           &lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
         &lt;/td&gt;
       &lt;/tr&gt;
     &lt;/table&gt;
     
     &lt;script&gt;
-      _IG_RegisterOnloadHandler(function() {
-        <b>// Prepend the click URL to the sign-up link so it can be tracked by the ads system
-        var prefs = new _IG_Prefs();
-        _gel(&quot;signup&quot;).href = prefs.getString(&quot;clickurl&quot;) + _esc(_gel(&quot;signup&quot;).href);</b>
-
-        // Set the background image of the table
+        // Cache the background image of the table
         _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
         
         // Embed the Gmail video from YouTube
-        _IG_EmbedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
-            width: 300,
+        _IG_EmbedCachedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
+            width: 250,
             height: 210
           });
       });
     &lt;/script&gt;
   ]]&gt;&lt;/Content&gt;
 &lt;/Module&gt;</pre>
+
+<h3>Enable Interaction-Tracking</h3>
+<p>
+  Lastly, let's send an interaction hit when the user initially moves their mouse
+  over the ad.  To do this, we need to bind a <code>mouseover</code> JavaScript event handler
+  to the body.  In the callback, call <code>_ReportAdInteraction()</code> to report the hit.
+  We only want to report the first <code>mouseover</code> that occurs.  Create a global variable
+  that gets flagged after the initial <code>mouseover</code> is received, and only call 
+  <code>_ReportAdInteraction()</code> if the variable hasn't been flagged.
 </p>
+<pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+    &lt;Require feature=&quot;ads&quot;/&gt;
+    &lt;Require feature=&quot;flash&quot;/&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
+  &lt;UserPref name=&quot;aiturl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
+  &lt;Content type=&quot;html&quot;&gt;&lt;![CDATA[
+    &lt;table width=&quot;300&quot; id=&quot;main&quot; border=0 cellspacing=0 cellpadding=0&gt;
+      &lt;tr height=&quot;30&quot;&gt;
+        &lt;td style=&quot;padding-left: 190px; font-size: 12px;&quot;&gt;
+          &lt;a href=&quot;javascript:_ADS_ClickDestinationUrl(&apos;http://mail.google.com/mail/help/open.html#utm_campaign=en&amp;utm_source=en-ha-na-us-gadget&amp;utm_medium=ha&apos;)&quot;&gt;Sign up for Gmail&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr height=&quot;220&quot;&gt;
+        &lt;td align=center valign=top&gt;
+          &lt;div id=&quot;video&quot;&gt;&lt;/div&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    
+    &lt;script&gt;
+      var mouseover_hit = false;
+      _IG_RegisterOnloadHandler(function() {
+        <b>// Track initial mouseover the ad
+        _IG_AddDOMEventHandler(document.body, &apos;mouseover&apos;, function() {
+          if (!mouseover_hit) {
+            _ReportAdInteraction(&apos;mouse_over&apos;);
+            mouseover_hit = true;
+          }
+        });</b>
+        
+        // Cache the background image of the table
+        _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
+        
+        // Embed the Gmail video from YouTube
+        _IG_EmbedCachedFlash(_IG_GetCachedUrl(&quot;http://www.youtube.com/v/_YUugB4IUl4&quot;), _gel(&quot;video&quot;), {
+            width: 250,
+            height: 210
+          });
+      });
+    &lt;/script&gt;
+  ]]&gt;&lt;/Content&gt;
+&lt;/Module&gt;</pre>
 
 <a name="finaloutcome"></a>
 <h2>The Final Outcome</h2>
@@ -1652,7 +1695,6 @@ stop();</pre>
    </tr>
   </table>
 </p>
-
 
 
 
