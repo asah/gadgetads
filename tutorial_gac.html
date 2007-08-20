@@ -509,7 +509,8 @@ pre b {
         Use this when your gadget contains only a single user-interaction that needs
         to be tracked.  For example, this could be a click-to-play button which starts
         video playback or a start button to load in a Flash game.  Each time this function
-        is called, a generic hit is sent to our tracking server.
+        is called, a generic hit is sent to our tracking server.  These hits are 
+        grouped into &quot;Primary Interactions&quot; in the interaction reports.
       </p>
     </li>
     <li>
@@ -532,12 +533,12 @@ pre b {
 </p>
 <p>
   <b>Note: </b>If the <code>name</code> parameter doesn't match one from the list,
-  the hits are grouped into an &quot;Other&quot; section in the reports.
+  the hits are grouped into an &quot;Other&quot; section in the interaction reports.
 </p>
 <p>
   Here's an
   <a href="http://gadgetads.googlecode.com/svn/trunk/tutorial_content/interaction_tracking.xml">example gadget</a>
-  that reports interactions when mouse rolls over the ad and when clicking on any of four item links:
+  that reports interactions on the initial mouseover and when clicking on any of four item links:
   (<a href="http://gmodules.com/ig/ifr?synd=open&url=http://gadgetads.googlecode.com/svn/trunk/tutorial_content/interaction_tracking.xml">live preview</a>)
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -1420,7 +1421,7 @@ stop();</pre>
       <code>_IG_GetImageUrl(url)</code>
     </td>
     <td>
-      Use to cache embedded images.  More information located in the
+      Use to cache embedded images.  More information is located in the
       <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache">Google Gadgets API reference</a>.
     </td>
   </tr>
