@@ -96,7 +96,7 @@
       
       // Create clickable logo
       var html = [
-        '<a href="javascript:_ADS_ClickDestinationUrl()">',
+        '<a href="javascript:_ADS_ClickDestinationUrl(http://www.vw.com')">',
         '<img src="' + _IG_GetImageUrl('http://') + '" alt="logo" width=30 height=30/>',
         '</a>'
       ].join("");
