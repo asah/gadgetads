@@ -3,7 +3,8 @@
   <ModulePrefs title="My Items" width="300" height="250" thumbnail="">
     <Require feature="ads"/>
   </ModulePrefs>
-  <UserPref datatype="hidden" name="aiturl" default_value=""/>
+  <UserPref datatype="hidden" name="clickurl" default_value=""/>
+  <UserPref datatype="hidden" name="aiturl" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
     <a href="javascript:_ADS_ReportInteraction('item_1');" >Item 1</a>
     <br>
