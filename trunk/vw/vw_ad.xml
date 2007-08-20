@@ -89,7 +89,7 @@
       // Track mouseovers on the ad
       _IG_AddDOMEventHandler(document.body, 'mouseover', function() {
         if (!mouseoverDetected) {
-          _ReportAdInteraction('mouse_over');
+          _ADS_ReportInteraction('mouse_over');
           mouseoverDetected = true;
         }
       });
@@ -104,10 +104,10 @@
     
       // Generate tab links
       var html = [
-        '<a href="javascript:void(0);" onclick="_ReportAdInteraction(\'tab_1\'); showVideos();">Videos</a>',
-        '<a href="javascript:void(0);" onclick="_ReportAdInteraction(\'tab_2\'); showFeeds();">Buzz</a>',
-        '<a onclick="_ReportAdInteraction(\'destination_url_1\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/dealerlocator/en/us/\');">Find Dealers</a>',
-        '<a onclick="_ReportAdInteraction(\'destination_url_2\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/specialoffers/en/us/\');">Special Offers</a>'
+        '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'tab_1\'); showVideos();">Videos</a>',
+        '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'tab_2\'); showFeeds();">Buzz</a>',
+        '<a onclick="_ADS_ReportInteraction(\'destination_url_1\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/dealerlocator/en/us/\');">Find Dealers</a>',
+        '<a onclick="_ADS_ReportInteraction(\'destination_url_2\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/specialoffers/en/us/\');">Special Offers</a>'
       ].join(" | ");
       _gel("linksContainer").innerHTML = html;
     
@@ -153,7 +153,7 @@
       var randIndex = Math.floor(Math.random() * 10000 % videoSources.length);
       var html = [
         '<div id="videoContainer"></div>',
-        '<a href="javascript:void(0);" onclick="_ReportAdInteraction(\'browse\'); showVideos();">&laquo; see more &raquo;</a>'
+        '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'browse\'); showVideos();">&laquo; see more &raquo;</a>'
       ];
       contentContainer.innerHTML = html.join('');
     
