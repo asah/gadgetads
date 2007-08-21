@@ -247,7 +247,7 @@
   XML where the required elements and attributes are <b>bolded</b>:
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;My Gadget Ad&quot; <b>width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;</b>
+  &lt;ModulePrefs title=&quot;My Gadget Ad&quot; <b>width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;</b>&gt;
     <b>&lt;Require feature=&quot;ads&quot;/&gt;</b>
   &lt;/ModulePrefs&gt;
   <b>&lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;&quot;/&gt;</b>
@@ -271,6 +271,10 @@
     <li>Skyscraper: 120 x 600</li>
     <li>Wide Skyscraper: 160 x 600</li>
   </ul>
+</p>
+<p>
+  The <code>thumbnail</code> attribute is required and must be set to a valid image URL.
+  The <code>scrolling</code> attribute is required and must be set to <code>false</code>.
 </p>
 
 <a name="imprequire"></a>
@@ -547,7 +551,7 @@
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;My Items&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+  &lt;ModulePrefs title=&quot;My Items&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
   &lt;/ModulePrefs&gt;
   &lt;UserPref datatype=&quot;hidden&quot; name=&quot;clickurl&quot; default_value=&quot;&quot;/&gt;
@@ -1078,7 +1082,7 @@ stop();</pre>
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;<b>300</b>&quot; height=&quot;<b>250</b>&quot; thumbnail=&quot;&quot;&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;<b>300</b>&quot; height=&quot;<b>250</b>&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
   &lt;/ModulePrefs&gt;
   &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;
@@ -1122,7 +1126,7 @@ stop();</pre>
   Your gadget should now look something like this:
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
   &lt;/ModulePrefs&gt;
   &lt;UserPref name=&quot;clickurl&quot; datatype=&quot;hidden&quot; default_value=&quot;DEBUG&quot;/&gt;
@@ -1173,7 +1177,7 @@ stop();</pre>
   </ol>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
     <b>&lt;Require feature=&quot;flash&quot;/&gt;</b>
   &lt;/ModulePrefs&gt;
@@ -1236,7 +1240,7 @@ stop();</pre>
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
     &lt;Require feature=&quot;flash&quot;/&gt;
   &lt;/ModulePrefs&gt;
@@ -1281,7 +1285,7 @@ stop();</pre>
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot;&gt;
+  &lt;ModulePrefs title=&quot;Simple Gmail Gadget Ad&quot; width=&quot;300&quot; height=&quot;250&quot; thumbnail=&quot;&quot; scrolling=&quot;false&quot;&gt;
     &lt;Require feature=&quot;ads&quot;/&gt;
     &lt;Require feature=&quot;flash&quot;/&gt;
   &lt;/ModulePrefs&gt;
