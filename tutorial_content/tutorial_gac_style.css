@@ -128,7 +128,9 @@ li pre{
 
 
 /* ########## TOC ########## */
-
+#gacbody .toc a {
+  font-weight: bold;
+}
 ol.toc, div.toc ol{
   margin:1.5em 0 0 25px;
   padding:0;
@@ -140,23 +142,16 @@ ol.toc li, div.toc ol li{
   margin:.5em 0 0 1.5em;
   padding:0;
 }
-
 ol.toc li ol, div.toc ol li ol{
 	margin:0;
 	padding:0;
 }
-	
 ol.toc li ol li, div.toc ol li ol li{
   padding:0;
   margin:.1em 0 0 1em;
   font-weight:normal;
   list-style:none;
 }
-
-table ol.toc{
-	margin-left:0;
-}
-
 /* ########## END TOC ########## */
 
 
