@@ -52,8 +52,20 @@ pre b {
       <li><a href="#ggae">Use the Google Gadget Ads Editor</a></li>
     </ul>
   </li>
-  <li><a href="#clickthrough">Tracking Click-Throughs</a></li>
-  <li><a href="#interaction">Tracking User Interactions</a></li
+  <li>
+    <a href="#clickthrough">Tracking Clickthroughs</a>
+    <ul>
+      <li><a href="#clickthroughflash">Clickthroughs in Flash</a></li>
+      <li><a href="#clickthroughdebug">Enabling Debug Mode</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#interaction">Tracking Interactions</a>
+    <ul>
+      <li><a href="#interactionflash">Interactions in Flash</a></li>
+      <li><a href="#interactiondebug">Enabling Debug Mode</a></li>
+    </ul>
+  </li
   <li><a href="#remotecontent">Fetching Remote Content</a></li>
   <li><a href="#images">Embedding Images: Recommended</a></li>
   <li>
@@ -117,10 +129,10 @@ pre b {
   these ads conform to industry standards and Google's accepted policies around
   rich media and dynamic advertising. It is very important that you conform to
   both IAB (Internet Advertising Board) and Google corporate policies around
-  acceptable forms of advertising. Beyond "obvious" guidelines about not
+  acceptable forms of advertising. Beyond &quot;obvious&quot; guidelines about not
   misleading users, there are some special considerations that may not be obvious
-  at first. For example, pages can have multiple ads on them-- so you cannot play
-  audio on-load, or the ads will conflict. Google has developed an initial set of
+  at first. For example, pages can have multiple ads on them &mdash; so you cannot play
+  audio on load, or the ads will conflict. Google has developed an initial set of
   editorial guidelines that must be adhered to. You can see these guidelines at
   the link below:
 </p>
@@ -132,7 +144,7 @@ pre b {
   In many parts of the world, users and companies pay a lot of money for
   bandwidth and so it is important to respect their needs to keep ads small.
   Moreover, if ads slowed down webpages too much, then the web would seem slow
-  and we would all suffer. Google has consistently seen that latency and direct
+  and we would all suffer. Google has consistently seen that latency has a direct
   and obvious impact on the performance of ads. The IAB limits rich media ad
   sizes based on the dimensions of the creative, but no ads are allowed to be
   over 40k on load. Google's preference is always that advertisers should comply
@@ -144,33 +156,33 @@ pre b {
 </p>
 <p>
   As gadget ads are a new and unique format Google has set a maximum of 50 KB
-  (kilobytes) allowed "on load" for an ad during our beta period. The definition
-  of "on load" is tricky, but should be taken to mean the size of the ad when it
+  (kilobytes) allowed &quot;on load&quot; for an ad during our beta period. The definition
+  of &quot;on load&quot; is tricky, but should be taken to mean the size of the ad when it
   is loaded with the page and prior to a consumer interacting with it. If the user
-  has "interacted" with the gadget ad, then it is OK to use more than 50KB. Both
-  for the 50KB limit and the no-audio rule mentioned above, on-load video is
+  has &quot;interacted&quot; with the gadget ad, then it is OK to use more than 50KB. Both
+  for the 50KB limit and the no-audio rule mentioned above, &quot;on load&quot; video is
   generally not possible, but small animation sequences work.
 </p>
-<h3>Bad Clicks and Misleading Click-Targets</h3>
+<h3>Bad Clicks and Misleading Click Targets</h3>
 <p>
-  It is trivial to simulate a click with a gadget ad-- obviously, don't do this.
-  Beyond threats, click fraud makes no sense for gadget ads--
-  click-through-based advertisers ultimate make money when users willingly
+  It is trivial to simulate a click with a gadget ad &mdash; obviously, don't do this.
+  Beyond threats, click fraud makes no sense for gadget ads &mdash;
+  clickthrough-based advertisers ultimate make money when users willingly
   choose to click to learn more about products or services. Fraudulent gadget ad
   clicks increase click through rate, at the expense of conversion. Similarly,
-  "tricking" the user into clicking with bad click targets is self-defeating.
+  &quot;tricking&quot; the user into clicking with bad click targets is self-defeating.
 </p>
 <p>
-  The more subtle issue is low click-through rates. For example, if the click
-  through URLs are not properly placed, then the gadget will 'work' but fail to
+  The more subtle issue is low clickthrough rates. For example, if the click
+  through URLs are not properly placed, then the gadget will &quot;work&quot; but fail to
   run if it uses CPC (cost-per-click) advertising. More subtly, your help in
   user interface design can help advertisers understand the implications of CPM
-  (paying for impressions, not clicks) vs. CPC vs. CPA (paying for conversion)
+  (paying for impressions, not clicks) vs. CPC vs. CPA (paying for conversions)
   advertising.
 </p>
 <p>
   Click targets (clicks that lead users to another website) must be visually
-  identified as causing click-through vs. in-gadget interactions. Google
+  identified as causing clickthrough vs. in-gadget interactions. Google
   suggests doing this by having all click targets underlined and in a blue font
   color.
 </p>
@@ -185,19 +197,19 @@ pre b {
   Google requires that ads are completely anonymous.  Google Gadget Ads may not
   create or read cookies, or use other cookie-like mechanisms, e.g. flash local
   storage. We view this as a crucial aspect of respecting our users' privacy.
-  This is a very important rule -- do not make mistakes.
+  This is a very important rule &mdash; do not make mistakes.
 </p>
 <h3>Downloads and Malware Ads</h3>
 <p>
   Gadget Ads cannot download (or attempt to download) any software to the user's
-  computer. Currently, IAB/Google do not permit download-links from inside
-  gadgets-- we are investigating way(s) of changing these guidelines to allow
-  download links from inside gadget ads-- but today, advertisers must place all
-  download links on the 'landing page' (destination page from click-throughs).
+  computer. Currently, IAB/Google does not permit download links from inside
+  gadgets &mdash; we are investigating ways of changing these guidelines to allow
+  download links from inside gadget ads &mdash; but today, advertisers must place all
+  download links on the 'landing page' (destination page from clickthroughs).
 </p>
 <h3>Popup Windows</h3>
 <p>
-  Don't use alert(), confirm() or other "modal" dialog boxes for any reason.
+  Don&apos;t use alert(), confirm() or other &quot;modal&quot; dialog boxes for any reason.
   We also do not allow links to landing pages that generate
   pop-ups when users enter or leave your landing page. We consider a pop-up to
   be any window, regardless of content, that opens in addition to the original
@@ -213,11 +225,11 @@ pre b {
   you can embed all types of content such as images, Flash, videos, etc.
   as you would on a normal webpage.   You also have complete access to our various
   <a href="http://www.google.com/apis/gadgets/reference.html">API functions</a> with
-  no restrictions on how it's used.
+  no restrictions on how they're used.
 </p>
 <p>
   On the other hand, gadget ads must adhere to a set of requirements that must be fulfilled in
-  order for it to be approved.  There are two types of requirements for gadget ads:
+  order for them to be approved.  There are two types of requirements for gadget ads:
   <ol>
   <li>Requirements in the gadget XML</li>
   <li>Requirements in the implementation</li>
@@ -256,8 +268,9 @@ pre b {
 &lt;/Module&gt;</pre>
 </p>
 <p>
-  The <code>width</code> and <code>height</code> attributes define the ad size, which
-  must match one of the following formats:
+  Gadget ads are available in the same formats as image ads.
+  The <code>width</code> and <code>height</code> attributes define the ad size and
+  must match one of the following <a href="https://www.google.com/adsense/static/en_US/AdFormats.html#image">AdSense formats</a>:
   <ul>
     <li>Banner: 468 x 60</li>
     <li>Leaderboard: 728 x 90</li>
@@ -268,6 +281,7 @@ pre b {
     <li>Skyscraper: 120 x 600</li>
     <li>Wide Skyscraper: 160 x 600</li>
   </ul>
+</p>
 
 <a name="imprequire"></a>
 <h3>Implementation Requirements</h3>
@@ -297,13 +311,13 @@ pre b {
       <td>Follow the instructions under <a href="#interaction">Tracking User Interactions</a>.</td>
     </tr>
     <tr>
-      <td>Must track click-throughs on target links.</td>
-      <td>Follow the instructions under <a href="#clickthrough">Tracking Click-Throughs</a>.</td>
+      <td>Must track clickthroughs on target links.</td>
+      <td>Follow the instructions under <a href="#clickthrough">Tracking Clickthroughs</a>.</td>
     </tr>
   </table>
 </p>
 <p>
-  The various sections in this document covers the implementation details on how to fulfill
+  The various sections in this document cover the implementation details on how to fulfill
   each requirement.
 </p>
 
@@ -313,9 +327,9 @@ pre b {
 <p>
   Now that you have a better understanding of gadget ad requirements, you can start building one.
   To help get you started, we've provided a list of example gadget ads that you can use
-  to quickly get started.  The examples are all partially completed and includes all
+  to quickly get started.  The examples are all partially completed and include all
   required XML elements and attributes.  Each file may contain sets of 
-  code snippets that fulfills various implementation requirements.  Depending on which file you choose,
+  code snippets that fulfill various implementation requirements.  Depending on which file you choose,
   a different set of snippets will exist.  You can take the snippets and expand
   on them, or simply swap in a few pieces of information on your own to make a complete
   gadget.
@@ -339,7 +353,7 @@ pre b {
       <td>
         <div>Code snippets:</div>
         <ul>
-          <li>tracking click-through in HTML</li>
+          <li>tracking clickthrough in HTML</li>
           <li>tracking user interactions in HTML</li>
         </ul>
       </td>
@@ -349,7 +363,7 @@ pre b {
       <td>
         <div>Code snippets:</div>
         <ul>
-          <li>tracking click-through in HTML</li>
+          <li>tracking clickthrough in HTML</li>
           <li>tracking user interactions in HTML</li>
           <li>embedding Flash</li>
         </ul>
@@ -360,7 +374,7 @@ pre b {
       <td>
         <div>Code snippets:</div>
         <ul>
-          <li>tracking click-through in HTML</li>
+          <li>tracking clickthrough in HTML</li>
           <li>tracking user interactions in HTML</li>
           <li>embedding Flash</li>
           <li>streaming video from YouTube</li>
@@ -418,12 +432,12 @@ pre b {
 
 
 <a name="clickthrough"></a>
-<h2>Tracking Click-Throughs</h2>
+<h2>Tracking Clickthroughs</h2>
 <p>
   All gadget ads should have at least one exit link defined where users can click on the link
   and be redirected to some remote destination, usually a landing page of some kind.
-  In order to determine click-through rates for your gadget ad, you need to track
-  all click-throughs on all your designated exit links.  This requires a slight
+  In order to determine clickthrough rates for your gadget ad, you need to track
+  all clickthroughs on all your designated exit links.  This requires a slight
   implementation change in the way you define your links.
 </p>
 <p>
@@ -432,30 +446,31 @@ pre b {
 </p>
 <pre>&lt;a target="_top" href="http://mytargetdomain.com"&gt;Target Link&lt;/a&gt;</pre>
 <p>
-  In order to enable click-through tracking on this link, you must use the following
+  In order to enable clickthrough tracking on this link, you must use the following
   JavaScript function to initiate the redirect:
   <ul>
     <li>
       <code><b>_ADS_ClickDestinationUrl(url)</b></code>
       <p>
         Pass in the final destination URL into the function as the <code>url</code> parameter.  
-        When function is called, a click-through hit is received and then redirected to the destination.
+        When function is called, a clickthrough hit is received and then redirected to the destination.
     </li>
   </ul>
 </p>
 <p>
-  Here's the same link from above, except that click-through tracking is now enabled:
+  Here's the same link from above, except that clickthrough tracking is now enabled:
 </p>
 <pre>&lt;a href="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
 <p>
-  You can call this function from anywhere to simulate a click-through.
-  Here's an example on creating a click-through using an input button
+  You can call this function from anywhere to simulate a clickthrough.
+  Here's an example of creating a clickthrough using an input button:
 </p>
 <pre>&lt;input onclick="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>" type="button" value="Target Link"/&gt;</pre>
 
-<h3>Click-Throughs in Flash</h3>
+<a name="clickthroughflash"></a>
+<h3>Clickthroughs in Flash</h3>
 <p>
-  To create click-throughs in Flash, you need to simply call the JavaScript function
+  To create clickthroughs in Flash, you need to simply call the JavaScript function
   using ActionScript.  You can do this by using <code>getURL(javascript:&lt;JS_FUNCTION&gt;)</code>.
   For example:
 </p>
@@ -464,15 +479,15 @@ pre b {
 <a name="clickthroughdebug"></a>
 <h3>Enabling Debug Mode</h3>
 <p>
-  In order to verify that your click-throughs are setup and working correctly, you can enable
+  In order to verify that your clickthroughs are setup and working correctly, you can enable
   debug mode by setting the <code>default_value</code> for UserPref <code>clickurl</code>
-  to &quot;DEBUG&quot;.  This lets you see a confirmation whenever click-throughs
+  to &quot;DEBUG&quot;.  This lets you see a confirmation whenever clickthroughs
   are detected.
 </p>
 <pre>&lt;UserPref name=&quot;<b>clickurl</b>&quot; datatype=&quot;hidden&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
 <p>
   In debug mode, <code>_ADS_ClickDestinationUrl()</code> creates a
-  confirmation pop-up with a message indicating that the click-through was received.
+  confirmation pop-up with a message indicating that the clickthrough was received.
   The destination URL is displayed in the confirmation box so you can clearly see
   the final destination.
   You then have the option of proceeding to the destination URL or
@@ -498,7 +513,7 @@ pre b {
   track as many user interactions as possible.
 </p>
 <p>
-  To report interactions, setup JavaScript event handlers in your gadget ad to be
+  To report interactions, set up JavaScript event handlers in your gadget ad to be
   triggered by user interactions that you wish to track.  Have each
   event handler callback execute one of the JavaScript functions below.  Each call will
   send a hit to our tracking server and report the interaction:
@@ -568,6 +583,7 @@ pre b {
   ]]&gt;&lt;/Content&gt;
 &lt;/Module&gt;</pre>
 
+<a name="interactionflash"></a>
 <h3>Interactions in Flash</h3>
 <p>
   To track interactions in your Flash applications, call <code>_ADS_ReportInteraction()</code>
@@ -575,14 +591,14 @@ pre b {
 </p>
 <pre>getURL("javascript:<b>_ADS_ReportInteraction('mouse_over', 1);</b>");</pre>
 
-<a name="trackingdebug"></a>
+<a name="interactiondebug"></a>
 <h3>Enabling Debug Mode</h3>
 <p>
   Interaction tracking is very important to implement correctly.
   If it's not setup properly, you run the risk
   of receiving significantly less data in your reports.  Without the reports, you have no way 
-  of determining the success of your gadget ad.  You can easily test
-  verify whether interaction hits are being reported correctly by enabling debug mode.
+  of determining the success of your gadget ad.  You can easily verify whether
+  interaction hits are being reported correctly by enabling debug mode.
 </p>
 <p>
   To enable debug mode, set the <code>default_value</code> to &quot;DEBUG&quot; for
@@ -590,12 +606,12 @@ pre b {
 <pre>&lt;UserPref name=&quot;<b>aiturl</b>&quot; datatype=&quot;string&quot; default_value=&quot;<b>DEBUG</b>&quot;/&gt;</pre>
 </p>
 <p>
-  This enables debug mode for interaction-tracking, which creates a small debug
+  This enables debug mode for interaction tracking, which creates a small debug
   buffer at the top left corner of your gadget.  Initially, a title bar
   with the &quot;DEBUG&quot; link is shown along with a message counter for number of items currently
   in the buffer.  Clicking on the link expands the container where you can then see
   the messages contained.  The buffer container is designed to
-  to overlay on top of all HTML content such as text, images, Flash, and iframes to ensure
+  overlay on top of all HTML content such as text, images, Flash, and iframes to ensure
   that it remains visible.
 </p>
 <p>
@@ -708,7 +724,7 @@ pre b {
     <a href="http://www.google.com/apis/gadgets/reference.html#Ref_Cache"><code><b>_IG_GetImage(url)</b></code></a>
     <p>
     Returns an HTML Image element after fetching it through Google's cache.
-    The <code>url</code> parameter must an absolute URL pointing to your image.
+    The <code>url</code> parameter must be an absolute URL pointing to your image.
     </p>
   </li>
   <li>
@@ -818,7 +834,7 @@ pre b {
   Resources that fall under the first category are hosted on the same domain as the Flash object
   that's accessing it.  These resources can be referenced by using a relative path.
   All Flash files that are fetched using <code>_IG_EmbedCachedFlash()</code>
-  automatically caches any child resources that are embedded using a relative path.
+  automatically cache any child resources that are embedded using a relative path.
   Assuming the parent Flash file is embedded using <code>_IG_EmbedCachedFlash()</code>,
   all you need to do is reference the child resources using relative paths.  These
   resources are automatically cached and no additional actions are required.
@@ -896,7 +912,7 @@ pre b {
     <li>
       Find the video on <a href="http://www.youtube.com">YouTube</a> that you want to use.
       If your video doesn't exist on YouTube, <a href="http://www.youtube.com/my_videos_upload">upload</a>
-      them now.  Visit their <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">help center</a>
+      it now.  Visit their <a href="http://www.google.com/support/youtube/bin/topic.py?topic=10524">help center</a>
       if you need help.
     </li>
     <li>
@@ -1078,7 +1094,7 @@ stop();</pre>
   We start with an empty gadget template.  The background image is 300 x 250 pixels.
   Let's set the width and height of the gadget to 300 x 250 by setting the <code>width</code> and <code>height</code> 
   attributes under <code>ModulePrefs</code>.  Since we're in the process of developing
-  the gadget, make sure to enable debug mode for both click-through and interaction-tracking.
+  the gadget, make sure to enable debug mode for both clickthrough and interaction tracking.
 </p>
 <pre>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
@@ -1215,7 +1231,7 @@ stop();</pre>
 <p>
   In the unused top-right corner, let's create a Gmail sign-up link that redirects
   users to a webpage where they can sign up for a Gmail account.  We want the 
-  gadget ad to track click-throughs on this link.  So we'll
+  gadget ad to track clickthroughs on this link.  So we'll
   need to use <code>_ADS_ClickDestinationUrl()</code> to create the redirect.
 </p>
 <p>
@@ -1274,7 +1290,7 @@ stop();</pre>
   ]]&gt;&lt;/Content&gt;
 &lt;/Module&gt;</pre>
 
-<h3>Enable Interaction-Tracking</h3>
+<h3>Enable Interaction Tracking</h3>
 <p>
   Lastly, let's send an interaction hit when the user initially moves their mouse
   over the ad.  To do this, we need to bind a <code>mouseover</code> JavaScript event handler
@@ -1331,7 +1347,7 @@ stop();</pre>
 <h2>The Final Outcome</h2>
 <p>
   Congratulations!  You've just made your first gadget ad.  Here's a live running instance
-  showing how the final gadget should look like
+  showing what the final gadget should look like
   (<a href="http://fusion.google.com/add?moduleurl=http://gadgetads.googlecode.com/svn/trunk/tutorial_content/simple_gmail_ad.xml">add it now</a>):
 </p>
 <p><iframe frameborder=0 width=300 height=250 src="http://gmodules.com/ig/ifr?url=http://gadgetads.googlecode.com/svn/trunk/tutorial_content/simple_gmail_ad.xml&synd=open"></iframe></p>
@@ -1352,7 +1368,7 @@ stop();</pre>
 <h3>JavaScript Library</h3>
 <p>
   This section describes the JavaScript functions supported by the Google Gadgets API
-  that's specifically relevant to Google Gadget Ads.
+  that are specifically relevant to Google Gadget Ads.
 </p>
 <table width="95%" border=0 cellspacing=0 cellpadding=0>
   <tr>
@@ -1388,7 +1404,7 @@ stop();</pre>
         </li>
         <li>
           <b><code>_ADS_ReportInteraction(name, value):</code></b> To be used when
-          tracking multiple interactions and pass in a value to be summed up in
+          tracking multiple interactions and passing in a value to be summed up in
           the reports.
         </li>
       </ul>
@@ -1397,7 +1413,7 @@ stop();</pre>
   <tr>
     <td><code>_ADS_ClickDestinationUrl(dest_url)</code></td>
     <td>
-      Reports a click-through hit and redirects to the location specified by <code>dest_url</code>.
+      Reports a clickthrough hit and redirects to the location specified by <code>dest_url</code>.
       Valid parameters are:
       <ul>
         <li>
@@ -1614,7 +1630,7 @@ stop();</pre>
    <tr>
     <td>General</td>
     <td>scroll</td>
-    <td>User uses the scroll bar in a ad creative</td>
+    <td>User uses the scroll bar in an ad creative</td>
    </tr>
    <tr>
     <td>General</td>
@@ -1624,7 +1640,7 @@ stop();</pre>
    <tr>
     <td>General</td>
     <td>change_zip</td>
-    <td>User changes zip cod info in creative</td>
+    <td>User changes zip code info in creative</td>
    </tr>
    <tr>
     <td>General</td>
