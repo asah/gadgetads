@@ -20,16 +20,12 @@
 /* ########## END HYPERLINKS ########## */
 
 /* ########## FONT FORMATS ########## */
-#gacbody h1, h2, h3, h4, h5 {
+#gacbody h1, #gacbody h2, #gacbody h3, #gacbody h4, #gacbody h5 {
 	font-weight:bold;
 	margin-bottom:0;
-}
-	
-h2, h3, h4, h5 {
 	margin-left:25px;
 }
-
-h1 {
+#gacbody h1 {
 	font-size:130%;
 	margin:2em 0 0 10px; 
 	padding:0 3px 0 3px;
@@ -37,15 +33,13 @@ h1 {
 	background-color: #e5ecf9;
 	border-color: #3366CC;
 }
-
-h2 {
+#gacbody h2 {
 	font-size:120%;
 	margin-top:1.5em;
 	border-bottom: 1px solid;
 	border-color: #3366CC;
 }
-
-h3 {
+#gacbody h3 {
 	font-size:110%;	
 	margin-top:.7em;
 	position:relative;
@@ -53,8 +47,7 @@ h3 {
 	top:.7em;
 	z-index:5; /*to avoid falling behind other elements due to lowered position*/
 }
-	
-h4 {
+#gacbody h4 {
 	margin-top:.5em;
 	font-size:100%;
 	font-weight:bold;
@@ -63,8 +56,7 @@ h4 {
 	top:.8em;
 	z-index:5; /*to avoid falling behind other elements due to lowered position*/
 }
-	
-h5 {
+#gacbody h5 {
 	margin-top:.4em;
 	font-size:100%;
 	font-weight:100;
@@ -75,40 +67,36 @@ h5 {
 	top:.8em;
 	z-index:5; /*to avoid falling behind other elements due to lowered position*/
 }
-	
-p {
+
+#gacbody p {
 	margin: 1em 0 0 25px;
 	padding:0;
 }
-	
-ol, ul, dl{
+
+#gacbody ol, #gacbody ul, #gacbody dl{
 	padding-top:.5em;
 	margin-top:0;
 	margin-bottom:0;
 }
-	
-li ol, li ul{
+#gacbody li ol, #gacbody li ul{
 	padding:.1em 0 0 0;
 	margin:0;
 }
-	
-li{
+#gacbody li{
  	margin: .4em 0 0 1.5em;
 	padding:0;
 }
-			
-ul li p, ol li p{
+#gacbody ul li p, #gacbody ol li p{
 	margin: 0;
 	padding:.4em 0 0 0;
 	font-weight:normal;
 }
-	
-code{
+
+#gacbody code{
 	font-family: "Courier New", Courier, monospace;
 	font-size: 100%;
 }
-	
-pre {
+#gacbody pre {
 	background-color: #eee;
 	border: 1px solid #bbb;
 	color: #000000;
@@ -119,19 +107,17 @@ pre {
 	text-align:left;
 	overflow: auto;
 }
-	
-li pre{
+#gacbody li pre{
 	margin: 1em 0 0 0;
 	padding: .9em;
 }
 /* ########## END FONT FORMATS ########## */
 
-
 /* ########## TOC ########## */
 #gacbody .toc a {
   font-weight: bold;
 }
-ol.toc, div.toc ol{
+#gacbody ol.toc, #gacbody div.toc ol{
   margin:1.5em 0 0 25px;
   padding:0;
   list-style:none;
