@@ -24,7 +24,6 @@
 </p>
 <!-- END TEMPORARY NOTICE -->
 
-
 <!-- TOC -->
 <h2>Contents</h2>
 <ol class="toc">
@@ -1315,12 +1314,12 @@ stop();</pre>
     &lt;script&gt;
       <b>// Track initial mouseover the ad
       var mouseover_hit = false;
-      _IG_AddDOMEventHandler(document.body, &apos;mouseover&apos;, function() {
+      document.body.onmouseover = function() {
         if (!mouseover_hit) {
           _ADS_ReportInteraction(&apos;mouse_over&apos;);
           mouseover_hit = true;
         }
-      });</b>
+      };</b>
       
       // Cache the background image of the table
       _gel(&quot;main&quot;).style.background = &quot;transparent url(&quot; + _IG_GetImageUrl(&quot;http://www.labpixies.com/gadgads/gmail/images/background.png&quot;) + &quot;)&quot;;
@@ -1770,7 +1769,7 @@ stop();</pre>
    </tr>
   </table>
 </p>
-</div>
 
+</div>
 </body>
 </html>
