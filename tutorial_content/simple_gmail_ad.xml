@@ -23,12 +23,12 @@
     <script>
       // Track initial mouseover the ad
       var mouseover_hit = false;
-      _IG_AddDOMEventHandler(document.body, 'mouseover', function() {
+      document.body.onmouseover = function() {
         if (!mouseover_hit) {
           _ADS_ReportInteraction('mouse_over');
           mouseover_hit = true;
         }
-      });
+      };
       
       // Cache the background image of the table
       _gel("main").style.background = "transparent url(" + _IG_GetImageUrl("http://www.labpixies.com/gadgads/gmail/images/background.png") + ")";
