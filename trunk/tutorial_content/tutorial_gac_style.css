@@ -7,14 +7,14 @@ body {
 	}
 
 /* ########## HYPERLINKS ########## */
-a {
+#gacbody a {
   color: #0000cc;
 }	
-a:active {
+#gacbody a:active {
   color: #cc0000;
   text-decoration:none;
 }
-a:visited {
+#gacbody a:visited {
   color: #551a8b;
 }
 /* ########## END HYPERLINKS ########## */
