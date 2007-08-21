@@ -1,13 +1,23 @@
-#gacbody a {
+body {
+	font-family: arial, sans-serif;
+	background-color:#fff;
+	font-size: small;
+	margin: 24px 8px 8px;
+	color:#000;
+	}
+
+/* ########## HYPERLINKS ########## */
+a {
   color: #0000cc;
 }	
-#gacbody a:active {
+a:active {
   color: #cc0000;
-  text-decoration: none;
+  text-decoration:none;
 }
-#gacbody a:visited {
+a:visited {
   color: #551a8b;
 }
+/* ########## END HYPERLINKS ########## */
 
 /* ########## FONT FORMATS ########## */
 #gacbody h1, h2, h3, h4, h5 {
