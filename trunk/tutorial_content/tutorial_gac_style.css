@@ -4,7 +4,7 @@
 	font-size: small;
 	margin: 24px 8px 8px;
 	color:#000;
-	}
+}
 
 /* ########## HYPERLINKS ########## */
 #gacbody a {
@@ -112,7 +112,7 @@
 	padding: .9em;
 }
 #gacbody pre b, #gacbody li pre b {
-  color: #c00;
+  color: #cc0000;
 }
 /* ########## END FONT FORMATS ########## */
 
