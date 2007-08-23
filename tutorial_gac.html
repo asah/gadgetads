@@ -453,12 +453,12 @@
 <p>
   Here's the same link from above, except that clickthrough tracking is now enabled:
 </p>
-<pre>&lt;a href="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
+<pre>&lt;a href="javascript:<b>_ADS_ClickDestinationUrl('http://targetdestination.com');</b>"&gt;Target Link&lt;/a&gt;</pre>
 <p>
   You can call this function from anywhere to simulate a clickthrough.
   Here's an example of creating a clickthrough using an input button:
 </p>
-<pre>&lt;input onclick="<b>javascript:_ADS_ClickDestinationUrl('http://targetdestination.com');</b>" type="button" value="Target Link"/&gt;</pre>
+<pre>&lt;input onclick="javascript:<b>_ADS_ClickDestinationUrl('http://targetdestination.com');</b>" type="button" value="Target Link"/&gt;</pre>
 
 <a name="clickthroughflash"></a>
 <h3>Clickthroughs in Flash</h3>
@@ -467,7 +467,7 @@
   using ActionScript.  You can do this by using <code>getURL(javascript:&lt;JS_FUNCTION&gt;)</code>.
   For example:
 </p>
-<pre>getURL(<b>javascript:_ADS_ClickDestinationUrl(&#39;http://targetdestination.com&#39;);</b>)</pre>
+<pre>getURL(javascript:<b>_ADS_ClickDestinationUrl(&#39;http://targetdestination.com&#39;);</b>)</pre>
 
 <a name="clickthroughdebug"></a>
 <h3>Enabling Debug Mode</h3>
