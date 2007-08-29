@@ -160,7 +160,8 @@
       // Show videos DIV and hide feeds
       _IG_EmbedCachedFlash(videoSources[randIndex], 'videoContainer', {
           width: 270,
-          height: 220
+          height: 220,
+          wmode: 'transparent'
         });
       contentContainer.className = "videos";
     }
