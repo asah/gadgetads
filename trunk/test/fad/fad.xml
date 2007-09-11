@@ -13,8 +13,11 @@
   <Content type="html"><![CDATA[
     <div id="container"></div>
     <script>
-      _IG_EmbedFlash("http://www.corp.google.com/~wangz/fad/fad.swf", "container",
-        {width: 300, height: 250});
+      var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/test/fad.swf';
+      _IG_EmbedCachedFlash(swfUrl, 'container', {
+        width: 300, 
+        height: 250
+      });
     </script>
   ]]></Content>
 </Module>
