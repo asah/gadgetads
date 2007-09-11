@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  Gadget ad should pass all validation requirements
+-->
 <Module>
   <ModulePrefs title="My Flash Gadget Ad"
     width="300"
