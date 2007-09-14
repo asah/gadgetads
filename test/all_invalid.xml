@@ -1,0 +1,12 @@
+
+<Module>
+<ModulePrefs />
+<Content type="html-inline"><![CDATA[
+Hello, world!
+<img src="http://imgcash1.imageshack.us/common/images/header_white.jpg"/>
+<script>
+document.cookie = 'one';
+</script>
+
+]]></Content>
+</Module>
