@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
   <ModulePrefs title="Interaction Test">
-    <Require feature="interaction-tracking"/>
+    <Require feature="ads"/>
   </ModulePrefs>
+  <UserPref datatype="hidden" name="clickurl"/>
   <UserPref datatype="hidden" name="aiturl"/>
   <Content type="html"><![CDATA[
-    <a href="javascript:_IG_ReportInteraction();" >
-      <img src="http://gadgets.testing.googlepages.com/clickme.jpg" border="0"/>
+    <a href="javascript:_ADS_ReportInteraction();" >
+      <img src="http://static.howstuffworks.com/gif/diesel-jeep-engine.jpg" border="0"/>
     </a>
   ]]></Content>
 </Module>
