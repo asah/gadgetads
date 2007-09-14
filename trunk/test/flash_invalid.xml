@@ -3,7 +3,7 @@
   <ModulePrefs>
   	<Require feature="flash"/>
 	</ModulePrefs>
-	<Content type="html-inline"><![CDATA[
+	<Content type="html"><![CDATA[
 		<div id="container"></div>
 		<script>
 			_IG_EmbedFlash('http://www.thesandboxonline.com/saatchila/highlander_300x250.swf', 'container', {
