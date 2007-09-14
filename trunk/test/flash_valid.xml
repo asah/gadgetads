@@ -16,6 +16,8 @@
   <Content type="html"><![CDATA[
     <div id="container"></div>
     <script>
+      _IG_FetchContent('http://dannon.mtv:9010/ig/f/jVilVNnzbJ0/ig.js', function(response) { alert(response); });
+      
       var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/test/test_content/fad.swf';
       _IG_EmbedCachedFlash(swfUrl, 'container', {
         width: 300, 
