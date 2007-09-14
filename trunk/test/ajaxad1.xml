@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+<ModulePrefs title="Sainsbury's Recipes, Ideas and Tips" title_url="http://www.sainsburys.co.uk/" category="Lifestyle" thumbnail="http://www.sainsburys.co.uk/widgets/images/thumbnail.gif" description="Find useful recipes and tips from Sainsbury's." render_inline="optional" width="336" height="280" scrolling="false"><Require feature="interaction-tracking"/><Require feature="setprefs"/></ModulePrefs>
+<UserPref name="resultslimit" display_name="Page limit" datatype="enum" default_value="5">
+<EnumValue value="3" display_value="3 results per page"/>
+<EnumValue value="5" display_value="5 results per page"/>
+<EnumValue value="10" display_value="10 results per page"/>
+</UserPref>
+<UserPref name="starttab" default_value="0" datatype="hidden" />
+<UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="  />
+<Content type="html"><![CDATA[  
+<style type="text/css">	
+#gadget{margin:0 auto;text-align:center;overflow:hidden}
+#wrapper{margin:0 auto;width:336px;height:280px;color:#000;font-family:tahoma,arial,sans-serif;font-size:10px;line-height:16px;text-align:left;overflow:hidden}	
+#wrapper img{border:0;}
+div#logo{margin:0 2px;}
+
+a{color:#000}
+a.link {cursor:pointer;color:#000}
+h1{margin:5px 0;font-family:tahoma,arial,sans-serif;font-size:11px;color:#000;font-weight:bold}
+h2{margin:2px 0;font-family:tahoma,arial,sans-serif;font-size:10px;color:#000;font-weight:bold}
+p{font-family:tahoma,arial,sans-serif;font-size:10px;color:#000; }
+
+#navigation {margin:0;height:25px;}	
+#navigation ul{background:#fff;list-style-type:none;margin:0;padding:0;overflow:hidden;}
+#navigation ul li{float:left;margin:0;padding:0;text-indent:-5000em;}
+#navigation ul li a {display:block;height:25px;color:#fff}
+a#recipesTabOn,a#recipesTabOff,a#ideasTabOn,a#ideasTabOff{width:111px}
+a#tipsTabOn, a#tipsTabOff{width:114px}
+
+div#mainContent{padding:1px 0 6px 0;overflow:hidden;}	
+div#tabContent{margin:0 1px;height:135px;overflow:hidden;}
+div#separator{clear:left;height:5px;font-size:0;line-height:0}
+
+div#recipeDetail {margin:0 0 0 10px;overflow:auto;height:100%}
+div#recipeDetail h2{margin:5px 0 0 0;color:#f26334;}
+div#recipeDetail img{margin:0 0 4px 0}
+div#recipeDetail p {margin:0;}
+div#recipeDetail ul{margin:0 0 1em 0;padding:0;width:300px;list-style-type:none;font-family:tahoma,arial,sans-serif;font-size:10px;}
+div#recipeDetail ul li{margin:0;padding:0 0 0 10px;}
+div.bodytext{margin:5px 10px 10px 0;font-family:tahoma,arial,sans-serif;font-size:10px;}
+
+div#results{font-family:tahoma,arial,sans-serif;font-size:9px}
+div#recipeResults {overflow:auto;height:100%}
+div#recipeResults h1{color:#f26334;margin:5px 10px;}
+div#recipeResults p{color:#000000;margin:0 10px;}
+div#recipeResults dl{margin:0 10px;font-family:tahoma,arial,sans-serif;font-size:10px;}
+div#recipeResults dl dt{font-weight:bold;padding-left:10px;}
+div#recipeResults dl dd{margin:2px 0 2px 10px;color:#666;}
+div.searchresults {display:none;}
+
+div#recipeResultsPaging {margin-top:6px;overflow:hidden;}
+div#recipeResultsPaging ul{display:inline;float:left;font-family:tahoma,arial,sans-serif;font-size:10px;list-style-type:none;margin:0 0 0.5em 20px;overflow:hidden;padding:0;}
+div#recipeResultsPaging ul li a {display:block;padding:0 6px;color:#000;cursor: pointer}
+div#recipeResultsPaging ul li strong {display:block;padding:0 6px;color:#f26334}
+div#recipeResultsPaging ul li{border-left:1px solid #000;float:left;}	
+div#recipeResultsPaging ul li.last{}	
+div#recipeResultsPaging a.next{color:#000;float:left;padding-right:10px;text-decoration:none;}	
+
+div#ideaDetails {padding:0 10px;overflow:auto;height:100% }
+div#ideaDetails p{margin:5px 0 }
+div.ideaText{float:left;padding-bottom:5px;width:185px}
+div.ideaImg{float:right;padding:5px 2px;width:96px;}
+div.ideaSeparator{clear:both;height:5px;border-bottom:solid 1px #ececee}
+
+div#tips {margin:0;height:100%;overflow:auto;}	
+div#tipsDetail { padding:0 10px;}
+div#tipsDetail p{font-size:11px;}
+div#tipsDetail dl{font-size:10px;margin:10px 0 0 0;width:290px;}	
+div#tipsDetail dt{color:#f26334;}
+div#tipsDetail dt strong{font-size:11px;}
+div#tipsDetail .author { white-space:nowrap }
+div#tipsDetail dd{color:#666666;margin-left:0;}
+
+#extraContent{position:relative;margin:0 2px;padding:0;height:50px;font-size:11px}
+
+#recipeExtra,#ideasExtra,#tipsExtra { padding:5px 10px;height:100% }
+#recipeExtra { padding:5px 10px; }
+#ideasExtra,#tipsExtra { padding:8px 10px; }
+
+#extraContent ul {float:none;margin:0;padding:2px 0 0 0;clear:both;width:auto;height:auto;border:0;background:none;list-style:none}
+#extraContent ul li a{width:auto;border:0;padding:0 0 4px 10px;color:#000;text-decoration:none;cursor:pointer}
+
+#extraContent ul li a:hover{color:#f26334;cursor:pointer}
+
+
+form#recipeSearch{margin:0;}
+form#recipeSearch fieldset{border:0;margin:0;padding:0;position:relative	}
+form#recipeSearch input{font-family:tahoma,arial,sans-serif;font-size:10px;color:#666;}	
+form#recipeSearch input.text{position:absolute;top:2px;padding:2px 2px 1px 2px;width:190px;}	
+form#recipeSearch input.submit{margin:0 0 0 195px;width:57px;}		
+
+div#error h1{margin:4px;color:#f00}
+div#error p{margin:4px;}
+div#error a{color:#f26334;}
+</style>
+<div id="gadget"><div id="wrapper">
+	<div id="navigation"><ul><li><a title="Recipes" id="recipesTabOn">Recipes</a></li><li><a title="Recipes" id="recipesTabOff" class="link">Recipes</a></li><li><a title="Ideas" id="ideasTabOn">Ideas</a></li><li><a title="Ideas" id="ideasTabOff" class="link">Ideas</a></li><li><a title="Tips" id="tipsTabOn">Tips</a></li><li><a title="Tips" id="tipsTabOff" class="link">Tips</a></li></ul></div>
+	<div id="mainContent">
+		<div id="logo"><a href="http://www.sainsburys.co.uk" title="Go to the Sainsbury's website" target="_blank" id="mainlink"><img id="logoImage" src="" width="332" height="42" alt="Sainsbury's Recipes, Ideas and Tips Google Gadget" /></a></div>
+		<div id="tabContent"> </div>
+		<div id="separator"> </div>
+		<div id="extraContent">
+		<div id="recipeExtra"><form id="recipeSearch">
+		<fieldset><input type="text" id="searchFor" class="text" value="Search for recipes &amp; ideas e.g. chicken" onclick="this.value=''" onkeypress="return onEnter(event,this.form)" /><input type="image" class="submit" src="http://www.sainsburys.co.uk/widgets/images/recipes/search.gif" alt="Search" onclick="return ReturnSearch();" /></fieldset>		
+		<ul><li><a href="http://www.sainsburys.co.uk/food/recipe" id="recipelink" target="_blank" title="Link to advanced recipe search in a new window" onmouseover="setLinkChange(this.id,true)" onmouseout="setLinkChange(this.id,false)">Advanced Search</a></li></ul>
+		</form></div>
+		<div id="ideasExtra"><ul><li><a href="http://www.sainsburys.co.uk/food/trysomethingnew/" id="ideaslink" target="_blank" title="Link to Sainsbury's website ideas in a new window" onmouseover="setLinkChange(this.id,true)" onmouseout="setLinkChange(this.id,false)">Visit our site for more ideas</a></li><li><a href="http://www.sainsburys.co.uk/YourIdeas/tips/" id="ideascommunity" target="_blank" title="Link to Sainsbury's online community in a new window" onmouseover="setLinkChange(this.id,true)" onmouseout="setLinkChange(this.id,false)">Share your ideas in our online community</a></li></ul></div>
+		<div id="tipsExtra"><ul><li><a href="http://www.sainsburys.co.uk/food/trysomethingnew/" id="tipslink" target="_blank" title="Link to Sainsbury's website tips in a new window" onmouseover="setLinkChange(this.id,true)" onmouseout="setLinkChange(this.id,false)">Visit our site for more tips</a></li><li><a href="http://www.sainsburys.co.uk/YourIdeas/tips/" id="tipscommunity" target="_blank" title="Link to Sainsbury's online community in a new window" onmouseover="setLinkChange(this.id,true)" onmouseout="setLinkChange(this.id,false)">Share your tips in our online community</a></li></ul></div></div>
+	</div>
+</div></div>
+<script type="text/javascript">
+var recipeLoaded=false;var ideasLoaded=false;var tipsLoaded=false; var ServiceUrl="http://www.sainsburys.co.uk/webservices/webservices.asmx"; function init(){var prefs=new _IG_Prefs();var tab=prefs.getInt("starttab");switch (tab){case 2:changeTab('tips');break;case 1:changeTab('ideas');break;case 0:default:changeTab('recipe');break;}addClickUrls();setImageLocations();setOnClicks();}
+function GetImageUrl(ImageUrl){var ImageServerUrl="http://www.sainsburys.co.uk/widgets/images/";ImageUrl=ImageServerUrl+ImageUrl;return _IG_GetImageUrl(ImageUrl);}
+function addClickUrls() { var prefs = new _IG_Prefs(); eObject=_gel('mainlink');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href); eObject=_gel('recipelink');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href); eObject=_gel('ideaslink');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href); eObject=_gel('ideascommunity');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href); eObject=_gel('tipslink');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href); eObject=_gel('tipscommunity');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href); eObject=_gel('errorlink');if (eObject) eObject.href=prefs.getString("clickurl")+_esc(eObject.href);}
+function setImageLocations(){ _gel("mainContent").style.background="#fff url("+GetImageUrl("main/body_bg.gif")+") no-repeat left bottom"; _gel("logoImage").src=GetImageUrl("main/logo.gif"); _gel("separator").style.background="url("+GetImageUrl("main/drop_shadow.gif")+") no-repeat bottom center"; _gel("recipesTabOn").style.background="#f26334 url("+GetImageUrl("tabs3/recipes_on.gif")+") no-repeat"; _gel("recipesTabOff").style.background="#cccdd0 url("+GetImageUrl("tabs3/recipes_off.gif")+") no-repeat"; _gel("ideasTabOn").style.background="#f26334 url("+GetImageUrl("tabs3/ideas_on.gif")+") no-repeat"; _gel("ideasTabOff").style.background="#cccdd0 url("+GetImageUrl("tabs3/ideas_off.gif")+") no-repeat"; _gel("tipsTabOn").style.background="#f26334 url("+GetImageUrl("tabs3/tips_on.gif")+") no-repeat"; _gel("tipsTabOff").style.background="#cccdd0 url("+GetImageUrl("tabs3/tips_off.gif")+") no-repeat"; _gel("recipeExtra").style.background="url("+GetImageUrl("recipes/bg_form.gif")+") no-repeat top right"; _gel("ideasExtra").style.background="url("+GetImageUrl("ideas/coffee.jpg")+") no-repeat top right"; _gel("tipsExtra").style.background="url("+GetImageUrl("tips/peppers.jpg")+") no-repeat top right"; _gel("recipelink").style.background="url("+GetImageUrl("main/bullet.gif")+") top left no-repeat"; _gel("ideaslink").style.background="url("+GetImageUrl("main/bullet.gif")+") top left no-repeat"; _gel("ideascommunity").style.background="url("+GetImageUrl("main/bullet.gif")+") top left no-repeat"; _gel("tipslink").style.background="url("+GetImageUrl("main/bullet.gif")+") top left no-repeat"; _gel("tipscommunity").style.background="url("+GetImageUrl("main/bullet.gif")+") top left no-repeat";}
+function setLinkChange(obj, roll) { _gel(obj).style.background= (roll==true) ? "url("+GetImageUrl("main/bullet-over.gif")+") top left no-repeat" : "url("+GetImageUrl("main/bullet.gif")+") top left no-repeat";}
+function setOnClicks() { _gel('recipesTabOn').onclick=function(){changeTab('recipes');_IG_ReportInteraction();}
+_gel('recipesTabOff').onclick=function(){changeTab('recipes');_IG_ReportInteraction();}
+_gel('ideasTabOn').onclick=function(){changeTab('ideas');_IG_ReportInteraction();}
+_gel('ideasTabOff').onclick=function(){changeTab('ideas');_IG_ReportInteraction();}
+_gel('tipsTabOn').onclick=function(){changeTab('tips');_IG_ReportInteraction();}
+_gel('tipsTabOff').onclick=function(){changeTab('tips');_IG_ReportInteraction();}}
+function showTabContentLoading() {_gel("tabContent").innerHTML = "";_gel("tabContent").style.background="url("+GetImageUrl("main/loading.gif")+") no-repeat center center";}
+function showTabContentHTML(htmlData) { htmlData = htmlData.replace(/&lt;/g,'<'); htmlData = htmlData.replace(/&gt;/g,'>'); _gel("tabContent").innerHTML = htmlData; _gel("tabContent").style.background = "#fff";}
+function ShowHide(sObject,bShow){bShow = bShow.toString();eObject=_gel(sObject);if (eObject) eObject.style.display=(bShow=='true')?"block":"none";}
+function SetContent(sObject,sContent) { eObject = _gel(sObject); if (eObject && !eObject.disabled) eObject.innerHTML=sContent;}
+function ReturnSearch() { eObject = _gel('searchFor'); searchFor = eObject.value; if (searchFor != '' && searchFor != 'Search for recipes & ideas e.g. chicken') { showTabContentLoading(); displayRecipeResults(searchFor,1);} else { alert('Please enter a search term');}
+return false;}
+function onEnter( evt, frm ) { var keyCode = null; if( evt.which ) { keyCode = evt.which;} else if( evt.keyCode ) { keyCode = evt.keyCode;}
+if( 13 == keyCode ) { ReturnSearch(); return false;}
+return true;}
+function changeExtraContent(tab) { switch (tab) { case 'ideas':
+ShowHide('recipeExtra','false'); ShowHide('tipsExtra','false'); ShowHide('ideasExtra','true'); break; case 'tips':
+ShowHide('recipeExtra','false'); ShowHide('ideasExtra','false'); ShowHide('tipsExtra','true'); break; case 'recipe':
+default:
+ShowHide('ideasExtra','false'); ShowHide('tipsExtra','false'); ShowHide('recipeExtra','true'); break;}
+}
+function changeTab(tab,RecipeId) { var prefs = new _IG_Prefs(); switch (tab) { case 'ideas':
+if (ideasLoaded==false) { showTabContentLoading() }; ShowHide('recipesTabOn','false'); ShowHide('recipesTabOff','true'); ShowHide('ideasTabOn','true'); ShowHide('ideasTabOff','false'); ShowHide('tipsTabOn','false'); ShowHide('tipsTabOff','true'); displayIdeas(); prefs.set("starttab", 1); break; case 'tips':
+if (tipsLoaded==false) { showTabContentLoading() }; ShowHide('recipesTabOn','false'); ShowHide('recipesTabOff','true'); ShowHide('ideasTabOn','false'); ShowHide('ideasTabOff','true'); ShowHide('tipsTabOn','true'); ShowHide('tipsTabOff','false'); displayTopTips(); prefs.set("starttab", 2); break; case 'recipe':
+default:
+if (recipeLoaded==false || RecipeId != null) { showTabContentLoading() }
+ShowHide('recipesTabOn','true'); ShowHide('recipesTabOff','false'); ShowHide('ideasTabOn','false'); ShowHide('ideasTabOff','true'); ShowHide('tipsTabOn','false'); ShowHide('tipsTabOff','true'); displayRecipe(RecipeId); prefs.set("starttab", 0); break;}
+changeExtraContent(tab);}
+function displayRecipe(RecipeId) { var GetXmlUrl; if (RecipeId) { GetXmlUrl = ServiceUrl + "/GetRecipeById?RecipeId="+RecipeId;} else { GetXmlUrl = ServiceUrl + "/GetRecipeRandom";}
+_IG_FetchXmlContent(GetXmlUrl, function (response) { if (response == null || typeof(response) != "object" || response.firstChild == null) { showErrorMessage(GetXmlUrl); return;}
+var html = "<div id=\"recipeDetail\">"; eObject = response.getElementsByTagName("name"); xmldata = eObject.item(0).firstChild.nodeValue; html += "<h1>" + xmldata + "</h1>"; eObject = response.getElementsByTagName("rating"); xmldata = eObject.item(0).firstChild.nodeValue; if (xmldata != '') html += getRatingGraphic(xmldata); eObject = response.getElementsByTagName("description"); xmldata = eObject.item(0).firstChild.nodeValue; if (xmldata != '') { xmldata = xmldata.replace(/\n/g,'<br/>'); html += "<p>" + xmldata + "</p>";}
+html += "<h2>Recipe information</h2>"; eObject = response.getElementsByTagName("servings"); xmldata = eObject.item(0).firstChild.nodeValue; if (xmldata != '') html += "<p><strong>Serves: </strong>" + xmldata + "</p>"; eObject = response.getElementsByTagName("preptime"); xmldata = eObject.item(0).firstChild.nodeValue; if (xmldata != '') html += "<p><strong>Prep time: </strong>" + xmldata + " minutes</p>"; eObject = response.getElementsByTagName("cookingtime"); xmldata = eObject.item(0).firstChild.nodeValue; if (xmldata != '') html += "<p><strong>Cooking time: </strong>" + xmldata + " minutes</p>"; var itemList = response.getElementsByTagName("ingredients"); for (var i = 0; i < itemList.length ; i++) { var nodeList = itemList.item(i).childNodes; if (nodeList.length > 0) { html += "<h2>Ingredients</h2>"; html += "<ul>"; for (var j = 0; j < nodeList.length ; j++) { var node = nodeList.item(j); if (node.nodeName == "string") { xmldata = node.firstChild.nodeValue; html += "<li style=\"background:url("+GetImageUrl("recipes/list_marker.gif")+") no-repeat top left;\">" + xmldata + "</li>";}
+}
+html += "</ul>";}
+}
+html += "<h2>Method</h2>"; xmldata = response.getElementsByTagName("method").item(0).firstChild.nodeValue; if (xmldata != '') { xmldata = xmldata.replace(/\\n/g,'<br/>'); html += "<div class=\"bodytext\">" + xmldata + "</div>";}
+html += "</dl></div>"; if (RecipeId != 0) recipeLoaded = true; showTabContentHTML(html)
+});}
+function displayIdeas(){ var GetXmlUrl=ServiceUrl+"/GetAllIdeas"; _IG_FetchXmlContent(GetXmlUrl, function (response){if (response==null || typeof(response)!="object" || response.firstChild==null){showErrorMessage(GetXmlUrl);return;}
+var html = "<div id=\"ideaDetails\">"; var itemList=response.getElementsByTagName("tipssearchresponse"); for (var i=itemList.length-1; i > itemList.length-6;i--) { var nodeList=itemList.item(i).childNodes; if (nodeList.length>0) { var htmlreplace = "<div class=\"ideaText\"><h1>[*title*]</h1><p><strong>Why not try</strong> [*summary*]</p>[*rating*]</div><div class=\"ideaImg\" style=\"background:url("+GetImageUrl("ideas/shadow.gif")+") no-repeat 0 4px;\"><img src=\"[*imageurl*]\" width=\"90\" height=\"112\" alt=\"[*title*]\" title=\"[*title*]\" border=\"0\" /></div>"; for (var j=0;j<nodeList.length;j++){ var node=nodeList.item(j); if (node.nodeName=="tipid"){xmldata=node.firstChild.nodeValue;htmlreplace=htmlreplace.replace('[*id*]',xmldata);}
+if (node.nodeName=="title"){xmldata=node.firstChild.nodeValue;htmlreplace=htmlreplace.replace(/\[\*title\*\]/g,xmldata);}
+if (node.nodeName=="summary"){xmldata=node.firstChild.nodeValue;htmlreplace=htmlreplace.replace('[*summary*]',xmldata);}
+if (node.nodeName=="rating"){xmldata=node.firstChild.nodeValue;htmlreplace=htmlreplace.replace('[*rating*]',getRatingGraphic(xmldata));}
+if (node.nodeName=="imagethumburl"){xmldata=node.firstChild.nodeValue;htmlreplace=htmlreplace.replace('[*imageurl*]',_IG_GetImageUrl("http://www.sainsburys.co.uk"+xmldata));}}
+html+=htmlreplace; if (i > (itemList.length-6)) {html+="<div class=\"ideaSeparator\"></div>";}
+}}
+html+="</div>"; showTabContentHTML(html);});}
+function getRatingGraphic(rating){ var ratingHtml="<img src=\"";switch (rating){ case "5":ratingHtml+=GetImageUrl("tips/rating5.gif")+"\" alt=\"5 stars";break; case "4":ratingHtml+=GetImageUrl("tips/rating4.gif")+"\" alt=\"4 stars";break; case "3":ratingHtml+=GetImageUrl("tips/rating3.gif")+"\" alt=\"3 stars";break; case "2":ratingHtml+=GetImageUrl("tips/rating2.gif")+"\" alt=\"2 stars";break; case "1":ratingHtml+=GetImageUrl("tips/rating1.gif")+"\" alt=\"1 star";break; case "0":default:ratingHtml+=GetImageUrl("tips/rating0.gif")+"\" alt=\"0 stars";break;}
+ratingHtml+="\" width=\"61\" height=\"15\" />";if (rating=="0") ratingHtml="";return ratingHtml;}
+function displayTopTips(){ var GetXmlUrl = ServiceUrl + "/GetTopTips?categoryId=0"; _IG_FetchXmlContent(GetXmlUrl, function (response) { if (response == null || typeof(response) != "object" || response.firstChild == null) { showErrorMessage(GetXmlUrl); return;}
+var html = ""; html+="<div id=\"tips\">"; html+="<div id=\"tipsDetail\">"; html+="<h1>Top rated tips</h1>"; html+="<div class=\"bodytext\">"; var itemList=response.getElementsByTagName("tipssearchresponse"); var prefs=new _IG_Prefs(__MODULE_ID__); var resultLimit=+(prefs.getString("resultslimit")); if (resultLimit > itemList.length) resultLimit = itemList.length; for (var i=0;i<resultLimit;i++){ var nodeList=itemList.item(i).childNodes; if (nodeList.length > 0) { var htmlreplace = "<dl><dt><strong>[*title*]</strong> <span class=\"author\">By [*author*]</span></dt>[*rating*]<dd>[*summary*]</dd></dl>"; for (var j=0;j<nodeList.length;j++) { var node = nodeList.item(j); if (node.nodeName=="title") { xmldata = node.firstChild.nodeValue; htmlreplace=htmlreplace.replace('[*title*]',xmldata);}
+if (node.nodeName=="author") { xmldata = node.firstChild.nodeValue; htmlreplace=htmlreplace.replace('[*author*]',xmldata);}
+if (node.nodeName=="rating") { xmldata = node.firstChild.nodeValue; htmlreplace=htmlreplace.replace('[*rating*]',getRatingGraphic(xmldata));}
+if (node.nodeName=="summary") { xmldata = node.firstChild.nodeValue; htmlreplace=htmlreplace.replace('[*summary*]',xmldata);}
+}
+html += htmlreplace;}
+}
+html += "</div></div></div>"; showTabContentHTML(html); tipsLoaded = true;});}
+function displaySearchResults(currentPage,gotoPage) { ShowHide('searchresults'+currentPage,'false'); ShowHide('searchresults'+gotoPage,'true'); generatePaging(gotoPage);}
+function generatePaging(currentPage) { var html = "<ul>"; var totalPages = +(_gel("resultsPageTotal").value); totalPages = (totalPages > 8) ? 8 : totalPages; for (var i = 1;i <= totalPages;i++) html += (i == currentPage) ? "<li><strong>"+i+"</strong></li>" : "<li><a onclick=\"displaySearchResults('"+currentPage+"',"+i+")\">"+i+"</a></li>"; if (currentPage < totalPages) { html += "<li class=\"last\"><a onclick=\"displaySearchResults('"+currentPage+"',"+(currentPage+1)+")\" class=\"next\" style=\"background:url("+GetImageUrl("recipes/recipes_marker.gif")+") no-repeat right\">Next results</a></li>";}
+html += "</ul>"; _gel('recipeResultsPaging').innerHTML = html;}
+function displayRecipeResults(searchFor,pageNum) { var GetXmlUrl = ServiceUrl + "/SearchRecipe?query="+searchFor; var prefs = new _IG_Prefs(__MODULE_ID__); var resultLimit = +(prefs.getString("resultslimit")); _IG_FetchXmlContent(GetXmlUrl, function (response) { if (response == null || typeof(response) != "object" || response.firstChild == null) { showErrorMessage(); return;}
+var html = ""; html += "<div id=\"recipeResults\">"; html += "<h1>Recipe search results for: "+searchFor+"</h1>"; html += "<a name=\"searchtop\" id=\"searchtop\"></a>"; html += "<div id=\"results\">"; var itemList = response.getElementsByTagName("SearchResultResponse"); var xmldata = ""; if (itemList.length > 0) { for (var i = 0; i < itemList.length ; i++) { if (i % resultLimit == 0) { if (i != 0) html += "</dl></div>"; html += "<div id=\"searchresults"+((i/resultLimit)+1)+"\" class=\"searchresults\">"; html += "<p>"+itemList.length+" results found - Page "+((i/resultLimit)+1)+"</p>"; html += "<dl>";}
+var nodeList = itemList.item(i).childNodes; if (nodeList.length > 0) { var htmlreplace = "<dt style=\"background:url("+GetImageUrl("recipes/recipes_marker.gif")+") no-repeat 0 6px;\"><a onclick=\"changeTab('recipe',[*recipeid*])\" class=\"link\"><strong>[*title*]</strong></a></dt><dd>[*summary*]</dd>"; for (var j=0;j<nodeList.length;j++) { var node=nodeList.item(j); if (node.nodeName == "Url") { xmldata = node.firstChild.nodeValue; xmldata = xmldata.substr(xmldata.indexOf('recipeid=')); xmldata = xmldata.replace('recipeid=',''); htmlreplace = htmlreplace.replace('[*recipeid*]',xmldata);}
+if (node.nodeName == "Title") { xmldata = node.firstChild.nodeValue; htmlreplace = htmlreplace.replace('[*title*]',xmldata);}
+if (node.nodeName == "Summary") { xmldata = node.firstChild.nodeValue; htmlreplace = htmlreplace.replace('[*summary*]',xmldata);}
+}
+html += htmlreplace;}
+}
+html += "</dl></div>";} else { html += "No results have been found.</br>";}
+html += "</div>"; html += "<div id=\"recipeResultsPaging\"></div>"; html += "<input type=\"hidden\" id=\"resultsPageTotal\" name=\"resultsPageTotal\" value=\"" + Math.ceil(itemList.length/resultLimit) + "\" />"; html += "</div>"; showTabContentHTML(html)
+displaySearchResults(1,pageNum);},{refreshInterval: 0});}
+function showErrorMessage(XmlUrl) { var html = "<div id=\"error\"><h1>Sorry, there has been an error</h1>"; html += "<p>Unfortunately, we are unable to retrieve the requested data at this time.</p>"; html += "<p>Go to the <a href=\"http://www.sainsburys.co.uk\" id=\"errorlink\">Sainsbury's website</a></p>"; html += "</div>"; showTabContentHTML(html)
+}
+_IG_RegisterOnloadHandler(init()); 
+</script>
+  ]]> 
+  </Content>
+</Module>

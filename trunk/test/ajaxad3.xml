@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="ゼクシィnet - 結婚準備から新生活までの総合情報サイト" title_url="http://zexy.net/?vos=nxywadww3070611016" description="結婚が決まったら、ふたりにぴったりの会場探し。結婚式準備サイト-ゼクシィnetでは、あなたの式場探しをお手伝いします。 " author="RECRUIT CO.,LTD." width="336" height="280" scaling="false" scrolling="false" thumbnail="http://zexy.net/al/googleg/goog_070612_gadget_car_thumbnail.gif"> 
+</ModulePrefs>
+<UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+<Content type="html"><![CDATA[
+<table width="336" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td colspan="3"><img src="/ig/proxy?url=http://zexy.net/al/googleg/goog_070612_gadget_xy_header.gif" width="336" height="55" /></td>
+  </tr>
+  <tr>
+    <td width="2"><img src="/ig/proxy?url=http://zexy.net/al/googleg/goog_070612_gadget_xy_leftbar.gif" width="2" height="214" /></td>
+    <td width="332" height="214" align="center" valign="middle">
+      <table width="320" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td height="90" align="left" valign="top"><p style="font-size:12px; line-height:20px; font-weight:bold; margin:0px; padding:0px;">ブライダルフェアに行ってみよう</p>
+          <p style="font-size:9px; line-height:15px; margin:0px; padding:0px;">結婚式当日の様子が見られたり、試食会、試着会などを体験できる！</p>
+          <p style="font-size:10px; line-height:25px; margin:0px; padding:0px;"><a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=04&X_CD=goolgeg&vos=nxywadww3070611001" target="_top" id="link01">関東エリア</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=06&X_CD=goolgeg&vos=nxywadww3070611002" target="_top" id="link02">関西エリア</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=05&X_CD=goolgeg&vos=nxywadww3070611003" target="_top" id="link03">東海エリア</a>
+          <p style="font-size:10px; line-height:20px; margin:0px; padding:0px;"><a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=01&X_CD=goolgeg&vos=nxywadww3070611004" target="_top" id="link04">北海道</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=02&X_CD=goolgeg&vos=nxywadww3070611005" target="_top" id="link05">東北</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=03&X_CD=goolgeg&vos=nxywadww3070611006" target="_top" id="link06">北陸・甲信越・静岡</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=07&X_CD=goolgeg&vos=nxywadww3070611007" target="_top" id="link07">中国</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=10&X_CD=goolgeg&vos=nxywadww3070611008" target="_top" id="link08">四国</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=AT003&han_cd=08&X_CD=goolgeg&vos=nxywadww3070611009" target="_top" id="link09">九州</a></p></td>
+        </tr>
+        <tr>
+          <td height="1" align="left" valign="top"><img src="/ig/proxy?url=http://zexy.net/al/googleg/goog_070612_gadget_xy_bar.gif" width="320" height="1" /></td>
+        </tr>
+        <tr>
+          <td height="60" align="left" valign="top"><p style="font-size:12px; line-height:20px; font-weight:bold; margin:0px; padding:0px;">シンプルウエディング</p>
+          <p style="font-size:9px; line-height:15px; margin:0px; padding:0px;">ハデな結婚式はしたくなくても、記念に思い出を残すことはできるよ</p>
+          <p style="font-size:10px; line-height:25px; margin:0px; padding:0px;"><a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=B9043&X_CD=goolgeg&vos=nxywadww3070611010" target="_top" id="link10">関東エリア</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=B9044&X_CD=goolgeg&vos=nxywadww3070611011" target="_top" id="link11">関西エリア</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=B9045&X_CD=goolgeg&vos=nxywadww3070611012" target="_top" id="link12">東海エリア</a></td>
+        </tr>
+        <tr>
+          <td height="1" align="left" valign="top"><img src="/ig/proxy?url=http://zexy.net/al/googleg/goog_070612_gadget_xy_bar.gif" width="320" height="1" /></td>
+        </tr>
+        <tr>
+          <td height="60" align="left" valign="top"><p style="font-size:12px; line-height:20px; font-weight:bold; margin:0px; padding:0px;">フォトギャラリーから会場選び</p>
+          <p style="font-size:9px; line-height:15px; margin:0px; padding:0px;">結婚したくなる写真がいっぱい。夢が広がる式場探し。</p>
+          <p style="font-size:10px; line-height:25px; margin:0px; padding:0px;"><a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=B2139&HAN_CD=04&X_CD=goolgeg&vos=nxywadww3070611013" target="_top" id="link13">関東エリア</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=B2139&HAN_CD=06&X_CD=goolgeg&vos=nxywadww3070611014" target="_top" id="link14">関西エリア</a>　<a href="http://zexy.net/cgi-bin/location.cgi?LINK_CD=B2139&HAN_CD=05&X_CD=goolgeg&vos=nxywadww3070611015" target="_top" id="link15">東海エリア</a></td>
+        </tr>
+    </table></td>
+    <td width="2"><img src="/ig/proxy?url=http://zexy.net/al/googleg/goog_070612_gadget_xy_rightbar.gif" width="2" height="214" /></td>
+  </tr>
+  <tr>
+    <td colspan="3"><img src="/ig/proxy?url=http://zexy.net/al/googleg/goog_070612_gadget_xy_footer.gif" width="336" height="11" /></td>
+  </tr>
+</table>
+<script type="text/javascript">
+_IG_RegisterOnloadHandler (function() {
+  var prefs = new _IG_Prefs();
+_gel("link01").href = prefs.getString("clickurl") + _esc(_gel("link01").href);
+_gel("link02").href = prefs.getString("clickurl") + _esc(_gel("link02").href);
+_gel("link03").href = prefs.getString("clickurl") + _esc(_gel("link03").href);
+_gel("link04").href = prefs.getString("clickurl") + _esc(_gel("link04").href);
+_gel("link05").href = prefs.getString("clickurl") + _esc(_gel("link05").href);
+_gel("link06").href = prefs.getString("clickurl") + _esc(_gel("link06").href);
+_gel("link07").href = prefs.getString("clickurl") + _esc(_gel("link07").href);
+_gel("link08").href = prefs.getString("clickurl") + _esc(_gel("link08").href);
+_gel("link09").href = prefs.getString("clickurl") + _esc(_gel("link09").href);
+_gel("link10").href = prefs.getString("clickurl") + _esc(_gel("link10").href);
+_gel("link11").href = prefs.getString("clickurl") + _esc(_gel("link11").href);
+_gel("link12").href = prefs.getString("clickurl") + _esc(_gel("link12").href);
+_gel("link13").href = prefs.getString("clickurl") + _esc(_gel("link13").href);
+_gel("link14").href = prefs.getString("clickurl") + _esc(_gel("link14").href);
+_gel("link15").href = prefs.getString("clickurl") + _esc(_gel("link15").href)
+});
+</script>
+]]></Content>
+</Module>

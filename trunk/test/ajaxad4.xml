@@ -1,0 +1,1154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs width="160" height="600" title="eBay Gadget Ad">
+  </ModulePrefs>
+
+  <!-- context-aware (keyword) gadget params -->
+  <UserPref datatype="hidden" name="width" default_value="160"/> <!-- TODO: remove this hack -->
+  <UserPref datatype="hidden" name="height" default_value="600"/> <!-- TODO: remove this hack -->
+
+  <UserPref datatype="hidden" name="keyword" default_value=""/>
+
+  <!-- context-aware (siteurl) gadget params -->
+  <UserPref datatype="hidden" name="siteurl" default_value=""/>
+
+  <!-- context-aware (radlinks_client) gadget params -->
+  <UserPref datatype="hidden" name="radlinks_client" default_value="ca-jindal"/>
+
+  <!-- gadget ad parameters -->
+  <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+  <UserPref datatype="hidden" name="forcelog" default_value="0"/> <!-- custom interaction tracking -->
+
+  <UserPref datatype="hidden" name="debuglog" default_value="0"/> <!-- custom interaction tracking -->
+
+  <!-- listing-type gadget parameters -->
+  <UserPref datatype="hidden" name="maxresults" default_value="25"/>
+  <UserPref datatype="hidden" name="linktoitem" default_value="1"/>
+
+  <!-- ebay-listing parameters -->
+  <UserPref datatype="hidden" name="ebayToken" default_value="%2FqM55OLjHsY%3D**r7Fvve2GXM%2BF2UwKs39FEbsH%2BYg%3D"/>
+  <UserPref datatype="hidden" name="ebayUser" default_value="adsah"/>
+
+  <!-- ebay-ad parameters -->
+  <UserPref datatype="hidden" name="ebayTrackingCode" default_value="711-48580-15222-0/2"/>
+
+  <Content type="html">
+<![CDATA[
+<style>
+.cloaked { position: absolute; top: -1000px; visibility:hidden; }
+a:link { color: #0000ff; }
+a:visited { color: #0000ff; }
+a:hover { color: #0000ff; }
+a:active { color: #0000ff; }
+
+.adspace { 
+  position: absolute; top:0; left:0; z-index:1000;
+  background-color: #ffffff; 
+  overflow: hidden;
+  cursor:pointer;
+}
+.scratch {
+  background-color: #ffffff;
+  font-family: Arial; font-size: 9pt;
+  white-space: nowrap;
+}
+.strict_text {
+  background-color: #ffffff;
+  font-family: Arial; font-size: 9pt;
+  white-space: nowrap;
+}
+.wrap_title {
+  font-family: Arial; font-size: 9pt;
+}
+.wrap_price {
+  font-family: Arial; font-size: 9pt; font-weight: bold;
+}
+.title { 
+  font-family: Arial; font-size: 9pt;
+  white-space:nowrap; 
+  overflow:hidden;
+  border-bottom: solid 1px #eeffee;
+  padding-left: 4px;
+}
+.bids {
+  padding-left: 4px;
+  font-family: Arial; font-size: 8pt;
+  color: #999999;
+  border-bottom: solid 1px #eeffee;
+}
+.price {
+  font-family: Arial; font-size: 9pt; font-weight: bold;
+  white-space:nowrap; 
+  border-bottom: solid 1px #eeffee;
+  text-align: right;
+}
+.tdImage { font-size: 2pt; 
+  padding-bottom: 1px; 
+  border-bottom: solid 1px #eeffee; 
+}
+.towerCell { 
+  border-bottom: solid 1px #eeffee; 
+  padding-bottom: 5px; 
+}
+</style>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td><img id="hlog" src="" height="0" width="0"></td>
+<td valign="top"><div id="adspace" class="adspace">
+<img src="/ig/proxy?url=http://echo3.net/gads/images/ebay_logo_144x76.gif">
+</div></td></tr></table>
+
+<!-- start of templates -->
+<div id="728x90" class="cloaked">
+<!--{TEMPLATE_START}
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td valign="top" width="{LOGO_WIDTH}" style="padding-right: 6px;">
+<a onclick="return logging(this,{LOGO_ONCLICK},0);" 
+   target="_blank" href="{LOGO_URL}"><img border="0" src="{LOGO_SRC}"></a>
+</td><td valign="top" style="padding-top: 4px;"><a 
+ onclick="return logging(this,{IMG0_ONCLICK},0);"
+ target="_blank" href="{IMG0_URL}"><img 
+ height="{IMG0_HEIGHT}" border="0" src="/ig/proxy?url={IMG0_SRC}"></a>
+</td><td valign="top">
+<table cellpadding="0" cellspacing="0" border="0">
+<tr><td class="tdImage" valign="top" width="20">{ROW0_HASIMG}</td>
+<td class="price">{ROW0_PRICE}</td>{ROW0_BIDS}<td class="title">
+<a onclick="return logging(this,{ROW0_ONCLICKTITLE},0);"
+ target="_blank" href="{ROW0_URL}">{ROW0_TITLE}</a>
+</td></tr>
+<tr><td class="tdImage" valign="top" width="20">{ROW1_HASIMG}</td>
+<td class="price">{ROW1_PRICE}</td>{ROW1_BIDS}
+<td class="title"><a onclick="return logging(this,{ROW1_ONCLICKTITLE},0);"
+ target="_blank" href="{ROW1_URL}">{ROW1_TITLE}</a>
+</td></tr>
+<tr><td class="tdImage" valign="top" width="20">{ROW2_HASIMG}</td>
+<td class="price">{ROW2_PRICE}</td>{ROW2_BIDS}
+<td class="title"><a onclick="return logging(this,{ROW2_ONCLICKTITLE},0);"
+ target="_blank" href="{ROW2_URL}">{ROW2_TITLE}</a></td></tr>
+<tr><td class="tdImage" valign="top" width="20">{ROW3_HASIMG}</td>
+<td class="price">{ROW3_PRICE}</td>{ROW3_BIDS}
+<td class="title"><a onclick="return logging(this,{ROW3_ONCLICKTITLE},0);"
+ target="_blank" href="{ROW3_URL}">{ROW3_TITLE}</a></td></tr>
+<tr><td class="tdImage" valign="top" width="20">{ROW4_HASIMG}</td>
+<td class="price">{ROW4_PRICE}</td>{ROW4_BIDS}
+<td class="title"><a onclick="return logging(this,{ROW4_ONCLICKTITLE},0);"
+ target="_blank" href="{ROW4_URL}">{ROW4_TITLE}</a></td></tr>
+</table></td></tr></table>
+{TEMPLATE_STOP}-->
+</div>
+<div id="3##x2##" class="cloaked">
+<!--{TEMPLATE_START}
+<nobr><a 
+onclick="return logging(this,{LOGO_ONCLICK},0);"
+target="_blank" href="{LOGO_URL}"><img border="0" src="{LOGO_SRC}"></a>
+<a 
+ onclick="return logging(this,{IMG0_ONCLICK},0);"
+ target="_blank" href="{IMG0_URL}"><img 
+ style="position: relative; top: 4px;"
+ height="{IMG0_HEIGHT}" border="0" src="/ig/proxy?url={IMG0_SRC}"></a>
+</nobr><br clear="all">
+<table>
+<tr><td class="price">{ROW0_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW0_ONCLICKTITLE},0);"
+target="_blank" href="{ROW0_URL}">{ROW0_TITLE}</a></td></tr>
+<tr><td class="price">{ROW1_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW1_ONCLICKTITLE},0);"
+target="_blank" href="{ROW1_URL}">{ROW1_TITLE}</a></td></tr>
+<tr><td class="price">{ROW2_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW2_ONCLICKTITLE},0);"
+target="_blank" href="{ROW2_URL}">{ROW2_TITLE}</a></td></tr>
+<tr><td class="price">{ROW3_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW3_ONCLICKTITLE},0);"
+target="_blank" href="{ROW3_URL}">{ROW3_TITLE}</a></td></tr>
+<tr><td class="price">{ROW4_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW4_ONCLICKTITLE},0);"
+target="_blank" href="{ROW4_URL}">{ROW4_TITLE}</a></td></tr>
+<tr><td class="price">{ROW5_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW5_ONCLICKTITLE},0);"
+target="_blank" href="{ROW5_URL}">{ROW5_TITLE}</a></td></tr>
+<tr><td class="price">{ROW6_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW6_ONCLICKTITLE},0);"
+target="_blank" href="{ROW6_URL}">{ROW6_TITLE}</a></td></tr>
+<tr><td class="price">{ROW7_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW7_ONCLICKTITLE},0);"
+target="_blank" href="{ROW7_URL}">{ROW7_TITLE}</a></td></tr>
+<tr><td class="price">{ROW8_PRICE}</td><td class="title">
+<a onclick="return logging(this,{ROW8_ONCLICKTITLE},0);"
+target="_blank" href="{ROW8_URL}">{ROW8_TITLE}</a></td></tr>
+</table>
+{TEMPLATE_STOP}-->
+</div>
+<div id="160x600" class="cloaked">
+<!--{TEMPLATE_START}
+<a 
+ onclick="return logging(this,{LOGO_ONCLICK},0);"
+ target="_blank" href="{LOGO_URL}"><img style="position:relative; {IE0}"
+ height="{LOGO_HEIGHT}" border="0" src="{LOGO_SRC}"></a>
+<br clear="all">
+<div class="towerCell">
+<a onclick="return logging(this,{IMG0_ONCLICK},0);"
+ target="_blank" href="{IMG0_URL}"><img align="left"
+ height="{IMG1_HEIGHT}"
+ border="0" src="{IMG0_SRC}"></a>
+<br clear="all">
+<span class="wrap_price">{IMG0_PRICE}</span>
+<span class="wrap_title">{IMG0_TITLE}</span>
+</div>
+<div class="towerCell">
+<a onclick="return logging(this,{IMG1_ONCLICK},0);"
+ target="_blank" href="{IMG1_URL}"><img align="left"
+ height="{IMG1_HEIGHT}"
+ border="0" src="{IMG1_SRC}"></a>
+<br clear="all">
+<span class="wrap_price">{IMG1_PRICE}</span>
+<span class="wrap_title">{IMG1_TITLE}</span>
+</div>
+<div class="towerCell">
+<a onclick="return logging(this,{IMG2_ONCLICK},0);"
+ target="_blank" href="{IMG2_URL}"><img align="left"
+ height="{IMG2_HEIGHT}"
+ border="0" src="{IMG2_SRC}"></a>
+<br clear="all">
+<span class="wrap_price">{IMG2_PRICE}</span>
+<span class="wrap_title">{IMG2_TITLE}</span>
+</div>
+<br clear="all">
+<a 
+ onclick="return logging(this,{LOGO_ONCLICK},0);"
+ target="_blank" href="{LOGO_URL}"><img 
+  style="position:absolute; top:524px; "
+ height="{LOGO_HEIGHT}" border="0" src="{LOGO_SRC}"></a>
+{TEMPLATE_STOP}-->
+</div>
+<div id="searchbox" class="cloaked">
+<!--{TEMPLATE_START}
+<a 
+ onclick="return logging(this,{LOGO_ONCLICK},0);"
+ target="_blank" href="{LOGO_URL}"><img align="left"
+ style="position:relative; {IE0}"
+ height="{LOGO_HEIGHT}" border="0" src="{LOGO_SRC}"></a>
+{SEARCHBOX_BELOWLOGO}
+<div style="text-align:center; padding-top:{PADDING_TOP}px;">
+<FORM  onsubmit="return logging(this,{SEARCHBOX_ONCLICK},1);"
+ ACTION="{SEARCHBOX_ACTION}"
+ METHOD="GET" target="ebaywin">
+<INPUT type="hidden" name="MfcISAPICommand" value="GetResult">
+<INPUT type="hidden" name="ht" value="1">
+<INPUT type="hidden" name="SortProperty" value="MetaEndSort">
+<input type=text id="query" name=query size="{SEARCHBOX_SIZE}"
+  maxlength="100" value=""
+  style="height:24px;font-size:14px; padding: 3px; margin: 0px;">
+{SEARCHBOX_BUTTONBELOWINPUT}
+<input  type="submit" value="search" >
+</form></div>
+{TEMPLATE_STOP}-->
+</div>
+<!-- end of templates -->
+<!-- this is the scratch area that strictWidth needs -->
+<div style="height: 0">
+<table cellpadding="0" cellspacing="0" border="0" class="cloaked">
+<tr><td><div id="scratch" class="scratch"></div></td></tr></table>
+</div>
+<script type="text/javascript">
+// TODO: debug_logging is for development work only. Get rid of it
+var debug_logging = 0;
+
+var forcelog = 0;
+var fraction_impressions_to_log = 0.01;
+
+var LOGOWIDTH  = 144;
+var LOGOHEIGHT = 76;
+var ICONHEIGHT = 32;
+var LIST_RIGHT = 0;
+var LIST_DOWN  = 1;
+var IMG_TOWER  = 2;
+
+var SEARCH_BOX   = -1;
+var SEARCH_RIGHT = 0;
+var SEARCH_BELOW = 1;
+
+/*****************************************************
+//     Utility functions
+*****************************************************/
+
+function getStringPref(value,dfl) {
+
+  var rtn = prefs.getString(value);
+  if (rtn.length < 1) rtn=dfl;
+  return rtn;
+}
+
+function getRequiredStringPref(value) {
+  var rtn = prefs.getString(value);
+  if (rtn.length < 1) {
+    return "";
+  }
+  return rtn;
+}
+
+function getIntPref(value, dfl) {
+  var rtn = 0;
+  var v = prefs.getString(value);
+  if (v.length < 1) rtn=dfl;
+  else rtn = parseInt(v);
+  return rtn;
+}
+
+function getBoolPref(value, dfl) {
+  var rtn = false;
+  var v = prefs.getString(value);
+  if (v.length < 1) rtn = dfl;
+  else rtn = v;
+  return rtn;
+} 
+
+/****************************************************
+// gadgetKeywordAD Class
+//
+// you must override 
+//      showResults()
+//      showStaticResults()
+//
+// you probably want to override
+//      setKeyword()
+//
+// starts with
+//      run()
+//      
+*****************************************************/ 
+function logging(a,entry,query) {
+  var landing=null;
+  if (a != null && a.href != null) {
+    landing = a.href.substr(clickurl.length);
+  }
+  gad.customLogEntry(entry, landing, query);
+  return true;
+}
+function gadgetKeywordAD(radlinks_client,clickurl,width,height,keyword,site) {
+  this.radlinks_client = radlinks_client;
+  this.clickurl        = clickurl;
+  this.width           = width;
+  this.height          = height;
+  this.given_keyword   = keyword;
+  this.keyword         = '';
+  this.site            = site;
+  if (this.site!=null && this.site.length>0) {
+    if (this.site.substr(0,7) != 'http://') {
+      this.site = 'http://' + this.site;
+    }
+    if (this.site == 'http://') {
+      this.site = '';
+    }
+  }
+}
+
+gadgetKeywordAD.prototype.customLogEntry = function(entry, landing, query) {
+  // NOTE: google.com submits a large set of cookies wastefully
+  // vs. gmodules.com which is cheaper and the relative-URL 
+  // is required for future-proofing against secure-subdomains.
+  // so Not var url = "http://google.com/ig/nop?" + entry;
+  var url = '/ig/nop';
+  url += '?url=' + encodeURIComponent(_args()['url']);
+  url += '&entry=' + encodeURIComponent(entry);
+
+  if (landing!=null) {
+    url += '&landing=' + encodeURIComponent(landing);
+  }
+
+  if (query == 1) {
+    var q = 'indeterminate';
+    var it = _gel('query');
+    if (it) {
+      q = it.value;
+    }
+    url += '&q=' + encodeURIComponent(q);
+  }
+
+  // TODO: debug_logging is just for development work. Get rid of it.
+  // or view results at http://echo3.net/gads/dblog.php
+  if (debug_logging) {
+    _IG_FetchContent('http://echo3.net/gads/dblog.php?q=' 
+         + encodeURIComponent(url),function(){});
+  }
+
+  _IG_FetchContent(url,function(){});
+}
+
+gadgetKeywordAD.prototype.run = function() {
+    this.getKeywordOrDie();
+}
+
+gadgetKeywordAD.prototype.setKeyword = function(kw) {
+  this.keyword = kw;
+  this.showResults();
+}
+
+gadgetKeywordAD.prototype.handleKeywordBySite = function(rsp, obj) {
+  obj.keyword = '';
+  if (rsp == null || rsp.length == 0) { 
+    obj.customLogEntry('keywordbysite returned no keyword for site='+obj.site);
+    obj.getKeywordFromRadvalue();
+    return;
+  }
+  obj.setKeyword(rsp);
+}
+
+gadgetKeywordAD.prototype.getKeywordBySite = function() {
+
+// TODO: this is a place holder for an alternate source of 
+//       keywords that might use handleKeywordBySite()
+  this.getKeywordFromRadvalue();
+  return
+}
+
+
+gadgetKeywordAD.prototype.parseRadvalues = function(feed,obj) {
+  obj.keyword = '';
+  if (feed == null || feed.length == 0) { 
+    obj.showStaticResults('radvalues returned no keyword for site='+this.site);
+    return;
+  }
+  var items = feed.getElementsByTagName("RADLINK");
+  var item = items.item(0);
+  obj.customLogEntry('radvalues returned keyword =' 
+      + obj.getXMLValue(item, "TERM") + ' for ' + obj.site);
+  obj.setKeyword(obj.getXMLValue(item,"TERM"));
+}
+
+gadgetKeywordAD.prototype.getKeywordFromRadvalue = function() {
+  // we need to get a keyword via google radlinks
+
+  var v = 'http://pagead2.googlesyndication.com/pagead/ads';
+  v += '?client=' + this.radlinks_client;
+  v += '&output=xml'
+  v += '&num_radlinks=1';
+  v += '&num_ads=0';
+
+  // TODO: find out if site can be anything other than domain name
+  var s = this.site;
+  if (s.indexOf('?') >= 0) s = encodeURIComponent(s);
+  v += '&url=' + s;
+  _IG_FetchXmlContent(v,_IG_Callback(this.parseRadvalues,this))
+}
+
+gadgetKeywordAD.prototype.getKeywordOrDie = function() {
+  if (this.given_keyword.length > 0) {
+    // we were given a keyword
+    this.setKeyword(this.given_keyword);
+  } else if (this.site.length < 1) {
+    // we don't have much to go on here
+    this.showStaticResults('no site or keyword');
+  } else {
+    this.getKeywordBySite();
+  }
+}
+
+gadgetKeywordAD.prototype.getXMLValueWithDefault = function(item, name, dfl) {
+  return ((item == null ||
+           item.getElementsByTagName(name) == null ||
+           item.getElementsByTagName(name).item(0) == null
+          )
+          ? dfl
+          : item.getElementsByTagName(name).item(0).lastChild.nodeValue);
+}
+
+gadgetKeywordAD.prototype.getXMLValue = function(item,name) {
+  return this.getXMLValueWithDefault(item, name, "");
+}
+
+gadgetKeywordAD.prototype.replaceString = function(needle,repl,haystack) {
+  var ln,p1,s2;
+  var rtn = haystack;
+
+  if( needle==null || haystack==null ) {
+    return rtn;
+  }
+  repl = '' + repl;
+  needle = '' + needle;
+  haystack = '' + haystack;
+  if ( (ln=needle.length)>0 && haystack.length>0 ) {
+    while((p1=rtn.indexOf(needle)) >= 0)
+    { s2 = rtn.substr(p1+ln);
+      rtn = rtn.substr(0,p1) + repl + s2;
+    }
+  }
+  return rtn;
+} 
+
+gadgetKeywordAD.prototype.showStaticResults = function(where) {
+  this.customLogEntry('static results ' + where);
+}
+
+gadgetKeywordAD.prototype.showResults = function() {
+  this.customLogEntry('results based on' + this.keyword);
+}
+
+gadgetKeywordAD.prototype.getWidthInPixels = function(id) {
+  var rtn = 0;
+  // NOTE: id should be that of a div w/in a table
+  var it = _gel(id);
+  if( !it ) {
+    return rtn;
+  }
+  if (it.clientWidth>0) rtn =  it.clientWidth;
+  else if (it.style.pixelWidth>0) rtn =  it.style.pixelWidth;
+  else if (it.offsetWidth>0) rtn =  it.offsetWidth;
+  return rtn;
+}
+
+gadgetKeywordAD.prototype.strictWidth=function(txt,w,class_name) {
+
+  var ln = txt;
+  var max = w;
+  var wn = 0,w0=-1;
+
+  var scratch = _gel("scratch");
+  if( !scratch ) return;
+  scratch.className = class_name;
+  scratch.innerHTML = '...&nbsp;';
+  max -= this.getWidthInPixels('scratch');
+
+  scratch.innerHTML = ln;
+  while((wN=this.getWidthInPixels('scratch'))>=max)
+  {
+    if (wN == w0) {
+      // the width is not changing for whatever reason
+      // and clipped text is not as bad as an infinite loop
+      // so let's just get out of here
+      break;
+    }
+    else if (w0 > 0 && wN > w0) {
+      // we got larger
+      // maybe we were given something like '&#376;' instead of 'Y'
+      // so we probably just broke something, let's put it all back
+      // and return the original text
+      ln = txt;
+      break;
+    }
+    w0 = wN;
+    ln = ln.substr(0,ln.length-2);
+    scratch.innerHTML = ln;
+  }
+  if (ln.length<txt.length) ln += '...';
+
+  var v= '<div class="strict_text" style="overflow:hidden; width:'+w+'px;">';
+  v += ln;
+  v += '</div>';
+
+  return v;
+}
+
+// TODO: i18n
+gadgetKeywordAD.prototype.formatPrice = function(d) {
+  var num = Math.floor(d);
+  var dec = Math.floor(100 * (d - num));
+  dec = this.decimal_char + dec;
+  while (dec.length < 3) dec = dec + '0';
+
+  var s = '';
+  var ns = '' + num;
+  for (var i = ns.length-1 ; i >= 0; i--) {
+    s = s + ns.charAt(i);
+  }
+
+  var rtn = '';
+  for (var i = 0, nc=0, n=s.length ; i < n ; i++) {
+    rtn = s.charAt(i) + rtn;
+    if ((++nc)==3 && (i+1)<n)
+    { rtn = this.comma_char + rtn;
+      nc = 0;
+    }
+  }
+
+  if (d < 1000) rtn = rtn + dec;
+  rtn = this.currency_char + rtn;
+
+  return rtn;
+}
+
+gadgetKeywordAD.prototype.hasUnsafeURLChars =function (s) {
+
+  // whitelist certain safe characters-- not < > ' " %
+  // TODO: add more?
+  //  - added the space for keywords like 'size 8 shoes'
+  if ((q=s.match(/^[a-zA-Z0-9., ;:\[\]{}/|~`!@#$%^&*()=+_-]*$/))) {
+    return false;
+  }
+  return true;
+}
+
+gadgetKeywordAD.prototype.singlequote = function(v) {
+  var rtn = v;
+  if( v!=null ) {
+    rtn = "'" + v + "'";
+  }
+  return rtn;
+} 
+
+/*****************************************************
+// gadgetEBayAD Class
+*****************************************************/ 
+function gadgetEBayAD(radlinks_client,clickurl,width,height,keyword,site,
+           ebay_token,ebay_user,mediaplex_code,
+           currency_char,comma_char,decimal_char,maxresults) {
+
+  gadgetKeywordAD.call(this,radlinks_client,clickurl,width,height,keyword,site);
+
+  this.ebay_token      = ebay_token;
+  this.ebay_user       = ebay_user;
+  this.mediaplex_code  = mediaplex_code;
+
+  this.ndx             = 0;
+  this.title           = new Array();
+  this.bids            = new Array();
+  this.img             = new Array();
+  this.price           = new Array();
+  this.link            = new Array();
+  this.info            = new Array();
+  this.endTime         = new Array();
+
+  this.maxresults      = ((maxresults == null)?25:maxresults);
+  this.currency_char   = ((currency_char == null)?'$':currency_char);
+  this.comma_char      = ((comma_char == null)?',':comma_char);
+  this.decimal_char    = ((decimal_char == null)?',':decimal_char);
+
+  // TODO: what is the right location for these images?
+  this.ebay_logo = 
+    '/ig/proxy?url=http://echo3.net/gads/images/ebay_logo_144x76.gif';
+  this.ebay_img  = 
+    '/ig/proxy?url=http://echo3.net/gads/images/ebay_img20x20.gif';
+}
+gadgetEBayAD.prototype = new gadgetKeywordAD(); 
+
+gadgetEBayAD.prototype.setKeyword = function(kw) {
+  this.keyword = kw;
+  var v = '';
+  v += 'http://rest.api.ebay.com/restapi';
+  v += '?CallName=GetSearchResults';
+  v += '&RequestToken=' + this.ebay_token;
+  v += '&RequestUserId=' + this.ebay_user;
+  v += '&Query=' + encodeURIComponent(this.keyword);
+  v += '&EntriesPerPage=' + this.maxresults;
+  v += '&PageNumber=1';
+  v += '&SearchFlags=SearchInDescription';
+  v += '&Version=491';
+  // TODO: should 3600 be hardcoded?
+  v += '&EndTimeFrom=' + this.timestamp(3600);
+  v += '&UnifiedInput=1';
+  _IG_FetchXmlContent(v, _IG_Callback(this.parseEBayFeed, this));
+}
+
+gadgetEBayAD.prototype.getMediaplexURL = function(item_id, keyword, site) {
+  var rtn = this.mediaplex_code;
+
+  if (this.hasUnsafeURLChars(item_id)) {
+    this.showStaticResults('item id contains unsafe characters: ' + item_id);
+  } else {
+    rtn = this.replaceString('ITEM_ID', item_id, rtn);
+  }
+
+  if (this.hasUnsafeURLChars(keyword)) {
+    this.showStaticResults('keyword contains unsafe characters: ' + keyword);
+  } else {
+    rtn = this.replaceString('KEYWORD', keyword, rtn);
+  }
+
+  if (this.hasUnsafeURLChars(site)) {
+    this.showStaticResults('site contains unsafe characters: ' + site);
+  } else {
+    rtn = this.replaceString('SITE', site, rtn);
+  }
+  return rtn;
+}
+
+gadgetEBayAD.prototype.parseEBayFeed = function(feed, obj) {
+  if (feed == null || feed.length == 0) {
+    obj.showStaticResults('no response from ebay feed with ' + obj.keyword);
+    return;
+  }  
+
+  var items = feed.getElementsByTagName("Item");
+  if (items == null || items.length == 0) {
+    obj.showStaticResults('0 items in ebay feed with ' + obj.keyword);
+    return;
+  }
+  obj.ndx = 0;   
+
+  for (var i = 0, n=items.length; i < n; i++) {
+    var item = items.item(i);
+    var item_id = obj.getXMLValue(item, "ItemID");
+    obj.endTime[obj.ndx] = obj.getXMLValue(item, "EndTime");
+    obj.title[obj.ndx] = obj.getXMLValue(item, "Title");
+    // NOTE: use mediaplex URL instead of the ViewItemURL
+    obj.link[obj.ndx] = obj.getMediaplexURL(item_id, obj.keyword, obj.site);
+    obj.bids[obj.ndx] = obj.getXMLValueWithDefault(item, "BidCount", 0);
+    obj.img[obj.ndx] = obj.getXMLValue(item, "GalleryURL");
+    obj.price[obj.ndx] = obj.getXMLValue(item, "CurrentPrice");
+    obj.info[obj.ndx] = [ item_id,obj.price[obj.ndx],obj.bids[obj.ndx],
+                          (obj.img[obj.ndx].length>0?'yi':'ni')
+                        ].join('-');
+
+    // we don't index by the loop control variable because we might
+    // want to filter-out results by some other criteria
+    obj.ndx++;
+    if (obj.ndx >= obj.maxresults) break;
+  }
+
+  if (obj.ndx < 1) {
+    obj.showStaticResults('no matching items found in ebay feed');
+    return;
+  }
+
+  obj.showResults();
+}
+
+gadgetEBayAD.prototype.showStaticResults = function(why) {
+  this.customLogEntry(why);
+  this.ndx = 0;
+  this.showResults();
+} 
+
+gadgetEBayAD.prototype.timestamp = function(dsec) {
+  var now = new Date();
+  now.setTime(now.getTime() + (1000*dsec));
+
+  var yr = now.getUTCFullYear();
+  var mon = 1 + now.getUTCMonth();
+  if (mon < 10) { mon = '0' + mon; }
+  var day = now.getUTCDate();
+  if (day < 10) { day = '0' + day; }
+  var hr = now.getUTCHours();
+  if (hr < 10) { hr = '0' + hr; }
+  var mn = now.getUTCMinutes();
+  if (mn < 10) { mn = '0' + mn; }
+  var sc = now.getUTCSeconds();
+  if (sc < 10) { sc = '0' + sc; }
+
+  // TODO: stomp to the hour, because otherwise this busts the cache between google and ebay
+  mn = '00';
+  sc = '00';
+
+  // format: 2007-05-01T00:00:00.0400Z
+  var rtn = yr + '-' + mon + '-' + day + 'T';
+  rtn += hr + ':' + mn + ':' + sc;
+  rtn += '.00Z';
+  return rtn;
+}
+
+gadgetEBayAD.prototype.showResults = function() {
+
+  var v = '';
+  var url = '';
+  var on_click = '';   
+  var rnd = Math.random();
+
+  var adspace = _gel("adspace");
+  var hlogImg = _gel("hlog");
+
+  var display_mode = LIST_RIGHT;
+  var items_max = this.ndx;
+  var images_max = 0;
+  var template_max = 0;
+  var bShowBids = false;
+
+  var size_string = this.width + 'x' + this.height;
+  var searchform_size =10;
+  var searchform_mode=SEARCH_RIGHT;
+
+  var IE_shift_logo_left = (isIE?'left:-4px;':'left:0;');
+
+  var logo_url = this.clickurl + encodeURIComponent('http://hub.ebay.com/buy');
+  var search_url = this.clickurl 
+      + encodeURIComponent('http://search.ebay.com/search/search.dll?satitle='
+      + encodeURIComponent(this.keyword));
+
+  hlogImg.height = this.height;
+  adspace.style.height = this.height + 'px';
+  adspace.style.width = (this.width-17) + 'px';
+
+  switch(size_string)
+  { 
+    default:
+    case "728x90":
+    {
+      display_mode = LIST_RIGHT;
+      items_max = 5; 
+      template_max = 5; 
+      images_max = 1;
+      searchform_mode = SEARCH_RIGHT;
+      searchform_size = 30;
+      //bShowBids = true;
+
+      break;
+    }
+
+    case "300x250":
+    {
+      display_mode = LIST_DOWN;
+      items_max = 8;
+      template_max = 9; 
+      images_max = 1;
+      searchform_mode = SEARCH_BELOW;
+      searchform_size = 20;
+
+      break;
+    }
+
+    case "336x280":
+    {
+      display_mode = LIST_DOWN;
+      items_max = 9; 
+      template_max = 9; 
+      images_max = 1;
+      searchform_mode = SEARCH_BELOW;
+      searchform_size = 20;
+
+      break;
+    }
+
+    case "160x600":
+    {
+      display_mode = IMG_TOWER;
+      items_max = 3; 
+      images_max = 3;
+      template_max = 3; 
+      searchform_mode = SEARCH_BELOW;
+      searchform_size=12;
+
+      break;
+    }
+  }
+
+  if (items_max>this.ndx) items_max = this.ndx;
+  if (this.ndx < 1) display_mode=SEARCH_BOX;
+
+  var log = "rnd=" + rnd + "&w=" + this.width + "&h=" + this.height 
+          + "&kw=" + _esc(this.keyword) + "&site=" + _esc(this.site) 
+          + "&ids=" + _esc(this.info.join(",")); 
+
+  if (display_mode == LIST_RIGHT) {
+    // 728x90
+    // logo, 1 img, img indicators, price, [bids,] items right
+    on_click = this.singlequote(escape(log+'&action=click&clickitem=logo'));
+
+    v = _gel("728x90").innerHTML;
+    v = this.replaceString("{LOGO_WIDTH}",LOGOWIDTH,v);
+    v = this.replaceString("{LOGO_ONCLICK}",on_click,v);
+    v = this.replaceString("{LOGO_URL}",logo_url,v);
+    v = this.replaceString("{LOGO_SRC}",this.ebay_logo,v);
+
+    var n=0;
+    if ( images_max) {
+      for (var i = 0, sn; i < this.ndx; i++) {
+        if (this.img[i].length < 1) continue;
+         
+        sn = ((n < 10)?'0'+n:n);
+        on_click=this.singlequote(escape(log+'&action=click&clickitem=img'+sn));
+        n++;
+
+        url = this.clickurl + encodeURIComponent(this.link[i]);
+        v = this.replaceString("{IMG0_ONCLICK}",on_click,v);
+        v = this.replaceString("{IMG0_URL}",url,v);
+       
+        v = this.replaceString("{IMG0_SRC}",this.img[i],v);
+        var h = Math.floor(0.9 * this.height);
+        v = this.replaceString("{IMG0_HEIGHT}",h,v);
+        break;
+      }
+      images_max = 0;
+    }
+    if( n<1 ) {
+      v = this.replaceString("{IMG0_SRC}",'',v);
+      v = this.replaceString("{IMG0_ONCLICK}",'null',v);
+      v = this.replaceString("{IMG0_HEIGHT}",'0',v);
+      v = this.replaceString("{IMG0_URL}",'',v);
+    }
+
+    n = 0;
+    for (var i = 0, sn ; i < items_max; i++) {
+
+      url = this.clickurl + encodeURIComponent(this.link[i]);
+
+      sn = ((n < 10)?'0'+n:n);
+      on_click = this.singlequote(escape(log+'&action=click&clickitem='+sn));
+      n++;
+
+      // if we have an image, indicate it here
+      if (this.img[i].length < 1) { 
+        v = this.replaceString("{ROW" + (n-1) + "_HASIMG}",'&nbsp;',v);
+      }
+      else
+      { 
+        var u= '';
+        u += '<a onclick="return logging(this,'+on_click+',0);"';
+        u += ' target="_blank" href="';
+        u += url;
+        u += '">';  
+        u += '<img height="16" border="0" src="';
+        u += this.ebay_img + '">';
+        u += '</a>';
+        v = this.replaceString("{ROW" + (n-1) + "_HASIMG}",u,v);
+      }
+      var p = (this.price[i]>0?this.formatPrice(this.price[i]):'');
+      v = this.replaceString("{ROW" + (n-1) + "_PRICE}",p,v);
+
+      if (!bShowBids) { 
+        v = this.replaceString("{ROW" + (n-1) + "_BIDS}",'',v);
+      } else {
+        var u='';
+        u += '<td class="bids">';
+        if (this.bids[i] < 1) u += '&nbsp;';
+        else
+        { u += this.bids[i] + ' bid';
+          u += ((this.bids[i] > 1)?'s':'');
+        }
+        u += '</td>';
+        v = this.replaceString("{ROW" + (n-1) + "_BIDS}",u,v);
+      }
+      v = this.replaceString("{ROW" + (n-1) + "_ONCLICKTITLE}",on_click,v);
+      v = this.replaceString("{ROW" + (n-1) + "_URL}",url,v);
+      v = this.replaceString("{ROW" + (n-1) + "_TITLE}",this.title[i],v);
+    }
+    // clear any unused rows
+    for ( ; n <=template_max ; n++) {
+      v = this.replaceString("{ROW" + (n-1) + "_HASIMG}",'',v);
+      v = this.replaceString("{ROW" + (n-1) + "_PRICE}",'',v);
+      v = this.replaceString("{ROW" + (n-1) + "_BIDS}",'',v);
+      v = this.replaceString("{ROW" + (n-1) + "_ONCLICKTITLE}",'0',v);
+      v = this.replaceString("{ROW" + (n-1) + "_URL}",'',v);
+      v = this.replaceString("{ROW" + (n-1) + "_TITLE}",'',v);
+    }
+
+    v = this.replaceString("<!--{TEMPLATE_START}","",v);
+    v = this.replaceString("{TEMPLATE_STOP}-->","",v);
+  }
+  else if (display_mode == LIST_DOWN) {
+
+    // 300x250 | 336x280
+    // logo, 1 image, items below
+    on_click = this.singlequote(escape(log+'&action=click&clickitem=logo'));
+
+    v = _gel("3##x2##").innerHTML;
+    v = this.replaceString("{LOGO_WIDTH}",LOGOWIDTH,v);
+    v = this.replaceString("{LOGO_ONCLICK}",on_click,v);
+    v = this.replaceString("{LOGO_URL}",logo_url,v);
+    v = this.replaceString("{LOGO_SRC}",this.ebay_logo,v);
+
+    var n = 0;
+    if (images_max) {
+
+      for (var i = 0,sn; i < this.ndx; i++) {
+        if (this.img[i].length < 1) continue;
+
+        url = this.clickurl + encodeURIComponent(this.link[i]);
+
+        sn = ((n < 10)?'0'+n:n);
+        on_click=this.singlequote(escape(log+'&action=click&clickitem=img'+sn));
+        n++;
+
+        v = this.replaceString("{IMG0_SRC}",this.img[i],v);
+        v = this.replaceString("{IMG0_ONCLICK}",on_click,v);
+        v = this.replaceString("{IMG0_HEIGHT}",LOGOHEIGHT,v);
+        v = this.replaceString("{IMG0_URL}",url,v);
+
+        break;
+      }
+      images_max = 0;
+    }
+    if( n<1 ) {
+      v = this.replaceString("{IMG0_SRC}",'',v);
+      v = this.replaceString("{IMG0_ONCLICK}",'0',v);
+      v = this.replaceString("{IMG0_HEIGHT}",'0',v);
+      v = this.replaceString("{IMG0_URL}",'',v);
+    }
+
+    n = 0;
+    for (var i = 0,sn; i < items_max; i++) {
+
+      url = this.clickurl + encodeURIComponent(this.link[i]);
+
+      sn = ((n < 10)?'0'+n:n);
+      on_click = this.singlequote(escape(log+'&action=click&clickitem=' + sn));
+      n++;
+
+      var p = ((this.price[i]>0)?this.formatPrice(this.price[i]):'');
+      v = this.replaceString("{ROW" +(n-1) + "_PRICE}",p,v);
+      v = this.replaceString("{ROW" + (n-1) + "_ONCLICKTITLE}",on_click,v);
+      v = this.replaceString("{ROW" + (n-1) + "_URL}",url,v);
+      var w = ((this.width==300)?228:262);
+      var s = this.strictWidth(this.title[i],w,'strict_text')
+      v = this.replaceString("{ROW" + (n-1) + "_TITLE}",s,v);
+    }
+    // clear any unused rows
+    for ( ; n <=template_max ; n++) {
+      v = this.replaceString("{ROW" + (n-1) + "_PRICE}",'',v);
+      v = this.replaceString("{ROW" + (n-1) + "_ONCLICKTITLE}",'0',v);
+      v = this.replaceString("{ROW" + (n-1) + "_URL}",'',v);
+      v = this.replaceString("{ROW" + (n-1) + "_TITLE}",'',v);
+    } 
+    v = this.replaceString("<!--{TEMPLATE_START}","",v);
+    v = this.replaceString("{TEMPLATE_STOP}-->","",v);
+  }
+  else if (display_mode==IMG_TOWER) {
+
+    // 160x600
+    // logo, (3) images w/ wrapped title, logo
+    on_click = this.singlequote(escape(log+'&action=click&clickitem=logo'));
+
+    v = _gel("160x600").innerHTML;
+    v = this.replaceString("{LOGO_HEIGHT}",LOGOHEIGHT,v);
+    v = this.replaceString("{LOGO_ONCLICK}",on_click,v);
+    v = this.replaceString("{LOGO_URL}",logo_url,v);
+    v = this.replaceString("{LOGO_SRC}",this.ebay_logo,v);
+    v = this.replaceString("{IE0}",IE_shift_logo_left,v);
+
+    var n = 0;
+    for (var i = 0,sn; i < this.ndx; i++) {
+      if (this.img[i].length < 1) continue;
+
+      url = this.clickurl + encodeURIComponent(this.link[i]);
+
+      sn = (n < 10) ? '0' + n : n;
+      on_click = this.singlequote(escape(log+'&action=click&clickitem=img'+sn));
+      n++;
+
+      v = this.replaceString("{IMG" + (n-1) + "_SRC}",this.img[i],v);
+      v = this.replaceString("{IMG" + (n-1) + "_ONCLICK}",on_click,v);
+      v = this.replaceString("{IMG" + (n-1) + "_HEIGHT}",LOGOHEIGHT,v);
+      v = this.replaceString("{IMG" + (n-1) + "_URL}",url,v);
+
+      var p = ((this.price[i]>0)?this.formatPrice(this.price[i]):'');
+      v = this.replaceString("{IMG" + (n-1) + "_PRICE}",p,v);
+      v = this.replaceString("{IMG" + (n-1) + "_TITLE}",this.title[i],v);
+
+      images_max--;
+      if (images_max < 1) break;
+    }
+    // clear any unused rows
+    for ( ; n <=template_max ; n++) {
+      v = this.replaceString("{IMG" + (n-1) + "_PRICE}",'',v);
+      v = this.replaceString("{IMG" + (n-1) + "_ONCLICK}",'0',v);
+      v = this.replaceString("{IMG" + (n-1) + "_HEIGHT}",0,v);
+      v = this.replaceString("{IMG" + (n-1) + "_URL}",'',v);
+      v = this.replaceString("{IMG" + (n-1) + "_TITLE}",'',v);
+    }
+    v = this.replaceString("<!--{TEMPLATE_START}","",v);
+    v = this.replaceString("{TEMPLATE_STOP}-->","",v);
+  }
+  else { 
+
+    // SEARCH_BOX
+    on_click = this.singlequote(escape(log+'&action=click&clickitem=logo'));
+    v = _gel("searchbox").innerHTML;
+    v = this.replaceString("{LOGO_HEIGHT}",LOGOHEIGHT,v);
+    v = this.replaceString("{LOGO_ONCLICK}",on_click,v);
+    v = this.replaceString("{LOGO_URL}",logo_url,v);
+    v = this.replaceString("{LOGO_SRC}",this.ebay_logo,v);
+    v = this.replaceString("{IE0}",IE_shift_logo_left,v);
+
+    var pt = ((this.height>350)?20:Math.floor(this.height/5));
+    v = this.replaceString("{PADDING_TOP}",pt,v);
+
+    on_click = this.singlequote(escape(log+'&action=search'));
+    v = this.replaceString("{SEARCHBOX_ONCLICK}",on_click,v);
+
+    var s = (searchform_mode==SEARCH_BELOW) ?'<br clear="all">':'';
+    v = this.replaceString("{SEARCHBOX_BELOWLOGO}",s,v);
+
+// TODO: find out [if we should|how to] implement clickurl here
+// var action = clickurl + encodeURIComponent(eBay stuff...)
+
+// TODO: find out if this is really the way they want search to work
+//       As it is right now, using the new code does Not actually search
+// i.e.
+// var ucode = '711-15237-2060-323/4'; // an old code we once used here
+//
+// - with the Old code it really does search for the item the user
+// enters e.g. "fish" ends up at http://search.ebay.com/fish 
+//
+// - with the New code it does not take the user to a page about 
+// the item being searched for but instead to ebay.com main page
+
+    var ucode = ebay_trackingcode; // i.e. New code 711-48580-15222-0/2
+
+    v = this.replaceString("{SEARCHBOX_ACTION}",
+          'http://rover.ebay.com/rover/1/'+ucode + '?',v);
+    v = this.replaceString("{SEARCHBOX_SIZE}",searchform_size,v);
+    s = (this.heigth>400) ?'<br clear="all">':'';
+    v = this.replaceString("{SEARCHBOX_BUTTONBELOWINPUT}",s,v);
+    v = this.replaceString("<!--{TEMPLATE_START}","",v);
+    v = this.replaceString("{TEMPLATE_STOP}-->","",v);
+  } 
+
+  if (forcelog == 1 || rnd < fraction_impressions_to_log) {
+    on_click = escape(log+'&action=impr');
+    logging(null,on_click,0);
+  }
+
+  adspace.innerHTML = v;
+}
+
+/*****************************************************
+
+//     init
+
+*****************************************************/ 
+
+var isIE = ((document.all)?true:false);
+
+// UserPrefs
+var prefs = new _IG_Prefs(__MODULE_ID__);
+
+// some of the following UserPrefs may not exist yet
+// in our module right now, but they could be there someday
+// To handle these cases we made these get[Type]Pref wrapper 
+// functions to make it easy to hardcode some defaults
+
+var clickurl = getStringPref('clickurl',
+    'http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url=');
+var radlinks_client = getStringPref('radlinks_client','ca-jindal');
+
+// TODO: what if user pref fails to give us our width|height?
+var width = getIntPref('width',0);
+var height = getIntPref('height',0);
+
+var keyword = getStringPref('keyword','');
+var site = getStringPref('siteurl','');
+
+var ebay_token = getRequiredStringPref('ebayToken');
+var ebay_user = getRequiredStringPref('ebayUser');
+var ebay_trackingcode = getRequiredStringPref('ebayTrackingCode');
+
+// TODO: how much of this should be hardcoded?
+var mediaplex_code = 'http://rover.ebay.com/rover/1/' 
+    + ebay_trackingcode 
+    + '?type={ifsearch:search}{ifcontent:content}' 
+    + '&mpre=http%3A%2F%2Fsearch.ebay.com%2Fsearch%2Fsearch.dll%3Fquery%3D' 
+    + 'ITEM_ID' 
+    + '%26sonewuser%3D1%26st%3D1%26sortproperty%3Dmetaendsort%26st%3D1' 
+    + '&keyword=KEYWORD' 
+    + '&origin={SITE}';
+
+var currency_char = getStringPref('currency_char','$');
+var decimal_char = getStringPref('decimal_char','.');
+var comma_char = getStringPref('comma_char',','); 
+
+var maxresults = getIntPref('maxresults',25);
+var linktoitem = getBoolPref('linktoitem',1);
+
+// TODO: this just makes a way for the test site to see what would be logged
+// and turning this on in production would melt down a perfectly good
+// server so please Never enable it (to be enabled from test site only)
+debug_logging = getBoolPref('debuglog',0);
+
+forcelog = getBoolPref('forcelog',0);
+
+var gad = new gadgetEBayAD(radlinks_client,clickurl,width,height,keyword,site,
+                           ebay_token,ebay_user,mediaplex_code,
+                           currency_char,comma_char,decimal_char,
+                           maxresults);
+
+gad.run();
+
+</script>
+  ]]></Content>
+</Module>
