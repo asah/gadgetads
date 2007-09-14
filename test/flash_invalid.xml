@@ -23,7 +23,7 @@
 		<img src="http://www.amsuper.com/images/wysiwyg/005-5000_hp_official_alpha_motor.JPG"/>
 		
 		<script>
-		  document.cookies.push('hello');
+		  document.cookie = 'hello';
 	  </script>
 	]]></Content>
 </Module>
