@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="">
+  <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
     <Require feature="ads"/>
     <Require feature="flash"/>
   </ModulePrefs>
