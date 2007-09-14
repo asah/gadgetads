@@ -12,7 +12,7 @@
   <Content type="html"><![CDATA[
     <div>Isn't my ad beautiful?</div>
     
-    <img id="img1" src=""/>
+    <a href="javascript:_ADS_ClickDestinationUrl('http://www.google.com');"><img id="img1" src=""/></a>
     <script>
       _gel('img1').src = _IG_GetImageUrl('http://img.youtube.com/vi/psRmRrigXOQ/default.jpg');
     </script>
