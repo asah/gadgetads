@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Tesco Direct Search Gadget" description="Search the Tesco Direct product catalogue with this gadget. Displays the first 3 results, and allows you to click through to either the product or the full search results page" author="Paul Sebborn" author_affiliation="Tesco.com" title_url="http://direct.tesco.com" width="300" height="250" thumbnail="http://www.tesco.com/dealoftheday/googleGadgets/images/direct-thumbnail.gif" author_email="onyx@tesco.co.uk"/>
+  <UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?url="/>
+  <Content type="html"><![CDATA[
+	<style type="text/css">
+			#TDGmain { font:75% Verdana;padding:5px; text-align:center; margin:0;border:1px solid #1C388C;height:238px; }
+
+			#TDGmain p { margin:0.5em 0; }
+				#TDGmain a img { border:none; padding:0; margin:0; }
+			#TDGmain form { margin:0; padding:0; }
+			#TDGmain form fieldset { padding:0; margin:0; border:0;}
+				#TDGmain form fieldset label { font-size:0.9em; display:block; font: 1em Verdana; color:#1C388C; margin:5px 0; }
+				#TDGmain form fieldset #tdSearchBox { width:160px; margin-right:5px;}
+				#TDSearch {border:1px solid #1C388C;height:226px; padding:5px;}
+			#TDsearchResults { list-style:none; padding:0; margin:10px 0 5px; height:115px; }
+			html>body #TDsearchResults{ padding-left:0; }
+				#TDsearchResults li { float:left;border:1px solid #ccc; width:84px; margin:0 3px 0 0;padding:7px 0 0 0;text-align:center;}
+				#TDsearchResults li.last { margin-right:0; }
+					#TDsearchResults li a { font-size:0.9em;}
+						#TDsearchResults li a img { border:none; width:65px; height:65px;margin:0; padding:0;}
+						#TDsearchResults li a span { display:block; text-align:center; margin:0 0 5px 0; padding:0; width:100%;height:2.35em;line-height:1.1em;overflow:hidden; cursor:pointer; }
+			#TDGmain p#TDGReset { text-align:right; font-size:1.2em; clear:both; margin-top:10px;}
+				#TDGReset a { text-decoration:underline; cursor:pointer; }
+			#TDFullSearch { text-align:center; width:100%; }
+			#TDGmain #TDLogo { text-align:right; width:100%;margin:0;padding:0;}
+				#TDGmain #TDLogo a { margin-right:5px;margin:0;padding:0; }
+				#TDGmain h2 { margin:0;padding:0; }
+
+				#TDnoprod { color:#1C388C; width:100%; text-align:center; margin:0 auto; padding:40px 0; font:bold 1.2em Verdana; }
+
+
+	</style>
+	<script type="text/javascript">
+		
+		function TDGinit() { 
+			oCont = _gel('TDSearch');
+			oResetState = oCont.innerHTML;
+			prefs = new _IG_Prefs(__MODULE_ID__);
+			trackUrls();
+			cacheImgs();
+		}
+		function trackUrls() { 
+			var oLinks = _gelstn('a');
+			for (var i=0;i<oLinks.length ;i++ ) {
+				if (oLinks[i].id) {
+					var oTargLink = _unesc(_gel(oLinks[i].id).href);
+					_gel(oLinks[i].id).href = prefs.getString("clickurl") + oTargLink;
+				}
+			}
+		}
+		function cacheImgs() { 
+			var oImgs = _gelstn('img');
+			for (var i=0;i<oImgs.length;i++) {
+				if(oImgs[i].getAttribute('rel').length > 0) {
+					oImgs[i].src = _IG_GetImageUrl(oImgs[i].getAttribute('rel'));
+				}
+			}
+		}
+		function buildUrl(query) { 
+			var url = "http://www.google.com/base/feeds/snippets/?bq=" + query + _esc("[customer id:344645]");
+			url += "&alt=rss";
+			return url;
+		}
+		function ieCheck() {
+			if (navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion >= "4.0") {
+			return true;
+		  } else { return false;}
+		}
+
+		function gadgetSearch() { 
+			var oForm = _gel('TDSearchForm');
+			var query = oForm.tdSearchBox.value;
+			oCont.innerHTML = "";
+			_IG_FetchXmlContent(buildUrl(_esc(query)), 
+				function(response) { 
+					//Put logo in page and link
+					var oTescoLogo = document.createElement('p');
+					oTescoLogo.id = "TDLogo";
+					oTescoLogo.innerHTML = '<a href="http://direct.tesco.com" id="TD_Link" target="_blank"><img src="" id="TD_Logo" rel="http://www.tesco.com/dealoftheday/googleGadgets/images/direct_v1_03.jpg" alt="Tesco Direct" style="width:150px;" /></a>';
+					oTescoLogo.firstChild.firstChild.src = _IG_GetImageUrl(oTescoLogo.firstChild.firstChild.getAttribute('rel'));
+					oCont.appendChild(oTescoLogo);
+					// Get array of all product nodes
+					var entries = response.getElementsByTagName("item");
+					//build list
+					var oEntriesList = document.createElement('ul');
+					oEntriesList.id = 'TDsearchResults';
+					var iCounter = ((entries.length < 3) && (entries.length > 0)) ? entries.length : 3;
+					if (entries.length < 1) {
+						//Display message informing that no products found
+						var oNoProd = document.createElement('p');
+						oNoProd.id = 'TDnoProd';
+						oNoProd.appendChild(document.createTextNode("Sorry, we couldn't match your search for '" + query + "'"));
+						oCont.appendChild(oNoProd);
+						buildResetLink();
+						return false;
+					} else { 
+						//Cycle through product node and build a list item
+						for(var i=0;i<iCounter;i++) { 
+							var liTemp = document.createElement('li');
+							if (i==2){ liTemp.className = 'last'; }
+							//set current node
+							var curr_node = entries[i];
+							//set current node's title
+							var curr_title = curr_node.getElementsByTagName('title')[0].firstChild.nodeValue;
+							// link
+							var newA = document.createElement('a');
+							newA.href = curr_node.getElementsByTagName('link')[0].firstChild.nodeValue;
+							newA.target = "_blank";
+							newA.id = "TDGProd" + i;
+							//image
+							var newImg = document.createElement('img');
+							var imageNode = (ieCheck()) ? 'g:image_link' : 'image_link';
+							newImg.src = _IG_GetImageUrl(curr_node.getElementsByTagName(imageNode)[0].firstChild.nodeValue);
+							newImg.alt = document.createTextNode(curr_title);
+							newA.appendChild(newImg);
+
+							//link description
+							var newASpan = document.createElement('span');
+							newASpan.appendChild(document.createTextNode(curr_title));
+							newA.appendChild(newASpan);
+							liTemp.appendChild(newA);
+							oEntriesList.appendChild(liTemp);
+						}
+						oCont.appendChild(oEntriesList);
+						//Build a "search Tesco Direct" link
+						var oFullSearch = document.createElement('p');
+						oFullSearch.id = "TDFullSearch";
+						var lFullSearch = document.createElement('a');
+						lFullSearch.id = "TDGSearchLink";
+						lFullSearch.href = "http://direct.tesco.com/search/default.aspx?search=" + _esc(query);
+						lFullSearch.target = "_blank";
+						var txtFullSearch = document.createTextNode('See all results for "' + query + '" at Tesco Direct');
+						lFullSearch.appendChild(txtFullSearch);
+						oFullSearch.appendChild(lFullSearch);
+						oCont.appendChild(oFullSearch);
+						//create search again link
+						buildResetLink();
+						trackUrls();
+					}
+
+				}
+			);
+		}
+		function buildResetLink() {
+			if(oCont) {
+				var oResetLink = document.createElement('p');
+				oResetLink.id = "TDGReset";
+				var aResetLink = document.createElement('a');
+				oResetLink.href = "#";
+				oResetLink.onclick = function() {tdSearchReset()};
+				var sResetLink = document.createTextNode('Search again >');
+				aResetLink.appendChild(sResetLink);
+				oResetLink.appendChild(aResetLink);
+				oCont.appendChild(oResetLink);
+			}
+		}
+		
+		function tdSearchReset() {
+			oCont.innerHTML = oResetState;
+			TDGinit();
+		}
+		_IG_RegisterOnloadHandler(TDGinit);
+	</script>
+
+	<div id="TDGmain">
+		<div id="TDSearch">
+			<h1 id="TDLogo"><a id="TD_HomeLink" href="http://direct.tesco.com" target="_blank"><img src="" rel="http://www.tesco.com/dealoftheday/googleGadgets/images/direct_v1_03.jpg" alt="Tesco Direct" /></a></h1>
+			<h2 style="margin:0; padding:0;"><img src="" rel="http://www.tesco.com/dealoftheday/googleGadgets/images/direct_v1_06.jpg" alt="Thousands of products all in one place" /></h2>
+			<p><img src="" rel="http://www.tesco.com/dealoftheday/googleGadgets/images/direct_ani.gif" alt="from Beds to Sheds..." /></p>
+			<form action="" method="post" onsubmit="gadgetSearch(); return false;" id="TDSearchForm">
+				<fieldset>
+					<label for="tdSearchBox">See if we've got what you're looking for:</label>
+					<input type="text" id="tdSearchBox" name="tdSearchBox" />
+					<input type="submit" id="tdSubmit" name="tdSubmit" value="Search" />
+				</fieldset>
+			</form>
+		</div>
+	</div>
+
+  ]]></Content>
+</Module>
