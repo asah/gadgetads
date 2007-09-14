@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="My HTML Gadget Ad"
+    width="300"
+    height="250"
+    thumbnail="http://img0.gmodules.com/ig/modules/datetime-thm.png"
+    scrolling="false">
+    <Require feature="ads"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <div>Isn't my ad beautiful?</div>
+    
+    <a href="javascript:_ADS_ClickDestinationUrl('http://www.google.com');"><img id="img1" src=""/></a>
+    <script>
+      _gel('img1').src = _IG_GetImageUrl('http://img.youtube.com/vi/psRmRrigXOQ/default.jpg');
+    </script>
+    
+    <script>
+      // Add interaction tracking
+      var wentOver = false;
+      document.body.onmouseover = function() {
+        if (!wentOver) {
+          _ADS_ReportInteraction('mouse_over');
+          wentOver = true;
+        }
+      }
+    </script>
+  ]]></Content>
+</Module>
