@@ -6,7 +6,7 @@
 	<Content type="html"><![CDATA[
 		<div id="container"></div>
 		<script>
-			_IG_EmbedFlash('http://www.thesandboxonline.com/saatchila/highlander_300x250.swf', 'container', {
+			_IG_EmbedFlash('http://www.youtube.com/v/YhHTk-9E85Q', 'container', {
 			  width: 300,
 			  height: 250
 			});
