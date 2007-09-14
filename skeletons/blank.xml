@@ -6,5 +6,6 @@
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
+    <!-- Insert gadget content here -->
   ]]></Content>
 </Module>
