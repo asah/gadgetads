@@ -23,7 +23,7 @@
 		<img src="http://www.amsuper.com/images/wysiwyg/005-5000_hp_official_alpha_motor.JPG"/>
 		
 		<script>
-		  document.cookie = 'testcookie=blahblah; expires=Fri, 3 Aug 2008 20:47:11 UTC; path=/ig/ifr';
+		  document.cookie = 'testcookie=blahblah; expires=Fri, 3 Aug 2008 20:47:11 UTC; path=/ig';
 	  </script>
 	]]></Content>
 </Module>
