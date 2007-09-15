@@ -3,7 +3,7 @@
   <ModulePrefs title="My Flash Gadget Ad"
     width="300"
     height="250"
-    thumbnail=""
+    thumbnail="http://img0.gmodules.com/ig/modules/datetime-thm.png"
     scrolling="false">
     <Require feature="ads"/>
     <Require feature="flash"/>
