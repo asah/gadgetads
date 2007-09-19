@@ -9,28 +9,30 @@
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
     <script>
-      function showNews(domId) {
-      }
-      function showVideos(domId) {
+      function tabCallback(domId) {
+        // Report the interaction when users click on any tab
+        alert(tabs.getSelectedTab().getIndex());
+        
+        var html =  new Array();
       }
       
       var tabs = new _IG_Tabs();
       tabs.addTab('News', {
         tooltip: 'Click here to read news about Google',
-        callback: showNews
+        callback: tabCallback
       });
       tabs.addTab('Videos', {
         tooltip: 'Click here to see videos',
-        callback: showVideos
+        callback: tabCallback
       });
-      
-      
-      var script = document.createElement('script');
-      script.src = 'http://www.google.com/ig/modules/filenewgadgets.js';
-      script.onload = function() {
-        alert(gadgetLinks);
-      };
-      document.getElementsByTagName('head')[0].appendChild(script);
+      tabs.addTab('Images', {
+        tooltip: 'View images here',
+        callback: tabCallback
+      });
+      tabs.addTab('Other', {
+        tooltip: 'See other content here',
+        callback: tabCallback
+      );
     </script>
     
     multiple-interactions
