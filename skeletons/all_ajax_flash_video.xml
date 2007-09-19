@@ -7,17 +7,34 @@
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
+  
     <!-- Embedding an image -->
-    <img id='img1' width="276" height="110"/>
+    <img id='img1' onclick="javascript:_ADS_ReportInteraction(' width="276" height="110"/>
     <script>
       // Replace the image URL below with your own
-      _gel('img1').src = _IG_GetImageUrl('http://www.google.com/intl/en_ALL/images/logo.gif');
+      var img1 = _gel('img1');
+      img1.src = _IG_GetImageUrl('http://www.google.com/intl/en_ALL/images/logo.gif');
+      
+      // Report an interaction whenever the user clicks on the image
     </script>
     
     <!-- Creating a clickthrough link -->
     <!-- Replace the destination URL below with your own -->
-    <a href="javascript:_ADS_ClickDestinationUrl('http://www.google.com');">Click here</a>
+    <a onclick="javascript:_ADS_ReportInteraction('');" 
+        href="javascript:_ADS_ClickDestinationUrl('http://www.google.com');">Click here</a>
     
+    <script src="
+    <script>
+      var tabs = new _IG_Tabs();
+      tabs.addTab('News', {
+        tooltip: 'Click here to read news about Google',
+        callback: showNews
+      });
+      tabs.addTab('Videos', {
+        tooltip: 'Click here to see videos',
+        callback: showVideos
+      });
+    </script>
     
     multiple-interactions
     flash
