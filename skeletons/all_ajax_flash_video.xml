@@ -3,6 +3,7 @@
   <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
     <Require feature="ads"/>
     <Require feature="flash"/>
+    <Require feature="tabs"/>
   </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
