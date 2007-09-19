@@ -34,7 +34,7 @@
       });
       
       var tabs_arr = tabs.getTabs();
-      for (var n = 0; n < tabs_arr; n++) {
+      for (var n = 0; n < tabs_arr.length; n++) {
         tabs_arr[n].getNameContainer().onclick = _IG_Callback(_ADS_ReportInteraction, 'tab_' + (n + 1));
       }
     </script>
