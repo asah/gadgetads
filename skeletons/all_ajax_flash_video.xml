@@ -32,7 +32,7 @@
       tabs.addTab('Other', {
         tooltip: 'See other content here',
         callback: tabCallback
-      );
+      });
     </script>
     
     multiple-interactions
