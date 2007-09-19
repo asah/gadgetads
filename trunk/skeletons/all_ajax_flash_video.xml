@@ -11,7 +11,6 @@
     <script>
       function tabCallback(domId) {
         // Report the interaction when users click on any tab
-        alert(tabs.getSelectedTab().getIndex());
         
         var html =  new Array();
       }
@@ -33,6 +32,11 @@
         tooltip: 'See other content here',
         callback: tabCallback
       });
+      
+      var tabs_arr = tabs.getTabs();
+      for (var n = 0; n < tabs_arr; n++) {
+        tabs_arr[n].getNameContainer().onclick = _IG_Callback(_ADS_ReportInteraction, 'tab_' + (n + 1));
+      }
     </script>
     
     multiple-interactions
