@@ -8,24 +8,13 @@
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
-  
-    <!-- Embedding an image -->
-    <img id='img1' onclick="javascript:_ADS_ReportInteraction(' width="276" height="110"/>
+    <script onload="alert('hi');" src="http://www.google.com/ig/modules/gadgetads.html"></script>
     <script>
-      // Replace the image URL below with your own
-      var img1 = _gel('img1');
-      img1.src = _IG_GetImageUrl('http://www.google.com/intl/en_ALL/images/logo.gif');
+      function showNews(domId) {
+      }
+      function showVideos(domId) {
+      }
       
-      // Report an interaction whenever the user clicks on the image
-    </script>
-    
-    <!-- Creating a clickthrough link -->
-    <!-- Replace the destination URL below with your own -->
-    <a onclick="javascript:_ADS_ReportInteraction('');" 
-        href="javascript:_ADS_ClickDestinationUrl('http://www.google.com');">Click here</a>
-    
-    <script src="
-    <script>
       var tabs = new _IG_Tabs();
       tabs.addTab('News', {
         tooltip: 'Click here to read news about Google',
@@ -35,6 +24,14 @@
         tooltip: 'Click here to see videos',
         callback: showVideos
       });
+      
+      
+      var script = document.createElement('script');
+      script.src = 'http://www.google.com/ig/modules/filenewgadgets.js';
+      script.onload = function() {
+        alert(gadgetLinks);
+      }
+      document.getElementsByTagName('head')[0].appendChild(script);
     </script>
     
     multiple-interactions
