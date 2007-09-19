@@ -13,9 +13,8 @@
     -->
     <div id="fc"></div>
     <script>
-      // Set the SWF and destination URLs with your own
-      var swfUrl = 'http://FLASH_SWF_URL';
-      var destUrl = 'http://DESTINATION_TARGET_URL';
+      // Replace the SWF URL below with your own
+      var swfUrl = 'http://YOUR_FLASH_SWF_URL';
       
       // Update the width/height to the ad size
       var fWidth = 300;

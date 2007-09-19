@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="">
+  <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
     <Require feature="ads"/>
     <Require feature="flash"/>
   </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
+    
+    
     <!-- INCLUDES ALL IMPLEMENTATION INSTRUCTIONS -->
     embed image
     click-through
