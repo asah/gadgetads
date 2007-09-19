@@ -8,7 +8,6 @@
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
-    <script onload="alert('hi');" src="http://www.google.com/ig/modules/gadgetads.html"></script>
     <script>
       function showNews(domId) {
       }
@@ -30,7 +29,7 @@
       script.src = 'http://www.google.com/ig/modules/filenewgadgets.js';
       script.onload = function() {
         alert(gadgetLinks);
-      }
+      };
       document.getElementsByTagName('head')[0].appendChild(script);
     </script>
     
