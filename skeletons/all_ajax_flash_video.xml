@@ -8,6 +8,15 @@
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
+    <!--
+      The following features are included in this gadget:
+      -- generating a tabs interface
+      -- multiple interaction tracking
+      -- embedding Flash
+      -- embedding images
+      -- fetching live XML feeds
+      -- streaming videos from YouTube
+    -->
     <style>
       #newsContainer a {
         color: #0000cc;
@@ -142,8 +151,9 @@
                         // Generate the HTML to display this image.
                         // Report interactions when image links are clicked on.
                         html.push(
-                          '<a onclick="_ADS_ReportInteraction(\'view_detail\');" target="_top" href="' + _hesc(link) + '">',
-                          '<img src="' + node.getAttribute('url') + '"',
+                          '<a onclick="_ADS_ReportInteraction(\'view_detail\');",
+                          ' target="_top" href="' + _hesc(link) + '">',
+                          '<img src="' + _IG_GetImageUrl(node.getAttribute('url')) + '"',
                           ' width="' + node.getAttribute('width') + '"',
                           ' height="' + node.getAttribute('height') + '"/>',
                           '</a>'
@@ -153,11 +163,11 @@
                         link = '#';
                         break;
                       }
-                    }
+                    } // end for loop
                   }
-                }
-              }
-            }
+                } // end for loop
+              } // end for loop
+            } // end if else
             
             // Insert the generated HTML into the selected tab's content container
             selectedTab.getContentContainer().innerHTML = '<div id="imageContainer">' + html.join('') + '</div>';
