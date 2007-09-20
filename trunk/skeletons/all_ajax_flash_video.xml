@@ -40,6 +40,9 @@
       }
     </style>
     
+    <div id="header"></div>
+    <div id="tabs"></div>
+    
     <script>
       // Report interaction when user mouses over the ad unit.  Only count
       // this the first time.
@@ -199,6 +202,9 @@
         tooltip: 'See other content here',
         callback: tabCallback
       });
+      
+    // Insert an image above the tabs
+    _gel('header').appendChild(_IG_GetImage('http://www.google.com/logos/Logo_25wht.gif'));
     </script>
   ]]></Content>
 </Module>
