@@ -151,7 +151,7 @@
                         // Generate the HTML to display this image.
                         // Report interactions when image links are clicked on.
                         html.push(
-                          '<a onclick="_ADS_ReportInteraction(\'view_detail\');",
+                          '<a onclick="_ADS_ReportInteraction(\'view_detail\');"',
                           ' target="_top" href="' + _hesc(link) + '">',
                           '<img src="' + _IG_GetImageUrl(node.getAttribute('url')) + '"',
                           ' width="' + node.getAttribute('width') + '"',
