@@ -18,6 +18,7 @@
       -- embedding images
     -->
     <style>
+      /* Styles for specific tab content containers */
       #logoHeader img {
         border: 0;
       }
@@ -31,6 +32,7 @@
         padding: 2px;
       }
       
+      /* CSS formatting for the XML feed entries */
       .entry {
         border-bottom: 1px solid #aaaaaa;
         padding-bottom: 3px;
@@ -108,14 +110,11 @@
           
           // Embed the YouTube Flash video player here.
           // Replace the 'swfUrl' below with your own SWF URL.
-          var swfUrl = 'http://www.youtube.com/v/sSEs-aE2nCA';
+          var swfUrl = 'http://www.youtube.com/jp.swf?video_id=sSEs-aE2nCA';
           _IG_EmbedCachedFlash(swfUrl, selectedTab.getContentContainer(), {
-            width: 250, 
-            height: 200
+            width: 290, 
+            height: 210
           });
-            
-          // Report an interaction for video playback
-          _ADS_ReportInteraction('video_1');
           break;
           
         case 'Images':
