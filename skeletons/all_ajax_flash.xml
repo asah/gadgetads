@@ -111,8 +111,8 @@
           
           // Embed the YouTube Flash video player here.
           // Replace the 'swfUrl' below with your own SWF URL.
-          var swfUrl = 'http://www.youtube.com/jp.swf?video_id=sSEs-aE2nCA';
-          _IG_EmbedCachedFlash(swfUrl, selectedTab.getContentContainer(), {
+          var swfUrl = 'http://www.youtube.com/v/sSEs-aE2nCA';
+          _IG_EmbedFlash(swfUrl, selectedTab.getContentContainer(), {
             width: 300, 
             height: 210
           });

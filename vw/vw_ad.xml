@@ -158,8 +158,8 @@
       contentContainer.innerHTML = html.join('');
     
       // Show videos DIV and hide feeds
-      var videoUrl = 'http://www.youtube.com/jp.swf?video_id=' + videoSources[randIndex];
-      _IG_EmbedCachedFlash(videoUrl, 'videoContainer', {
+      var videoUrl = 'http://www.youtube.com/v/' + videoSources[randIndex];
+      _IG_EmbedFlash(videoUrl, 'videoContainer', {
           width: 270,
           height: 220,
           wmode: 'transparent'
