@@ -203,8 +203,13 @@
         callback: tabCallback
       });
       
-    // Insert an image above the tabs
-    _gel('header').appendChild(_IG_GetImage('http://www.google.com/logos/Logo_25wht.gif'));
+    // Create a clickthrough image link at the top
+    _gel('header').innerHTML = [
+      '<a target="_top"',
+      ' href="javascript:_ADS_ClickDestinationUrl(\'http://www.google.com/adwords/gadgetads\');">',
+      '<img src="' + _IG_GetImageUrl('http://www.google.com/logos/Logo_25wht.gif') + '"/>',
+      '</a>'
+    ].join('');
     </script>
   ]]></Content>
 </Module>
