@@ -80,7 +80,7 @@
         case 'News':
           // Fetch an XML feed and generate the HTML to display it.
           // Set up links report an interaction on each click.
-          var feedUrl = 'http://news.google.com/news?hl=en&ned=us&q=google&ie=UTF-8&output=atom';
+          var feedUrl = 'http://googleblog.blogspot.com/atom.xml';
           var numEntries = 10;
           _IG_FetchFeedAsJSON(feedUrl, function(json) {
             var html = new Array();
