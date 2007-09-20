@@ -2,16 +2,202 @@
 <Module>
   <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
     <Require feature="ads"/>
+    <Require feature="flash"/>
+    <Require feature="tabs"/>
   </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
+    <!--
+      The following features are included in this gadget:
+      -- generating a tabs interface
+      -- tracking clickthroughs
+      -- tracking multiple interactions
+      -- fetching remote XML feeds
+      -- embedding images
+    -->
+    <style>
+      /* Styles for specific tab content containers */
+      #logoHeader img {
+        border: 0;
+      }
+      #newsContainer a {
+        color: #0000cc;
+        font-size: 0.7em;
+      }
+      #imageContainer img {
+        vertical-align: middle;
+        border: 0;
+        padding: 2px;
+      }
+      
+      /* CSS formatting for the XML feed entries */
+      .entry {
+        border-bottom: 1px solid #aaaaaa;
+        padding-bottom: 3px;
+        margin-bottom: 3px;
+      }
+      .entryDate {
+        color: #676767;
+        font-size: 0.65em;
+        font-style: italic;
+      }
+    </style>
     
+    <table border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td id="logoHeader"></td>
+        <td id="tabHeader"></td>
+      </tr>
+    </table>
+    <div id="tabs"></div>
     
-    <!-- INCLUDES ALL IMPLEMENTATION INSTRUCTIONS -->
-    embed image
-    click-through
-    multiple-interactions
+    <script>
+      // Report interaction when user mouses over the ad unit.  Only count
+      // this the first time.
+      var mouseOver = false;
+      window.onmouseover = function() {
+        if (!mouseOver) {
+          mouseOver = true;
+          _ADS_ReportInteraction('mouse_over');
+        }
+      }
+      
+      // Gets called each time a tab is selected.
+      function tabCallback(domId) {
+        // Store the currently selected tab
+        var selectedTab = tabs.getSelectedTab();
+        
+        // Report the interaction when users click on any tab.  Only send
+        // the hit if the user's mouse is over the ad
+        if (mouseOver) {
+          _ADS_ReportInteraction('tab_' + (selectedTab.getIndex() + 1));
+        }
+        
+        // Here you generate content depending on which tab is selected.
+        switch (selectedTab.getName()) {
+        case 'News':
+        case 'Videos':
+          // Fetch an XML feed and generate the HTML to display it.
+          // Set up links report an interaction on each click.
+          var feedUrl = 'http://googleblog.blogspot.com/atom.xml';
+          if (selectedTab.getName().match(/videos/i)) {
+            feedUrl = 'http://www.youtube.com/rss/user/google/videos.rss';
+          }
+          
+          // How many RSS/Atom feed entries do you want to retrieve?
+          var numEntries = 10;
+          _IG_FetchFeedAsJSON(feedUrl, function(json) {
+            var html = new Array();
+            html.push('<div id="newsContainer">');
+            
+            // Iterate through each feed entry and generate HTML to display it
+            for (var n = 0; n < json.Entry.length; n++) {
+              var entry = json.Entry[n];
+              var entryDate = new Date(entry.Date * 1000);
+              html.push(
+                '<div class="entry">',
+                '<a target="_top" onclick="_ADS_ReportInteraction(\'view_detail\');" href="' + entry.Link + '">' + entry.Title + '</a>',
+                '<div class="entryDate">' + entryDate.toLocaleString() + '</div>',
+                '</div>'
+              );
+            }
+            html.push('</div>');
+            
+            // Insert the generated HTML into the selected tab's content container
+            selectedTab.getContentContainer().innerHTML = html.join('');
+          }, numEntries, true);
+          break;
+          
+        case 'Images':
+          // Fetch an image XML feed and display the images inside this tab.
+          // Images should be clickable and report interactions.
+          var imageFeed = 'http://picasaweb.google.com/data/feed/base/user/cristiandeives/albumid/5072220454528255009?kind=photo&alt=rss&hl=en_US';
+          _IG_FetchXmlContent(imageFeed, function(xmlDoc) {
+            var html = new Array();
+            var root = xmlDoc.documentElement;
+            if (!root) {
+              // If no root element exists, then show an alert.
+              html.push('Failed to retrieve images.');
+            } else {
+              // Iterate through the XML nodes to extract the image thumbnail URLs.
+              // You must study the RSS XML format to understand what to look for.
+              var items = root.getElementsByTagName('item');
+              for (var n = 0; n < items.length; n++) {
+                var item = items[n];
+                var link = '#';
+                for (var k = 0; k < item.childNodes.length; k++) {
+                  var child = item.childNodes[k];
+                  if (child.nodeName == 'link') {
+                    // Save the photo link which we use later on
+                    link = child.firstChild.nodeValue;
+                  } else if (child.nodeName == 'media:group') {
+                    for (var t = 0; t < child.childNodes.length; t++) {
+                      var node = child.childNodes[t];
+                      if (node.nodeName == 'media:thumbnail') {
+                        // Generate the HTML to display this image.
+                        // Report interactions when image links are clicked on.
+                        html.push(
+                          '<a onclick="_ADS_ReportInteraction(\'view_detail\');"',
+                          ' target="_top" href="' + _hesc(link) + '">',
+                          '<img src="' + _IG_GetImageUrl(node.getAttribute('url')) + '"',
+                          ' width="' + node.getAttribute('width') + '"',
+                          ' height="' + node.getAttribute('height') + '"/>',
+                          '</a>'
+                        );
+                        break;
+                      }
+                    } // end for loop
+                    
+                    // Reset the link to default
+                    link = '#';
+                  }
+                } // end for loop
+              } // end for loop
+            } // end if else
+            
+            // Insert the generated HTML into the selected tab's content container
+            selectedTab.getContentContainer().innerHTML = '<div id="imageContainer">' + html.join('') + '</div>';
+          });
+          break;
+          
+        case 'Other':
+          selectedTab.getContentContainer().innerHTML = 'Generate some other content here!';
+          break;
+        }
+      }
+      
+      // Create tabs using the Tabs library and set up callback functions
+      // that get executed whenever the tab is selected.
+      var tabs = new _IG_Tabs(0, '', _gel('tabs'));
+      tabs.addTab('News', {
+        tooltip: 'Click here to read news about Google',
+        callback: tabCallback
+      });
+      tabs.addTab('Videos', {
+        tooltip: 'Click here to see videos',
+        callback: tabCallback
+      });
+      tabs.addTab('Images', {
+        tooltip: 'View images here',
+        callback: tabCallback
+      });
+      tabs.addTab('Other', {
+        tooltip: 'See other content here',
+        callback: tabCallback
+      });
     
+      // Create a clickthrough image link at the top left corner.
+      // Report an interaction here as well.
+      _gel('logoHeader').innerHTML = [
+        '<a onclick="_ADS_ReportInteraction(\'destination_url_1\');"',
+        ' href="javascript:_ADS_ClickDestinationUrl(\'http://www.google.com/adwords/gadgetads\');">',
+        '<img src="' + _IG_GetImageUrl('http://www.google.com/logos/Logo_25wht.gif') + '"/>',
+        '</a>'
+      ].join('');
+      
+      // Move the tab header container to the same row as the image link
+      _gel('tabHeader').appendChild(tabs.getHeaderContainer());
+    </script>
   ]]></Content>
 </Module>
