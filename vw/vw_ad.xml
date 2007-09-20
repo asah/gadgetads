@@ -72,14 +72,14 @@
     var prefs = new _IG_Prefs();
     var contentContainer = _gel("contentContainer");
     var videoSources = [
-      "http://www.youtube.com/v/cv157ZIInUk",
-      "http://www.youtube.com/v/xCIF6JF1O5U",
-      "http://www.youtube.com/v/0I0WfnhVs2s",
-      "http://www.youtube.com/v/SPQp7HJWVdg",
-      "http://www.youtube.com/v/Xnd1BxAo81g",
-      "http://www.youtube.com/v/119eSti2n1o",
-      "http://www.youtube.com/v/_9Eg-S6aaSw",
-      "http://www.youtube.com/v/FvyxCC5XWCg"
+      "cv157ZIInUk",
+      "xCIF6JF1O5U",
+      "0I0WfnhVs2s",
+      "SPQp7HJWVdg",
+      "Xnd1BxAo81g",
+      "119eSti2n1o",
+      "_9Eg-S6aaSw",
+      "FvyxCC5XWCg"
     ];
   
   
@@ -158,7 +158,8 @@
       contentContainer.innerHTML = html.join('');
     
       // Show videos DIV and hide feeds
-      _IG_EmbedCachedFlash(videoSources[randIndex], 'videoContainer', {
+      var videoUrl = 'http://www.youtube.com/jp.swf?video_id=' + videoSources[randIndex];
+      _IG_EmbedCachedFlash(videoUrl, 'videoContainer', {
           width: 270,
           height: 220,
           wmode: 'transparent'
