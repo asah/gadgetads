@@ -11,10 +11,11 @@
     <!--
       The following features are included in this gadget:
       -- generating a tabs interface
-      -- multiple interaction tracking
+      -- tracking clickthroughs
+      -- tracking multiple interactions
+      -- fetching remote XML feeds
       -- embedding Flash
       -- embedding images
-      -- fetching live XML feeds
       -- streaming videos from YouTube
     -->
     <style>
@@ -124,11 +125,11 @@
           // via FlashVars.
           var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/tutorial_content/small_player.swf';
           _IG_EmbedCachedFlash(swfUrl, selectedTab.getContentContainer(), {
-              swf_version: 8,
-              width: 300, 
-              height: 250, 
-              flashvars: 'flvURL=' + _esc(flvURL)
-            });
+            swf_version: 8,
+            width: 300, 
+            height: 220, 
+            flashvars: 'flvURL=' + _esc(flvURL)
+          });
             
           // Report an interaction for video playback
           _ADS_ReportInteraction('video_1');
