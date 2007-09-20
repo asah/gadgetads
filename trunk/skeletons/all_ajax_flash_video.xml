@@ -212,9 +212,11 @@
         callback: tabCallback
       });
     
-      // Create a clickthrough image link at the top left corner
+      // Create a clickthrough image link at the top left corner.
+      // Report an interaction here as well.
       _gel('logoHeader').innerHTML = [
-        '<a href="javascript:_ADS_ClickDestinationUrl(\'http://www.google.com/adwords/gadgetads\');">',
+        '<a onclick="_ADS_ReportInteraction(\'destination_url_1\');"',
+        ' href="javascript:_ADS_ClickDestinationUrl(\'http://www.google.com/adwords/gadgetads\');">',
         '<img src="' + _IG_GetImageUrl('http://www.google.com/logos/Logo_25wht.gif') + '"/>',
         '</a>'
       ].join('');
