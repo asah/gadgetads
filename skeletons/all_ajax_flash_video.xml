@@ -185,7 +185,7 @@
       
       // Create tabs using the Tabs library and set up callback functions
       // that get executed whenever the tab is selected.
-      var tabs = new _IG_Tabs();
+      var tabs = new _IG_Tabs(0, '', _gel('tabs'));
       tabs.addTab('News', {
         tooltip: 'Click here to read news about Google',
         callback: tabCallback
