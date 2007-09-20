@@ -8,13 +8,86 @@
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <Content type="html"><![CDATA[
-    <script>
-      function tabCallback(domId) {
-        // Report the interaction when users click on any tab
-        
-        var html =  new Array();
+    <style>
+      #newsContainer a {
+        color: #0000cc;
+        font-size: 0.7em;
       }
       
+      .entry {
+        border-bottom: 1px solid #aaaaaa;
+        padding-bottom: 3px;
+        margin-bottom: 3px;
+      }
+      .entryDate {
+        color: #676767;
+        font-size: 0.65em;
+        font-style: italic;
+      }
+    </style>
+    
+    <script>
+      // Report interaction when user mouses over the ad unit.  Only count
+      // this the first time.
+      var mouseOver = false;
+      window.onmouseover = function() {
+        if (!mouseOver) {
+          mouseOver = true;
+          _ADS_ReportInteraction('mouse_over');
+        }
+      }
+      
+      function tabCallback(domId) {
+        // Store the currently selected tab
+        var selectedTab = tabs.getSelectedTab();
+        
+        // Report the interaction when users click on any tab.  Only send
+        // the hit if the user's mouse is over the ad
+        if (mouseOver) {
+          _ADS_ReportInteraction('tab_' + (selectedTab.getIndex() + 1));
+        }
+        
+        // Here you generate content depending on which tab is selected.
+        switch (selectedTab.getName()) {
+        case 'News':
+          // Fetch an XML feed and generate the HTML to display it.
+          // Set up links report an interaction on each click.
+          var feedUrl = 'http://news.google.com/news?hl=en&ned=us&q=google&ie=UTF-8&output=atom';
+          var numEntries = 10;
+          _IG_FetchFeedAsJSON(feedUrl, function(json) {
+            var html = new Array();
+            html.push('<div id="newsContainer">');
+            
+            // Iterate through each feed entry and generate HTML to display it
+            for (var n = 0; n < json.Entry.length; n++) {
+              var entry = json.Entry[n];
+              var entryDate = new Date(entry.Date);
+              html.push(
+                '<div class="entry">',
+                '<a target="_top" onclick="_ADS_ReportInteraction(\'view_detail\');" href="' + entry.Link + '">' + entry.Title + '</a>',
+                '<div class="entryDate">' + entryDate.toLocaleString() + '</div>',
+                '</div>'
+              );
+            }
+            html.push('</div>');
+            
+            selectedTab.getContentContainer().innerHTML = html.join('');
+          }, numEntries, true);
+          break;
+          
+        case 'Videos':
+          break;
+          
+        case 'Images':
+          break;
+          
+        case 'Other':
+          break;
+        }
+      }
+      
+      // Create tabs using the Tabs library and set up callback functions
+      // that get executed whenever the tab is selected.
       var tabs = new _IG_Tabs();
       tabs.addTab('News', {
         tooltip: 'Click here to read news about Google',
@@ -32,11 +105,6 @@
         tooltip: 'See other content here',
         callback: tabCallback
       });
-      
-      var tabs_arr = tabs.getTabs();
-      for (var n = 0; n < tabs_arr.length; n++) {
-        tabs_arr[n].getNameContainer().onclick = _IG_Callback(_ADS_ReportInteraction, 'tab_' + (n + 1));
-      }
     </script>
     
     multiple-interactions
