@@ -37,7 +37,7 @@
   
   <div id="player">
     Here's the <a id="flvLink" target="_top">FLV link</a>
-    for this <a href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
+    for this <a target="_top" href="http://www.youtube.com/watch?v=WWyJJQbFago">YouTube video</a>.
     <div id="click" onclick="javascript:play();">Click to Play</div>
   </div>
 
@@ -60,7 +60,7 @@
           swf_version: 8, 
           width: 300, 
           height: 250, 
-          flashvars: 'flvUrl=' + _esc(flvURL)
+          flashvars: 'flvURL=' + _esc(flvURL)
         });
     }
   </script>
