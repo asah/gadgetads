@@ -13,9 +13,10 @@
       -- generating a tabs interface
       -- tracking clickthroughs
       -- tracking multiple interactions
-      -- fetching remote XML feeds
-      -- embedding Flash
+      -- embedding remote RSS/Atom feeds
+      -- embedding remote XML feeds and extracting specific data
       -- embedding images
+      -- embedding Flash
       -- streaming videos from YouTube
     -->
     <style>
