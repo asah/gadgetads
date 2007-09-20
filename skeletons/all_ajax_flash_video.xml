@@ -18,6 +18,9 @@
       -- streaming videos from YouTube
     -->
     <style>
+      #logoHeader img {
+        border: 0;
+      }
       #newsContainer a {
         color: #0000cc;
         font-size: 0.7em;
@@ -40,7 +43,13 @@
       }
     </style>
     
-    <div id="header"></div>
+    <a href="javascript:_ADS_ClickDestinationUrl('http://www.google.com');">test</a>
+    <table border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td id="logoHeader"></td>
+        <td id="tabHeader"></td>
+      </tr>
+    </table>
     <div id="tabs"></div>
     
     <script>
@@ -146,6 +155,7 @@
                 for (var k = 0; k < item.childNodes.length; k++) {
                   var child = item.childNodes[k];
                   if (child.nodeName == 'link') {
+                    // Save the photo link which we use later on
                     link = child.firstChild.nodeValue;
                   } else if (child.nodeName == 'media:group') {
                     for (var t = 0; t < child.childNodes.length; t++) {
@@ -161,12 +171,12 @@
                           ' height="' + node.getAttribute('height') + '"/>',
                           '</a>'
                         );
-                        
-                        // Rest the link
-                        link = '#';
                         break;
                       }
                     } // end for loop
+                    
+                    // Reset the link to default
+                    link = '#';
                   }
                 } // end for loop
               } // end for loop
@@ -202,14 +212,16 @@
         tooltip: 'See other content here',
         callback: tabCallback
       });
+    
+      // Create a clickthrough image link at the top left corner
+      _gel('logoHeader').innerHTML = [
+        '<a href="javascript:_ADS_ClickDestinationUrl(\'http://www.google.com/adwords/gadgetads\');">',
+        '<img src="' + _IG_GetImageUrl('http://www.google.com/logos/Logo_25wht.gif') + '"/>',
+        '</a>'
+      ].join('');
       
-    // Create a clickthrough image link at the top
-    _gel('header').innerHTML = [
-      '<a target="_top"',
-      ' href="javascript:_ADS_ClickDestinationUrl(\'http://www.google.com/adwords/gadgetads\');">',
-      '<img src="' + _IG_GetImageUrl('http://www.google.com/logos/Logo_25wht.gif') + '"/>',
-      '</a>'
-    ].join('');
+      // Move the tab header container to the same row as the image link
+      _gel('tabHeader').appendChild(tabs.getHeaderContainer());
     </script>
   ]]></Content>
 </Module>
