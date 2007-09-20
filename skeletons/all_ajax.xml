@@ -13,7 +13,8 @@
       -- generating a tabs interface
       -- tracking clickthroughs
       -- tracking multiple interactions
-      -- fetching remote XML feeds
+      -- embedding remote RSS/Atom feeds
+      -- embedding remote XML feeds and extracting specific data
       -- embedding images
     -->
     <style>
