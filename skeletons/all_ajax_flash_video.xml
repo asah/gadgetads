@@ -76,6 +76,35 @@
           break;
           
         case 'Videos':
+          // In order to stream videos off of YouTube, save the YouTube 
+          // video ID, timestamp, and the YouTube signature.
+          var videoId = 'sSEs-aE2nCA';
+          var timestamp = '__ENV_time_secs_since_epoch__';
+          var signature = '__YOUTUBE_VIDEO_TEST(sSEs-aE2nCA)__';
+          
+          // Use the video ID, timestamp, and signature created above to 
+          // construct the FLV URL. 
+          var flvURL = 'http://www.youtube.com/get_video?';
+          flvURL += [
+              'video_id=' + _esc(videoId),
+              'ts=' + _esc(timestamp),
+              't=' + _esc(signature),
+              'gad=1'
+            ].join('&');
+            
+          // Embed your own custom Flash video player which supports streaming
+          // from an FLV file hosted remotely.  The FLV URL is passed in
+          // via FlashVars.
+          var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/tutorial_content/small_player.swf';
+          _IG_EmbedCachedFlash(swfUrl, selectedTab.getContentContainer(), {
+              swf_version: 8,
+              width: 300, 
+              height: 250, 
+              flashvars: 'flvURL=' + _esc(flvURL)
+            });
+            
+          // Report an interaction for video playback
+          _ADS_ReportInteraction('video_1');
           break;
           
         case 'Images':

@@ -14,7 +14,7 @@
     <div id="fc"></div>
     <script>
       // Replace the SWF URL below with your own
-      var swfUrl = 'http://YOUR_FLASH_SWF_URL';
+      var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/test/test_content/fad.swf';
       
       // Update the width/height to the ad size
       var fWidth = 300;
