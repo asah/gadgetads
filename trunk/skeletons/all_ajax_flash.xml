@@ -89,7 +89,7 @@
             // Iterate through each feed entry and generate HTML to display it
             for (var n = 0; n < json.Entry.length; n++) {
               var entry = json.Entry[n];
-              var entryDate = new Date(entry.Date);
+              var entryDate = new Date(entry.Date * 1000);
               html.push(
                 '<div class="entry">',
                 '<a target="_top" onclick="_ADS_ReportInteraction(\'view_detail\');" href="' + entry.Link + '">' + entry.Title + '</a>',
