@@ -33,7 +33,7 @@
 
         alert(arguments.callee);
         if (typeof GMap2 == 'undefined') {
-          window.setTimeout(constructor, 100);
+          window.setTimeout(arguments.callee, 100);
         } else {
           loadMapCallback();
         }
