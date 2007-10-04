@@ -20,7 +20,7 @@
       
       function loadMap() {
         
-        window.setTimeout('alert("here");', 1000);
+        window.setTimeout('alert("here")', 1000);
         
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
