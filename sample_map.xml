@@ -28,7 +28,8 @@
       }
 
       function waitMap() {
-        var mapInit = document.getElementById('mapInit');
+        alert(_gel);
+        var mapInit = _gel('mapInit');
         mapInit.innerHTML = 'loading map...';
 
         if (typeof GMap2 != 'undefined') {
