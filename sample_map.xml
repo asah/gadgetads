@@ -18,7 +18,8 @@
       // http://maps.google.com/maps?file=api&amp;v=2.x
 
       function loadMap() {
-        _IG_LoadScript('http://maps.google.com/maps?file=api&amp;v=2.x', 'loadMapCallback();');
+        _IG_LoadScript('/ig/proxy?url=' + _esc('http://maps.google.com/maps?file=api&amp;v=2.x'), 
+            'loadMapCallback();');
       }
       
       function loadMapCallback() {
