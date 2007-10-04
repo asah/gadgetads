@@ -24,19 +24,14 @@
         script.type = 'text/javascript';
         head.appendChild(script);
 
-        window.setTimeout(waitMap, 100);
+        var intervalId = window.setInterval(function() { alert(_gel); }, 1000);
       }
 
       function waitMap() {
-        alert(_gel);
-        return;
         var mapInit = document.getElementById('mapInit');
         mapInit.innerHTML = 'loading map...';
 
-        alert(arguments.callee);
-        if (typeof GMap2 == 'undefined') {
-          window.setTimeout(arguments.callee, 100);
-        } else {
+        if (typeof GMap2 != 'undefined') {
           loadMapCallback();
         }
       }
