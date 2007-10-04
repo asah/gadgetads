@@ -18,15 +18,12 @@
       // http://maps.google.com/maps?file=api&amp;v=2.x
       
       
-      function loadMap() {
-        
-        window.setTimeout('alert("here")', 1000);
-        
+      function loadMap() {        
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
         script.src = 'http://maps.google.com/maps?file=api&amp;v=2.x';
         script.type = 'text/javascript';
-        //head.appendChild(script);
+        head.appendChild(script);
         window.setTimeout(function() { alert(script); }, 100);
       }
       
