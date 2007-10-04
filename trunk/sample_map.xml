@@ -23,9 +23,6 @@
       }
       
       function loadMapCallback() {
-        alert(GBrowserIsCompatible);
-        return;
-        
         if (GBrowserIsCompatible()) {
           var map = new GMap2(_gel('map'));
           map.addControl(new GSmallMapControl());
