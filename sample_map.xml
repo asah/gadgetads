@@ -28,7 +28,7 @@
       }
 
       function waitMap() {
-        var mapInit = _gel('mapInit');
+        var mapInit = document.getElementById('mapInit');
         mapInit.innerHTML = 'loading map...';
 
         alert(arguments.callee);
