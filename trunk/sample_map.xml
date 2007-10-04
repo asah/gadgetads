@@ -12,17 +12,18 @@
     </style>
     <div id="map"></div>
     
-    <img onclick="loadMap();" src="http://gadgetads.googlecode.com/svn/trunk/sample_map.png"/>
+    <img onclick="loadMap();" src="http://gadgetads.googlecode.com/svn/trunk/sample_map.png" width=306 height=202a/>
     
     <script>
       // http://maps.google.com/maps?file=api&amp;v=2.x
-      
-      alert(GBrowserIsCompatible);
-      if (GBrowserIsCompatible()) {
-        var map = new GMap2(_gel('map'));
-        map.addControl(new GSmallMapControl());
-        map.addControl(new GMapTypeControl());
-        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+
+      function loadMap() {
+        if (GBrowserIsCompatible()) {
+          var map = new GMap2(_gel('map'));
+          map.addControl(new GSmallMapControl());
+          map.addControl(new GMapTypeControl());
+          map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+        }
       }
     </script>
   ]]> 
