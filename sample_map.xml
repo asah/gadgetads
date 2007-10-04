@@ -17,15 +17,6 @@
     <script>
       // http://maps.google.com/maps?file=api&amp;v=2.x
 
-     function loadMap() {
-        var head = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script');
-        script.src = 'http://maps.google.com/maps?file=api&amp;v=2.x';
-        script.type = 'text/javascript';
-        head.appendChild(script);
-
-        window.setInterval(waitMap, 1000);
-      }
 
       function waitMap() {
         alert(_gel);
@@ -37,6 +28,17 @@
           window.clearInterval(intervalId);
         }
       }
+
+      function loadMap() {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = 'http://maps.google.com/maps?file=api&amp;v=2.x';
+        script.type = 'text/javascript';
+        head.appendChild(script);
+
+        window.setInterval(waitMap, 1000);
+      }
+
 
       function loadMapCallback() {
         alert(GMap2);
