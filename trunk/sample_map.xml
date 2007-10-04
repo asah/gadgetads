@@ -31,9 +31,9 @@
         var mapInit = _gel('mapInit');
         mapInit.innerHTML = 'loading map...';
 
-        alert('again');
+        alert(arguments.callee);
         if (typeof GMap2 == 'undefined') {
-          window.setTimeout(this, 100);
+          window.setTimeout(constructor, 100);
         } else {
           loadMapCallback();
         }
