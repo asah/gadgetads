@@ -24,10 +24,12 @@
         script.type = 'text/javascript';
         head.appendChild(script);
 
-        waitMap();
+        window.setTimeout(waitMap, 100);
       }
 
       function waitMap() {
+        alert(_gel);
+        return;
         var mapInit = document.getElementById('mapInit');
         mapInit.innerHTML = 'loading map...';
 
