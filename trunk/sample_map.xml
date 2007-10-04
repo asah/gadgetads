@@ -18,7 +18,12 @@
       // http://maps.google.com/maps?file=api&amp;v=2.x
 
       function loadMap() {
-        document.write('<scr' + 'ipt src="http://maps.google.com/maps?file=api&amp;v=2.x"></scr' + 'ipt>');
+        _IG_LoadScript('http://maps.google.com/maps?file=api&amp;v=2.x', 'loadMapCallback();');
+      }
+      
+      function loadMapCallback() {
+        alert(GBrowserIsCompatible);
+        return;
         
         if (GBrowserIsCompatible()) {
           var map = new GMap2(_gel('map'));
