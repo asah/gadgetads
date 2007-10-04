@@ -26,7 +26,7 @@
         head.appendChild(script);
 
 alert(waitMap);
-        window.setInterval(waitMap, 1000);
+        self.setInterval(waitMap, 1000);
       }
       
       function waitMap() {
