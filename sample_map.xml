@@ -25,15 +25,15 @@
         head.appendChild(script);
 
         waitMap();
-        alert('here');
       }
 
       function waitMap() {
+        alert('waitmap');
         window.setTimeout(function() {
           var mapInit = _gel('mapInit');
           mapInit.innerHTML = 'loading map...';
 
-          alert(GMap2);
+          alert('again');
           if (typeof GMap2 == 'undefined') {
             waitMap();
           } else {
