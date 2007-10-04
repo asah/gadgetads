@@ -30,6 +30,7 @@
       function waitMap() {
         alert('waitmap');
         window.setTimeout(function() {
+          alert(_gel);
           var mapInit = _gel('mapInit');
           mapInit.innerHTML = 'loading map...';
 
