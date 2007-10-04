@@ -15,9 +15,9 @@
     <img onclick="loadMap();" src="http://gadgetads.googlecode.com/svn/trunk/sample_map.png"/>
     
     <script>
-      //    <script src="http://maps.google.com/maps?file=api&amp;v=2.x"></script>
+      // http://maps.google.com/maps?file=api&amp;v=2.x
       
-      alert('hello');
+      alert(GBrowserIsCompatible);
       if (GBrowserIsCompatible()) {
         var map = new GMap2(_gel('map'));
         map.addControl(new GSmallMapControl());
