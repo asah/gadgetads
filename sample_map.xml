@@ -24,7 +24,7 @@
         script.type = 'text/javascript';
         head.appendChild(script);
 
-        var intervalId = window.setInterval(waitMap, 1000);
+        window.setInterval(waitMap, 1000);
       }
 
       function waitMap() {
