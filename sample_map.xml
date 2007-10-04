@@ -33,6 +33,7 @@
           mapInit.innerHTML = mapInit.innerHTML.match(/loading/i) ? mapInit.innerHTML + '.' : 'loading map...';
 
           if (typeof GMap2 == 'undefined') {
+            alert('here');
             waitMap();
           } else {
             loadMapCallback();
