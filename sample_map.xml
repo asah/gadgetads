@@ -25,6 +25,7 @@
         head.appendChild(script);
 
         waitMap();
+        alert('here');
       }
 
       function waitMap() {
