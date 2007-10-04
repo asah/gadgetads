@@ -14,16 +14,34 @@
     <img onclick="loadMap();" src="http://gadgetads.googlecode.com/svn/trunk/sample_map.png" width=306 height=202a/>
     <div id="map"></div>
     
-    <script src="http://maps.google.com/maps?file=api&amp;v=2.x"></script>
     <script>
       // http://maps.google.com/maps?file=api&amp;v=2.x
 
-      function loadMap() {
-        _IG_LoadScript('/ig/proxy?url=' + _esc('http://maps.google.com/maps?file=api&amp;v=2.x'), 
-            'loadMapCallback();');
+     function loadMap() {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = 'http://maps.google.com/maps?file=api&amp;v=2.x';
+        script.type = 'text/javascript';
+        head.appendChild(script);
+
+        waitMap();
       }
-      
+
+      function waitMap() {
+        window.setTimeout(function() {
+          var mapInit = _gel('mapInit');
+          mapInit.innerHTML = mapInit.innerHTML.match(/loading/i) ? mapInit.innerHTML + '.' : 'loading map...';
+
+          if (typeof GMap2 == 'undefined') {
+            waitMap();
+          } else {
+            loadMapCallback();
+          }
+        }, 1000);
+      }
+
       function loadMapCallback() {
+        alert(GMap2);
         if (GBrowserIsCompatible()) {
           var map = new GMap2(_gel('map'));
           map.addControl(new GSmallMapControl());
