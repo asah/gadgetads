@@ -25,7 +25,7 @@
         script.type = 'text/javascript';
         head.appendChild(script);
 
-        window.setInterval(function() {
+        window.setTimeout(function() {
           alert('here');
         }, 1000);
       }
