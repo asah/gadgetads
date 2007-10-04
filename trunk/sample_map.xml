@@ -28,18 +28,15 @@
       }
 
       function waitMap() {
-          alert(_gel);
-        window.setTimeout(function() {
-          var mapInit = _gel('mapInit');
-          mapInit.innerHTML = 'loading map...';
+        var mapInit = _gel('mapInit');
+        mapInit.innerHTML = 'loading map...';
 
-          alert('again');
-          if (typeof GMap2 == 'undefined') {
-            waitMap();
-          } else {
-            loadMapCallback();
-          }
-        }, 1000);
+        alert('again');
+        if (typeof GMap2 == 'undefined') {
+          window.setTimeout(waitMap, 100);
+        } else {
+          loadMapCallback();
+        }
       }
 
       function loadMapCallback() {
