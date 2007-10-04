@@ -26,8 +26,7 @@
         //head.appendChild(script);
         window.setTimeout(function() {
           head.appendChild(script);
-          alert(waitMap);
-//          window.setInterval(waitMap, 500);
+          window.setInterval(waitMap, 500);
         }, 100);
       }
       
