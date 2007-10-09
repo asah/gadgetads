@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Simple Gmail Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
+  <ModulePrefs title="Simple Gmail Gadget Ad" width="300" height="250" thumbnail="http://gadgetads.googlecode.com/svn/trunk/tutorial_content/simple_gmail_ad-thm.png" scrolling="false">
     <Require feature="ads"/>
     <Require feature="flash"/>
   </ModulePrefs>
