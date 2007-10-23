@@ -94,7 +94,7 @@
     var h = size[1];
     var preview = document.getElementById("preview");
     var code = document.getElementById("code");
-    code.value = '<!-- ' + w + 'x' + h +' -->\n' + '<iframe frameborder=0 width=' + w + ' height=' + h + ' marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="http://gmodules.com/ig/ifr?url='+encodeURIComponent(url)+'&synd=ads&up_clickurl=%c"></iframe>';
+    code.value = '<!-- ' + w + 'x' + h +' -->\n' + '<iframe frameborder=0 width=' + w + ' height=' + h + ' marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="http://gmodules.com/ig/ifr?url='+encodeURIComponent(url)+'&synd=dart&up_clickurl=%c"></iframe>';
     code.select();
     var preview_code;
     preview_code = code.value.replace("%c", encodeURIComponent("http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl="));
