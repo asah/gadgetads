@@ -43,13 +43,7 @@
 
   <script>
     // Create the link to the FLV file on YouTube
-    var flvURL = 'http://www.youtube.com/get_video?';
-    flvURL += [
-        'video_id=' + _esc('WWyJJQbFago'),
-        'ts=' + _esc(__ENV_time_secs_since_epoch__),
-        't=' + _esc('__YOUTUBE_VIDEO_TEST(WWyJJQbFago)__'),
-        'gad=1'
-      ].join('&');
+    var flvURL = '_YOUTUBE_VIDEO_URL(WWyJJQbFago)__';
     
     // Set the href attribute so the user can see what it looks like
     _gel('flvLink').href = flvURL;
