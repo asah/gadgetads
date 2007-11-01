@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="My Gadget Ad" width="728" height="90" thumbnail="" scrolling="false">
+    <Require feature="ads"/>
+    <Require feature="flash"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <!-- 
+      Embeds a single Flash file in the gadget ad and sets the dimensions
+      to match the ad size.
+    -->
+    <div id="fc"></div>
+    <script>
+      // Replace the SWF URL below with your own
+      var swfUrl = 'http://www.mercadolivre.com.br/org-img/MLB/google/google_teste5.swf';
+      
+      // Update the width/height to the ad size
+      var fWidth = 728;
+      var fHeight = 90;
+      
+      // Embed Flash into HTML container div
+      _IG_EmbedCachedFlash(swfUrl, 'fc', {
+          width: fWidth,
+          height: fHeight
+        });
+    </script>
+  ]]></Content>
+</Module>
