@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module> 
+<ModulePrefs title="GEICO Video Survey" width="300" height="250" author="Jeremy Misavage" author_email="jeremy.misavage@martinagency.com" author_affiliation="The Martin Agency" thumbnail="http://www.tma-walmart.com/geico_gadget/gadget.jpg" scrolling="false">
+	<Require feature="flash"/>
+	<Require feature="ads"/>
+	<Require feature="setprefs"/>
+</ModulePrefs>
+<UserPref name="voted" default_value="0" datatype="hidden"/>
+<UserPref name="clickurl" datatype="hidden" default_value="http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl="/>
+<UserPref name="aiturl" datatype="hidden"/>
+<Content type="html">
+	<![CDATA[
+		<style>
+		#flashcontainer {
+			background-color: #D1E3EF;
+			text-align: center;
+		}
+		</style>
+
+		<div id="flashcontainer"></div>
+	
+		<script type="text/javascript">
+			var prefs = new _IG_Prefs();
+			var url = "http://hosting.gmodules.com/ig/gadgets/file/116829632994393930703/gadget.swf";
+
+			function vote(movie) {
+				_ADS_ReportInteraction('item_' + movie, 1);
+				if( prefs.getInt("voted") == 0 ) {
+					prefs.set("voted", 1);
+				}
+			}
+
+			function displayFlash() {
+				var voted = prefs.getInt("voted");
+				var rateURL = prefs.getString("clickurl") + _esc("http://www.geico.com/landingpage/go5.htm?soa=48499");
+				var homeURL = prefs.getString("clickurl") + _esc("http://www.geico.com/"); 
+				
+				// Play .swf file.
+				_IG_EmbedFlash( _IG_GetCachedUrl(url), "flashcontainer", {
+							swf_version: 7,
+							id: "geicovideogadget",
+							width: 300,
+							height: 250,
+							flashvars: 'rateURL=' + _esc(rateURL) + '&homeURL=' + _esc(homeURL) + '&voted=' + _esc(voted) });
+			}
+			
+			_IG_RegisterOnloadHandler( displayFlash );
+		</script>
+	]]>
+</Content>
+</Module>
