@@ -50,7 +50,7 @@
     </tr>
     <tr>
       <td>&nbsp;</td>
-      <td><input id="clickNew" type="checkbox"/>Open Clickthroughs in New Windows
+      <td><input id="clickNew" type="checkbox"/> Open Clickthroughs in New Windows
   </table>
   
   <p>
@@ -81,6 +81,7 @@
   <script>
   var gurl = document.getElementById('gurl');
   var gsize = document.getElementById('gsize');
+  var clickNew = document.getElementById('clickNew');
   
   function set_url(url, w, h) {
     gurl.value = url;
@@ -97,10 +98,33 @@
     var h = size[1];
     var preview = document.getElementById("preview");
     var code = document.getElementById("code");
-    code.value = '<!-- ' + w + 'x' + h +' -->\n' + '<iframe frameborder=0 width=' + w + ' height=' + h + ' marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="http://ads.gmodules.com/ig/ifr?url='+encodeURIComponent(url)+'&synd=dart&up_aiturl=&up_clickurl=%c"></iframe>';
+    var ifrUrl = 'http://ads.gmodules.com/ig/ifr?';
+    ifrUrl += [
+      'url=' + encodeURIComponent(url),
+      'synd=dart',
+      'up_aiturl=',
+      'up_clickurl=%c',
+      'up_ads_clicktarget_new_=' + (clickNew ? '1', '0')
+    ].join('&');
+    code.value = [
+      '<!-- ' + w + 'x' + h +' -->',
+      '\n',
+      '<iframe frameborder=0 ',
+        'width="' + w + '"',
+        'height="' + h + '"',
+        'marginwidth="0"',
+        'marginheight="0"',
+        'vspace="0"',
+        'hspace="0"',
+        'allowtransparency="true"',
+        'scrolling="no"',
+        'src="' + ifrUrl + '">',
+      '</iframe>'
+    ].join(' ');
+    
     code.select();
     var preview_code;
-    preview_code = code.value.replace("%c", encodeURIComponent("http://gadgetads.googlecode.com/svn/trunk/test_clickurl.html?adurl="));
+    preview_code = code.value.replace("%c", '');
     preview.innerHTML = preview_code;
   }
   
