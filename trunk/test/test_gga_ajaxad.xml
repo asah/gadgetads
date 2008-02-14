@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Test Gadget Ad - AJAX" width="336" height="280" thumbnail="" scrolling="false">
+  <ModulePrefs title="Test Gadget Ad - AJAX" width="336" height="280" thumbnail="http://img0.gmodules.com/ig/modules/ov/module_blackjack2.png" scrolling="false">
     <Require feature="ads"/>
   </ModulePrefs>
   <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
