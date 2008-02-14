@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Test Gadget Ad - AJAX" width="336" height="280" thumbnail="" scrolling="false">
+    <Require feature="ads"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="ads_clicktarget_new_" datatype="hidden" default_value="1"/>
+  <Content type="html"><![CDATA[
+    <!--
+      The following tests are included in this gadget:
+      -- outputs all URL parameters
+      -- clickthrough tracking
+    -->
+    <style>
+      body {
+        font-size: 0.7em;
+      }
+      p {
+        padding: 5px 0px;
+        margin: 0px;
+      }
+      legend {
+        font-weight: bold;
+        color: #676767;
+      }
+      
+      #params fieldset {
+        background-color: #eff;
+      }
+      #params ul {
+        padding: 3px;
+        margin: 0px;
+      }
+      #params ul li {
+        list-style-type: none;
+      }
+      #params .paramKey {
+        font-weight: bold;
+      }
+      
+      #clicks fieldset {
+        background-color: #ffc;
+      }
+      #clicks input#destUrl {
+        width: 99%;
+      }
+      
+      #interactions fieldset {
+        background-color: #fcb;
+      }
+    </style>
+    
+    <br/>
+    <div id="params">
+      <fieldset>
+        <legend>URL Parameters</legend>
+        <div id="paramsContainer"></div>
+    </div>
+
+    <div id="clicks">
+      <fieldset>
+        <legend>Clickthrough Tracking</legend>
+        <p>
+          Verify clickthroughs create a pop-up confirmation dialog with the
+          destination URL displayed.  If you click 'OK', verify that a new
+          window opens up and loads the destination URL.
+        <div>
+          <b>Test Destination URL:</b>
+          <br/>
+          <input id="destUrl" type="text" value="http://www.google.com/webhp"/>
+          <br/>
+          <input onclick="_ADS_ClickDestinationUrl(_gel('destUrl').value);" type="button" value="Report Clickthrough"/>
+        </div>
+      </fieldset>
+    </div>
+    
+    <div id="interactions">
+      <fieldset>
+        <legend>Interaction Tracking</legend>
+        <p>
+          Verify interactions are output to the DEBUG info window at the top
+          left corner.
+        </p>
+        <div>
+          <b>Primary interaction:</b>
+          <input onclick="_ADS_ReportInteraction();" type="button" value="_ADS_ReportInteraction()"/>
+          <br/>
+          <b>Labeled interaction:</b>
+          <input onclick="_ADS_ReportInteraction('item_1');" type="button" value="_ADS_ReportInteraction('item_1')"/>
+          <br/>
+          <b>Label+value interaction:</b>
+          <input onclick="_ADS_ReportInteraction('submit', 2);" type="button" value="_ADS_ReportInteraction('submit', 2)"/>
+        </div>
+      </fieldset>
+    </div>
+    
+    <script>
+      function showParams() {
+        var args = _args();
+        var html = ['<ul>'];
+        for (var n in args) {
+          // Make the gadget URL a clickable link
+          var value = args[n];
+          if (n.match(/^url$/i)) {
+            value = '<a target="_blank" href="' + value + '">' + value + '</a>';
+          }
+          html.push('<li><span class="paramKey">' + n + '</span> = ' + value + '</li>');
+        }
+        html.push('</ul>');
+        _gel('paramsContainer').innerHTML = html.join('');
+      }
+      showParams();
+    </script>
+  ]]></Content>
+</Module>
+
+
