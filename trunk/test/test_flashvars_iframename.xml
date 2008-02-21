@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
+    <Require feature="ads"/>
+    <Require feature="flash"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <!-- 
+      Embeds a single Flash file in the gadget ad and sets the dimensions
+      to match the ad size.
+    -->
+    <div id="fc"></div>
+    <script>
+      // Adobe Flash Player bug workaround recommended by Google
+      if (!window.name) {
+        window.name = "gcontainer" + (new Date()).getTime();
+      }
+      
+      // Replace the SWF URL below with your own
+      var swfUrl = 'http://daniel-feedback-gadgets.googlecode.com/svn/trunk/test/test_flashvars_iframename.swf?nocache=' + (new Date()).getTime();
+      
+      // Update the width/height to the ad size
+      var fWidth = 300;
+      var fHeight = 250;
+      
+      // Embed Flash into HTML container div
+      _IG_EmbedCachedFlash(swfUrl, 'fc', {
+          width: fWidth,
+          height: fHeight,
+          flashvars: '_IG_GadgetContainer=' + _esc(window.name)
+        });
+    </script>
+  ]]></Content>
+</Module>
