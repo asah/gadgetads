@@ -19,7 +19,7 @@
       }
       
       // Replace the SWF URL below with your own
-      var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/test/test_flashvars_iframename.xml?nocache=' + (new Date()).getTime();
+      var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/test/test_flashvars_iframename.swf?nocache=' + (new Date()).getTime();
       
       // Update the width/height to the ad size
       var fWidth = 300;
