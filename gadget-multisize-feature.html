@@ -1,0 +1,74 @@
+<h2><a name="How_does_it_work_"> How does it work? </a></h2>
+<p>
+</p><h3><a name="1_Import_the_library_"> 1. Import the library: </a></h3>
+
+<p>
+</p><pre>&lt;Require feature="multisize" /&gt;
+</pre>
+<p>
+</p><h3><a name="2_Initiate_a_new_dismissible_mes"> 2. Initiate a new dismissible message object: </a></h3>
+<p>
+</p><pre>var sz = new _IG_MultiSize(__MODULE_ID__);
+</pre>
+<p>
+In most cases, you'll want to declare a single global object to be accessible within all scopes.
+</p><p>
+</p><h3><a name="3_Access_the_dimensions"> 3. Access the dimensions </a></h3>
+
+<p>
+</p><pre>sz.getWidth();  // returns the exact width, in pixels
+sz.getHeight(); // returns the exact height, in pixels
+sz.isShape("EXACT_160x600"); // equiv to:  if (sz.getWidth()==160 &amp;&amp; sz.getHeight()==600)
+sz.isShape("EXACT_SQUARE");  // equiv to:  if (sz.getWidth()==sz.getHeight())
+sz.isShape("SQUARE_LIKE");   // equiv to:  if (sz.getWidth()/sz.getHeight() &lt; 2.0 &amp;&amp; 
+                             //                sz.getHeight()/sz.getWidth() &lt; 2.0)
+sz.isShape("TALL_NARROW");   // equiv to:  if (sz.getHeight()/sz.getWidth() &gt;= 2.0)
+sz.isShape("SHORT_WIDE");    // equiv to:  if (sz.getWidth()/sz.getHeight() &gt;= 2.0)
+// TODO: define "sizes" and not just shapes... but this is tricky without more use-cases.
+</pre>
+<p>
+</p><h3><a name="4_Use_this_to_format_your_gadget"> 4. Use this to format your gadget </a></h3>
+
+<p>
+</p><pre>var w = sz.getWidth();
+var h = sz.getHeight();
+if (sz.isShape("EXACT_120x600")) {
+   error(w + "x" + h + " is not supported!");
+} else if (_max(w,h) &lt; 200) {
+   error(w + "x" + h + " is not supported: too small");
+} else if (sz.isShape("TALL_NARROW")) {
+   // layout for 160x600 ads, blog margins, etc.
+} else if (sz.isShape("SHORT_WIDE")) {
+   // layout for leaderboard and banner ads and igoogle users with very wide screens.
+} else if (sz.isShape("SQUARE_LIKE")) {
+   // layout for rectangle ads and most igoogle users
+} else {
+   error(w + "x" + h + " is not supported: doesn't match any supported shape");
+}
+</pre>
+<p>
+</p><h3><a name="5_Declare_the_supported_sizes_in"> 5. Declare the supported sizes in your gadget (recommended-- and will be required for gadget ads when they support multi-size) </a></h3>
+<p>
+By declaring some exact dimensions that your gadget definitely supports,
+various discovery systems (directories, tools, etc.) can automatically
+recommend your gadget to a given user.
+</p><p>
+</p><pre>  &lt;ModulePrefs title="Test MultiSize Library (iframe)" width="350" height="250"&gt;
+    &lt;Require feature="multisize"/&gt;
+
+    &lt;!-- other sizes might be OK, but these are explicitly supported, e.g. ads --&gt;
+    &lt;AlternateSize width="728" height="90" /&gt;
+    &lt;AlternateSize width="160" height="600" /&gt;
+    &lt;AlternateSize width="336" height="280" /&gt;
+    &lt;AlternateSize width="300" height="250" /&gt;
+    &lt;AlternateSize width="200" height="200" /&gt;
+
+  &lt;/ModulePrefs&gt;
+</pre>
+<p>
+When gadget ads supports multi-size,
+the various gadget ad tools will require <span style="background: rgb(255, 255, 206) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><font color="#0000ff">AlternateSizes</font></span><a href="/twiki/bin/edit/Main/AlternateSizes?topicparent=Main.RemoteModulesMultiSizeFeature">?</a> to be declared if
+you want to use one creative for multiple ad unit sizes.  For gadget ads,
+the width=/height= will be ignored and only the <span style="background: rgb(255, 255, 206) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><font color="#0000ff">AlternateSize</font></span><a href="/twiki/bin/edit/Main/AlternateSize?topicparent=Main.RemoteModulesMultiSizeFeature">?</a>'s will be
+used, i.e. width=/height= will be used for consumer use of the gadget ad.
+</p>
