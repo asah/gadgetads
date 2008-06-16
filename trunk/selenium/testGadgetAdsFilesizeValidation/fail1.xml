@@ -14,9 +14,11 @@ A Gadget to test that multiple references to the same cached resource are only c
 <script>
 document.write('<scr' + 'ipt src="' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/10kb.js') + '"></scr' + 'ipt>');
 document.write('<scr' + 'ipt src="' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/10kb.js') + '"></scr' + 'ipt>');
+document.write('<scr' + 'ipt src="' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/10kb.js') + '"></scr' + 'ipt>');
 </script>
 
 <script>
+document.write('<style>@import url("' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/5kb.css') + '");</style>');
 document.write('<style>@import url("' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/5kb.css') + '");</style>');
 document.write('<style>@import url("' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/5kb.css') + '");</style>');
 </script>
