@@ -1,6 +1,6 @@
 function a() {
 var dummy = "A
-a
+aaaa
 aa
 aal
 aalii
