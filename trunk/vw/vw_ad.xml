@@ -84,19 +84,10 @@
   
   
     // This function is executed after the page loads
-    var mouseoverDetected= false;
     function init() {
-      // Track mouseovers on the ad
-      _IG_AddDOMEventHandler(document.body, 'mouseover', function() {
-        if (!mouseoverDetected) {
-          _ADS_ReportInteraction('mouse_over');
-          mouseoverDetected = true;
-        }
-      });
-      
       // Create clickable logo
       var html = [
-        '<a href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com\')">',
+        '<a onclick="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com\')" href="javascript:void(0);">',
         '<img src="' + _IG_GetImageUrl('http://') + '" alt="logo" width=30 height=30/>',
         '</a>'
       ].join("");
@@ -106,8 +97,8 @@
       var html = [
         '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'tab_1\'); showVideos();">Videos</a>',
         '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'tab_2\'); showFeeds();">Buzz</a>',
-        '<a onclick="_ADS_ReportInteraction(\'destination_url_1\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/dealerlocator/en/us/\');">Find Dealers</a>',
-        '<a onclick="_ADS_ReportInteraction(\'destination_url_2\');" href="javascript:_ADS_ClickDestinationUrl(\'http://www.vw.com/specialoffers/en/us/\');">Special Offers</a>'
+        '<a onclick="_ADS_ReportClickInteraction(\'http://www.vw.com/dealerlocator/en/us/\', \'destination_url_1\');" href="javascript:void(0);">Find Dealers</a>',
+        '<a onclick="_ADS_ReportClickInteraction(\'http://www.vw.com/specialoffers/en/us/\', \'destination_url_2\');" href="javascript:void(0);">Special Offers</a>'
       ].join(" | ");
       _gel("linksContainer").innerHTML = html;
     
