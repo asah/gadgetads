@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+<ModulePrefs title="fail1" width="300" height="250" thumbnail="http://www.google.com/intl/en_ALL/images/logo.gif" scrolling="false">
+<Require feature="ads"/>
+<Require feature="flash"/>
+</ModulePrefs>
+<UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+<UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+<Content type="html"><![CDATA[
+<!--
+A Gadget to test that multiple references to the same cached resource are only counted once when validating Gadget size.
+-->
+
+<script>
+document.write('<scr' + 'ipt src="' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/10kb.js') + '"></scr' + 'ipt>');
+document.write('<scr' + 'ipt src="' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/10kb.js') + '"></scr' + 'ipt>');
+</script>
+
+<script>
+document.write('<style>@import url("' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/5kb.css') + '");</style>');
+document.write('<style>@import url("' + _IG_GetCachedUrl('http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/5kb.css') + '");</style>');
+</script>
+
+<div id="panel1">This content has a background image</div>
+<div id="panel2">This content has a background image too</div>
+<script>
+_gel("panel1").style.background = "transparent url(" + _IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg") + ") 0px 0px no-repeat";
+_gel("panel2").style.background = "transparent url(" + _IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg") + ") 0px 0px no-repeat";
+</script>
+
+<span id="imgContainer"><span/>
+<script>
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+</script>
+
+<div id="fc"></div>
+<div id="fc2"></div>
+
+<script>
+// Replace the SWF URL below with your own
+var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/2kb.swf';
+
+// Update the width/height to the ad size
+var fWidth = 300;
+var fHeight = 250;
+
+// Embed Flash into HTML container div
+_IG_EmbedCachedFlash(swfUrl, 'fc', {
+width: fWidth,
+height: fHeight
+});
+
+// Embed Flash into HTML container div
+_IG_EmbedCachedFlash(swfUrl, 'fc2', {
+width: fWidth,
+height: fHeight
+});
+</script>
+]]></Content>
+</Module>
