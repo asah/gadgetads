@@ -97,8 +97,8 @@
       var html = [
         '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'tab_1\'); showVideos();">Videos</a>',
         '<a href="javascript:void(0);" onclick="_ADS_ReportInteraction(\'tab_2\'); showFeeds();">Buzz</a>',
-        '<a onclick="_ADS_ReportClickInteraction(\'http://www.vw.com/dealerlocator/en/us/\', \'destination_url_1\');" href="javascript:void(0);">Find Dealers</a>',
-        '<a onclick="_ADS_ReportClickInteraction(\'http://www.vw.com/specialoffers/en/us/\', \'destination_url_2\');" href="javascript:void(0);">Special Offers</a>'
+        '<a onclick="_ADS_ReportInteractionClick(\'http://www.vw.com/dealerlocator/en/us/\', \'destination_url_1\');" href="javascript:void(0);">Find Dealers</a>',
+        '<a onclick="_ADS_ReportInteractionClick(\'http://www.vw.com/specialoffers/en/us/\', \'destination_url_2\');" href="javascript:void(0);">Special Offers</a>'
       ].join(" | ");
       _gel("linksContainer").innerHTML = html;
     
