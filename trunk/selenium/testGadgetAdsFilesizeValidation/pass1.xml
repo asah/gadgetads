@@ -22,18 +22,18 @@ document.write('<style>@import url("' + _IG_GetCachedUrl('http://gadgetads.googl
 <div id="panel1">This content has a background image</div>
 <div id="panel2">This content has a background image too</div>
 <script>
-_gel("panel1").style.background = "transparent url(" + _IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg") + ") 0px 0px no-repeat";
-_gel("panel2").style.background = "transparent url(" + _IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg") + ") 0px 0px no-repeat";
+_gel("panel1").style.background = "transparent url(" + _IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg") + ") 0px 0px no-repeat";
+_gel("panel2").style.background = "transparent url(" + _IG_GetCachedUrl("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg") + ") 0px 0px no-repeat";
 </script>
 
 <span id="imgContainer"><span/>
 <script>
-_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg"));
-_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg"));
-_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg"));
-_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg"));
-_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg"));
-_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/32kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
+_gel("imgContainer").appendChild(_IG_GetImage("http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsFilesizeValidation/24kb.jpg"));
 </script>
 
 <div id="fc"></div>
