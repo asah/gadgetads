@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Kariyer.net" width="336" height="280" thumbnail="http://ph2.dmtoolz.com/kariyernet/thumb.gif" scrolling="false">
+    <Require feature="ads"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <option value="68">Çocuk Geli&#351;imi ve E&#287;itimi</option>
+    <option value="85">Denizcilik / Yatç&#305;l&#305;k</option>
+    <a href="javascript:_ADS_ReportInteraction();">dummy interaction</a>
+  ]]></Content>
+</Module>
+
+
