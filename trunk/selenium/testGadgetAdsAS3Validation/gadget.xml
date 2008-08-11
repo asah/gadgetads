@@ -9,15 +9,14 @@
 	<Content type="html"><![CDATA[
 		<div id="fc"></div>
 		<script>
-			var swfUrl = 'http://scaffolds.dyndns.org/~jeff/AS3HelloWorld/HelloWorld.swf';
+			var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/selenium/testGadgetAdsAS3Validation/HelloWorld.swf';
 
 			var fWidth = 300;
 			var fHeight = 250;
 
 			_IG_EmbedCachedFlash(swfUrl, 'fc', {
 				width: fWidth,
-				height: fHeight,
-				refreshInterval: 1 //Disable caching. ONLY FOR TESTING!
+				height: fHeight
 			});
 			
 			function requestContent(url) {
