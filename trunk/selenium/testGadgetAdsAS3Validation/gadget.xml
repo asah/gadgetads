@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
+		<Require feature="ads"/>
+		<Require feature="flash"/>
+	</ModulePrefs>
+	<UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+	<UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+	<Content type="html"><![CDATA[
+		<div id="fc"></div>
+		<script>
+			var swfUrl = 'http://scaffolds.dyndns.org/~jeff/AS3HelloWorld/HelloWorld.swf';
+
+			var fWidth = 300;
+			var fHeight = 250;
+
+			_IG_EmbedCachedFlash(swfUrl, 'fc', {
+				width: fWidth,
+				height: fHeight,
+				refreshInterval: 1 //Disable caching. ONLY FOR TESTING!
+			});
+			
+			function requestContent(url) {
+				_IG_FetchContent(url, requestContentResponse);
+			}
+			
+			function requestContentResponse(content) {
+				try {
+					_gel('fc').childNodes[0].handleResponseFromJavaScript(content);
+				}
+				catch(e) {
+					alert(e);
+				}
+			}
+		</script>
+	]]></Content>
+</Module>
