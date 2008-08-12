@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="L4L YouTube Contest" width="300" height="250" thumbnail="http://contests.labpixies.com/gadget/l4l/images/thumbnail.jpg" scaling="false" scrolling="false">
+  <ModulePrefs title="L4L YouTube Contest" width="300" height="250" scaling="false" scrolling="false">
     <Require feature="ads"/>
     <Require feature="tabs"/>
     <Require feature="flash"/>
