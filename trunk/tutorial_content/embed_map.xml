@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Example: Embedding Google Maps" width="300" height="250" thumbnail="">
+    <Require feature="ads"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <style>
+      #map {
+        height: 230px;
+        width: 100%;
+      }
+    </style>
+    
+    <!--
+      Load the AJAX API loader to lazy-load the maps API library after user
+      interaction.  Maps API developer key is generated for http://gmodules.com
+      and is required to use the geocoder, e.g. driving directions.
+    -->
+    <script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAoB0i6SDqobDYkh2Eosh8_hTZqGWfQErE9pT-IucjscazSdFnjBSYTmG9lkUGpfCnsUSpnbFtRXVsgA"></script>
+    
+    <!-- Require user to initiate map load -->
+    <div><a href="javascript:loadMap();">Click to load map</a></div>
+
+    <!-- Map container -->
+    <div id="map"></div>
+    
+    <script>
+      function loadMap() {
+        // Load the latest version of the maps API
+        google.load('maps', '2.x', {
+          'callback': showMap
+        });
+      }
+      
+      // Call this function when the maps library has been loaded
+      function showMap() {
+        var map = new google.maps.Map2(_gel('map'));
+        map.setCenter(new google.maps.LatLng(37.4419, -122.1419), 13);
+      }
+    </script>  
+  ]]></Content>
+</Module>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
