@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="My Gadget Ad" width="300" height="250" scrolling="false">
+    <Require feature="ads"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <Content type="html"><![CDATA[
+    <img src="http://thumbs.ebay.com/pict/180235900790.jpg"/>
+    <img src="http://images.amazon.com/images/P/B000WQSRCA.16._MZZZZZZZ_.jpg"/>
+    <img src="http://www.google.com/intl/en_ALL/images/logo.gif"/>
+    <img src="http://content.yieldmanager.edgesuite.net/atoms/da/d3/d6/58/dad3d6586be53351c48ae22dceb686ca.gif"/>
+    <img src="http://img.shopzilla.com/sz/us/images/logos/default_hp.gif"/>
+    <img src="http://gga.ebay.cachetastic.com/images/ebay_logo_121x60.gif"/>
+    <script>
+      _ADS_ReportInteraction();
+    </script>
+  ]]></Content>
+</Module>
