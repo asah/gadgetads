@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Test MultiSize Library (iframe)" scrolling="false">
+    <Require feature="ads"/>
+    <Require feature="multisize"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value=""/>
+  <UserPref name="aiturl" datatype="hidden" default_value=""/>
+  <Content type="html"><![CDATA[
+  <div id=output onmouseover="_ADS_ReportInteraction('mouse_over');">
+    This is some gadget content here
+  </div>
+
+  <script>
+    var ms = new _IG_MultiSize();
+    var output = "<font style='font-size:12px'>dimensions: " + ms.getWidth();
+    output += "x" + ms.getHeight() + "<br>\n";
+    
+    _gel("output").innerHTML = output;
+  </script>
+  ]]>
+  </Content>
+</Module>

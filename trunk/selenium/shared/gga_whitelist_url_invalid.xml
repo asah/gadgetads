@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+<ModulePrefs author="You Tube" author_email="shashis@youtube.com" scaling="false" scrolling="false" title="%64%65%6D%6F">
+<Require feature="ads"/>
+<Require feature="tabs"/>
+<Require feature="flash"/>
+</ModulePrefs>
+<UserPref name="aiturl" datatype="hidden" default_value=""/>
+<Content type="url" href="http://www.google.com/reviews/polls/contest/user/demo/app?size=small&amp;gadgetType=gadgetad"/>
+</Module>

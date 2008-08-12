@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="Demo - 3PAS Gadget Ad" width="300" height="250" thumbnail="http://" scrolling="false">
+    <Require feature="ads"/>
+    <Require feature="flash"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
+  <UserPref name="ads_clicktarget_new_" datatype="hidden" default_value=""/>
+  <UserPref name="rawquery" datatype="hidden" default_value=""/>
+  <UserPref name="page_url" datatype="hidden" default_value=""/>
+  <UserPref name="bordercolor" datatype="hidden" default_value=""/>
+  <UserPref name="backgroundcolor" datatype="hidden" default_value=""/>
+  <UserPref name="linecolor" datatype="hidden" default_value=""/>
+  <UserPref name="textcolor" datatype="hidden" default_value=""/>
+  <UserPref name="linkcolor" datatype="hidden" default_value=""/>
+  <UserPref name="urlcolor" datatype="hidden" default_value=""/>
+  <UserPref name="lat" datatype="hidden" default_value=""/>
+  <UserPref name="long" datatype="hidden" default_value=""/>
+  <UserPref name="locaccuracy" datatype="hidden" default_value=""/>
+  <UserPref name="region" datatype="hidden" default_value=""/>
+  <UserPref name="metro" datatype="hidden" default_value=""/>
+  <UserPref name="city" datatype="hidden" default_value=""/>
+  <UserPref name="tzoffset" datatype="hidden" default_value=""/>
+  <UserPref name="age" datatype="hidden" default_value=""/>
+  <UserPref name="gender" datatype="hidden" default_value=""/>
+  <UserPref name="income" datatype="hidden" default_value=""/>
+  <UserPref name="family_size" datatype="hidden" default_value=""/>
+  <UserPref name="education" datatype="hidden" default_value=""/>
+  <UserPref name="children" datatype="hidden" default_value=""/>
+  <Content type="html"><![CDATA[
+    <div id="fc"></div>
+    <script>
+      // Replace the SWF URL below with your own
+      var swfUrl = 'http://gadgetads.googlecode.com/svn/trunk/test/test_content/fad.swf';
+      
+      // Update the width/height to the ad size
+      var fWidth = 300;
+      var fHeight = 250;
+      
+      // Embed Flash into HTML container div
+      _IG_EmbedCachedFlash(swfUrl, 'fc', {
+          width: fWidth,
+          height: fHeight
+        });
+    </script>
+  ]]></Content>
+</Module>

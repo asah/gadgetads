@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="L4L YouTube Contest" width="300" height="250" thumbnail="http://contests.labpixies.com/gadget/l4l/images/thumbnail.jpg" scaling="false" scrolling="false">
+    <Require feature="ads"/>
+    <Require feature="tabs"/>
+    <Require feature="flash"/>
+  </ModulePrefs>
+  <UserPref name="clickurl" datatype="hidden" default_value=""/>
+  <UserPref name="aiturl" datatype="hidden" default_value=""/>
+  <UserPref name="phase" datatype="hidden" default_value="none"/>
+  <Content type="html">
+    <![CDATA[
+
+
+<img src="http://apod.nasa.gov/apod/image/0304/bluemarble2k_big.jpg"/>
+<style type="text/css">
+body{
+width:298px;
+height:248px;
+max-width:300px;
+border: solid 1px red;
+}
+form { margin-bottom: 0; }
+.tablib_main_container{
+width:298px;
+height: 215px;
+}
+.tablib_table{
+width:298px;
+margin-top: 3px;
+}
+.tablib_spacerTab{
+}
+.tablib_selected{
+padding-left:3px;
+padding-right:3px;
+}
+.tablib_unselected{
+font-weight: bold;
+padding-left:3px;
+padding-right:3px;
+}
+.tablib_content_container{
+width:298px;
+height:190px;
+}
+.blacktext {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px;
+line-height: 16px;
+color: #000000;
+}
+.whitetext {
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 12px;
+line-height: 16px;
+color: #FFFFFF;
+}
+</style>
+<script type="text/javascript" >
+var mAll = _IG_GetCachedUrl("http://contests.labpixies.com/gadget/l4l/ad.js");
+document.write('<scr'+'ipt type="text/javascript" src="'+mAll+'"></scr'+'ipt>');
+var mAll1 = _IG_GetCachedUrl("http://contests.labpixies.com/gadget/l4l/contest_meta.js");
+document.write('<scr'+'ipt type="text/javascript" src="'+mAll1+'"></scr'+'ipt>');
+
+//DEBUG remove before publish
+var prefs = new _IG_Prefs(__MODULE_ID__);
+//END_DEBUG
+
+var contestID = 1;
+var vlist = null;
+var temp_vlist = null;
+var search_start_idx = 0;
+var vOfCount = 0;
+var tabs = null;
+var gtabID;
+var selectedVid = 0;
+var totalVotes = 0;
+var user_vid = "";
+var user_id = "";
+var _json_with_no_cache = 1;
+var timerHandle = 0;
+var voted_on_video = false;
+var page = 1;
+
+
+  
+function initTabs() {
+if(tabs==null){
+tabs = new _IG_Tabs(__MODULE_ID__,"Home");
+var phase = meta.phase;
+
+//DEBUG remove before publish
+var debug_phase = prefs.getString("phase")
+if( debug_phase != "none"){
+phase = debug_phase;
+}
+//END_DEBUG
+  
+
+tabs.addTab("Home","mainTbl", callback_home);
+
+if(phase == "watch"){
+tabs.addTab("Submit", "submit", callback_submit);
+tabs.addTab("Watch","view", callback);
+}else if(phase == "vote"){
+tabs.addTab("Vote","view", callback);
+tabs.addTab("Results", "results",callback_results);
+}else{
+tabs.addTab("Results", "results",callback_results);
+}
+tabs.addTab("Trailer", "trailer",callback_trailer);
+tabs.alignTabs("left");
+var link = document.createElement('a');
+link.setAttribute('href', "javascript:void(0);");
+link.setAttribute('border', '0');
+link.setAttribute('target', '_top');
+ link.innerHTML = '<img class="headerImg" border="0" src="'+_IG_GetImageUrl('http://contests.labpixies.com/gadget/l4l/images/small/header.png')+'" width="298" height="33" />';
+link.setAttribute('id', 'mainBanner');
+link.onclick = function(){_ADS_ReportInteraction('destination_url_1');_ADS_ClickDestinationUrl('http://lionsforlambs.unitedartists.com/');return false;};
+document.body.insertBefore(link,document.body.firstChild);
+}else{
+returned_from_home = true;
+tabs.displayTabs(true);
+tabs.setSelectedTab(2);
+}
+_gel("mainBanner").style.display = "block";
+}
+
+</script>
+<table id="mainTbl" style="display:none;" width="298" height="192" border="0" cellpadding="0" cellspacing="0" >
+<tr>
+	<td height="142" width="124" align="center" valign="middle" style="font-family:arial;font-size:11px;font-weight:bold;padding:3px;">
+	Click on submit for a chance to win for your cause.<br/><br/>
+	<img id="upload_img" style="cursor:pointer;" onclick="tabs.setSelectedTab(1);" src="" /><br/><br/>
+	<a style="color:black;" target="_blank" onclick="_ADS_ReportInteraction('destination_url_4');_ADS_ClickDestinationUrl('http://contests.labpixies.com/gadget/l4l/l4l_rules.html');return false" href="#">Official Rules</a>
+	</td>
+<td id="callContainer" height="142" width="174" align="left" valign="middle">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td height="50" width="103" id="smallFooter1" onclick="_ADS_ReportInteraction('destination_url_2');_ADS_ClickDestinationUrl('http://lionsforlambs.unitedartists.com/');return false;" style="cursor:pointer;">
+&nbsp;
+</td>
+<td height="50" width="195" id="smallFooter2" onclick="_ADS_ReportInteraction('destination_url_2');_ADS_ClickDestinationUrl('http://lionsforlambs.unitedartists.com/');return false;" style="cursor:pointer;">
+<img id="add_to" style="cursor:pointer;position:relative;left:122px;top:14px" onclick="addToPressed(event);" src="" />
+</td></tr></table></td></tr></table>
+
+<table width="298" height="190" id="submit" style="display:none;margin-top:2px;" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td id="submit0" width="298" height="190">
+<table width="298" height="190" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style="padding:10px;font-family:arial;font-size:12px;" width="298" height="100" align="left">
+Enter your YouTube user name to select one of your videos to be entered in the contest. Once you have selected the video, you will be asked to confirm your entry via email used to sign up for a YouTube account.
+</td></tr><tr>
+<td width="298" height="30" align="center" valign="top">
+<form onsubmit="getUserVideos(); return false;"><input id="user_name" style="margin:2px; height:20px; font-family:arial;font-size:12px;" type="text" style="width:155px" /><input style="margin:2px; height:20px;font-family:arial;font-size:12px;" type="submit" value="Go" /></form>
+</td></tr><tr>
+<td height="20" id="userSearchError" width="298" align="center" valign="top" style="font-size:10px;color:red;font-family:arial">
+</td></tr></table></td>
+<td id="submit1" style="display:none;padding:0px;" width="298" height="190">
+<table width="298" height="190" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="100%" height="110">
+<table width="100%" height="110" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td id="smallVid" align="center" height="110" valign="middle">
+<table width="133" height="108" style="">
+<tr>
+<td align="center">
+<span id="loading_small" style="font-size:10px;font-family:arial;align:center;margin-top:40px;">Click on a video thumbnail to view</span>
+</td></tr></table></td></tr></table></td></tr><tr><td>
+<table width="298" height="80" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td width="298" height="80" align="center">
+<table width="100%" style="background-color:#CCCCCC" height="80" border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="3" style="font-size:10px;" align="center" ><a onclick="upload();" href="javascript:void(0);">Upload a New Video</a></td></tr>
+<tr><td><img id="left_strip" onmousedown="startMoveStrip(1);" onmouseup="stopMoveStrip();" onmouseout="stopMoveStrip();" src="" /></td><td style="padding:0px 5px 0px 5px;"><div style="width:245px;height:45px; background-color:white;overflow:hidden;" id="userContent">&nbsp;</div></td><td><img id="right_strip" onmousedown="startMoveStrip(-1);" onmouseup="stopMoveStrip();" onmouseout="stopMoveStrip();" src="" /></td></tr>
+<tr>
+<td colspan="3" width="100%">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td align="left" style="padding-left:3px;font-family:arial;font-size:10px; color:blue;" align="left">
+<a href="javascript:void(0);" onclick="addToContest();">Add to Contest</a>
+</td>
+<td style="padding-right:3px;font-family:arial;font-size:10px; color:blue;" align="right">
+<input onclick="" type="checkbox" id="agree" /> I agree to these <a onclick="_ADS_ReportInteraction('destination_url_4');_ADS_ClickDestinationUrl('http://contests.labpixies.com/gadget/l4l/l4l_rules.html');return false;" href="#">rules</a>
+</td></tr></table></td></table></td></tr></table></td></tr></table>
+</td>
+<td id="submit2" style="display:none;" width="298" height="190">
+<table width="298" height="190" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style="padding:10px;font-family:arial;font-size:12px;" width="298" height="100" align="left">
+We have sent you an email at the address provided during your YouTube sign up. Please click on the link to confirm that you have read the T&amp;C and want to enter this contest. To find the email associated with your YouTube account, please go to My Account -&gt; more -&gt; Account Settings -&gt; Email Options
+</td>
+</tr>
+<tr>
+<td width="298" align="left" valign="top" style="padding-left:10px;">
+<a onclick="tabs.setSelectedTab(2);" href="javascript:void(0)" style="font-family:arial;font-size:12px;">Back to View Videos</a>
+</td></tr><tr>
+<td id="userSearchError2" width="298" align="center" valign="top" style="font-size:10px;color:red;font-family:arial">
+</td></tr></table>
+</td>
+<td id="submit3" width="298" height="190">
+<table width="298" height="190" border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td style="padding-top:20px;font-family:arial;font-size:12px;" width="298" height="60" align="center">
+Please type the text that appears in the following image
+</td></tr><tr>
+<td height="70" width="298" align="center">
+<img id="captcha" style="border: solid 1px rgb(20,40,100);" width="120" height="50" src="" /><br/>
+<a style="font-family:arial;font-size:10px;"href="javascript:void(0)" onclick="_gel('captcha').src='http://contests.labpixies.com/image.php?width=120&height=50&r='+Math.round(Math.random()*10000)">Can't read?</a>
+</td>
+</tr>
+<tr>
+<td width="298" align="center" valign="top">
+<form onsubmit="verifyCaptcha(); return false;"><input id="captcha_text" style="margin:2px; height:20px; font-family:arial;font-size:12px;" type="text" style="width:50px" /><input style="margin:2px; height:20px;font-family:arial;font-size:12px;" type="submit" value="Go" /></form>
+</td>
+</tr>
+<tr>
+<td id="userCaptchaError" width="298" align="center" valign="top" style="font-size:10px;color:red;font-family:arial">
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<div id="view" style="display:none;">
+<table id="viewTbl" width="298" height="192" border="0" cellpadding="0" cellspacing="0" >
+<tr>
+<td width="100%">
+<table width="298" border="0" cellpadding="0" cellspacing="0" >
+<tr>
+<td width="200" height="100%" align="center">
+<div id="plDiv" style="font-family:arial;width:180px;height:100%;align:center;vertical-align:middle;">
+<table width="180">
+<tr>
+<td align="center">
+<span id="loading_vid" style="font-size:12px;font-family:arial;color:white;align:center;margin-top:80px;">Loading Video...</span>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td valign="top">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" >
+<tr><td style="font-family:arial;font-size:11px;"><span id="vname" style="font-weight:bold"></span></td></tr>
+<tr><td style="font-family:arial;font-size:11px;">From: <a href="javascript:void(0);" style="font-weight:bold;" id="uname" target="_blank">--</a></td></tr>
+<tr><td style="font-family:arial;font-size:11px;">Views: <span id="views" >--</span></td></tr>
+<tr><td valign="bottom"><a style="font-weight:bold;font-family:arial;font-size:10px;" href="javascript:void(0);" onclick="post();" >Post A Response</a></td></tr>
+<tr><td height="25" valign="middle"><span style="color:#919191;font-weight:bold;font-size:11px;font-family:arial;" id="vote_text">0</span>&nbsp;&nbsp;<img id="butt0" style="cursor:pointer;vertical-align: middle" onmouseout="toggleButton(this);" onmouseover="toggleButton(this);" onclick="reportVote(1);" src="" />&nbsp;&nbsp;<img id="butt1" style="cursor:pointer;vertical-align: middle" onmouseout="toggleButton(this);" onmouseover="toggleButton(this);" onclick="reportVote(0);" src="" /></td></tr>
+<tr><td valign="middle" style="cursor:pointer;font-size:11px;font-family:arial;" onclick="changeVid();"><strong>Next Video >></strong></td></tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td width="298" align="center" style="font-family:arial;font-size:11px; background-color:#E0E0E0;" valign="middle">
+<form onsubmit="search(); return false;"><span style="margin:2px; height:20px;">Search for a video:</span> <input id="search_text" style="margin:2px; height:20px; font-family:arial;font-size:12px;" type="text" style="width:155px" /><input style="margin:2px; height:20px;font-family:arial;font-size:12px;" type="submit" value="Go" /></form>
+<div id="search_results" style="display:none;" width="100%" align="center" style="font-family:arial;font-size:12px; background-color:#E0E0E0;">
+Search results
+</div>
+</td>
+</tr>
+<table>
+</div>
+<img id="report_pixel" src="" width="1" height="1" style="position:absolute;top:-10px;left:-10px;" />
+<table id="results" style="display:none;margin-top:2px; height:190px" width="298" border="0" cellpadding="0" cellspacing="0" >
+<tr>
+<td width="100%" height="60" align="center" style="padding-top:5px;padding-bottom:5px;font-family:arial;font-size:12px; background-color:#E0E0E0;" valign="middle">
+<div id="win_results" width="100%" align="center" style="font-family:arial;font-size:12px; background-color:#E0E0E0;">
+Loading...
+</div>
+</td>
+</tr>
+<tr>
+<td width="100%" valign="top" style="padding-top:5px;">
+<table width="298" height="120" border="0" cellpadding="0" cellspacing="0" >
+<tr>
+<td width="180" height="100%" align="right" valign="top">
+<div id="resDiv" style="font-family:arial;width:142px;height:115px;align:center;vertical-align:middle;">
+<table width="142">
+<tr>
+<td align="center">
+<span id="loading_res_vid" style="font-size:12px;font-family:arial;align:center;margin-top:60px;">Loading Video...</span>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td valign="top" align="left" style="padding-left:10px">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" >
+<tr><td colspan="2" height="20" style="font-family:arial;font-size:11px;"><span id="res_vname" style="font-weight:bold"></span></td></tr>
+<tr><td colspan="2" height="20" style="font-family:arial;font-size:11px;">From: <a href="javascript:void(0);" style="font-weight:bold;" id="res_uname" target="_blank">--</a></td></tr>
+<tr><td colspan="2" height="20" style="font-family:arial;font-size:11px;">Views: <span id="res_views" >--</span></td></tr>
+<tr><td id="bar_selected" style="background-color:#55A90B;width:0px;">&nbsp;</td><td height="20" valign="middle" id="percent_selected"><strong>&nbsp;</strong> </td></tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<table>
+<table id="trailer" style="display:none;" width="298" height="192" border="0" cellpadding="0" cellspacing="0" >
+<tr>
+<td height="142" width="124" align="center" valign="middle" style="font-family:arial;font-size:11px;font-weight:bold;padding:3px;">
+&nbsp;
+</td>
+<td id="trailerContainer" height="142" width="174" align="left" valign="middle">&nbsp;</td>
+</tr>
+<tr>
+<td colspan="2">
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+<td height="50" width="103" id="smallFooter_trailer1" onclick="_ADS_ReportInteraction('destination_url_2');_ADS_ClickDestinationUrl('http://lionsforlambs.unitedartists.com/');return false;" style="cursor:pointer;">
+&nbsp;
+</td>
+<td height="50" width="195" id="smallFooter_trailer2" onclick="_ADS_ReportInteraction('destination_url_2');_ADS_ClickDestinationUrl('http://lionsforlambs.unitedartists.com/');return false;" style="cursor:pointer;">
+<img id="add_to_trailer" style="cursor:pointer;position:relative;left:122px;top:14px" onclick="addToPressed(event);" src="" />
+</td></tr></table></td></tr></table>
+</div>
+<script type="text/javascript">
+
+_gel("smallFooter1").style.backgroundImage = "url("+_IG_GetImageUrl("http://contests.labpixies.com/gadget/l4l/images/small/actors.jpg")+")";
+_gel("smallFooter2").style.backgroundImage = "url("+_IG_GetImageUrl("http://contests.labpixies.com/gadget/l4l/images/small/lions_for_lambs.png")+")";
+_gel("mainTbl").style.backgroundImage = "url("+_IG_GetImageUrl("http://contests.labpixies.com/gadget/l4l/images/small/background_home.jpg")+")";
+_gel("add_to").src = _IG_GetImageUrl("http://contests.labpixies.com/gadget/l4l/images/small/add_to.png");
+_gel("upload_img").src = _IG_GetImageUrl("http://contests.labpixies.com/gadget/l4l/images/small/upload_your_video.gif");
+window.onload = initTabs;
+var mouseover_hit = false;
+_IG_AddDOMEventHandler(document.body, 'mouseover', function() {
+if (!mouseover_hit) {
+_ADS_ReportInteraction('mouse_over');
+mouseover_hit = true;
+}
+});
+</script>
+]]>
+  </Content>
+</Module>
