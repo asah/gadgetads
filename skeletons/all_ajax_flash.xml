@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="My Gadget Ad" width="300" height="250" thumbnail="" scrolling="false">
+  <ModulePrefs title="My Gadget Ad" width="300" height="250" scrolling="false">
     <Require feature="ads"/>
     <Require feature="flash"/>
     <Require feature="tabs"/>
@@ -32,7 +32,7 @@
         border: 0;
         padding: 2px;
       }
-      
+
       /* CSS formatting for the XML feed entries */
       .entry {
         border-bottom: 1px solid #aaaaaa;
@@ -45,7 +45,7 @@
         font-style: italic;
       }
     </style>
-    
+
     <table border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td id="logoHeader"></td>
@@ -53,7 +53,7 @@
       </tr>
     </table>
     <div id="tabs"></div>
-    
+
     <script>
       // Report interaction when user mouses over the ad unit.  Only count
       // this the first time.
@@ -64,18 +64,18 @@
           _ADS_ReportInteraction('mouse_over');
         }
       }
-      
+
       // Gets called each time a tab is selected.
       function tabCallback(domId) {
         // Store the currently selected tab
         var selectedTab = tabs.getSelectedTab();
-        
+
         // Report the interaction when users click on any tab.  Only send
         // the hit if the user's mouse is over the ad
         if (mouseOver) {
           _ADS_ReportInteraction('tab_' + (selectedTab.getIndex() + 1));
         }
-        
+
         // Here you generate content depending on which tab is selected.
         switch (selectedTab.getName()) {
         case 'News':
@@ -86,7 +86,7 @@
           _IG_FetchFeedAsJSON(feedUrl, function(json) {
             var html = new Array();
             html.push('<div id="newsContainer">');
-            
+
             // Iterate through each feed entry and generate HTML to display it
             for (var n = 0; n < json.Entry.length; n++) {
               var entry = json.Entry[n];
@@ -99,25 +99,25 @@
               );
             }
             html.push('</div>');
-            
+
             // Insert the generated HTML into the selected tab's content container
             selectedTab.getContentContainer().innerHTML = html.join('');
           }, numEntries, true);
           break;
-          
+
         case 'Videos':
           // Align the tab content container in the 'center'
           selectedTab.getContentContainer().style.textAlign = 'center';
-          
+
           // Embed the YouTube Flash video player here.
           // Replace the 'swfUrl' below with your own SWF URL.
           var swfUrl = 'http://www.youtube.com/v/sSEs-aE2nCA';
           _IG_EmbedFlash(swfUrl, selectedTab.getContentContainer(), {
-            width: 300, 
+            width: 300,
             height: 210
           });
           break;
-          
+
         case 'Images':
           // Fetch an image XML feed and display the images inside this tab.
           // Images should be clickable and report interactions.
@@ -157,25 +157,25 @@
                         break;
                       }
                     } // end for loop
-                    
+
                     // Reset the link to default
                     link = '#';
                   }
                 } // end for loop
               } // end for loop
             } // end if else
-            
+
             // Insert the generated HTML into the selected tab's content container
             selectedTab.getContentContainer().innerHTML = '<div id="imageContainer">' + html.join('') + '</div>';
           });
           break;
-          
+
         case 'Other':
           selectedTab.getContentContainer().innerHTML = 'Generate some other content here!';
           break;
         }
       }
-      
+
       // Create tabs using the Tabs library and set up callback functions
       // that get executed whenever the tab is selected.
       var tabs = new _IG_Tabs(0, '', _gel('tabs'));
@@ -195,7 +195,7 @@
         tooltip: 'See other content here',
         callback: tabCallback
       });
-    
+
       // Create a clickthrough image link at the top left corner.
       // Report an interaction here as well.
       _gel('logoHeader').innerHTML = [
@@ -204,7 +204,7 @@
         '<img src="' + _IG_GetImageUrl('http://www.google.com/logos/Logo_25wht.gif') + '"/>',
         '</a>'
       ].join('');
-      
+
       // Move the tab header container to the same row as the image link
       _gel('tabHeader').appendChild(tabs.getHeaderContainer());
     </script>
