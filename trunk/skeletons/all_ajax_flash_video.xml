@@ -54,26 +54,10 @@
     <div id="tabs"></div>
 
     <script>
-      // Report interaction when user mouses over the ad unit.  Only count
-      // this the first time.
-      var mouseOver = false;
-      window.onmouseover = function() {
-        if (!mouseOver) {
-          mouseOver = true;
-          _ADS_ReportInteraction('mouse_over');
-        }
-      }
-
       // Gets called each time a tab is selected.
       function tabCallback(domId) {
         // Store the currently selected tab
         var selectedTab = tabs.getSelectedTab();
-
-        // Report the interaction when users click on any tab.  Only send
-        // the hit if the user's mouse is over the ad
-        if (mouseOver) {
-          _ADS_ReportInteraction('tab_' + (selectedTab.getIndex() + 1));
-        }
 
         // Here you generate content depending on which tab is selected.
         switch (selectedTab.getName()) {
