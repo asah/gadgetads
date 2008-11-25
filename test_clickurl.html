@@ -6,37 +6,44 @@ function _unesc(s) {
 function _args() {
   var args = new Object();
   var query = document.location.search.substring(1);
-  var pairs = query.split("&");
+  var pairs = query.split('&');
   for ( var i = 0; i < pairs.length; i++) {
     var pos = pairs[i].indexOf('=');
     if ( pos == -1 ) continue;
     var argname = pairs[i].substring(0,pos);
     var value = pairs[i].substring(pos+1);
-    value = value.replace(/\+/g, " ");
+    value = value.replace(/\+/g, ' ');
     args[argname] = _unesc(value);
   }
   return args;
 }
 
-var msg = _args()["msg"];
-var url = _args()["url"];
-if (!url) {
-  url = _args()["adurl"];
-}
+var args = _args();
+var msg = args['msg'];
+var url = args['url'] || args['adurl'];
 
 if (url) {
   url = _unesc(url);
   msg = (parseInt(msg) == 1) ? true : false;
-  
-  var regexp = new RegExp("^http[s]?://.*");
+
+  // Get list of URL parameters passed in.
+  var params = [];
+  for (var n in args) {
+    params.push(n + '=' + args[n]);
+  }
+
+  var regexp = new RegExp('^http[s]?://.*');
   if (url.match(regexp)) {
     var str = [
       '*** Click Received ***',
       '',
-      "Desitination URL",
-      url
+      'Destination URL',
+      url,
+      '',
+      'Parameters:',
+      params.join('\n');
     ];
-    
+
     if (msg) {
       if (window.confirm(str.join('\n'))) {
         window.location.replace(url);
