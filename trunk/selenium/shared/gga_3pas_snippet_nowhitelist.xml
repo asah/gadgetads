@@ -8,7 +8,7 @@
   <UserPref name="aiturl" datatype="hidden" default_value="DEBUG"/>
   <UserPref name="ads_clicktarget_new_" datatype="hidden" default_value=""/>
   <UserPref name="rawquery" datatype="hidden" default_value=""/>
-  <UserPref name="page_url" datatype="hidden" default_value=""/>
+  <UserPref name="page_keywords" datatype="hidden" default_value=""/>
   <UserPref name="bordercolor" datatype="hidden" default_value=""/>
   <UserPref name="backgroundcolor" datatype="hidden" default_value=""/>
   <UserPref name="linecolor" datatype="hidden" default_value=""/>
