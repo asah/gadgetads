@@ -28,6 +28,7 @@
   <UserPref name="family_size" datatype="hidden" default_value=""/>
   <UserPref name="education" datatype="hidden" default_value=""/>
   <UserPref name="children" datatype="hidden" default_value=""/>
+  <UserPref name="ad_group_id" datatype="hidden" default_value=""/>
   <Content type="html"><![CDATA[
     <div id="fc"></div>
     <script>
