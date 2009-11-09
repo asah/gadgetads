@@ -20,7 +20,7 @@ to match the ad size.
 var swfUrl = 'http://activedd.googlecode.com/svn/trunk/Google_Ads/mobinil/mobinilcalltonefinal/as2/300_250/Arabic/adArAs2.swf';
 var fWidth = 300;
 var fHeight = 250;
-_IG_EmbedCachedFlash(swfUrl, 'fc', {
+_IG_EmbedFlash(swfUrl, 'fc', {
 swf_version: 8,
 width: fWidth,
 height: fHeight
